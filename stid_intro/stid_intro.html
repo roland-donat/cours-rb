@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
-<title>Introduction au raisonnement bayésien  <br> <br> <font size="10"></font></title>
+<title>Une bref introduction aux réseaux bayésiens  <br> <br> <font size="10">Application à l'aide à décision</font></title>
 <meta name="author" content="(Roland Donat)"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
@@ -28,20 +28,20 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-background="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes_couv.jpg"><h1 class="title">Introduction au raisonnement bayésien  <br> <br> <font size="10"></font></h1><h2 class="author">Roland Donat</h2><h2 class="date"> <br>Année universitaire 2020-2021</h2>
+<section id="sec-title-slide" data-background="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes_couv.jpg"><h1 class="title">Une bref introduction aux réseaux bayésiens  <br> <br> <font size="10">Application à l'aide à décision</font></h1><h2 class="author">Roland Donat</h2><h2 class="date"> <br>Année universitaire 2020-2021</h2>
 </section>
 <section id="table-of-contents"><div id="table-of-contents">
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#/slide-orgb1bf6ec">Objectifs de la séance</a></li>
-<li><a href="#/slide-org48b5f13">Historique</a></li>
-<li><a href="#/slide-org7026225">Principe généraux</a></li>
-<li><a href="#/slide-org5349913">Les réseaux bayésiens</a></li>
-<li><a href="#/slide-orgf262f31">Inférence</a></li>
-<li><a href="#/slide-orgdcd4bba">Apprentissage</a></li>
-<li><a href="#/slide-org041e800">Références</a></li>
-<li><a href="#/slide-org67c9657">Résumé de la séance</a></li>
+<li><a href="#/slide-orgc3047cb">Objectifs de la séance</a></li>
+<li><a href="#/slide-orgcf6110d">Quelques rappels historiques pour commencer</a></li>
+<li><a href="#/slide-orga4f4ecf">Principe généraux</a></li>
+<li><a href="#/slide-org248ccf0">Les réseaux bayésiens</a></li>
+<li><a href="#/slide-org921e2b0">Inférence</a></li>
+<li><a href="#/slide-org8e5fee9">Apprentissage</a></li>
+<li><a href="#/slide-org3866c63">Références</a></li>
+<li><a href="#/slide-org6de6c89">Résumé de la séance</a></li>
 </ul>
 </div>
 </div>
@@ -49,12 +49,12 @@
 
 
 <section>
-<section id="slide-orgb1bf6ec">
-<h2 id="orgb1bf6ec">Objectifs de la séance</h2>
+<section id="slide-orgc3047cb">
+<h2 id="orgc3047cb">Objectifs de la séance</h2>
 <ul>
 <li>Replacer le développement des techniques bayésiennes dans l'Histoire scientifique</li>
 <li>Comprendre le principe de raisonnement bayésien</li>
-<li>Introduire le concept de réseau bayésien</li>
+<li>Introduire le formalisme des réseaux bayésiens</li>
 <li>Savoir construire un réseau bayésien pour un problème donné</li>
 
 </ul>
@@ -62,23 +62,23 @@
 </section>
 </section>
 <section>
-<section id="slide-org48b5f13">
-<h2 id="org48b5f13">Historique</h2>
+<section id="slide-orgcf6110d">
+<h2 id="orgcf6110d">Quelques rappels historiques pour commencer</h2>
 
 <div class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/commons/time-travel.jpg" alt="Classification dinosaures" width="80%" />
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/time-travel.jpg" alt="Classification dinosaures" width="80%" />
 </p>
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgedbf77a">
-<h3 id="orgedbf77a">Naissance de la théorie moderne des probabilités</h3>
+<section id="slide-orgd0a8e98">
+<h3 id="orgd0a8e98">Une histoire de jeux</h3>
 <div class="column" style="float:left; width: 40%">
 
 <div class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/commons/thomas_bayes.jpeg" alt="Thomas Bayes" width="100%" />
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/thomas_bayes.jpeg" alt="Thomas Bayes" width="90%" />
 </p>
 </div>
 
@@ -102,53 +102,158 @@
 </div>
 
 </section>
-<section id="slide-org3b4f796">
-<h4 id="org3b4f796">Naissance de la théorie moderne des probabilités</h4>
-
-
 </section>
-<section id="slide-orga7bafea">
-<h4 id="orga7bafea">Naissance de la théorie moderne des probabilités</h4>
+<section>
+<section id="slide-org236a934">
+<h3 id="org236a934">Les travaux se poursuivent&#x2026;</h3>
+<div class="block-example">
 <p>
-Kolmogorov <a href="https://www.slideshare.net/MariaRominaAngustia/history-of-probability">https://www.slideshare.net/MariaRominaAngustia/history-of-probability</a>
+<h4>Pierre-Simon Laplace (1749–1827)</h4>
 </p>
+<ul>
+<li>1774 : Mémoire sur la Probabilité des Causes par les Événements</li>
+<li>1812 : Reformulation et clarification des travaux de Bayes</li>
+
+</ul>
+
+</div>
+
+
+<div class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/pierre-simon_laplace.jpeg" alt="Thomas Bayes" width="90%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org76da24d">
+<h3 id="org76da24d">deux siècles plus tard&#x2026;</h3>
+<div class="block-example">
+<p>
+<h4>Fréquentistes vs Bayésiens (la guerre est toujours en cours)</h4>
+</p>
+<ul>
+<li>Fréquentistes : Seules les données ont de l'importance !</li>
+<li>Bayésiens : Les préjugés sont précieux !</li>
+
+</ul>
+
+</div>
+
+
+<div class="figure">
+<p><img src="https://fr.wikipedia.org/wiki/Inf%C3%A9rence_bay%C3%A9sienne#/media/Fichier:Fda_-_inf%C3%A9rence_bay%C3%A9sienne_(fr)_-_Bayes_vs_Frequentist.png" alt="Fréquentiste vs Bayésiens" width="90%" />
+</p>
+</div>
 
 
 </section>
 </section>
 <section>
-<section id="slide-org7026225">
-<h2 id="org7026225">Principe généraux</h2>
+<section id="slide-orgcfde011">
+<h3 id="orgcfde011">Les débuts de l'IA</h3>
+<div class="column" style="float:left; width: 40%">
+
+<div class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/expert_system.jpg" alt="Thomas Bayes" width="90%" />
+</p>
+</div>
+
+</div>
+
+<div class="column" style="float:right; width: 60%">
+
+<div class="block-example">
+<p>
+<h4>L'ère des systèmes experts (1970-1990)</h4>
+</p>
+<ul>
+<li>Formalisation des connaissances sur un système sous forme de <b>règles déterministes</b></li>
+<li>Moteur d'inférence reposant sur la logique booléenne</li>
+<li>Déduction d'informations à partir d'une base de règles</li>
+<li>Exemple : <code>SI X = VRAI ET Y = FAUX ALORS Z = VRAI</code></li>
+
+</ul>
+
+</div>
+
+</div>
+
 
 </section>
 </section>
 <section>
-<section id="slide-org5349913">
-<h2 id="org5349913">Les réseaux bayésiens</h2>
+<section id="slide-org988c9e6">
+<h3 id="org988c9e6">La domination de l'IA</h3>
+<div class="column" style="float:left; width: 40%">
+
+<div class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/judea_pearl.jpg" alt="Thomas Bayes" width="90%" />
+</p>
+</div>
+
+</div>
+
+<div class="column" style="float:right; width: 60%">
+
+<div class="block-example">
+<p>
+<h4>Judea Pearl (1936–) : Père des réseaux bayésiens</h4>
+</p>
+<ul>
+<li>1982 : <i>Reverend Bayes on inference engines : A distributed hierarchical approach</i></li>
+<li>\(P(\text{Revenus} > 1500) = 0.3\) et \(P(\text{Abonné salle de sport}) = 0.2\) Alors \(P(\text{Achat
+  chaussures running}) = 0.07\)</li>
+
+</ul>
+
+<ul>
+<li>1988 : <i>Probabilistic Reasoning in Intelligent Systems : Networks of Plausible Inference</i></li>
+<li>2011 : Judea Pearl reçoit le Prix Turing</li>
+
+</ul>
+
+</div>
+
+</div>
+
 
 </section>
 </section>
 <section>
-<section id="slide-orgf262f31">
-<h2 id="orgf262f31">Inférence</h2>
+<section id="slide-orga4f4ecf">
+<h2 id="orga4f4ecf">Principe généraux</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgdcd4bba">
-<h2 id="orgdcd4bba">Apprentissage</h2>
+<section id="slide-org248ccf0">
+<h2 id="org248ccf0">Les réseaux bayésiens</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org041e800">
-<h2 id="org041e800">Références</h2>
+<section id="slide-org921e2b0">
+<h2 id="org921e2b0">Inférence</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org67c9657">
-<h2 id="org67c9657">Résumé de la séance</h2>
+<section id="slide-org8e5fee9">
+<h2 id="org8e5fee9">Apprentissage</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org3866c63">
+<h2 id="org3866c63">Références</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org6de6c89">
+<h2 id="org6de6c89">Résumé de la séance</h2>
 <div class="block-definition">
 <p>
 <h4>Points clés</h4>
@@ -176,8 +281,8 @@ Donnez 5 éléments clés que vous avez retenus lors de cette séance
 </section>
 </section>
 <section>
-<section id="slide-orgc6a3549">
-<h3 id="orgc6a3549">Merci pour votre attention !</h3>
+<section id="slide-orgfe710c8">
+<h3 id="orgfe710c8">Merci pour votre attention !</h3>
 <p>
 <div class="slidesubtitle">Des questions ?</div>
 </p>
