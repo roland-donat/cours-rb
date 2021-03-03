@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
-<title>Une bref introduction aux réseaux bayésiens  <br> <br> <font size="10">Application à l'aide à décision</font></title>
+<title>Les réseaux bayésiens  <br> <br> <font size="10">Application à l'aide à décision</font></title>
 <meta name="author" content="(Roland Donat)"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
@@ -28,20 +28,20 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-background="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes_couv.jpg"><h1 class="title">Une bref introduction aux réseaux bayésiens  <br> <br> <font size="10">Application à l'aide à décision</font></h1><h2 class="author">Roland Donat</h2><h2 class="date"> <br>Année universitaire 2020-2021</h2>
+<section id="sec-title-slide" data-background="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes_couv.jpg"><h1 class="title">Les réseaux bayésiens  <br> <br> <font size="10">Application à l'aide à décision</font></h1><h2 class="author">Roland Donat</h2><h2 class="date"> <br>Année universitaire 2020-2021</h2>
 </section>
 <section id="table-of-contents"><div id="table-of-contents">
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#/slide-orgc3047cb">Objectifs de la séance</a></li>
-<li><a href="#/slide-orgcf6110d">Quelques rappels historiques pour commencer</a></li>
-<li><a href="#/slide-orga4f4ecf">Principe généraux</a></li>
-<li><a href="#/slide-org248ccf0">Les réseaux bayésiens</a></li>
-<li><a href="#/slide-org921e2b0">Inférence</a></li>
-<li><a href="#/slide-org8e5fee9">Apprentissage</a></li>
-<li><a href="#/slide-org3866c63">Références</a></li>
-<li><a href="#/slide-org6de6c89">Résumé de la séance</a></li>
+<li><a href="#/slide-org5d387bd">Objectifs de la séance</a></li>
+<li><a href="#/slide-orgcc3831d">Quelques rappels historiques pour commencer</a></li>
+<li><a href="#/slide-org4b70d1c">Principe généraux</a></li>
+<li><a href="#/slide-org42c8a49">Les réseaux bayésiens</a></li>
+<li><a href="#/slide-orgcdc35ff">Inférence</a></li>
+<li><a href="#/slide-orgc143b96">Apprentissage</a></li>
+<li><a href="#/slide-orgf9d6c59">Références</a></li>
+<li><a href="#/slide-org2e6d4ff">Résumé de la séance</a></li>
 </ul>
 </div>
 </div>
@@ -49,8 +49,8 @@
 
 
 <section>
-<section id="slide-orgc3047cb">
-<h2 id="orgc3047cb">Objectifs de la séance</h2>
+<section id="slide-org5d387bd">
+<h2 id="org5d387bd">Objectifs de la séance</h2>
 <ul>
 <li>Replacer le développement des techniques bayésiennes dans l'Histoire scientifique</li>
 <li>Comprendre le principe de raisonnement bayésien</li>
@@ -62,8 +62,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgcf6110d">
-<h2 id="orgcf6110d">Quelques rappels historiques pour commencer</h2>
+<section id="slide-orgcc3831d">
+<h2 id="orgcc3831d">Quelques rappels historiques pour commencer</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/time-travel.jpg" alt="Classification dinosaures" width="80%" />
@@ -73,19 +73,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgd0a8e98">
-<h3 id="orgd0a8e98">Une histoire de jeux</h3>
-<div class="column" style="float:left; width: 40%">
-
-<div class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/thomas_bayes.jpeg" alt="Thomas Bayes" width="90%" />
-</p>
-</div>
-
-</div>
-
-<div class="column" style="float:right; width: 60%">
-
+<section id="slide-org844a3ad">
+<h3 id="org844a3ad">Une histoire de jeux</h3>
 <div class="block-example">
 <p>
 <h4>Révérend Thomas Bayes (1702–1761)</h4>
@@ -98,14 +87,22 @@
 </ul>
 
 </div>
+<p>
+ <br>
+</p>
 
+<div class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/thomas_bayes.jpeg" alt="Thomas Bayes" width="30%" />
+</p>
 </div>
+
+
 
 </section>
 </section>
 <section>
-<section id="slide-org236a934">
-<h3 id="org236a934">Les travaux se poursuivent&#x2026;</h3>
+<section id="slide-org94bc35f">
+<h3 id="org94bc35f">Les travaux se poursuivent&#x2026;</h3>
 <div class="block-example">
 <p>
 <h4>Pierre-Simon Laplace (1749–1827)</h4>
@@ -117,18 +114,20 @@
 </ul>
 
 </div>
-
+<p>
+ <br>
+</p>
 
 <div class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/pierre-simon_laplace.jpeg" alt="Thomas Bayes" width="90%" />
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/pierre-simon_laplace.jpg" alt="pierre-simon_laplace" width="30%" />
 </p>
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-org76da24d">
-<h3 id="org76da24d">deux siècles plus tard&#x2026;</h3>
+<section id="slide-org494fb28">
+<h3 id="org494fb28">deux siècles plus tard&#x2026;</h3>
 <div class="block-example">
 <p>
 <h4>Fréquentistes vs Bayésiens (la guerre est toujours en cours)</h4>
@@ -140,30 +139,25 @@
 </ul>
 
 </div>
-
+<p>
+ <br>
+ <br>
+</p>
 
 <div class="figure">
-<p><img src="https://fr.wikipedia.org/wiki/Inf%C3%A9rence_bay%C3%A9sienne#/media/Fichier:Fda_-_inf%C3%A9rence_bay%C3%A9sienne_(fr)_-_Bayes_vs_Frequentist.png" alt="Fréquentiste vs Bayésiens" width="90%" />
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/Bayes_vs_Frequentist.png" alt="Fréquentiste vs Bayésiens" width="66%" />
 </p>
 </div>
 
+<p>
+Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christophe Michel</a>, 2018.
+</p>
 
 </section>
 </section>
 <section>
-<section id="slide-orgcfde011">
-<h3 id="orgcfde011">Les débuts de l'IA</h3>
-<div class="column" style="float:left; width: 40%">
-
-<div class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/expert_system.jpg" alt="Thomas Bayes" width="90%" />
-</p>
-</div>
-
-</div>
-
-<div class="column" style="float:right; width: 60%">
-
+<section id="slide-orge99c078">
+<h3 id="orge99c078">Les débuts de l'IA</h3>
 <div class="block-example">
 <p>
 <h4>L'ère des systèmes experts (1970-1990)</h4>
@@ -177,26 +171,22 @@
 </ul>
 
 </div>
+<p>
+ <br>
+</p>
 
+<div class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/expert_system.jpg" alt="Expert system" width="40%" />
+</p>
 </div>
+
 
 
 </section>
 </section>
 <section>
-<section id="slide-org988c9e6">
-<h3 id="org988c9e6">La domination de l'IA</h3>
-<div class="column" style="float:left; width: 40%">
-
-<div class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/judea_pearl.jpg" alt="Thomas Bayes" width="90%" />
-</p>
-</div>
-
-</div>
-
-<div class="column" style="float:right; width: 60%">
-
+<section id="slide-org8582e38">
+<h3 id="org8582e38">La domination de l'IA</h3>
 <div class="block-example">
 <p>
 <h4>Judea Pearl (1936–) : Père des réseaux bayésiens</h4>
@@ -215,45 +205,52 @@
 </ul>
 
 </div>
+<p>
+ <br>
+ <br>
+</p>
 
+<div class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/judea_pearl.jpg" alt="Thomas Bayes" width="30%" />
+</p>
 </div>
 
 
 </section>
 </section>
 <section>
-<section id="slide-orga4f4ecf">
-<h2 id="orga4f4ecf">Principe généraux</h2>
+<section id="slide-org4b70d1c">
+<h2 id="org4b70d1c">Principe généraux</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org248ccf0">
-<h2 id="org248ccf0">Les réseaux bayésiens</h2>
+<section id="slide-org42c8a49">
+<h2 id="org42c8a49">Les réseaux bayésiens</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org921e2b0">
-<h2 id="org921e2b0">Inférence</h2>
+<section id="slide-orgcdc35ff">
+<h2 id="orgcdc35ff">Inférence</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org8e5fee9">
-<h2 id="org8e5fee9">Apprentissage</h2>
+<section id="slide-orgc143b96">
+<h2 id="orgc143b96">Apprentissage</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org3866c63">
-<h2 id="org3866c63">Références</h2>
+<section id="slide-orgf9d6c59">
+<h2 id="orgf9d6c59">Références</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org6de6c89">
-<h2 id="org6de6c89">Résumé de la séance</h2>
+<section id="slide-org2e6d4ff">
+<h2 id="org2e6d4ff">Résumé de la séance</h2>
 <div class="block-definition">
 <p>
 <h4>Points clés</h4>
@@ -281,8 +278,8 @@ Donnez 5 éléments clés que vous avez retenus lors de cette séance
 </section>
 </section>
 <section>
-<section id="slide-orgfe710c8">
-<h3 id="orgfe710c8">Merci pour votre attention !</h3>
+<section id="slide-org9f51408">
+<h3 id="org9f51408">Merci pour votre attention !</h3>
 <p>
 <div class="slidesubtitle">Des questions ?</div>
 </p>
