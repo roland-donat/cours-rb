@@ -34,14 +34,14 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#/slide-orgb982209">Objectifs de la séance</a></li>
-<li><a href="#/slide-orgee83d66">Quelques rappels historiques pour commencer</a></li>
-<li><a href="#/slide-orgefb01b8">Le raisonnement bayésien</a></li>
-<li><a href="#/slide-orgcc24a78">Les réseaux bayésiens</a></li>
-<li><a href="#/slide-orgf61af68">Inférence</a></li>
-<li><a href="#/slide-orge73f2e6">Apprentissage</a></li>
-<li><a href="#/slide-orgbe3d4a6">Références</a></li>
-<li><a href="#/slide-org932d3ef">Résumé de la séance</a></li>
+<li><a href="#/slide-org2bf8f76">Objectifs de la séance</a></li>
+<li><a href="#/slide-orgddb79d4">Quelques rappels historiques pour commencer</a></li>
+<li><a href="#/slide-orgd3de863">Le raisonnement bayésien</a></li>
+<li><a href="#/slide-org8243a15">Les réseaux bayésiens</a></li>
+<li><a href="#/slide-org2931b7b">Inférence</a></li>
+<li><a href="#/slide-orgb41f741">Apprentissage</a></li>
+<li><a href="#/slide-orgcc27500">Références</a></li>
+<li><a href="#/slide-orgeb978ce">Résumé de la séance</a></li>
 </ul>
 </div>
 </div>
@@ -49,8 +49,8 @@
 
 
 <section>
-<section id="slide-orgb982209">
-<h2 id="orgb982209">Objectifs de la séance</h2>
+<section id="slide-org2bf8f76">
+<h2 id="org2bf8f76">Objectifs de la séance</h2>
 <ul>
 <li>Replacer le développement des techniques bayésiennes dans l'Histoire scientifique</li>
 <li>Comprendre le principe de raisonnement bayésien</li>
@@ -62,8 +62,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgee83d66">
-<h2 id="orgee83d66">Quelques rappels historiques pour commencer</h2>
+<section id="slide-orgddb79d4">
+<h2 id="orgddb79d4">Quelques rappels historiques pour commencer</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/time-travel.jpg" alt="Classification dinosaures" width="80%" />
@@ -73,8 +73,8 @@
 </section>
 </section>
 <section>
-<section id="slide-org670631d">
-<h3 id="org670631d">Une histoire de jeux</h3>
+<section id="slide-org8696a7f">
+<h3 id="org8696a7f">Une histoire de jeux</h3>
 <div class="block-example">
 <p>
 <h4>Révérend Thomas Bayes (1702–1761)</h4>
@@ -101,8 +101,8 @@
 </section>
 </section>
 <section>
-<section id="slide-org82ead3d">
-<h3 id="org82ead3d">Les travaux se poursuivent&#x2026;</h3>
+<section id="slide-org22b07c9">
+<h3 id="org22b07c9">Les travaux se poursuivent&#x2026;</h3>
 <div class="block-example">
 <p>
 <h4>Pierre-Simon Laplace (1749–1827)</h4>
@@ -126,8 +126,8 @@
 </section>
 </section>
 <section>
-<section id="slide-org6baf965">
-<h3 id="org6baf965">deux siècles plus tard&#x2026;</h3>
+<section id="slide-org64ce050">
+<h3 id="org64ce050">deux siècles plus tard&#x2026;</h3>
 <div class="block-example">
 <p>
 <h4>Fréquentistes vs Bayésiens (la guerre est toujours en cours)</h4>
@@ -156,8 +156,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org06db303">
-<h3 id="org06db303">Les débuts de l'IA</h3>
+<section id="slide-org3767ed5">
+<h3 id="org3767ed5">Les débuts de l'IA</h3>
 <div class="block-example">
 <p>
 <h4>L'ère des systèmes experts (1970-1990)</h4>
@@ -185,8 +185,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org8c9923a">
-<h3 id="org8c9923a">La domination de l'IA</h3>
+<section id="slide-orgbc9b61d">
+<h3 id="orgbc9b61d">La domination de l'IA</h3>
 <div class="block-example">
 <p>
 <h4>Judea Pearl (1936–) : Père des réseaux bayésiens</h4>
@@ -218,8 +218,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-orgefb01b8">
-<h2 id="orgefb01b8">Le raisonnement bayésien</h2>
+<section id="slide-orgd3de863">
+<h2 id="orgd3de863">Le raisonnement bayésien</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/bayes_panneau.jpg" alt="Panneau bayésien" width="80%" />
@@ -230,8 +230,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-orga1dabb3">
-<h3 id="orga1dabb3">Principe général</h3>
+<section id="slide-org2a410f9">
+<h3 id="org2a410f9">Principe général</h3>
 <div class="column" style="float:left; width: 50%">
 
 <div class="block-definition">
@@ -265,8 +265,8 @@ pour réaliser des raisonnements</li>
 </section>
 </section>
 <section>
-<section id="slide-orged42b19">
-<h3 id="orged42b19">Exemple de raisonnement</h3>
+<section id="slide-org6b76dba">
+<h3 id="org6b76dba">Exemple de raisonnement</h3>
 <div class="block-example">
 <p>
 <h4>Alarme et vol de voiture</h4>
@@ -298,8 +298,8 @@ donné, je me recouche, sinon j'appelle la police</li>
 </section>
 </section>
 <section>
-<section id="slide-org05c3b8d">
-<h3 id="org05c3b8d">Théorème de Bayes</h3>
+<section id="slide-org0b0b684">
+<h3 id="org0b0b684">Théorème de Bayes</h3>
 <div class="block-definition">
 <p>
 <h4>Théorème de Bayes</h4>
@@ -344,8 +344,8 @@ priori</i> et de conditionnement</li>
 </div>
 
 </section>
-<section id="slide-orgead249b">
-<h4 id="orgead249b">Théorème de Bayes</h4>
+<section id="slide-org1b952d5">
+<h4 id="org1b952d5">Théorème de Bayes</h4>
 <p>
 <div class="slidesubtitle">Retour sur l'exemple du vol de voiture</div>
 </p>
@@ -385,8 +385,8 @@ mathématiquement par la probabilité \(P(\text{Vol})\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org0a4cacd">
-<h3 id="org0a4cacd">Exemple de bayésiens</h3>
+<section id="slide-orgaf17f16">
+<h3 id="orgaf17f16">Exemple de bayésiens</h3>
 <div class="block-example">
 <p>
 <h4>Question</h4>
@@ -408,8 +408,8 @@ Vous connaissez tous une industrie qui repose sur les raisonnements bayésiens, 
 </section>
 </section>
 <section>
-<section id="slide-orgcc24a78">
-<h2 id="orgcc24a78">Les réseaux bayésiens</h2>
+<section id="slide-org8243a15">
+<h2 id="org8243a15">Les réseaux bayésiens</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/fireworks.jpg" alt="Fireworks" width="40%" />
@@ -419,8 +419,8 @@ Vous connaissez tous une industrie qui repose sur les raisonnements bayésiens, 
 </section>
 </section>
 <section>
-<section id="slide-orgc67036c">
-<h3 id="orgc67036c">Les réseaux bayésiens en trois points</h3>
+<section id="slide-orgf88df95">
+<h3 id="orgf88df95">Les réseaux bayésiens en trois points</h3>
 <div class="block-example">
 <p>
 <h4>Qu'est ce que c'est?</h4>
@@ -465,8 +465,8 @@ conditionnelles</li>
 </section>
 </section>
 <section>
-<section id="slide-orgec2842e">
-<h3 id="orgec2842e">Un exemple pour comprendre</h3>
+<section id="slide-orgd143990">
+<h3 id="orgd143990">Un exemple pour comprendre</h3>
 <div class="block-example">
 <p>
 <h4>Vol ou pas vol ?</h4>
@@ -505,8 +505,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-orge2a4d1b">
-<h4 id="orge2a4d1b">Un exemple pour comprendre</h4>
+<section id="slide-org915f598">
+<h4 id="org915f598">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_1.png" alt="RB alarme definition" width="90%" />
@@ -514,8 +514,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-org01899d7">
-<h4 id="org01899d7">Un exemple pour comprendre</h4>
+<section id="slide-orgd2722a8">
+<h4 id="orgd2722a8">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_2.png" alt="RB alarme definition" width="90%" />
@@ -523,8 +523,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-orga1df5f7">
-<h4 id="orga1df5f7">Un exemple pour comprendre</h4>
+<section id="slide-org8674d4e">
+<h4 id="org8674d4e">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_3.png" alt="RB alarme definition" width="90%" />
@@ -533,8 +533,8 @@ lieu pendant la nuit ?</li>
 
 
 </section>
-<section id="slide-orgd75ec50">
-<h4 id="orgd75ec50">Un exemple pour comprendre</h4>
+<section id="slide-orgc3caafe">
+<h4 id="orgc3caafe">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_4.png" alt="RB alarme definition" width="90%" />
@@ -542,8 +542,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-org3b56eb5">
-<h4 id="org3b56eb5">Un exemple pour comprendre</h4>
+<section id="slide-org12b0c8d">
+<h4 id="org12b0c8d">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_5.png" alt="RB alarme definition" width="90%" />
@@ -551,8 +551,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-org88f41e8">
-<h4 id="org88f41e8">Un exemple pour comprendre</h4>
+<section id="slide-orga489cf9">
+<h4 id="orga489cf9">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_6.png" alt="RB alarme definition" width="90%" />
@@ -561,8 +561,8 @@ lieu pendant la nuit ?</li>
 
 
 </section>
-<section id="slide-orge3f92c5">
-<h4 id="orge3f92c5">Un exemple pour comprendre</h4>
+<section id="slide-orgdd397af">
+<h4 id="orgdd397af">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_7.png" alt="RB alarme definition" width="90%" />
@@ -570,8 +570,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-org74a87a1">
-<h4 id="org74a87a1">Un exemple pour comprendre</h4>
+<section id="slide-orgc66e4c1">
+<h4 id="orgc66e4c1">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_8.png" alt="RB alarme definition" width="90%" />
@@ -580,8 +580,8 @@ lieu pendant la nuit ?</li>
 
 
 </section>
-<section id="slide-org1c2e08e">
-<h4 id="org1c2e08e">Un exemple pour comprendre</h4>
+<section id="slide-org3756226">
+<h4 id="org3756226">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_9.png" alt="RB alarme definition" width="90%" />
@@ -594,8 +594,8 @@ lieu pendant la nuit ?</li>
 </section>
 </section>
 <section>
-<section id="slide-org0561f8b">
-<h3 id="org0561f8b">Définition formelle</h3>
+<section id="slide-org85e8be5">
+<h3 id="org85e8be5">Définition formelle</h3>
 <div class="block-definition">
 <p>
 <h4>Réseau bayésien (RB)</h4>
@@ -632,8 +632,8 @@ variables aléatoires (v.a.) \(X_{1},\ldots,X_{n}\) par :
 </section>
 </section>
 <section>
-<section id="slide-org5e06dba">
-<h3 id="org5e06dba">Propriété fondamentale</h3>
+<section id="slide-orgcb10b59">
+<h3 id="orgcb10b59">Propriété fondamentale</h3>
 <div class="block-definition">
 <p>
 <h4>Factorisation de la loi jointe</h4>
@@ -667,15 +667,15 @@ P(X_{1}, \ldots,X_{n}) = \prod_{i=1}^{n} P(X_{i}| \text{pa}(X_{i}))
 </div>
 
 </section>
-<section id="slide-org69ecc87">
-<h4 id="org69ecc87">Propriété fondamentale</h4>
+<section id="slide-orgde72f28">
+<h4 id="orgde72f28">Propriété fondamentale</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
 <div class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_graphe.png" alt="RB alarme definition" width="90%" />
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_graphe.png" alt="RB alarme definition" width="75%" />
 </p>
 </div>
 
@@ -694,47 +694,173 @@ P(\text{Météo}|\text{Orage})
 
 </div>
 
+<p>
+ <br>
+</p>
+
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgd464ec2">
-<h3 id="orgd464ec2">Complexité</h3>
+<section id="slide-org10493ad">
+<h3 id="org10493ad">Complexité</h3>
+<p>
+<div class="slidesubtitle">Complexité spatiale d'une LPC discrète et finie</div>
+</p>
+
+<div class="block-definition">
+<p>
+<h4>Complexité spatiale d'une LPC discrète et finie</h4>
+</p>
+
+<ul>
+<li>Soient \(\boldsymbol{X} = X_{1},\ldots,X_{n}\) et \(\boldsymbol{Y} = Y_{1},\ldots,Y_{m}\) deux suites de
+v.a. à valeurs dans les ensembles discrets et finis \(\mathcal{X}_{1}, \ldots,
+  \mathcal{X}_{n}\) et \(\mathcal{Y}_{1}, \ldots, \mathcal{Y}_{m}\)</li>
+
+<li>La complexité spatiale associée à la LPC \(P(X_{1},\ldots,X_{n}|Y_{1},\ldots,Y_{m}) = P(\boldsymbol{X}|\boldsymbol{Y})\),
+notée \(CS(P(\boldsymbol{X}|\boldsymbol{Y}))\), est définie par le <b>nombre de configurations de
+valeurs différentes que peuvent prendre les v.a. \(X_{1},\ldots,X_{n}, Y_{1}, \ldots, Y_{m}\)</b></li>
+<li>Autrement dit : 
+\[
+  CS(P(\boldsymbol{X}|\boldsymbol{Y})) = \prod_{i = 1}^{n} |\mathcal{X}_{i}| \prod_{j =
+  1}^{m} |\mathcal{Y}_{j}|
+  \]
+où \(|\mathcal{X}_{i}|\) est le nombre d'éléments dans l'ensemble \(\mathcal{X}_{i}\)</li>
+
+</ul>
+
+</div>
+
+<div class="block-example">
+<p>
+<h4>Exercice</h4>
+</p>
+
+<ul>
+<li>Donner les complexités spatiales des LPC du RB "Alarme"</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgb0ec1fd">
+<h4 id="orgb0ec1fd">Complexité</h4>
+<p>
+<div class="slidesubtitle">Complexité probabiliste d'une LPC discrète et finie</div>
+</p>
+
+<div class="block-definition">
+<p>
+<h4>Complexité probabiliste d'une LPC discrète et finie</h4>
+</p>
+
+<ul>
+<li>Soient \(\boldsymbol{X} = X_{1},\ldots,X_{n}\) et \(\boldsymbol{Y} = Y_{1},\ldots,Y_{m}\) deux suites de
+v.a. à valeurs dans les ensembles discrets et finis \(\mathcal{X}_{1}, \ldots,
+  \mathcal{X}_{n}\) et \(\mathcal{Y}_{1}, \ldots, \mathcal{Y}_{m}\)</li>
+
+<li>La complexité probabiliste associée à la LPC \(P(X_{1},\ldots,X_{n}|Y_{1},\ldots,Y_{m}) = P(\boldsymbol{X}|\boldsymbol{Y})\),
+notée \(CP(P(\boldsymbol{X}|\boldsymbol{Y}))\), est définie par le <b>nombre de paramètres
+(probabilités) nécessaires pour définir la LPC</b></li>
+<li>Autrement dit : 
+\[
+  CP(P(\boldsymbol{X}|\boldsymbol{Y})) = \prod_{i = 1}^{n} (|\mathcal{X}_{i}| - 1) \prod_{j =
+  1}^{m} |\mathcal{Y}_{j}|
+  \]</li>
+
+<li>La CP tient simplement compte du fait qu'une LPC doit sommer à 1 pour chaque configuration des
+variables de conditionnement</li>
+
+<li>La CP mesure le potentiel de modélisation d'une loi (notion de degré de liberté)</li>
+
+</ul>
+
+</div>
+
+<div class="block-example">
+<p>
+<h4>Exercice</h4>
+</p>
+
+<ul>
+<li>Donner les complexités probabilistes des LPC du RB "Alarme"</li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-org1734297">
+<h4 id="org1734297">Complexité</h4>
+<p>
+<div class="slidesubtitle">Complexité d'un réseau bayésien</div>
+</p>
+
+<div class="block-definition">
+<p>
+<h4>Complexité d'une loi jointe représentée par un RB</h4>
+</p>
+
+<ul>
+<li>Soit \(X_{1},\ldots,X_{n}\) une suite de v.a. à valeurs dans les ensembles discrets et finis
+\(\mathcal{X}_{1}, \ldots, \mathcal{X}_{n}\)</li>
+<li>La complexité spatiale (resp. probabiliste) d'une loi jointe factorisée dans un RB est définie
+comme étant la somme des complexités spatiales (resp. probabilistes) associées à chacune des LPC
+\(P(X_{i}|\text{pa}(X_{i}))\)</li>
+<li>La <b>complexité spatiale</b> du RB a pour expression :
+\[
+  CS(RB) = \sum_{i = 1}^{n}
+  CS(P(X_{i}|\text{pa}(X_{i}))) = \sum_{i = 1}^{n} |\mathcal{X}_{i}| \times
+  \prod_{\mathcal{X} \in \text{pa}(\mathcal{X}_{i})} |\mathcal{X}|
+  \]</li>
+<li>La <b>complexité probabiliste</b> a pour expression :
+\[
+  CP(RB) = \sum_{i = 1}^{n}
+  CP(P(X_{i}|\text{pa}(X_{i}))) = \sum_{i = 1}^{n} (|\mathcal{X}_{i}| - 1) \times
+  \prod_{\mathcal{X} \in \text{pa}(\mathcal{X}_{i})} |\mathcal{X}|
+  \]</li>
+
+</ul>
+
+</div>
 
 
 </section>
 </section>
 <section>
-<section id="slide-orgf61af68">
-<h2 id="orgf61af68">Inférence</h2>
-<div class="outline-text-2" id="text-orgf61af68">
+<section id="slide-org2931b7b">
+<h2 id="org2931b7b">Inférence</h2>
+<div class="outline-text-2" id="text-org2931b7b">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-org7a2ab36">
-<h3 id="org7a2ab36">Relation de dépendance</h3>
+<section id="slide-org1f626a4">
+<h3 id="org1f626a4">Relation de dépendance</h3>
 
 
 
 </section>
 </section>
 <section>
-<section id="slide-orge73f2e6">
-<h2 id="orge73f2e6">Apprentissage</h2>
+<section id="slide-orgb41f741">
+<h2 id="orgb41f741">Apprentissage</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgbe3d4a6">
-<h2 id="orgbe3d4a6">Références</h2>
+<section id="slide-orgcc27500">
+<h2 id="orgcc27500">Références</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org932d3ef">
-<h2 id="org932d3ef">Résumé de la séance</h2>
+<section id="slide-orgeb978ce">
+<h2 id="orgeb978ce">Résumé de la séance</h2>
 <div class="block-definition">
 <p>
 <h4>Points clés</h4>
@@ -762,8 +888,8 @@ Donnez 5 éléments clés que vous avez retenus lors de cette séance
 </section>
 </section>
 <section>
-<section id="slide-org1fee91a">
-<h3 id="org1fee91a">Merci pour votre attention !</h3>
+<section id="slide-org3b30635">
+<h3 id="org3b30635">Merci pour votre attention !</h3>
 <p>
 <div class="slidesubtitle">Des questions ?</div>
 </p>
