@@ -34,14 +34,14 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#/slide-org568151b">Objectifs de la séance</a></li>
-<li><a href="#/slide-orgde49edd">Quelques rappels historiques pour commencer</a></li>
-<li><a href="#/slide-org98e1830">Le raisonnement bayésien</a></li>
-<li><a href="#/slide-orga8f3cdd">Les réseaux bayésiens</a></li>
-<li><a href="#/slide-org5551280">Inférence</a></li>
-<li><a href="#/slide-orgfb54f12">Apprentissage</a></li>
-<li><a href="#/slide-org469ed80">Références</a></li>
-<li><a href="#/slide-orgd94b4a6">Résumé de la séance</a></li>
+<li><a href="#/slide-org010232c">Objectifs de la séance</a></li>
+<li><a href="#/slide-org8f0a940">Quelques rappels historiques pour commencer</a></li>
+<li><a href="#/slide-org1e66fb3">Le raisonnement bayésien</a></li>
+<li><a href="#/slide-orgbabc9be">Les réseaux bayésiens</a></li>
+<li><a href="#/slide-orgac3b7b1">Inférence</a></li>
+<li><a href="#/slide-org081bc07">Apprentissage</a></li>
+<li><a href="#/slide-orgd36fa38">Références</a></li>
+<li><a href="#/slide-orge222158">Résumé de la séance</a></li>
 </ul>
 </div>
 </div>
@@ -49,8 +49,8 @@
 
 
 <section>
-<section id="slide-org568151b">
-<h2 id="org568151b">Objectifs de la séance</h2>
+<section id="slide-org010232c">
+<h2 id="org010232c">Objectifs de la séance</h2>
 <ul>
 <li>Replacer le développement des techniques bayésiennes dans l'Histoire scientifique</li>
 <li>Comprendre le principe de raisonnement bayésien</li>
@@ -62,8 +62,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgde49edd">
-<h2 id="orgde49edd">Quelques rappels historiques pour commencer</h2>
+<section id="slide-org8f0a940">
+<h2 id="org8f0a940">Quelques rappels historiques pour commencer</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/time-travel.jpg" alt="Classification dinosaures" width="80%" />
@@ -73,8 +73,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgde2cebb">
-<h3 id="orgde2cebb">Une histoire de jeux</h3>
+<section id="slide-org3ee92c3">
+<h3 id="org3ee92c3">Une histoire de jeux</h3>
 <div class="block-example">
 <p>
 <h4>Révérend Thomas Bayes (1702–1761)</h4>
@@ -101,8 +101,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgc5d456e">
-<h3 id="orgc5d456e">Les travaux se poursuivent&#x2026;</h3>
+<section id="slide-orgabf6153">
+<h3 id="orgabf6153">Les travaux se poursuivent&#x2026;</h3>
 <div class="block-example">
 <p>
 <h4>Pierre-Simon Laplace (1749–1827)</h4>
@@ -126,8 +126,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgdcdd13c">
-<h3 id="orgdcdd13c">deux siècles plus tard&#x2026;</h3>
+<section id="slide-org144d505">
+<h3 id="org144d505">deux siècles plus tard&#x2026;</h3>
 <div class="block-example">
 <p>
 <h4>Fréquentistes vs Bayésiens (la guerre est toujours en cours)</h4>
@@ -156,8 +156,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org0919c35">
-<h3 id="org0919c35">Les débuts de l'IA</h3>
+<section id="slide-org4abffd7">
+<h3 id="org4abffd7">Les débuts de l'IA</h3>
 <div class="block-example">
 <p>
 <h4>L'ère des systèmes experts (1970-1990)</h4>
@@ -185,8 +185,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org205ea37">
-<h3 id="org205ea37">La domination de l'IA</h3>
+<section id="slide-org6b820ba">
+<h3 id="org6b820ba">La domination de l'IA</h3>
 <div class="block-example">
 <p>
 <h4>Judea Pearl (1936–) : Père des réseaux bayésiens</h4>
@@ -218,8 +218,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org98e1830">
-<h2 id="org98e1830">Le raisonnement bayésien</h2>
+<section id="slide-org1e66fb3">
+<h2 id="org1e66fb3">Le raisonnement bayésien</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/bayes_panneau.jpg" alt="Panneau bayésien" width="80%" />
@@ -230,8 +230,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org7030b33">
-<h3 id="org7030b33">Principe général</h3>
+<section id="slide-org677a9f2">
+<h3 id="org677a9f2">Principe général</h3>
 <div class="column" style="float:left; width: 50%">
 
 <div class="block-definition">
@@ -265,8 +265,8 @@ pour réaliser des raisonnements</li>
 </section>
 </section>
 <section>
-<section id="slide-org33257c7">
-<h3 id="org33257c7">Exemple de raisonnement</h3>
+<section id="slide-org247adbb">
+<h3 id="org247adbb">Exemple de raisonnement</h3>
 <div class="block-example">
 <p>
 <h4>Alarme et vol de voiture</h4>
@@ -298,8 +298,8 @@ donné, je me recouche, sinon j'appelle la police</li>
 </section>
 </section>
 <section>
-<section id="slide-orgc159053">
-<h3 id="orgc159053">Théorème de Bayes</h3>
+<section id="slide-orgd7d1fa3">
+<h3 id="orgd7d1fa3">Théorème de Bayes</h3>
 <div class="block-definition">
 <p>
 <h4>Théorème de Bayes</h4>
@@ -332,17 +332,20 @@ autrement dit la "plausibilité" d'observer \(X\) alors que \(Y\) s'est produit<
 <h4>Conséquence</h4>
 </p>
 
-<p>
-Le théorème de Bayes permet d'effectuer des
-  raisonnements probabilistes (de l'inférence) impliquant <b>deux phénomènes aléatoires</b> à l'aide d'<i>a
-  priori</i> et de conditionnement
-</p>
+<ul>
+<li>Le théorème de Bayes permet d'effectuer des
+raisonnements probabilistes (de l'inférence) impliquant <b>deux phénomènes aléatoires</b> à l'aide d'<i>a
+priori</i> et de conditionnement</li>
+<li>Et si la problématique décisionnelle implique plus de deux phénomènes ou variables aléatoires,
+<b>les réseaux bayésiens vont nous sauver !</b></li>
+
+</ul>
 
 </div>
 
 </section>
-<section id="slide-org5f75818">
-<h4 id="org5f75818">Théorème de Bayes</h4>
+<section id="slide-org2cdf519">
+<h4 id="org2cdf519">Théorème de Bayes</h4>
 <p>
 <div class="slidesubtitle">Retour sur l'exemple du vol de voiture</div>
 </p>
@@ -352,7 +355,7 @@ Le théorème de Bayes permet d'effectuer des
 <h4>Modélisation</h4>
 </p>
 <ul>
-<li>Fiabilité de l'alarme : \(P(\text{Alarme} | \text{Vol}) = 0.9\)</li>
+<li>Fiabilité de l'alarme : \(P(\text{Alarme} | \text{Vol}) = 0.999\)</li>
 <li>Taux de fausses alarmes : \(P(\text{Alarme} | \text{Pas de vol}) = 0.005\)</li>
 
 </ul>
@@ -382,41 +385,150 @@ mathématiquement par la probabilité \(P(\text{Vol})\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org3716814">
-<h3 id="org3716814">Quiz</h3>
+<section id="slide-orgdd8af42">
+<h3 id="orgdd8af42">Quiz</h3>
 <p>
-Les paris sportifs
+Vous connaissez tous une industrie qui repose sur les raisonnements bayésiens, laquelle ?
 </p>
 
-</section>
-</section>
-<section>
-<section id="slide-orga8f3cdd">
-<h2 id="orga8f3cdd">Les réseaux bayésiens</h2>
+
+<div class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/betclic.png" alt="Betclic" width="90%" />
+</p>
+</div>
+
 
 </section>
 </section>
 <section>
-<section id="slide-org5551280">
-<h2 id="org5551280">Inférence</h2>
+<section id="slide-orgbabc9be">
+<h2 id="orgbabc9be">Les réseaux bayésiens</h2>
+
+<div class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/fireworks.jpg" alt="Fireworks" width="90%" />
+</p>
+</div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgfb54f12">
-<h2 id="orgfb54f12">Apprentissage</h2>
+<section id="slide-orgadc8ddc">
+<h3 id="orgadc8ddc">Les réseaux bayésiens en trois points</h3>
+<div class="block-example">
+<p>
+<h4>Qu'est ce que c'est?</h4>
+</p>
+
+<ul>
+<li>Les réseaux bayésiens désignent un formalisme de modélisation graphique</li>
+<li>Ce formalisme permet de représenter des phénomènes aléatoires complexes sous forme de lois de probabilité
+conditionnelles</li>
+
+</ul>
+
+</div>
+
+<div class="block-example">
+<p>
+<h4>Sur quoi ça repose?</h4>
+</p>
+
+<ul>
+<li>Théorie des graphes (aspect qualitatif)</li>
+<li>Théorie des probabilités (aspect quantitatif)</li>
+
+</ul>
+
+</div>
+
+<div class="block-example">
+<p>
+<h4>En quoi est-ce intéressant</h4>
+</p>
+
+<ul>
+<li>Formalisme graphique intuitif (facilite la communication)</li>
+<li>Puissance de modélisation</li>
+<li>Puissance de raisonnement par inférence probabiliste</li>
+
+</ul>
+
+</div>
 
 </section>
 </section>
 <section>
-<section id="slide-org469ed80">
-<h2 id="org469ed80">Références</h2>
+<section id="slide-org77c7333">
+<h3 id="org77c7333">Un exemple pour comprendre</h3>
+<div class="block-example">
+<p>
+<h4>Alors</h4>
+</p>
+
+<ul>
+<li>Replaçons nous dans notre problématique d'alarme et de vol de voiture</li>
+<li>Considérons à présent que notre alarme est sensible aux orages</li>
+<li>Cela se matérialise par une probabilité de fausses alarmes qui augmente avec la présence d'un
+orage et de son intensité (données constructeurs)</li>
+<li>On suppose également que la survenue d'un orage peut avoir été prévue par les services météo
+(données sur les performances des prévisions météo)</li>
+<li><b>La problématique du vol et de l'alarme n'est donc plus bivariée !</b></li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example">
+<p>
+<h4>L'alarme retentit</h4>
+</p>
+
+<ul>
+<li>Dois-je appeler la police ?
+<ul>
+<li>Si j'entends un fort orage</li>
+<li>Si avant de dormir, j'ai lu un bulletin météo indiquant que de petits orages risquaient d'avoir
+lieu pendant la nuit ?</li>
+
+</ul></li>
+<li>Que dire sur la météo si je vois un voleur s'emparer de mon véhicule ?</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org17da4ba">
+<h4 id="org17da4ba">Un exemple pour comprendre</h4>
+
+<div class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_1.png" alt="RB alarme definition" width="90%" />
+</p>
+</div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgd94b4a6">
-<h2 id="orgd94b4a6">Résumé de la séance</h2>
+<section id="slide-orgac3b7b1">
+<h2 id="orgac3b7b1">Inférence</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org081bc07">
+<h2 id="org081bc07">Apprentissage</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd36fa38">
+<h2 id="orgd36fa38">Références</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orge222158">
+<h2 id="orge222158">Résumé de la séance</h2>
 <div class="block-definition">
 <p>
 <h4>Points clés</h4>
@@ -444,8 +556,8 @@ Donnez 5 éléments clés que vous avez retenus lors de cette séance
 </section>
 </section>
 <section>
-<section id="slide-orge0bb6c0">
-<h3 id="orge0bb6c0">Merci pour votre attention !</h3>
+<section id="slide-org0b5c35a">
+<h3 id="org0b5c35a">Merci pour votre attention !</h3>
 <p>
 <div class="slidesubtitle">Des questions ?</div>
 </p>
