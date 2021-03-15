@@ -34,16 +34,16 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#/slide-orged3c60d">Objectifs de la séance</a></li>
-<li><a href="#/slide-orgf45c169">Un peu d'Histoire</a></li>
-<li><a href="#/slide-org6db691b">Le raisonnement bayésien</a></li>
-<li><a href="#/slide-orgc15df45">Les réseaux bayésiens</a></li>
-<li><a href="#/slide-orga70665d">Inférence</a></li>
-<li><a href="#/slide-org576ecd1">Construction pratique d'un réseau bayésien</a></li>
-<li><a href="#/slide-org9a72cee">Outils pour manipuler les RB</a></li>
-<li><a href="#/slide-org1928fa7">Évaluation</a></li>
-<li><a href="#/slide-orgb21761f">Application : <i>Trading</i> de bitcoins</a></li>
-<li><a href="#/slide-org09ab1ea">Résumé de la séance</a></li>
+<li><a href="#/slide-org93c65ea">Objectifs de la séance</a></li>
+<li><a href="#/slide-org40b4629">Un peu d'Histoire</a></li>
+<li><a href="#/slide-org2338dab">Le raisonnement bayésien</a></li>
+<li><a href="#/slide-org0b4fd91">Les réseaux bayésiens</a></li>
+<li><a href="#/slide-org9705547">Inférence</a></li>
+<li><a href="#/slide-org228b823">Construction pratique d'un réseau bayésien</a></li>
+<li><a href="#/slide-orgb816e72">Outils pour manipuler les RB</a></li>
+<li><a href="#/slide-org7fb6319">Évaluation</a></li>
+<li><a href="#/slide-org6570bb3">Application : <i>Trading</i> et <i>bitcoins</i></a></li>
+<li><a href="#/slide-org2b5d5c4">Résumé de la séance</a></li>
 </ul>
 </div>
 </div>
@@ -51,21 +51,22 @@
 
 
 <section>
-<section id="slide-orged3c60d">
-<h2 id="orged3c60d">Objectifs de la séance</h2>
+<section id="slide-org93c65ea">
+<h2 id="org93c65ea">Objectifs de la séance</h2>
 <ul>
 <li>Replacer le développement des techniques bayésiennes dans l'Histoire scientifique</li>
 <li>Comprendre le principe de raisonnement bayésien</li>
 <li>Introduire le formalisme des réseaux bayésiens</li>
 <li>Savoir construire un réseau bayésien pour un problème donné</li>
+<li>Découvrir l'outil de modélisation <code>GeNIe</code></li>
 
 </ul>
 
 </section>
 </section>
 <section>
-<section id="slide-orgf45c169">
-<h2 id="orgf45c169">Un peu d'Histoire</h2>
+<section id="slide-org40b4629">
+<h2 id="org40b4629">Un peu d'Histoire</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/time-travel.jpg" alt="Classification dinosaures" width="80%" />
@@ -75,8 +76,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orge80939b">
-<h3 id="orge80939b">Une histoire de jeux</h3>
+<section id="slide-org7a6a5e5">
+<h3 id="org7a6a5e5">Une histoire de jeux</h3>
 <div class="block-example">
 <p>
 <h4>Révérend Thomas Bayes (1702–1761)</h4>
@@ -103,8 +104,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgd0768bb">
-<h3 id="orgd0768bb">Les travaux se poursuivent&#x2026;</h3>
+<section id="slide-orga2aa4fb">
+<h3 id="orga2aa4fb">Les travaux se poursuivent&#x2026;</h3>
 <div class="block-example">
 <p>
 <h4>Pierre-Simon Laplace (1749–1827)</h4>
@@ -128,8 +129,8 @@
 </section>
 </section>
 <section>
-<section id="slide-org0558e5c">
-<h3 id="org0558e5c">deux siècles plus tard&#x2026;</h3>
+<section id="slide-org98a5696">
+<h3 id="org98a5696">deux siècles plus tard&#x2026;</h3>
 <div class="block-example">
 <p>
 <h4>Fréquentistes vs Bayésiens (la guerre est toujours en cours)</h4>
@@ -158,8 +159,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org4f513d2">
-<h3 id="org4f513d2">Les débuts de l'IA</h3>
+<section id="slide-org523e5fb">
+<h3 id="org523e5fb">Les débuts de l'IA</h3>
 <div class="block-example">
 <p>
 <h4>L'ère des systèmes experts (1970-1990)</h4>
@@ -187,8 +188,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org1886d57">
-<h3 id="org1886d57">La domination de l'IA</h3>
+<section id="slide-org50df92e">
+<h3 id="org50df92e">La domination de l'IA</h3>
 <div class="block-example">
 <p>
 <h4>Judea Pearl (1936–) : Père des réseaux bayésiens</h4>
@@ -220,8 +221,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org6db691b">
-<h2 id="org6db691b">Le raisonnement bayésien</h2>
+<section id="slide-org2338dab">
+<h2 id="org2338dab">Le raisonnement bayésien</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/bayes_panneau.jpg" alt="Panneau bayésien" width="80%" />
@@ -232,8 +233,8 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org1452321">
-<h3 id="org1452321">Principe général</h3>
+<section id="slide-org221aa64">
+<h3 id="org221aa64">Principe général</h3>
 <div class="column" style="float:left; width: 50%">
 
 <div class="block-definition">
@@ -267,8 +268,8 @@ pour réaliser des raisonnements</li>
 </section>
 </section>
 <section>
-<section id="slide-org71eeb0f">
-<h3 id="org71eeb0f">Exemple de raisonnement</h3>
+<section id="slide-org13fd4a9">
+<h3 id="org13fd4a9">Exemple de raisonnement</h3>
 <div class="block-example">
 <p>
 <h4>Alarme et vol de voiture</h4>
@@ -300,17 +301,17 @@ donné, je me recouche, sinon j'appelle la police</li>
 </section>
 </section>
 <section>
-<section id="slide-orgfd8d1f7">
-<h3 id="orgfd8d1f7">Théorème de Bayes</h3>
+<section id="slide-orgf7aef0c">
+<h3 id="orgf7aef0c">Théorème de Bayes</h3>
 <div class="block-definition">
 <p>
 <h4>Théorème de Bayes</h4>
 </p>
 
 <ul>
-<li>Le théorème (ou formule) de Bayes permet d'exprimer la loi d'un phénomène
-    \(Y\) conditionnellement à un phénomène \(X\) en fonction de la loi du phénomène \(X\) conditionnellement
-sachant \(X\) et de la loi
+<li>Le théorème (ou formule) de Bayes permet d'exprimer la loi d'un phénomène \(Y\) conditionnellement à
+un phénomène \(X\) en fonction de la loi du phénomène \(X\) 
+conditionnellement au phénomène \(Y\) et de la loi
     marginale du phénomène \(X\).</li>
 
 <li>Soient \(X\) et \(Y\) deux variables aléatoires (v.a.) représentant deux phénomènes aléatoires, on a :
@@ -319,7 +320,7 @@ sachant \(X\) et de la loi
   \]
 <ul>
 <li>les lois \(P(X)\) et \(P(Y)\) sont appelées lois <i>a priori</i> des
-phénomènes \(X\) et \(Y\) respectivement</li>
+phénomènes \(X\) et \(Y\) respectivement (ou lois marginales)</li>
 <li>la loi \(P(X|Y)\) représente la vraisemblance du phénomène \(X\) par rapport au phénomène \(Y\),
 autrement dit la "plausibilité" d'observer \(X\) alors que \(Y\) s'est produit</li>
 
@@ -346,8 +347,8 @@ priori</i> et de conditionnement</li>
 </div>
 
 </section>
-<section id="slide-org7565690">
-<h4 id="org7565690">Théorème de Bayes</h4>
+<section id="slide-org8acd9b0">
+<h4 id="org8acd9b0">Théorème de Bayes</h4>
 <p>
 <div class="slidesubtitle">Retour sur l'exemple du vol de voiture</div>
 </p>
@@ -366,19 +367,30 @@ priori</i> et de conditionnement</li>
 
 <div class="block-example">
 <p>
-<h4>L'alarme retentit...</h4>
+<h4>L'alarme retentit... Dois-je appeler la police ?</h4>
 </p>
 
 <ul>
-<li class="fragment appear">Dois-je appeler la police ?</li>
-<li class="fragment appear">Les données disponibles ne me permettent pas de prendre une décision !</li>
-<li class="fragment appear">Pour cela, il faut que j'estime \(P(\text{Vol}|\text{Alarme})\)</li>
-<li class="fragment appear">Or d'après le théorème de Bayes :
+<li class="fragment appear"><b>Si je suis fréquentiste :</b>
+<ul>
+<li>je construits un test : \(H_{0}\) : pas de vol et \(H_{1}\) : vol</li>
+<li>\(P(\text{Alarme} | \text{Pas de vol}) = 0.005 < 0.05\), il est trop surprenant qu'il s'agisse
+d'une fausse alarme compte tenu de sa fiabilité, je rejette \(H_{0}\) et j'appelle la police !</li>
+
+</ul></li>
+
+<li class="fragment appear"><b>Si je suis bayésien :</b>
+<ul>
+<li>Les données disponibles ne me permettent pas de prendre une décision !</li>
+<li>Pour cela, il faut que j'estime \(P(\text{Vol}|\text{Alarme})\)</li>
+<li>Or d'après le théorème de Bayes :
 \[
-  P(\text{Vol}|\text{Alarme}) = \frac{P(\text{Alarme} | \text{Vol}) P(\text{Vol})}{P(\text{Alarme})}
-  \]</li>
-<li class="fragment appear">La décision repose donc sur ma "croyance" <i>a priori</i> relative à l'occurrence d'un vol représentée
+    P(\text{Vol}|\text{Alarme}) = \frac{P(\text{Alarme} | \text{Vol}) P(\text{Vol})}{P(\text{Alarme})}
+    \]</li>
+<li>La décision repose donc sur ma "croyance" <i>a priori</i> relative sur l'occurrence d'un vol représentée
 mathématiquement par la probabilité \(P(\text{Vol})\)</li>
+
+</ul></li>
 
 </ul>
 
@@ -387,8 +399,8 @@ mathématiquement par la probabilité \(P(\text{Vol})\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org92d315b">
-<h3 id="org92d315b">Exemple de bayésiens</h3>
+<section id="slide-orgab721c3">
+<h3 id="orgab721c3">Exemple de bayésiens</h3>
 <div class="block-example">
 <p>
 <h4>Question</h4>
@@ -412,8 +424,8 @@ Vous connaissez tous une industrie qui repose sur les raisonnements bayésiens, 
 </section>
 </section>
 <section>
-<section id="slide-orgc15df45">
-<h2 id="orgc15df45">Les réseaux bayésiens</h2>
+<section id="slide-org0b4fd91">
+<h2 id="org0b4fd91">Les réseaux bayésiens</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/fireworks.jpg" alt="Fireworks" width="40%" />
@@ -423,8 +435,8 @@ Vous connaissez tous une industrie qui repose sur les raisonnements bayésiens, 
 </section>
 </section>
 <section>
-<section id="slide-org36188d2">
-<h3 id="org36188d2">Les réseaux bayésiens en trois points</h3>
+<section id="slide-org63d528e">
+<h3 id="org63d528e">Les réseaux bayésiens en trois points</h3>
 <div class="block-example">
 <p>
 <h4>Qu'est ce que c'est?</h4>
@@ -469,8 +481,8 @@ conditionnelles</li>
 </section>
 </section>
 <section>
-<section id="slide-org1f873a5">
-<h3 id="org1f873a5">Un exemple pour comprendre</h3>
+<section id="slide-org825f110">
+<h3 id="org825f110">Un exemple pour comprendre</h3>
 <div class="block-example">
 <p>
 <h4>Vol ou pas vol ?</h4>
@@ -491,17 +503,13 @@ orage et de son intensité (données constructeurs)</li>
 
 <div class="fragment (appear) block-example">
 <p>
-<h4>L'alarme retentit</h4>
+<h4>L'alarme retentit en pleine nuit... Dois-je appeler la police ?</h4>
 </p>
 
-<ul>
-<li>Dois-je appeler la police ?
 <ul>
 <li>Si j'entends un fort orage</li>
 <li>Si avant de dormir, j'ai lu un bulletin météo indiquant que de petits orages risquaient d'avoir
 lieu pendant la nuit ?</li>
-
-</ul></li>
 <li>Que dire sur la météo si je vois un voleur s'emparer de mon véhicule ?</li>
 
 </ul>
@@ -509,8 +517,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-org677dd70">
-<h4 id="org677dd70">Un exemple pour comprendre</h4>
+<section id="slide-org4af711e">
+<h4 id="org4af711e">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_1.png" alt="RB alarme definition" width="90%" />
@@ -518,8 +526,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-orgdf3c7a5">
-<h4 id="orgdf3c7a5">Un exemple pour comprendre</h4>
+<section id="slide-org16abb36">
+<h4 id="org16abb36">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_2.png" alt="RB alarme definition" width="90%" />
@@ -527,8 +535,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-org0f036e3">
-<h4 id="org0f036e3">Un exemple pour comprendre</h4>
+<section id="slide-orga31e04e">
+<h4 id="orga31e04e">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_3.png" alt="RB alarme definition" width="90%" />
@@ -537,8 +545,8 @@ lieu pendant la nuit ?</li>
 
 
 </section>
-<section id="slide-org8e5af7d">
-<h4 id="org8e5af7d">Un exemple pour comprendre</h4>
+<section id="slide-org4fcf447">
+<h4 id="org4fcf447">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_4.png" alt="RB alarme definition" width="90%" />
@@ -546,8 +554,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-org4c99f67">
-<h4 id="org4c99f67">Un exemple pour comprendre</h4>
+<section id="slide-org33b1a47">
+<h4 id="org33b1a47">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_5.png" alt="RB alarme definition" width="90%" />
@@ -555,8 +563,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-org5f1380c">
-<h4 id="org5f1380c">Un exemple pour comprendre</h4>
+<section id="slide-orgf5c05e0">
+<h4 id="orgf5c05e0">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_6.png" alt="RB alarme definition" width="90%" />
@@ -565,8 +573,8 @@ lieu pendant la nuit ?</li>
 
 
 </section>
-<section id="slide-orgc391b7f">
-<h4 id="orgc391b7f">Un exemple pour comprendre</h4>
+<section id="slide-orga28fddf">
+<h4 id="orga28fddf">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_7.png" alt="RB alarme definition" width="90%" />
@@ -574,8 +582,8 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-org5263858">
-<h4 id="org5263858">Un exemple pour comprendre</h4>
+<section id="slide-orgac9f235">
+<h4 id="orgac9f235">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_8.png" alt="RB alarme definition" width="90%" />
@@ -584,8 +592,8 @@ lieu pendant la nuit ?</li>
 
 
 </section>
-<section id="slide-org2a148f1">
-<h4 id="org2a148f1">Un exemple pour comprendre</h4>
+<section id="slide-org408e39c">
+<h4 id="org408e39c">Un exemple pour comprendre</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_9.png" alt="RB alarme definition" width="90%" />
@@ -598,8 +606,8 @@ lieu pendant la nuit ?</li>
 </section>
 </section>
 <section>
-<section id="slide-orgdbf5b83">
-<h3 id="orgdbf5b83">Définition formelle</h3>
+<section id="slide-org52a0cb8">
+<h3 id="org52a0cb8">Définition formelle</h3>
 <div class="block-definition">
 <p>
 <h4>Réseau bayésien (RB)</h4>
@@ -636,8 +644,8 @@ variables aléatoires (v.a.) \(X_{1},\ldots,X_{n}\) par :
 </section>
 </section>
 <section>
-<section id="slide-orgfea6d36">
-<h3 id="orgfea6d36">Domaines d'application</h3>
+<section id="slide-org6dd9a63">
+<h3 id="org6dd9a63">Domaines d'application</h3>
 <div class="block-example">
 <p>
 <h4>Quelques champs d'applications</h4>
@@ -652,6 +660,10 @@ variables aléatoires (v.a.) \(X_{1},\ldots,X_{n}\) par :
 <li><b>Applications à l'aide à la décision en général</b></li>
 
 </ul>
+
+<p>
+Exemple : <a href="https://roland-donat.github.io/cours-rb/stid_intro/exemples/alarme.xdsl">Modèle du réseau bayésien <code>Alarme</code></a>
+</p>
 
 </div>
 
@@ -674,8 +686,8 @@ variables aléatoires (v.a.) \(X_{1},\ldots,X_{n}\) par :
 </section>
 </section>
 <section>
-<section id="slide-org92b83c8">
-<h3 id="org92b83c8">Propriété fondamentale</h3>
+<section id="slide-orgeda1155">
+<h3 id="orgeda1155">Propriété fondamentale</h3>
 <div class="block-definition">
 <p>
 <h4>Factorisation de la loi jointe</h4>
@@ -691,8 +703,7 @@ P(X_{1}, \ldots,X_{n}) = \prod_{i=1}^{n} P(X_{i}| \text{pa}(X_{i}))
 
 </div>
 
-
-<div class="block-definition">
+<div class="fragment (appear) block-definition">
 <p>
 <h4>Rappel</h4>
 </p>
@@ -709,8 +720,8 @@ P(X_{1}, \ldots,X_{n}) = \prod_{i=1}^{n} P(X_{i}| \text{pa}(X_{i}))
 </div>
 
 </section>
-<section id="slide-org7f0d958">
-<h4 id="org7f0d958">Propriété fondamentale</h4>
+<section id="slide-org77fd973">
+<h4 id="org77fd973">Propriété fondamentale</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -745,8 +756,8 @@ P(\text{Météo}|\text{Orage})
 </section>
 </section>
 <section>
-<section id="slide-orgead19b9">
-<h3 id="orgead19b9">Complexité</h3>
+<section id="slide-orgc1c59c7">
+<h3 id="orgc1c59c7">Complexité</h3>
 <p>
 <div class="slidesubtitle">Complexité spatiale d'une LPC discrète et finie</div>
 </p>
@@ -792,8 +803,8 @@ où \(|\mathcal{X}_{i}|\) est le nombre d'éléments dans l'ensemble \(\mathcal{
 </div>
 
 </section>
-<section id="slide-org090cce6">
-<h4 id="org090cce6">Complexité</h4>
+<section id="slide-orga43f1cf">
+<h4 id="orga43f1cf">Complexité</h4>
 <p>
 <div class="slidesubtitle">Complexité probabiliste d'une LPC discrète et finie</div>
 </p>
@@ -843,8 +854,8 @@ variables de conditionnement</li>
 
 
 </section>
-<section id="slide-org5c97b46">
-<h4 id="org5c97b46">Complexité</h4>
+<section id="slide-orgfdae24b">
+<h4 id="orgfdae24b">Complexité</h4>
 <p>
 <div class="slidesubtitle">Complexité d'un réseau bayésien</div>
 </p>
@@ -882,8 +893,8 @@ comme étant la somme des complexités spatiales (resp. probabilistes) associée
 </div>
 
 </section>
-<section id="slide-org96833d3">
-<h4 id="org96833d3">Complexité</h4>
+<section id="slide-org763421d">
+<h4 id="org763421d">Complexité</h4>
 <p>
 <div class="slidesubtitle">Conséquences pratiques</div>
 </p>
@@ -923,8 +934,8 @@ Calculer les complexités du modèle "Alarme" avec et sans RB
 </section>
 </section>
 <section>
-<section id="slide-orga305b24">
-<h3 id="orga305b24">Relations d'indépendances</h3>
+<section id="slide-orgb645448">
+<h3 id="orgb645448">Relations d'indépendances</h3>
 <div class="block-definition">
 <p>
 <h4>RB et indépendances conditionnelles</h4>
@@ -963,8 +974,8 @@ suivantes :
 </div>
 
 </section>
-<section id="slide-org11e7635">
-<h4 id="org11e7635">Relations d'indépendances</h4>
+<section id="slide-orgab49b0a">
+<h4 id="orgab49b0a">Relations d'indépendances</h4>
 <p>
 <div class="slidesubtitle">Connexion série</div>
 </p>
@@ -998,8 +1009,8 @@ suivantes :
 
 
 </section>
-<section id="slide-org59522e2">
-<h4 id="org59522e2">Relations d'indépendances</h4>
+<section id="slide-org861abfc">
+<h4 id="org861abfc">Relations d'indépendances</h4>
 <p>
 <div class="slidesubtitle">Connexion divergente</div>
 </p>
@@ -1032,8 +1043,8 @@ suivantes :
 </div>
 
 </section>
-<section id="slide-org6b8d367">
-<h4 id="org6b8d367">Relations d'indépendances</h4>
+<section id="slide-org7cb54ef">
+<h4 id="org7cb54ef">Relations d'indépendances</h4>
 <p>
 <div class="slidesubtitle">Connexion divergente</div>
 </p>
@@ -1071,19 +1082,19 @@ suivantes :
 </section>
 </section>
 <section>
-<section id="slide-orga70665d">
-<h2 id="orga70665d">Inférence</h2>
+<section id="slide-org9705547">
+<h2 id="org9705547">Inférence</h2>
 
 <div class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/inferences.jpg" alt="Inférence" width="95%" />
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/inferences.jpg" alt="Inférence" width="85%" />
 </p>
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-org6678db4">
-<h3 id="org6678db4">Problématique</h3>
+<section id="slide-orgad35e30">
+<h3 id="orgad35e30">Problématique</h3>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_inference_alarme_pb.png" alt="Inférence problématique" width="95%" />
@@ -1091,8 +1102,8 @@ suivantes :
 </div>
 
 </section>
-<section id="slide-orgffecbf3">
-<h4 id="orgffecbf3">Problématique</h4>
+<section id="slide-org5ab45a2">
+<h4 id="org5ab45a2">Problématique</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_inference_alarme_ex_1.png" alt="Inférence problématique" width="95%" />
@@ -1100,8 +1111,8 @@ suivantes :
 </div>
 
 </section>
-<section id="slide-orgdd10f95">
-<h4 id="orgdd10f95">Problématique</h4>
+<section id="slide-orge579645">
+<h4 id="orge579645">Problématique</h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_inference_alarme_ex_2.png" alt="Inférence problématique" width="95%" />
@@ -1111,8 +1122,8 @@ suivantes :
 </section>
 </section>
 <section>
-<section id="slide-org3d19666">
-<h3 id="org3d19666">Méthode d'élimination des variables</h3>
+<section id="slide-orgb11db34">
+<h3 id="orgb11db34">Méthode d'élimination des variables</h3>
 <p>
 <div class="slidesubtitle">Principe</div>
 </p>
@@ -1123,9 +1134,9 @@ suivantes :
 </p>
 
 <ul>
-<li>Méthode adaptée pour les réseaux bayésiens à variables discrètes et finies,
+<li>Méthode adaptée pour les réseaux bayésiens à <b>variables discrètes et finies</b>,
 i.e. LPC sous forme de tables (matrices)</li>
-<li>Si le phénomène étudié implique des variables continues et/ou non finies, il faut les discrétiser
+<li>Si le phénomène étudié implique des variables continues et/ou non finies, il faut les <b>discrétiser</b>
 au préalable</li>
 
 </ul>
@@ -1138,7 +1149,7 @@ au préalable</li>
 </p>
 
 <ul>
-<li>"Éliminer" par marginalisation successive toutes les variables de la loi jointe qui
+<li>"Éliminer" par marginalisations successives toutes les variables de la loi jointe qui
 n'apparaissent pas dans le calcul à réaliser</li>
 <li>Simplifier le calcul à réaliser grâce à la propriété de factorisation des RB et choississant un
 "bon" ordre d'élimination des variables</li>
@@ -1163,8 +1174,8 @@ n'apparaissent pas dans le calcul à réaliser</li>
 
 
 </section>
-<section id="slide-org4abbba9">
-<h4 id="org4abbba9">Méthode d'élimination des variables</h4>
+<section id="slide-org4a9cc12">
+<h4 id="org4a9cc12">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1193,8 +1204,8 @@ Info météo (\(M\))</li>
 </div>
 
 </section>
-<section id="slide-orgd6efd1a">
-<h4 id="orgd6efd1a">Méthode d'élimination des variables</h4>
+<section id="slide-org173602f">
+<h4 id="org173602f">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1227,8 +1238,8 @@ P(V = \text{oui}; A = \text{oui}) = \sum_{O \in \{\text{non},
 </div>
 
 </section>
-<section id="slide-org5c9e11b">
-<h4 id="org5c9e11b">Méthode d'élimination des variables</h4>
+<section id="slide-org9992133">
+<h4 id="org9992133">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1294,8 +1305,8 @@ Principe identique :
 </section>
 </section>
 <section>
-<section id="slide-org576ecd1">
-<h2 id="org576ecd1">Construction pratique d'un réseau bayésien</h2>
+<section id="slide-org228b823">
+<h2 id="org228b823">Construction pratique d'un réseau bayésien</h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/information-network-regina-valluzzi.jpg" alt="information-network-regina-valluzzi" width="50%" />
@@ -1306,16 +1317,16 @@ Principe identique :
 </section>
 </section>
 <section>
-<section id="slide-orgf98058e">
-<h3 id="orgf98058e">Problématique</h3>
+<section id="slide-org5b8b2a3">
+<h3 id="org5b8b2a3">Problématique</h3>
 <div class="block-definition">
 <p>
 <h4>Objectif</h4>
 </p>
 
 <ul>
-<li>Modéliser un phénomène aléatoire impliquant différentes \(X_{1}, \ldots, X_{D}\)</li>
-<li>Utiliser un réseau bayésien afin de représenter au mieux les relations en les variables</li>
+<li>Modéliser un phénomène aléatoire impliquant différentes variables \(X_{1}, \ldots, X_{D}\)</li>
+<li>Utiliser un réseau bayésien afin de représenter au mieux les relations entre les variables</li>
 
 </ul>
 
@@ -1351,8 +1362,8 @@ informations incomplètes)</li>
 </div>
 
 </section>
-<section id="slide-orgc9c7ec2">
-<h4 id="orgc9c7ec2">Problématique</h4>
+<section id="slide-org9f49c46">
+<h4 id="org9f49c46">Problématique</h4>
 <p>
 <div class="slidesubtitle">Exemple : Vente d'un livret</div>
 </p>
@@ -1364,8 +1375,8 @@ informations incomplètes)</li>
 </div>
 
 </section>
-<section id="slide-orgd5b2100">
-<h4 id="orgd5b2100">Problématique</h4>
+<section id="slide-org3769e26">
+<h4 id="org3769e26">Problématique</h4>
 <p>
 <div class="slidesubtitle">Apprentissage de la structure</div>
 </p>
@@ -1378,8 +1389,8 @@ informations incomplètes)</li>
 
 
 </section>
-<section id="slide-org850a8fe">
-<h4 id="org850a8fe">Problématique</h4>
+<section id="slide-org0ca99f0">
+<h4 id="org0ca99f0">Problématique</h4>
 <p>
 <div class="slidesubtitle">Apprentissage des LPC (structure fixée)</div>
 </p>
@@ -1392,8 +1403,8 @@ informations incomplètes)</li>
 
 
 </section>
-<section id="slide-org85268a3">
-<h4 id="org85268a3">Problématique</h4>
+<section id="slide-orgcb85b8e">
+<h4 id="orgcb85b8e">Problématique</h4>
 <p>
 <div class="slidesubtitle">Apprentissage complet du réseau bayésien</div>
 </p>
@@ -1408,8 +1419,8 @@ informations incomplètes)</li>
 </section>
 </section>
 <section>
-<section id="slide-orgbdad865">
-<h3 id="orgbdad865">Construction par expertise</h3>
+<section id="slide-org0fa082b">
+<h3 id="org0fa082b">Construction par expertise</h3>
 <p>
 <div class="slidesubtitle">Acquisition de l'information</div>
 </p>
@@ -1443,8 +1454,8 @@ informations incomplètes)</li>
 
 
 </section>
-<section id="slide-orgad95533">
-<h4 id="orgad95533">Construction par expertise</h4>
+<section id="slide-org6b0a72b">
+<h4 id="org6b0a72b">Construction par expertise</h4>
 <p>
 <div class="slidesubtitle">Attention au connexions convergentes (V-structures)</div>
 </p>
@@ -1486,8 +1497,8 @@ assumant les simplifications induites</li>
 </section>
 </section>
 <section>
-<section id="slide-org1825ecd">
-<h3 id="org1825ecd">Apprentissage des LPC</h3>
+<section id="slide-org57a30b3">
+<h3 id="org57a30b3">Apprentissage des LPC</h3>
 <div class="block-definition">
 <p>
 <h4>Hypothèses</h4>
@@ -1529,8 +1540,8 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-org52fe585">
-<h4 id="org52fe585">Apprentissage des LPC</h4>
+<section id="slide-org1b9d926">
+<h4 id="org1b9d926">Apprentissage des LPC</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1542,8 +1553,8 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-orgfce9b85">
-<h4 id="orgfce9b85">Apprentissage des LPC</h4>
+<section id="slide-orgb11104a">
+<h4 id="orgb11104a">Apprentissage des LPC</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1555,8 +1566,8 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-org5df3c21">
-<h4 id="org5df3c21">Apprentissage des LPC</h4>
+<section id="slide-org37920a9">
+<h4 id="org37920a9">Apprentissage des LPC</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1568,8 +1579,8 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-org7397d2c">
-<h4 id="org7397d2c">Apprentissage des LPC</h4>
+<section id="slide-org13cfab0">
+<h4 id="org13cfab0">Apprentissage des LPC</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1581,8 +1592,8 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-orgeeceb8a">
-<h4 id="orgeeceb8a">Apprentissage des LPC</h4>
+<section id="slide-orgc68ce18">
+<h4 id="orgc68ce18">Apprentissage des LPC</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1594,8 +1605,8 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-org0b88c7a">
-<h4 id="org0b88c7a">Apprentissage des LPC</h4>
+<section id="slide-orgd556355">
+<h4 id="orgd556355">Apprentissage des LPC</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1607,8 +1618,8 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-org406fbb0">
-<h4 id="org406fbb0">Apprentissage des LPC</h4>
+<section id="slide-orgfd9f97d">
+<h4 id="orgfd9f97d">Apprentissage des LPC</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1620,8 +1631,8 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-org57da8c5">
-<h4 id="org57da8c5">Apprentissage des LPC</h4>
+<section id="slide-orgde7891b">
+<h4 id="orgde7891b">Apprentissage des LPC</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1633,8 +1644,8 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-org20fe7db">
-<h4 id="org20fe7db">Apprentissage des LPC</h4>
+<section id="slide-org4bba934">
+<h4 id="org4bba934">Apprentissage des LPC</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -1649,8 +1660,8 @@ v.a. \(X_{d}\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org9a72cee">
-<h2 id="org9a72cee">Outils pour manipuler les RB</h2>
+<section id="slide-orgb816e72">
+<h2 id="orgb816e72">Outils pour manipuler les RB</h2>
 <div class="block-example">
 <p>
 <h4>Outils graphiques</h4>
@@ -1658,7 +1669,7 @@ v.a. \(X_{d}\)</li>
 
 <ul>
 <li><a href="https://download.bayesfusion.com/files.html?category=Academia"><code>GeNIe</code></a> : outil gratuit pour les étudiants et le monde académique sous <code>Windows</code> et <code>Linux</code>
-(<i>via</i> <code>Wine</code>)</li>
+(avec <code>Wine</code>)</li>
 <li><a href="https://www.bayesia.com/"><code>BayesiaLab</code></a> : outil payant sous <code>Windows</code> et <code>Linux</code></li>
 
 </ul>
@@ -1671,8 +1682,8 @@ v.a. \(X_{d}\)</li>
 </p>
 
 <ul>
-<li><a href="https://agrum.gitlab.io/"><code>PyAgrum</code></a> : librairie <code>Python</code> opensource</li>
-<li><a href="https://www.bnlearn.com/examples/pkg-gRain/"><code>bnlearn</code></a> : librairie <code>R</code> opensource</li>
+<li><a href="https://agrum.gitlab.io/"><code>PyAgrum</code></a> : librairie <code>Python</code> <i>opensource</i></li>
+<li><a href="https://www.bnlearn.com/examples/pkg-gRain/"><code>bnlearn</code></a> : librairie <code>R</code> <i>opensource</i></li>
 
 </ul>
 
@@ -1683,8 +1694,8 @@ v.a. \(X_{d}\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org1928fa7">
-<h2 id="org1928fa7">Évaluation</h2>
+<section id="slide-org7fb6319">
+<h2 id="org7fb6319">Évaluation</h2>
 <div class="block-example">
 <p>
 <h4>Objectif</h4>
@@ -1725,8 +1736,8 @@ L'évaluation est sur 5 points :
 </section>
 </section>
 <section>
-<section id="slide-orgb21761f">
-<h2 id="orgb21761f">Application : <i>Trading</i> de bitcoins</h2>
+<section id="slide-org6570bb3">
+<h2 id="org6570bb3">Application : <i>Trading</i> et <i>bitcoins</i></h2>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/trading_view.png" alt="Binance trading view" width="90%" />
@@ -1736,8 +1747,8 @@ L'évaluation est sur 5 points :
 </section>
 </section>
 <section>
-<section id="slide-org6a77c81">
-<h3 id="org6a77c81">Éléments de vocabulaire du <i>trading</i></h3>
+<section id="slide-orgb7217be">
+<h3 id="orgb7217be">Éléments de vocabulaire du <i>trading</i></h3>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/trading_vocab.png" alt="Binance trading view" width="90%" />
@@ -1745,8 +1756,8 @@ L'évaluation est sur 5 points :
 </div>
 
 </section>
-<section id="slide-org0e6c81a">
-<h4 id="org0e6c81a">Éléments de vocabulaire du <i>trading</i></h4>
+<section id="slide-org4960717">
+<h4 id="org4960717">Éléments de vocabulaire du <i>trading</i></h4>
 
 <div class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/trading_bougie.png" alt="Binance trading view" width="90%" />
@@ -1756,8 +1767,8 @@ L'évaluation est sur 5 points :
 </section>
 </section>
 <section>
-<section id="slide-org6aff003">
-<h3 id="org6aff003">Problématiques décisionnelles du <i>trading</i></h3>
+<section id="slide-org8dd5e22">
+<h3 id="org8dd5e22">Problématiques décisionnelles du <i>trading</i></h3>
 <p>
 <div class="slidesubtitle">Objectifs</div>
 </p>
@@ -1769,8 +1780,8 @@ L'évaluation est sur 5 points :
 </div>
 
 </section>
-<section id="slide-org3f5f085">
-<h4 id="org3f5f085">Problématiques décisionnelles du <i>trading</i></h4>
+<section id="slide-orga40a73a">
+<h4 id="orga40a73a">Problématiques décisionnelles du <i>trading</i></h4>
 <p>
 <div class="slidesubtitle">Modélisation</div>
 </p>
@@ -1781,11 +1792,12 @@ L'évaluation est sur 5 points :
 </p>
 
 <ul>
-<li>Historique du cours Bitcoin/USD avec période 3 minutes</li>
+<li>Historique du cours Bitcoin/USD de périodicité 3 minutes</li>
 <li>Indicateurs :
 <ul>
 <li>Ratio du plus bas par rapport à la différence entre fermeture et ouverture (<i>Shadow Low Body Ratio</i>)</li>
 <li>Quantile glissant du volume sur 100 unités de temps (<i>Moving Volume Quantile</i> 100)</li>
+<li>Autres indicateurs étranges issus du monde du <i>trading</i></li>
 
 </ul></li>
 <li>Pourcentage d'évolution du plus haut, plus bas et à la fermeture à l'unité de temps suivante</li>
@@ -1802,7 +1814,7 @@ L'évaluation est sur 5 points :
 
 <ul>
 <li>Discrétisation des variables</li>
-<li>Construction d'un RB visant à prévoir la bougie à \(t + 1\) compte tenu d'indicateurs observés à
+<li>Construction d'un RB visant à prévoir les bougies à \(t + 1\) et \(t+2\) compte tenu d'indicateurs observés à
 l'instant \(t\)</li>
 <li>Utilisation du logiciel GeNIe</li>
 <li>Modèle : <a href="https://roland-donat.github.io/cours-rb/usecase/btc/bn_btc_usdc_3m.xdsl">https://roland-donat.github.io/cours-rb/usecase/btc/bn_btc_usdc_3m.xdsl</a></li>
@@ -1815,8 +1827,8 @@ l'instant \(t\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org09ab1ea">
-<h2 id="org09ab1ea">Résumé de la séance</h2>
+<section id="slide-org2b5d5c4">
+<h2 id="org2b5d5c4">Résumé de la séance</h2>
 <div class="block-definition">
 <p>
 <h4>Points clés</h4>
@@ -1844,8 +1856,8 @@ Donnez 5 éléments clés que vous avez retenus lors de cette séance
 </section>
 </section>
 <section>
-<section id="slide-orgbb44f31">
-<h3 id="orgbb44f31">Merci pour votre attention !</h3>
+<section id="slide-org1137199">
+<h3 id="org1137199">Merci pour votre attention !</h3>
 <p>
 <div class="slidesubtitle">Des questions ?</div>
 </p>
