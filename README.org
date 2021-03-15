@@ -239,7 +239,7 @@ Ce site présente l'ensemble de mes ressources pédagogiques relatives à la mod
 
 ** Introduction aux réseaux bayésiens
 
-- [[stid_intro/stid_intro.html][Lien du cours]]
+- [[https://roland-donat.github.io/cours-rb/stid_intro/stid_intro.html][Lien du cours]]
 - Durée : 3h
 - Niveau : IUT STID 2ème année et LP Stats
 
