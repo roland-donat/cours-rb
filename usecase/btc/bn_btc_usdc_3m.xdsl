@@ -98,6 +98,14 @@
 			<state id="hausse" />
 			<probabilities>0.4949138714155303 0.5050861285844697</probabilities>
 		</cpt>
+		<utility id="Node1">
+			<parents>ret_low_t1</parents>
+			<utilities>-0.5 -0.25 -0.1 -0.05 -0.03 -0.015 0</utilities>
+		</utility>
+		<utility id="Copy_of_Node1">
+			<parents>ret_high_t1</parents>
+			<utilities>0 0.015 0.03 0.05 0.1 0.25 0.5</utilities>
+		</utility>
 	</nodes>
 	<extensions>
 		<genie version="1.0" app="GeNIe 2.0.5406.0" name="data_btc_usdc_3m" faultnameformat="nodestate">
@@ -178,7 +186,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>874 517 946 565</position>
+				<position>1060 516 1132 564</position>
 				<barchart active="true" width="128" height="128" />
 			</node>
 			<node id="ret_high_t2">
@@ -186,7 +194,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>869 248 941 296</position>
+				<position>1067 243 1139 291</position>
 				<barchart active="true" width="128" height="128" />
 			</node>
 			<node id="ret_close_t2">
@@ -194,8 +202,24 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>870 379 942 427</position>
+				<position>1068 374 1140 422</position>
 				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Node1">
+				<name>Esp Pct Low t1</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>540 663 590 691</position>
+				<barchart active="true" width="162" height="80" />
+			</node>
+			<node id="Copy_of_Node1">
+				<name>Esp Pct High t1</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>735 667 785 695</position>
+				<barchart active="true" width="162" height="80" />
 			</node>
 		</genie>
 	</extensions>
