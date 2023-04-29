@@ -1,0 +1,502 @@
+# -*- coding: utf-8 -*-
+
+#+TITLE: Rappels de probabilité et introduction aux réseaux bayésiens
+#+AUTHOR: Exercices de cours
+#+DATE: ENSIBS - Spécialité Informatique
+# Modélisation Stochastique par Réseaux Bayésiens 
+
+# Org-mode general options
+# ------------------------
+#+LANGUAGE: fr
+#+OPTIONS: H:3 num:nil toc:t \n:nil @:t ::t |:t ^:{} f:t TeX:t author:t d:nil htm/citel-style:nil
+#+OPTIONS: html-postamble:nil
+#+DRAWERS: OPTIONS CACHE MACROS
+#+STARTUP: content 
+#+STARTUP: hidestars
+#+TODO: TODO(t) INPROGRESS(p) | DONE(d)
+#+BIND: org-latex-table-scientific-notation "{%s}E{%s}"
+
+# HTML options
+# ------------
+# HTML options
+# ------------
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://edgemind-sas.github.io/visual-identity/official_docs/css/edgemind.css" />
+
+
+# LaTeX options
+# -------------
+:OPTIONS:
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [a4paper,twoside,11pt]
+
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage[french]{babel}
+#+LATEX_HEADER: \usepackage[default,scale=0.95]{opensans}
+
+#+LATEX_HEADER: \frenchbsetup{ListOldLayout=true} %FBReduceListSpacing=true,CompactItemize=false}
+
+#+LATEX_HEADER: \usepackage{graphicx}
+# #+LATEX_HEADER: \usepackage[dvips,xetex]{graphicx}
+#+LATEX_HEADER: % Graphics path
+#+LATEX_HEADER: \graphicspath{ 
+#+LATEX_HEADER:   {./fig/}
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: \usepackage{amssymb}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{amsfonts}
+
+#+LATEX_HEADER: \usepackage{color}
+#+LATEX_HEADER: % EdgeMind Colors
+#+LATEX_HEADER: \definecolor{EMLogoBlue}        {cmyk}{0.96, 0.75, 0.30, 0.18} 
+#+LATEX_HEADER: \definecolor{EMLogoOrange}      {cmyk}{0.00, 0.61, 0.90, 0.00} 
+#+LATEX_HEADER: \definecolor{EMGrey}            {cmyk}{0.21, 0.17, 0.10, 0.00} 
+#+LATEX_HEADER: \definecolor{EMBrownLight}      {cmyk}{0.25, 0.47, 0.75, 0.15} 
+#+LATEX_HEADER: \definecolor{EMRed}             {cmyk}{0.21, 1.00, 0.92, 0.14} 
+#+LATEX_HEADER: \definecolor{EMBrown}           {cmyk}{0.34, 1.00, 0.91, 0.55} 
+
+#+LATEX_HEADER: \usepackage{verbatim}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{float}
+#+LATEX_HEADER: \usepackage{lmodern}
+
+#+LATEX_HEADER: \usepackage[pdfborder={0 0 0},bookmarks=true,bookmarksnumbered=true,pdfpagemode=None,pdfstartview=FitH,pdfpagelayout=SinglePage,colorlinks=true,linkcolor=EMBrown,urlcolor=EMBrown,citecolor=EMBrown]{hyperref}
+#+LATEX_HEADER: \usepackage{natbib}
+#+LATEX_HEADER: \usepackage{subfig}
+#+LATEX_HEADER: \captionsetup[table]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[figure]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[subfloat]{margin=0pt,font=footnotesize}
+#+LATEX_HEADER: \usepackage{booktabs}
+
+# #+LATEX_HEADER: \usepackage{minted}
+# #+LATEX_HEADER: \usemintedstyle{edgemind}
+# #+LATEX_HEADER: \renewcommand{\theFancyVerbLine}{\sffamily \footnotesize {\color{EMLogoBlue}\oldstylenums{\arabic{FancyVerbLine}}}}
+
+#+LATEX_HEADER: \usepackage{geometry}
+#+LATEX_HEADER: \geometry{
+#+LATEX_HEADER: %  nohead,
+#+LATEX_HEADER:   top=2.25cm, 
+#+LATEX_HEADER:   bottom=2.25cm, 
+#+LATEX_HEADER:  left=2.5cm, 
+#+LATEX_HEADER:  right=2.5cm}
+
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \onehalfspacing
+#+LATEX_HEADER: % Supprime l'indentation
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: % Espacement entre les paragraphes
+#+LATEX_HEADER: \setlength{\parskip}{2ex}
+
+
+:END:
+# Latex command to work with minted
+:CACHE:
+#+HEADER: :eval yes
+#+HEADER: :results silent
+#+HEADER: :exports results
+#+BEGIN_SRC emacs-lisp 
+;; (setq org-latex-pdf-process
+;;       '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "bibtex %b"
+;;         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+#+END_SRC
+:END:
+# LaTeX Macros maths
+#+MACRO: TEX-INDEP $\perp\!\!\!\perp$
+:OPTIONS:
+#+LATEX_HEADER: % ""
+#+LATEX_HEADER: \def\ofg#1{\og #1 \fg{}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % backslash
+#+LATEX_HEADER: \def\bs{\textbackslash}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Presentation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % bold math
+#+LATEX_HEADER: \def\mbf#1{\boldsymbol{#1}}
+#+LATEX_HEADER: % straight bold math
+#+LATEX_HEADER: \def\mbfs#1{\mathbf{#1}}
+#+LATEX_HEADER: % (), {}, [], ||
+#+LATEX_HEADER: \def\lrPar#1{\left( #1 \right)}
+#+LATEX_HEADER: \def\lrpar#1{( #1 )}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrace#1{\left\{ #1 \right\}}
+#+LATEX_HEADER: \def\lrbrace#1{\{ #1 \}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrack#1{\left[ #1 \right]}
+#+LATEX_HEADER: \def\lrbrack#1{[ #1 ]}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrMid#1{\left| #1 \right|}
+#+LATEX_HEADER: \def\lrmid#1{| #1 |}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrmmid#1{\Vert #1 \Vert}
+#+LATEX_HEADER: \def\lrMmid#1{\left\Vert #1 \right\Vert}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrfloor#1{\lfloor #1 \rfloor}
+#+LATEX_HEADER: \def\lrFloor#1{\left\lfloor #1 \right\rfloor}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrceil#1{\lceil #1 \rceil}
+#+LATEX_HEADER: \def\lrCeil#1{\left\lceil #1 \right\rceil}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \def\lrnorm#1{\| #1 \|}
+#+LATEX_HEADER: % \def\lrNorm#1{\left\| #1 \right\|}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % = definition
+#+LATEX_HEADER: \def\eqdef{\stackrel{\text{d\acute{e}f}}{=}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Operators
+#+LATEX_HEADER: % =========
+#+LATEX_HEADER: % sign
+#+LATEX_HEADER: \def\signe{\text{signe}}
+#+LATEX_HEADER: % support
+#+LATEX_HEADER: \def\supp{\text{supp}}
+#+LATEX_HEADER: % to
+#+LATEX_HEADER: \def\conv#1{\xrightarrow[#1]{}}
+#+LATEX_HEADER: % d of dx
+#+LATEX_HEADER: \def\d{\text{d}}
+#+LATEX_HEADER: % integral/sum
+#+LATEX_HEADER: \def\intsum{\textstyle{\sum}\hspace{-0.5cm}\displaystyle\int}
+#+LATEX_HEADER: % modulo
+#+LATEX_HEADER: \def\modulo{\text{mod}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Set
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Classic sets
+#+LATEX_HEADER: \def\bbbr{\mathbb{R}} 
+#+LATEX_HEADER: \def\bbbn{\mathbb{N}} 
+#+LATEX_HEADER: \def\bbbk{\mathbb{K}} 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Characteristic function
+#+LATEX_HEADER: \def\indic{\mbox{1\hspace{-.25em}I}} 
+#+LATEX_HEADER: % Imply
+#+LATEX_HEADER: \def\Then{\Rightarrow}
+#+LATEX_HEADER: % set { ... }
+#+LATEX_HEADER: \def\set#1{\lrbrace{ #1 }}
+#+LATEX_HEADER: \def\Set#1{\lrBrace{ #1 }}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % set minus (\)
+#+LATEX_HEADER: \def\sm{\setminus}
+#+LATEX_HEADER: % part set of a set
+#+LATEX_HEADER: \def\setofparts#1{\mathcal{P}\left(#1\right)}
+#+LATEX_HEADER: % Union/intersection
+#+LATEX_HEADER: \def\union{\cup}
+#+LATEX_HEADER: \def\Union{\bigcup}
+#+LATEX_HEADER: \def\inter{\cap}
+#+LATEX_HEADER: \def\Inter{\bigcap}
+#+LATEX_HEADER: % Complementary
+#+LATEX_HEADER: \def\comp#1{\overline{#1}}
+#+LATEX_HEADER: % Cardinality
+#+LATEX_HEADER: \def\card{\text{card}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Probability
+#+LATEX_HEADER: % ===========
+#+LATEX_HEADER: % P
+#+LATEX_HEADER: \def\P{\mathbb{P}}
+#+LATEX_HEADER: \def\Prob{P}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Espectancy E[.]
+#+LATEX_HEADER: \def\E#1{\mathbb{E}\left[#1\right]}
+#+LATEX_HEADER: % indep.
+#+LATEX_HEADER: \def\perp\!\!\!\perp{\perp\!\!\!\perp}
+#+LATEX_HEADER: \def\nindep{\perp\!\!\!\!\not\,\perp}
+#+LATEX_HEADER: % Variance, covariance et corrélation
+#+LATEX_HEADER: \def\Var{\text{Var}}
+#+LATEX_HEADER: \def\Med{\text{Med}}
+#+LATEX_HEADER: \def\Cov{\text{Cov}}
+#+LATEX_HEADER: \def\Cor{\text{Cor}}
+#+LATEX_HEADER: % Mean bar
+#+LATEX_HEADER: \def\avg#1{\overline{#1}}
+#+LATEX_HEADER: \def\Bar#1{\overline{#1}}
+#+LATEX_HEADER: \def\Tilde#1{\widetilde{#1}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % convergence
+#+LATEX_HEADER: \def\convP{\xrightarrow[]{P}}
+#+LATEX_HEADER: \def\convL{\xrightarrow[]{L^2}}
+#+LATEX_HEADER: \def\convD{\xrightarrow[]{\mathcal{L}}}
+#+LATEX_HEADER: % ~_{sth}
+#+LATEX_HEADER: \def\simu#1{\underset{#1}{\sim}}
+#+LATEX_HEADER: % ~ iid
+#+LATEX_HEADER: \def\simiid{\stackrel{\text{i.i.d.}}{\sim}}
+#+LATEX_HEADER: % ~ as
+#+LATEX_HEADER: \def\simas{\stackrel{\text{as.}}{\sim}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % GMs
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Parents
+#+LATEX_HEADER: \def\Pa{\text{Pa}}
+#+LATEX_HEADER: \def\pa{\text{pa}}
+#+LATEX_HEADER: % Children
+#+LATEX_HEADER: \def\Ch{\text{Ch}}
+#+LATEX_HEADER: \def\ch{\text{ch}}
+#+LATEX_HEADER: \def\En{\text{En}}
+#+LATEX_HEADER: \def\en{\text{en}}
+#+LATEX_HEADER: % Ancestors
+#+LATEX_HEADER: \def\An{\text{An}}
+#+LATEX_HEADER: \def\an{\text{an}}
+#+LATEX_HEADER: % Descandants
+#+LATEX_HEADER: \def\De{\text{De}}
+#+LATEX_HEADER: \def\de{\text{de}}
+#+LATEX_HEADER: % Non descandants
+#+LATEX_HEADER: \def\Nd{\text{Nd}}
+#+LATEX_HEADER: \def\nd{\text{nd}}
+#+LATEX_HEADER: % Family
+#+LATEX_HEADER: \def\Fa{\text{Fa}}
+#+LATEX_HEADER: \def\fa{\text{fa}}
+#+LATEX_HEADER: % Domaine
+#+LATEX_HEADER: \def\Dom{\text{Dom}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Optimisation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % argmin/argmax
+#+LATEX_HEADER: \def\argmin#1{\underset{#1}{\arg\min}~}
+#+LATEX_HEADER: \def\argmax#1{\underset{#1}{\arg\max}~}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Matrices
+#+LATEX_HEADER: % ========
+#+LATEX_HEADER: % diag
+#+LATEX_HEADER: \def\diag{\text{diag}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % SdF
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Propagation dcc
+#+LATEX_HEADER: \def\propdcc{\stackrel{\text{dcc}}{\rightsquigarrow}}
+:END:
+
+# Babel configuration
+# -------------------
+:CACHE:
+#+HEADER: :eval yes
+#+HEADER: :results silent
+#+HEADER: :exports results
+#+BEGIN_SRC emacs-lisp 
+(setq org-latex-listings 'minted)
+
+(setq org-latex-minted-options
+        '(("frame" "lines") ("linenos=false") ("fontsize=\\footnotesize")))
+
+#+END_SRC
+:END:
+
+
+* Questions de cours
+
+1. Soit $X_{1}, \ldots, X_{n}$ une suite de variables aléatoires (v.a.). En supposant que la loi
+   jointe de la suite de v.a. $X_{1}, \ldots, X_{n}$ soit représentée par le réseau bayésien (RB) : 
+   \begin{equation*}
+   X_{1} \to X_{2} \to \dots \to X_{n-1} \to X_{n},
+   \end{equation*}
+   la relation $P(X_{1},\ldots,X_{n}) = P(X_{1}) \prod_{i=2}^{n} P(X_{i}|X_{i-1})$ est elle correcte
+   ? 
+2. La complexité d'un réseau bayésien dépend-elle du nombre de liens entre les variables ?
+3. Soit le réseau bayésien $X \rightarrow Y \leftarrow Z$. Montrer que les v.a. $X$ et $Z$ sont
+   indépendantes. 
+
+** Correction                                                      :noexport:
+1. Oui. D'après les relations de dépendance décrivant le RB, la variable $X_{1}$ n'a pas de variable
+   parente, sa loi est donc déterminée par $P(X_{1})$. Chaque variable $X_{i}$, $i \ge 2$, est
+   caractérisée par la loi conditionnelle $P(X_{i}|X_{i-1})$. Sous ces hypothèses de dépendance, la
+   factorisation de la loi jointe des variables $X_{1}, \ldots, X_{n}$ s'écrit :
+   \begin{equation*}
+   P(X_{1},\ldots,X_{n}) = P(X_{1}) \times P(X_{2}|X_{1}) \times \cdots \times P(X_{n}|X_{n-1}).
+   \end{equation*}
+   Il est à noter que ce réseau bayésien permet de représenter une chaîne de Markov.
+2. Oui, plus les variables sont connectées entre elles, plus les lois conditionnelles des variables
+   dans le RB nécessiteront un grand nombre de paramètres à définir, et donc des complexités
+   spatiales importantes.
+3. Dans ce RB, la factorisation de la loi jointe des variables $X, Y, Z$ s'écrit :
+   \begin{equation*}
+   P(X, Y, Z) = P(X) \times P(Y|X,Z) \times P(Z).
+   \end{equation*}
+   Les v.a. $X$ et $Z$ sont indépendantes si et seulement si $P(X,Z) = P(X) \times P(Z)$.
+   En éliminant la variable Y par marginalisation sur les v.a. $X$ et $Z$ (i.e. en sommant sur la
+   v.a. $Y$, on a :
+   \begin{equation*}
+   P(X, Z) = \sum_{Y} P(X, Y, Z).
+   \end{equation*}
+   En utilisant la factorisation de la loi jointe dans ce RB, nous obtenons :
+   \begin{equation*}
+   P(X, Z) = \sum_{Y} P(X) \times P(Y|X,Z) \times P(Z).
+   \end{equation*}
+   Par distributivité de l'addition sur la multiplication, nous avons :
+   \begin{equation*}
+   P(X, Z) = P(X) \times P(Z) \times \sum_{Y} P(Y|X,Z).
+   \end{equation*}
+   Or, par définition d'une loi de probabilité conditionnelle $\sum_{y} P(Y=y|X=x,Z=z) = 1$, pour toutes
+   valeurs $x$ et $z$. Le terme
+   $\sum_{Y} P(Y|X,Z)$ disparaît donc dans le produit précédent et nous obtenons le résultat
+   attendu :
+   \begin{equation*}
+   P(X, Z) = P(X) \times P(Z).
+   \end{equation*}
+   Sous les hypothèses du RB $X \rightarrow Y \leftarrow Z$, $X$ et $Z$ sont indépendantes.
+   
+
+* Exercice 1
+
+Dans cet exercice, nous utiliserons la représentation graphique du réseau  bayésien (RB) présentée
+en Figure [[fig_rb_3_var]]
+
+#+ATTR_LATEX: :scale 0.3
+#+CAPTION: Graphe d'un RB à trois variables.
+#+NAME: fig_rb_3_var
+[[./rb_3_var.png]]
+
+Les lois de probabilité conditionnelles (LPC) de ce RB sont les suivantes :
+- $P(X)$ =
+  #+ATTR_LATEX: :environment tabular :align |c|c|
+  #+ATTR_LATEX: :center t
+  #+ATTR_LATEX: :font \normalsize
+   |---------+---------|
+   | $x_{1}$ | $x_{2}$ |
+   |---------+---------|
+   | $1/2$   | $1/2$   |
+   |---------+---------|
+- $P(Y|X)$ =
+  #+ATTR_LATEX: :environment tabular :align |c||c|c|
+  #+ATTR_LATEX: :center t
+  #+ATTR_LATEX: :font \normalsize
+   |---------+---------+---------|
+   | $X$     | $y_{1}$ | $y_{2}$ |
+   |---------+---------+---------|
+   | $x_{1}$ | $2/3$   | $1/3$   |
+   |---------+---------+---------|
+   | $x_{2}$ | $4/5$   | $1/5$   |
+   |---------+---------+---------|
+- $P(Z|Y)$ =
+  #+ATTR_LATEX: :environment tabular :align |c||c|c|
+  #+ATTR_LATEX: :center t
+  #+ATTR_LATEX: :font \normalsize
+   |---------+---------+---------|
+   | $Y$     | $z_{1}$ | $z_{2}$ |
+   |---------+---------+---------|
+   | $y_{1}$ | $0$     | $1$     |
+   |---------+---------+---------|
+   | $y_{2}$ | $1/2$   | $1/2$   |
+   |---------+---------+---------|
+
+
+1. Écrire l'expression de la loi jointe du modèle. 
+2. Calculer tous les paramètres de la loi jointe naturelle du modèle.
+3. Que peut-on dire sur la relation d'indépendance $X \perp\!\!\!\perp Z \mid Y$ ?
+
+** Correction                                                      :noexport:
+1. La loi jointe des v.a. $X, Y, Z$ dans le RB de la Figure [[fig_rb_3_var]] est :
+   \begin{equation*}
+   P(X, Y, Z) = P(X) P(Y|X) P(Z|Y).
+   \end{equation*}
+
+2. Calculer les paramètres de la loi jointe consiste à calculer les probabilités $P(X = x, Y = y, Z
+   = z)$ pour tous $x \in \{x_{1}, x_{2}\}$, $y \in \{y_{1}, y_{2}\}$, $z \in \{z_{1},
+   z_{2}\}$. Dans ce cas, la loi jointe est caractérisée par huit probabilités et peut se mettre
+   sous la forme de la table suivante :
+   #+ATTR_LATEX: :environment tabular :align |c|c|c||c|
+   #+ATTR_LATEX: :center t
+   #+ATTR_LATEX: :font \normalsize
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+   | $X$     | $Y$     | $Z$     | $P(X, Y, Z)$                                                                                                         |
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+   | $x_{1}$ | $y_{1}$ | $z_{1}$ | $P(X = x_{1}) \times P(Y=y_{1} \vert X=x_{1}) \times P(Z=z_{1} \vert   Y=y_{1})  = 1/2 \times 2/3 \times 0 = 0$      |
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+   | $x_{2}$ | $y_{1}$ | $z_{1}$ | $P(X = x_{2}) \times P(Y=y_{1} \vert X=x_{1}) \times P(Z=z_{1} \vert   Y=y_{1})  = 1/2 \times 2/3 \times 0 = 0$      |
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+   | $x_{1}$ | $y_{2}$ | $z_{1}$ | $P(X = x_{1}) \times P(Y=y_{2} \vert X=x_{1}) \times P(Z=z_{1} \vert   Y=y_{2})  = 1/2 \times 1/3 \times 1/2 = 1/12$ |
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+   | $x_{2}$ | $y_{2}$ | $z_{1}$ | $1/2 \times 1/5 \times 1/2 = 1/20$                                                                                   |
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+   | $x_{1}$ | $y_{1}$ | $z_{2}$ | $1/2 \times 2/3 \times 1 = 1/3$                                                                                      |
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+   | $x_{2}$ | $y_{1}$ | $z_{2}$ | $1/2 \times 4/5 \times 1 = 2/5$                                                                                      |
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+   | $x_{1}$ | $y_{2}$ | $z_{2}$ | $1/2 \times 1/3 \times 1/2 = 1/12$                                                                                   |
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+   | $x_{2}$ | $y_{2}$ | $z_{2}$ | $1/2 \times 1/5 \times 1/2 = 1/20$                                                                                   |
+   |---------+---------+---------+----------------------------------------------------------------------------------------------------------------------|
+
+   Sans surprise, nous avons bien une loi de probabilité puisque :
+   \begin{equation*}
+   \sum_{x \in \{x_{1}, x_{2}\}, y \in \{y_{1}, y_{2}\}, z \in \{z_{1}, z_{2}\}} P(X=x, Y=y, Z=z) = 1,
+   \end{equation*}
+   avec $P(X=x, Y=y, Z=z) \in [0,1]$, pour tous $x \in \{x_{1}, x_{2}\}$, $y \in \{y_{1}, y_{2}\}$, $z \in \{z_{1},
+   z_{2}\}$.
+
+3. Dans ce RB, la factorisation de la loi jointe des variables $X, Y, Z$ s'écrit :
+   \begin{equation*}
+   P(X, Y, Z) = P(X) \times P(Y|X) \times P(Z|Y).
+   \end{equation*}
+   Les v.a. $X$ et $Z$ sont indépendantes conditionnellement à $Y$ si et seulement si $P(X,Z|Y) = P(X|Y) \times P(Z|Y)$.
+   Par définition, 
+   \begin{equation*}
+   P(X, Z | Y) = \frac{P(X, Y, Z)}{P(Y)}.
+   \end{equation*}
+   En utilisant la factorisation de la loi jointe dans ce RB, nous obtenons :
+   \begin{equation*}
+   P(X, Z | Y) = P(X) \times P(Y|X) \times P(Z|Y) \times \frac{1}{P(Y)}
+   \end{equation*}
+   En remarquant que $P(X) \times P(Y|X) = P(X,Y)$ par définition, il vient :
+   \begin{equation*}
+   P(X, Z | Y) = \frac{P(X, Y)}{P(Y)} \times P(Z|Y)
+   \end{equation*}
+   D'où $P(X,Z|Y) = P(X|Y) \times P(Z|Y)$ et donc $X \perp\!\!\!\perp Z \mid Y$.
+
+* Exercice 2
+
+Dans cet exercice, nous utiliserons la représentation graphique du RB présentée en Figure
+[[fig_rb_4_var]]. Toutes les v.a. du modèle sont supposées binaires. 
+
+#+ATTR_LATEX: :height 0.25\textheight
+#+CAPTION: Graphe d'un RB à quatre variables.
+#+NAME: fig_rb_4_var
+[[./rb_4_var.png]]
+
+1. Écrire l'expression de la loi jointe du modèle. 
+2. Donner le nombre de paramètres pour définir la loi jointe représentée par le RB. 
+3. Même question sans utiliser la factorisation de la loi jointe associée au RB. 
+4. Reprendre les questions 2 et 3 en calculant le nombre de paramètres probabilistes nécessaire à la
+   définition de la loi jointe factorisée dans le RB et de la loi jointe naturelle des variables.
+5. Déterminer si les relations d'indépendances suivantes sont vraies ou fausses : 
+   - $X_{1} \perp\!\!\!\perp X_{4} \mid X_{2}, X_{3}$ ;
+   - $X_{2} \perp\!\!\!\perp X_{3} \mid X_{1}$ ;
+   - $X_{2} \perp\!\!\!\perp X_{3} \mid X_{1}, X_{4}$.
+
+** Correction                                                      :noexport:
+
+1. La loi jointe des v.a. $X_{1}, X_{2}, X_{3}, X_{4}$ dans le RB de la Figure [[fig_rb_4_var]] est :
+   \begin{equation*}
+   P(X_{1}, X_{2}, X_{3}, X_{4}) = P(X_{1}) P(X_{2}|X_{1}) P(X_{3}|X_{1}) P(X_{4}|X_{2},X_{3}).
+   \end{equation*}
+2. La complexité spatiale du RB correspond à la somme des complexités spatiales des LPC de chaque
+   variable :
+   \begin{equation*}
+   CS(RB) = CS(P(X_{1})) + CS(P(X_{2}|X_{1})) + CS(P(X_{3}|X_{1})) + CS(P(X_{4}|X_{2}, X_{3}))
+   \end{equation*}
+   Les v.a. $X_{1}, X_{2}, X_{3}, X_{4}$ étant binaires, nous obtenons :
+   - $CS(P(X_{1})) = 2$ ;
+   - $CS(P(X_{2}|X_{1})) = 4$ ;
+   - $CS(P(X_{3}|X_{1})) = 4$ ;
+   - $CS(P(X_{4}|X_{2}, X_{3})) = 8$.
+   D'où $CS(RB) = 18$.
+3. La complexité spatiale de la loi jointe non factorisée (ou loi jointe naturelle) des v.a. $X_{1},
+   X_{2}, X_{3}, X_{4}$ est $CS(LJN) = 2^{4} = 16$
+4. Dans le cas du RB, la complexité probabiliste,notée CP correspondant au nombre de paramètres probabilistes
+   nécessaires pour définir le modèle, est :
+   - $CP(P(X_{1})) = 1$ ;
+   - $CP(P(X_{2}|X_{1})) = 2$ ;
+   - $CP(P(X_{3}|X_{1})) = 2$ ;
+   - $CP(P(X_{4}|X_{2}, X_{3})) = 4$.
+   D'où $CP(RB) = 9$.
+   Pour la loi jointe naturelle des v.a., $CP(LJN) = 16 - 1 = 15$.
+5. La technique générale pour répondre aux questions d'indépendance conditionnelle est la suivante :
+   - Écrire la définition probabiliste de la relation d'indépendance à vérifier.
+   - À partir de l'expression de la factorisation de la loi jointe, éliminer les variables qui
+     n'interviennent pas dans la relation d'indépendance à vérifier en effectuant une
+     marginalisation. 
+   - Diviser par la loi des variables de conditionnement.
+
+
+
