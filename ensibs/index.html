@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Modélisation stochastique et approche bayésienne</title>
+<meta name="author" content="Roland Donat" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://edgemind-sas.github.io/visual-identity/official_docs/css/edgemind.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Modélisation stochastique et approche bayésienne</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0a88ff7">Introduction</a>
+<ul>
+<li><a href="#orgc9b60d1">Objectifs pédagogiques</a></li>
+<li><a href="#org295f95e">Prérequis</a></li>
+<li><a href="#org4cb0cd4">Intervenant : Roland Donat</a></li>
+<li><a href="#org26c83f3">Sources pédagogiques</a></li>
+<li><a href="#orge3cfe7d">Démarche d'amélioration continue</a></li>
+</ul>
+</li>
+<li><a href="#org7297fcf">Session 1 : Rappels de probabilité et introduction aux réseaux bayésiens</a></li>
+<li><a href="#org8a1663d">Session 2 : Inférence dans les RB</a></li>
+<li><a href="#orga9d18e7">Session 3 : Apprentissage des LPC</a></li>
+<li><a href="#orgf04df2b">Exercices de TD</a></li>
+<li><a href="#org5909396">Quelques outils informatiques autour des réseaux bayésiens</a>
+<ul>
+<li><a href="#org9842d43">Logiciel <code>GeNIe</code></a></li>
+<li><a href="#orgbd040e5">Librairie <code>pyAgrum</code></a></li>
+</ul>
+</li>
+<li><a href="#org3da9a5c">Archives</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0a88ff7" class="outline-2">
+<h2 id="org0a88ff7">Introduction</h2>
+<div class="outline-text-2" id="text-org0a88ff7">
+</div>
+<div id="outline-container-orgc9b60d1" class="outline-3">
+<h3 id="orgc9b60d1">Objectifs pédagogiques</h3>
+<div class="outline-text-3" id="text-orgc9b60d1">
+<ol class="org-ol">
+<li>Se sensibiliser et pratiquer la modélisation probabiliste</li>
+<li>Savoir construire un réseau bayésien adapté à une problématique concrète</li>
+<li>Maîtriser les calculs probabilistes réalisés dans un réseau bayésien</li>
+<li>Savoir exploiter des données pour construire et paramétrer un réseau bayésien automatiquement</li>
+<li>Aller plus loin en prenant connaissance de certaines extensions des réseaux bayésiens</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org295f95e" class="outline-3">
+<h3 id="org295f95e">Prérequis</h3>
+<div class="outline-text-3" id="text-org295f95e">
+<ol class="org-ol">
+<li>Notions de base sur la théorie des probabilités :
+<ul class="org-ul">
+<li>Variable aléatoire discrète</li>
+<li>Loi de probabilité jointe et conditionnelle</li>
+</ul></li>
+<li>Notions d'algorithmique et de complexité</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org4cb0cd4" class="outline-3">
+<h3 id="org4cb0cd4">Intervenant : Roland Donat</h3>
+<div class="outline-text-3" id="text-org4cb0cd4">
+<ul class="org-ul">
+<li>Co-fondateur de la société <a href="http://www.edgemind.fr">EdgeMind</a></li>
+<li>Enseignant-Chercheur associé UBS</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org26c83f3" class="outline-3">
+<h3 id="org26c83f3">Sources pédagogiques</h3>
+<div class="outline-text-3" id="text-org26c83f3">
+<p>
+Ce cours a été préparé en s'inspirant des sources suivantes :
+</p>
+<ul class="org-ul">
+<li>Cours de Master 2 sur les réseaux bayésiens de Philippe LERAY, Professeur à Polytech Nantes.</li>
+<li>Cours intitulé "Probabilistic Graphical Models" enseigné par Daphne KOLLER à Stanford.</li>
+<li>Cours sur les modèles graphiques probabilistes enseigné par Francis BACH à l'ENS.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge3cfe7d" class="outline-3">
+<h3 id="orge3cfe7d">Démarche d'amélioration continue</h3>
+<div class="outline-text-3" id="text-orge3cfe7d">
+<p>
+Étant joueur, chaque année je me permets de mettre en place un petit jeu visant à améliorer la qualité des supports
+pédagogiques qui vous sont proposés.
+</p>
+
+<p>
+La règle est simple : chaque semaine celle ou celui qui repère le plus de coquilles dans les ressources pédagogiques du cours
+(site web, slides de cours, TD, quiz) gagne un café (je sais, ma générosité me perdra). 
+</p>
+
+<p>
+Comment déclarer proprement des coquilles :
+</p>
+<ol class="org-ol">
+<li>Envoyez-moi un mail avec en objet "[Modélisation stochastique] jeu des coquilles" contenant les
+coquilles que vous aurez repérées.</li>
+<li>Pour chaque coquille, précisez bien sa localisation, i.e. document concerné, page/slide,
+paragraphe, etc. en expliquant le problème.</li>
+<li>Le plus simple est de soumettre votre liste de coquilles détectées en une seule fois avant la
+journée de cours suivante.</li>
+<li>Le café est payé à la personne qui a trouvé le plus de coquilles à la pause.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org7297fcf" class="outline-2">
+<h2 id="org7297fcf">Session 1 : Rappels de probabilité et introduction aux réseaux bayésiens</h2>
+<div class="outline-text-2" id="text-org7297fcf">
+<ul class="org-ul">
+<li><a href="cours/cours_intro/rb_intro.pdf">Slides du cours</a></li>
+<li><a href="td/exercices_cours/exo_rb_intro.html">Exercices de cours</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8a1663d" class="outline-2">
+<h2 id="org8a1663d">Session 2 : Inférence dans les RB</h2>
+<div class="outline-text-2" id="text-org8a1663d">
+<ul class="org-ul">
+<li><a href="cours/cours_inference/rb_inference.pdf">Slide du cours</a></li>
+<li><a href="td/exercices_cours/exo_inf.html">Exercices de cours</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga9d18e7" class="outline-2">
+<h2 id="orga9d18e7">Session 3 : Apprentissage des LPC</h2>
+<div class="outline-text-2" id="text-orga9d18e7">
+<ul class="org-ul">
+<li><a href="cours/cours_apprentissage/rb_apprentissage_lpc.pdf">Slides du cours</a></li>
+<li><a href="td/exercices_cours/exo_app_lpc.html">Exercices de cours</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf04df2b" class="outline-2">
+<h2 id="orgf04df2b">Exercices de TD</h2>
+<div class="outline-text-2" id="text-orgf04df2b">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Titre</th>
+<th scope="col" class="org-left">Thème</th>
+<th scope="col" class="org-left">Modèles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="td/hector/hector.html">Hector le robot jongleur</a></td>
+<td class="org-left">Modélisation, Complexité</td>
+<td class="org-left"><a href="td/hector/ex_hector.xdsl">Modèle GeNiE</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="td/animaux/animaux.html">Le jeu des animaux</a></td>
+<td class="org-left">Modélisation, Aide à la décision</td>
+<td class="org-left"><a href="td/animaux/Animaux.xdsl">Modèle GeNiE</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="td/fraude_cb/fraude_cb.html">Détection de fraude à la carte de crédit</a></td>
+<td class="org-left">Modélisation, Détection d'anomalies</td>
+<td class="org-left"><a href="td/fraude_cb/ex_fraude.xdsl">Modèle GeNiE</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="td/comp_modeles_app/comp_modeles_app.html">Comparaison de modèles et vraisemblance</a></td>
+<td class="org-left">Apprentissage, comparaison de modèles</td>
+<td class="org-left"><a href="td/comp_modeles_app/comp_modeles_app.7z">Modèles GeNiE</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="td/des_utilite/des_utilite.html">Notion d'utilité</a></td>
+<td class="org-left">Utilité</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="td/microplant/microplant.html">Micro Plant</a></td>
+<td class="org-left">Modélisation, Analyse système</td>
+<td class="org-left"><a href="td/microplant/microplant.xdsl">Modèle GeNiE</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org5909396" class="outline-2">
+<h2 id="org5909396">Quelques outils informatiques autour des réseaux bayésiens</h2>
+<div class="outline-text-2" id="text-org5909396">
+</div>
+<div id="outline-container-org9842d43" class="outline-3">
+<h3 id="org9842d43">Logiciel <code>GeNIe</code></h3>
+<div class="outline-text-3" id="text-org9842d43">
+<p>
+Le logiciel <code>GeNIe</code> est une interface graphique permettant de construire des modèles à partir du
+formalisme des réseaux bayésiens. Ce logiciel repose sur la librairie <code>SMILE</code> écrite en <code>C++</code>
+permettant la manipulation des réseaux bayésiens et implémentant un certain nombre d'algorithme
+d'inférence. 
+</p>
+
+<p>
+<code>GeNIe</code> et <code>SMILE</code> ont été développés par le <i>Decision Systems Laboratory, University of Pittsburgh</i> entre
+1994 et 2015. Ils sont à présents maintenu par l'entreprise BayesFusion, LLC qui propose une
+version gratuite pour les académiques.
+</p>
+
+<p>
+Pour télécharger <code>GeNIe</code>, il faut donc se rendre sur le site de <a href="http://www.bayesfusion.com/#!downloads/rxu9q">BayesFusion, LLC</a> et cliquer sur le
+lien associé à la version académique.
+</p>
+
+<p>
+Pour les utilisateurs de <code>Linux</code>, il semblerait que la dernière version distribuée par BayesFusion,
+LLC ne fonctionne plus sous <code>Wine</code>. Vous pouvez donc 
+<a href="soft/GeNIe 2.0.7z">télécharger l'archive <code>7zip</code></a> pour récupérer la dernière version éditée par
+l'université de Pittsburgh et compatible avec <code>Wine</code>. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbd040e5" class="outline-3">
+<h3 id="orgbd040e5">Librairie <code>pyAgrum</code></h3>
+<div class="outline-text-3" id="text-orgbd040e5">
+<p>
+<code>pyAgrum</code> est un <i>wrapper</i> <code>Python</code> pour la librairie <code>aGrUM</code> écrite en <code>C++</code>. <code>aGrUM</code> est une
+librairie conçue pour développer rapidement des outils reposant sur l'utilisation de modèles
+graphiques probabilistes dont les réseaux bayésiens font parties.
+</p>
+
+<p>
+L'outil <code>pyAgrum</code> a donc pour objectif de fournir une API de haut niveau pour les fonctionnalités
+de <code>aGrUM</code> chargées de la création, la manipulation et le lancement de calculs dans les réseaux
+bayésiens. 
+</p>
+
+<p>
+Ces outils sont développés par le LIP6 qui a mis en place un GitLab accessible à
+l'adresse suivante : <a href="https://agrum.gitlab.io/">https://agrum.gitlab.io/</a>
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org3da9a5c" class="outline-2">
+<h2 id="org3da9a5c">Archives</h2>
+</div>
+</div>
+</body>
+</html>
