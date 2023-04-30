@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<smile version="1.0" id="Network1" numsamples="1000" discsamples="10000">
+	<nodes>
+		<cpt id="Node2">
+			<state id="non" />
+			<state id="oui" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Node1">
+			<state id="non" />
+			<state id="oui" />
+			<parents>Node2</parents>
+			<probabilities>0.5 0.5 0.05 0.95</probabilities>
+		</cpt>
+		<cpt id="Copy_of_Node1">
+			<state id="non" />
+			<state id="oui" />
+			<parents>Node1</parents>
+			<probabilities>0.1 0.9 0.99 0.01000000000000001</probabilities>
+		</cpt>
+		<cpt id="O1">
+			<state id="non" />
+			<state id="oui" />
+			<parents>Copy_of_Node1</parents>
+			<probabilities>0.7 0.3 0.3 0.7</probabilities>
+		</cpt>
+		<cpt id="O2">
+			<state id="non" />
+			<state id="oui" />
+			<parents>Copy_of_Node1</parents>
+			<probabilities>0.9 0.09999999999999998 0.09999999999999998 0.9</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 2.0.5406.0" name="Hector" faultnameformat="nodestate">
+			<node id="Node1">
+				<name>B : Batterie OK</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>397 207 443 235</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Node2">
+				<name>C : Charge récente</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>396 64 444 94</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="O1">
+				<name>O1 : chute observée?</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>279 457 316 480</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="O2">
+				<name>O2 : chute observée?</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>520 455 557 478</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Copy_of_Node1">
+				<name>L : Lâche la balle</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>397 337 443 365</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+		</genie>
+	</extensions>
+</smile>

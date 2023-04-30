@@ -1,0 +1,1706 @@
+# -*- coding: utf-8 -*-
+
+#+TITLE: Hector le robot jongleur
+#+AUTHOR: Travaux dirigés
+#+DATE: ENSIBS - Spécialité Cyber Data
+# Modélisation Stochastique par Réseaux Bayésiens 
+
+# ==============================================
+# Document Configuration
+# ======================
+# Orgmode
+:CONFIG:
+#+LANGUAGE: fr
+#+OPTIONS: H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} f:t TeX:t author:t d:nil timestamp:nil
+#+OPTIONS: html-postamble:nil
+#+STARTUP: content 
+#+STARTUP: hidestars
+#+DRAWERS: CONFIG OPTIONS CACHE MACROS
+#+TODO: TODO(t) INPROGRESS(p) | DONE(d)
+#+BIND: org-latex-table-scientific-notation "{%s}E{%s}"
+:END:
+
+# LaTeX options
+# -------------
+# LaTeX Macros maths
+#+MACRO: TEX-INDEP $\perp\!\!\!\perp$
+:OPTIONS:
+#+LATEX_HEADER: % ""
+#+LATEX_HEADER: \def\ofg#1{\og #1 \fg{}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % backslash
+#+LATEX_HEADER: \def\bs{\textbackslash}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Presentation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % bold math
+#+LATEX_HEADER: \def\mbf#1{\boldsymbol{#1}}
+#+LATEX_HEADER: % straight bold math
+#+LATEX_HEADER: \def\mbfs#1{\mathbf{#1}}
+#+LATEX_HEADER: % (), {}, [], ||
+#+LATEX_HEADER: \def\lrPar#1{\left( #1 \right)}
+#+LATEX_HEADER: \def\lrpar#1{( #1 )}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrace#1{\left\{ #1 \right\}}
+#+LATEX_HEADER: \def\lrbrace#1{\{ #1 \}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrack#1{\left[ #1 \right]}
+#+LATEX_HEADER: \def\lrbrack#1{[ #1 ]}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrMid#1{\left| #1 \right|}
+#+LATEX_HEADER: \def\lrmid#1{| #1 |}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrmmid#1{\Vert #1 \Vert}
+#+LATEX_HEADER: \def\lrMmid#1{\left\Vert #1 \right\Vert}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrfloor#1{\lfloor #1 \rfloor}
+#+LATEX_HEADER: \def\lrFloor#1{\left\lfloor #1 \right\rfloor}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrceil#1{\lceil #1 \rceil}
+#+LATEX_HEADER: \def\lrCeil#1{\left\lceil #1 \right\rceil}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \def\lrnorm#1{\| #1 \|}
+#+LATEX_HEADER: % \def\lrNorm#1{\left\| #1 \right\|}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % = definition
+#+LATEX_HEADER: \def\eqdef{\stackrel{\text{d\acute{e}f}}{=}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Operators
+#+LATEX_HEADER: % =========
+#+LATEX_HEADER: % sign
+#+LATEX_HEADER: \def\signe{\text{signe}}
+#+LATEX_HEADER: % support
+#+LATEX_HEADER: \def\supp{\text{supp}}
+#+LATEX_HEADER: % to
+#+LATEX_HEADER: \def\conv#1{\xrightarrow[#1]{}}
+#+LATEX_HEADER: % d of dx
+#+LATEX_HEADER: \def\d{\text{d}}
+#+LATEX_HEADER: % integral/sum
+#+LATEX_HEADER: \def\intsum{\textstyle{\sum}\hspace{-0.5cm}\displaystyle\int}
+#+LATEX_HEADER: % modulo
+#+LATEX_HEADER: \def\modulo{\text{mod}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Set
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Classic sets
+#+LATEX_HEADER: \def\bbbr{\mathbb{R}} 
+#+LATEX_HEADER: \def\bbbn{\mathbb{N}} 
+#+LATEX_HEADER: \def\bbbk{\mathbb{K}} 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Characteristic function
+#+LATEX_HEADER: \def\indic{\mbox{1\hspace{-.25em}I}} 
+#+LATEX_HEADER: % Imply
+#+LATEX_HEADER: \def\Then{\Rightarrow}
+#+LATEX_HEADER: % set { ... }
+#+LATEX_HEADER: \def\set#1{\lrbrace{ #1 }}
+#+LATEX_HEADER: \def\Set#1{\lrBrace{ #1 }}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % set minus (\)
+#+LATEX_HEADER: \def\sm{\setminus}
+#+LATEX_HEADER: % part set of a set
+#+LATEX_HEADER: \def\setofparts#1{\mathcal{P}\left(#1\right)}
+#+LATEX_HEADER: % Union/intersection
+#+LATEX_HEADER: \def\union{\cup}
+#+LATEX_HEADER: \def\Union{\bigcup}
+#+LATEX_HEADER: \def\inter{\cap}
+#+LATEX_HEADER: \def\Inter{\bigcap}
+#+LATEX_HEADER: % Complementary
+#+LATEX_HEADER: \def\comp#1{\overline{#1}}
+#+LATEX_HEADER: % Cardinality
+#+LATEX_HEADER: \def\card{\text{card}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Probability
+#+LATEX_HEADER: % ===========
+#+LATEX_HEADER: % P
+#+LATEX_HEADER: \def\P{\mathbb{P}}
+#+LATEX_HEADER: \def\Prob{P}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Espectancy E[.]
+#+LATEX_HEADER: \def\E#1{\mathbb{E}\left[#1\right]}
+#+LATEX_HEADER: % indep.
+#+LATEX_HEADER: \def\indep{\perp\!\!\!\perp}
+#+LATEX_HEADER: \def\nindep{\perp\!\!\!\!\not\,\perp}
+#+LATEX_HEADER: % Variance, covariance et corrélation
+#+LATEX_HEADER: \def\Var{\text{Var}}
+#+LATEX_HEADER: \def\Med{\text{Med}}
+#+LATEX_HEADER: \def\Cov{\text{Cov}}
+#+LATEX_HEADER: \def\Cor{\text{Cor}}
+#+LATEX_HEADER: % Mean bar
+#+LATEX_HEADER: \def\avg#1{\overline{#1}}
+#+LATEX_HEADER: \def\Bar#1{\overline{#1}}
+#+LATEX_HEADER: \def\Tilde#1{\widetilde{#1}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % convergence
+#+LATEX_HEADER: \def\convP{\xrightarrow[]{P}}
+#+LATEX_HEADER: \def\convL{\xrightarrow[]{L^2}}
+#+LATEX_HEADER: \def\convD{\xrightarrow[]{\mathcal{L}}}
+#+LATEX_HEADER: % ~_{sth}
+#+LATEX_HEADER: \def\simu#1{\underset{#1}{\sim}}
+#+LATEX_HEADER: % ~ iid
+#+LATEX_HEADER: \def\simiid{\stackrel{\text{i.i.d.}}{\sim}}
+#+LATEX_HEADER: % ~ as
+#+LATEX_HEADER: \def\simas{\stackrel{\text{as.}}{\sim}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % GMs
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Parents
+#+LATEX_HEADER: \def\Pa{\text{Pa}}
+#+LATEX_HEADER: \def\pa{\text{pa}}
+#+LATEX_HEADER: % Children
+#+LATEX_HEADER: \def\Ch{\text{Ch}}
+#+LATEX_HEADER: \def\ch{\text{ch}}
+#+LATEX_HEADER: \def\En{\text{En}}
+#+LATEX_HEADER: \def\en{\text{en}}
+#+LATEX_HEADER: % Ancestors
+#+LATEX_HEADER: \def\An{\text{An}}
+#+LATEX_HEADER: \def\an{\text{an}}
+#+LATEX_HEADER: % Descandants
+#+LATEX_HEADER: \def\De{\text{De}}
+#+LATEX_HEADER: \def\de{\text{de}}
+#+LATEX_HEADER: % Non descandants
+#+LATEX_HEADER: \def\Nd{\text{Nd}}
+#+LATEX_HEADER: \def\nd{\text{nd}}
+#+LATEX_HEADER: % Family
+#+LATEX_HEADER: \def\Fa{\text{Fa}}
+#+LATEX_HEADER: \def\fa{\text{fa}}
+#+LATEX_HEADER: % Domaine
+#+LATEX_HEADER: \def\Dom{\text{Dom}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Optimisation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % argmin/argmax
+#+LATEX_HEADER: \def\argmin#1{\underset{#1}{\arg\min}~}
+#+LATEX_HEADER: \def\argmax#1{\underset{#1}{\arg\max}~}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Matrices
+#+LATEX_HEADER: % ========
+#+LATEX_HEADER: % diag
+#+LATEX_HEADER: \def\diag{\text{diag}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % SdF
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Propagation dcc
+#+LATEX_HEADER: \def\propdcc{\stackrel{\text{dcc}}{\rightsquigarrow}}
+:END:
+
+# HTML
+# ----
+:CONFIG:
+# Org HTML Macros
+#+MACRO: NEWLINE @@latex:\\@@ @@html:<br>@@
+#+MACRO: HTMLFONTSIZE @@html:<font size="$2">$1</font>@@
+#+MACRO: SUBTITLE @@html:<div class="slidesubtitle">$1</div>@@
+
+# HTML options
+# ------------
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://edgemind-sas.github.io/visual-identity/official_docs/css/edgemind.css" />
+:END:
+
+# ==============================================
+# Document starts here
+# ====================
+
+#+BEGIN_SRC emacs-lisp :results silent :tangle hector.py :exports results
+(setq td_corrige nil)
+#+END_SRC
+
+#+LATEX: \clearpage
+
+#+ATTR_HTML: :width 50%
+#+CAPTION: Image générée par Midjourney
+[[./hector.png]]
+
+
+
+* Introduction
+Hector, le robot jongleur, lâche souvent les balles avec lesquelles il jongle quand sa batterie est
+faible. 
+
+D'après les expériences précédentes, il a été déterminé que :
+- la probabilité qu'il lâche une balle quand sa batterie est faible est de $0.9$ ;
+- quand sa batterie n'est pas faible, la probabilité qu'il lâche une balle est seulement de $0.01$ ;
+- quand la batterie a été rechargée il y a peu de temps, il y a seulement $5\%$ de chances que la
+  batterie soit faible contre $50\%$ si la batterie n'a pas été rechargée récemment. 
+
+Un premier système de vision $O_{1}$
+(peu fiable) observe le robot et nous prévient lorsqu'il croit qu'Hector a lâché une balle. Un
+autre système $O_{2}$ (indépendant du premier) agit de la même façon. 
+
+Le but de cet exercice est de
+modéliser les résultats des observateurs en fonction de ce que fait Hector et de son état.
+
+* Structure du réseau bayésien
+
+1. En supposant que toutes les variables soient booléennes, quelles variables allez-vous choisir pour
+  modéliser ce problème ?
+2. Proposer une structure de réseau bayésien correspondant au problème. Étiqueter les noeuds du réseau et indiquer
+   clairement la direction des arcs entre les nœuds. 
+3. Donner l'expression de la loi de probabilité jointe associée au RB construit précédemment
+4. D'après votre modélisation, les résultats des deux observateurs sont-ils réellement indépendants ?
+   À quelle(s) condition(s) y a-t-il indépendance ? 
+
+* Lois de probabilité conditionnelles
+
+1. À partir des informations disponibles, représenter les LPC correspondant à votre structure. Il
+   vous manquera des données pour finir le travail, lesquelles ? 
+2. Calculer la complexité du RB et comparer la avec la complexité de la loi jointe du modèle
+   représentée naïvement (i.e. sans RB).
+
+* Implémentation et exploitation du modèle
+
+On suppose que la fiabilité des observateurs $O_{1}$ et $O_{2}$ est de respectivement
+$70\%$ et $90\%$.
+
+L'objectif est de répondre aux trois questions suivantes en utilisant la librairie =PyAgrum=, puis
+le logiciel =GeNUe=.
+
+1. Calculer la probabilité a priori de chacun des noeuds du réseau.
+2. $O_{1}$ observe que Hector a lâché une balle. Quelle est la probabilité que la batterie soit
+   faible sachant cela? Comparer cette valeur à la probabilité /a priori/ que la batterie soit faible.
+3. On ajoute alors une information supplémentaire : $O_{2}$ n'a rien vu (à la différence de
+   $O_{1}$). Quelle est la probabilité que la batterie soit faible sachant ces deux informations ?
+   Comparer aux résultats précédents.
+
+** Utilisation de la librairie =PyAgrum=
+
+Pour utiliser la librairie =Python= =PyAgrum=, il faut dans un premier temps l'installer dans votre
+environnement. Notons que =PyAgrum= fonctionne dans n'importe quel environnement
+=Python=. Toutefois, certaines fonctions de visualisation ne sont disponibles que dans les
+environnements de type /notebook/ (e.g. Jupyter).
+
+*** Création de la structure du modèle
+
+1. L'installation de la librairie se fait classiquement /via/ la commande =!pip install <nom_module>= : 
+   #+BEGIN_SRC python :eval no :exports code 
+!pip install pyagrum
+   #+END_SRC
+   Puis importer le module :
+   #+BEGIN_SRC python :session :results table :tangle hector.py :exports both
+import pyAgrum as gum # La librairie pyAgrum
+
+# Vérification des versions
+{
+    "pyagrum": gum.__version__, 
+}
+   #+END_SRC
+
+   #+RESULTS:
+   | pyagrum | : | 1.7.1 |
+
+1. Nous allons à présent initialiser notre réseau bayésien grâce à la fonction =gum.BayesNet= :
+   #+BEGIN_SRC python :session :results value :tangle hector.py :exports both
+bn = gum.BayesNet("Hector")
+bn
+   #+END_SRC
+
+   #+RESULTS:
+   : BN{nodes: 0, arcs: 0, domainSize: 1, dim: 0, mem: 0o}
+
+   En analysant l'objet =bn=, vous constatez que votre RB ne contient ni variable (/nodes/), ni
+   relation de dépendance (/arcs/).
+   
+1. L'étape suivante consiste à créer les cinq variables aléatoire (v.a.) discrètes et finies du modèle avec la fonction
+   =gum.LabelizedVariable=. Commençons avec la variable $C$ indiquant si Hector a été rechargé
+   récemment ou non. La fonction =LabelizedVariable= prend en argument un identifiant unique pour la
+     variable, une description optionnelle et un nombre de modalités (par défaut 2) :
+   #+BEGIN_SRC python :session :results value :tangle hector.py :exports both
+va_C = gum.LabelizedVariable("C", "Charge récente", 2)
+va_C
+   #+END_SRC
+
+   #+RESULTS:
+   : C:Labelized({0|1})
+
+   On remarque que la variable créée est bien binaire avec pour modalités 0 et 1.
+
+   Poursuivons avec la définition des autres variables :
+   #+BEGIN_SRC python :session :results value :tangle hector.py :exports both
+va_B = gum.LabelizedVariable("B", "Batterie ok ?", 2)
+va_L = gum.LabelizedVariable("L", "Hector lâche une balle ?", 2)
+va_O1 = gum.LabelizedVariable("O1", "O1 : chute observée ?", 2)
+va_O2 = gum.LabelizedVariable("O2", "O2 : chute observée ?", 2)
+   #+END_SRC
+
+   #+RESULTS:
+
+   Il est également possible de changer le nom des modalités de variable avec la méthode
+   =.changeLabel=. Par exemple, nous pouvons changer le nom de la première modalité par =non= et le nom de la seconde
+   modalité par =oui= pour toutes les variables :
+   #+BEGIN_SRC python :session :results value :tangle hector.py :exports both
+for va in [va_C, va_B, va_L, va_O1, va_O2]:
+    va.changeLabel(0, "non")
+    va.changeLabel(1, "oui")
+va_C
+   #+END_SRC
+   
+   #+RESULTS:
+   : C:Labelized({non|oui})
+
+1. Il s'agit à présent d'ajouter les variables précédemment créées dans le RB grâce à la méthode
+   =.add= :
+   #+BEGIN_SRC python :session :results value :tangle hector.py :exports both
+for va in [va_C, va_B, va_L, va_O1, va_O2]:
+    bn.add(va)
+bn
+   #+END_SRC
+
+   #+RESULTS:
+   : BN{nodes: 5, arcs: 0, domainSize: 32, dim: 5, mem: 80o}
+
+   Si vous utilisez un /notebook/ ou un éditeur de code supportant le HTML, il est possible de
+   visualiser graphiquement vos RB en utilisant le package 
+   =pyAgrum.lib.notebook= fourni avec =PyAgrum=. Ce package apporte en particulier la fonction
+   =getBN= :
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+import pyAgrum.lib.notebook as gnb # Fonctions de visualisation pour notebook 
+
+gnb.getBN(bn)
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_export html
+   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="350pt" height="44pt" viewBox="0.00 0.00 350.00 44.00">
+   <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 40)">
+   <title>G</title>
+   <!-- C -->
+   <g id="node1" class="node">
+   <title>C</title>
+   <g id="a_node1"><a xlink:title="(0) C">
+   <ellipse fill="#404040" stroke="black" cx="27" cy="-18" rx="27" ry="18"/>
+   <text text-anchor="middle" x="27" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">C</text>
+   </a>
+   </g>
+   </g>
+   <!-- O2 -->
+   <g id="node2" class="node">
+   <title>O2</title>
+   <g id="a_node2"><a xlink:title="(4) O2">
+   <ellipse fill="#404040" stroke="black" cx="99" cy="-18" rx="27" ry="18"/>
+   <text text-anchor="middle" x="99" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">O2</text>
+   </a>
+   </g>
+   </g>
+   <!-- L -->
+   <g id="node3" class="node">
+   <title>L</title>
+   <g id="a_node3"><a xlink:title="(2) L">
+   <ellipse fill="#404040" stroke="black" cx="171" cy="-18" rx="27" ry="18"/>
+   <text text-anchor="middle" x="171" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">L</text>
+   </a>
+   </g>
+   </g>
+   <!-- B -->
+   <g id="node4" class="node">
+   <title>B</title>
+   <g id="a_node4"><a xlink:title="(1) B">
+   <ellipse fill="#404040" stroke="black" cx="243" cy="-18" rx="27" ry="18"/>
+   <text text-anchor="middle" x="243" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">B</text>
+   </a>
+   </g>
+   </g>
+   <!-- O1 -->
+   <g id="node5" class="node">
+   <title>O1</title>
+   <g id="a_node5"><a xlink:title="(3) O1">
+   <ellipse fill="#404040" stroke="black" cx="315" cy="-18" rx="27" ry="18"/>
+   <text text-anchor="middle" x="315" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">O1</text>
+   </a>
+   </g>
+   </g>
+   </g>
+   </svg>
+   #+end_export
+
+   On observe que notre RB possède bien 5 variables mais aucune relation de dépendance pour
+   l'instant.
+
+1. Pour ajouter des relations de dépendance, il faut utiliser la méthode =.addArcs= en précisant
+   l'identifiant de la variable source, puis l'identifiant de la variable cible. Par exemple, pour
+   créer un arc allant de la variable $C$ à la variable $B$, on écrit :
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+bn.addArc("C", "B")
+gnb.getBN(bn)
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_export html
+   #+end_export
+
+1. Créez les autres relations de dépendance du modèle.
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+# SOLUTION
+# --------
+bn.addArc("B", "L")
+bn.addArc("L", "O1")
+bn.addArc("L", "O2")
+gnb.getBN(bn)
+    #+END_SRC
+
+    #+RESULTS:
+    #+begin_export html
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="134pt" height="260pt" viewBox="0.00 0.00 134.00 260.00">
+    <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
+    <title>G</title>
+    <!-- C -->
+    <g id="node1" class="node">
+    <title>C</title>
+    <g id="a_node1"><a xlink:title="(0) C">
+    <ellipse fill="#404040" stroke="black" cx="63" cy="-234" rx="27" ry="18"/>
+    <text text-anchor="middle" x="63" y="-230.3" font-family="Times,serif" font-size="14.00" fill="white">C</text>
+    </a>
+    </g>
+    </g>
+    <!-- B -->
+    <g id="node4" class="node">
+    <title>B</title>
+    <g id="a_node4"><a xlink:title="(1) B">
+    <ellipse fill="#404040" stroke="black" cx="63" cy="-162" rx="27" ry="18"/>
+    <text text-anchor="middle" x="63" y="-158.3" font-family="Times,serif" font-size="14.00" fill="white">B</text>
+    </a>
+    </g>
+    </g>
+    <!-- C&#45;&gt;B -->
+    <g id="edge1" class="edge">
+    <title>C-&gt;B</title>
+    <g id="a_edge1"><a xlink:title="0 → 1">
+    <path fill="none" stroke="#4a4a4a" d="M63,-215.7C63,-207.98 63,-198.71 63,-190.11"/>
+    <polygon fill="#4a4a4a" stroke="#4a4a4a" points="66.5,-190.1 63,-180.1 59.5,-190.1 66.5,-190.1"/>
+    </a>
+    </g>
+    </g>
+    <!-- O2 -->
+    <g id="node2" class="node">
+    <title>O2</title>
+    <g id="a_node2"><a xlink:title="(4) O2">
+    <ellipse fill="#404040" stroke="black" cx="27" cy="-18" rx="27" ry="18"/>
+    <text text-anchor="middle" x="27" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">O2</text>
+    </a>
+    </g>
+    </g>
+    <!-- L -->
+    <g id="node3" class="node">
+    <title>L</title>
+    <g id="a_node3"><a xlink:title="(2) L">
+    <ellipse fill="#404040" stroke="black" cx="63" cy="-90" rx="27" ry="18"/>
+    <text text-anchor="middle" x="63" y="-86.3" font-family="Times,serif" font-size="14.00" fill="white">L</text>
+    </a>
+    </g>
+    </g>
+    <!-- L&#45;&gt;O2 -->
+    <g id="edge2" class="edge">
+    <title>L-&gt;O2</title>
+    <g id="a_edge2"><a xlink:title="2 → 4">
+    <path fill="none" stroke="#4a4a4a" d="M54.65,-72.76C50.29,-64.28 44.85,-53.71 39.96,-44.2"/>
+    <polygon fill="#4a4a4a" stroke="#4a4a4a" points="42.99,-42.44 35.3,-35.15 36.77,-45.64 42.99,-42.44"/>
+    </a>
+    </g>
+    </g>
+    <!-- O1 -->
+    <g id="node5" class="node">
+    <title>O1</title>
+    <g id="a_node5"><a xlink:title="(3) O1">
+    <ellipse fill="#404040" stroke="black" cx="99" cy="-18" rx="27" ry="18"/>
+    <text text-anchor="middle" x="99" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">O1</text>
+    </a>
+    </g>
+    </g>
+    <!-- L&#45;&gt;O1 -->
+    <g id="edge4" class="edge">
+    <title>L-&gt;O1</title>
+    <g id="a_edge4"><a xlink:title="2 → 3">
+    <path fill="none" stroke="#4a4a4a" d="M71.35,-72.76C75.71,-64.28 81.15,-53.71 86.04,-44.2"/>
+    <polygon fill="#4a4a4a" stroke="#4a4a4a" points="89.23,-45.64 90.7,-35.15 83.01,-42.44 89.23,-45.64"/>
+    </a>
+    </g>
+    </g>
+    <!-- B&#45;&gt;L -->
+    <g id="edge3" class="edge">
+    <title>B-&gt;L</title>
+    <g id="a_edge3"><a xlink:title="1 → 2">
+    <path fill="none" stroke="#4a4a4a" d="M63,-143.7C63,-135.98 63,-126.71 63,-118.11"/>
+    <polygon fill="#4a4a4a" stroke="#4a4a4a" points="66.5,-118.1 63,-108.1 59.5,-118.1 66.5,-118.1"/>
+    </a>
+    </g>
+    </g>
+    </g>
+    </svg>
+    #+end_export
+
+*** Définition des LPC
+    
+1. La structure du RB est prête, il faut maintenant renseigner les lois de probabilité
+   conditionnelles (LPC) de chaque variable. Pour une variable donnée, on renseigne la loi de
+   probabilité associée à chaque configuration de modalités de ses variables parentes.
+
+   Pour les variables $C$ et $B$, cela donne :
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+# Pas de parent, on renseigne directement la loi (a priori) de la variable
+bn.cpt("C")[:] = [0.5, 0.5] 
+
+# On renseigne la loi de probabilité de B pour les deux modalités (non et oui)
+# de sa variable parente C
+bn.cpt("B")[{"C": "non"}] = [0.5, 0.5]
+bn.cpt("B")[{"C": "oui"}] = [0.05, 0.95]
+   #+END_SRC
+
+   La fonction =gnb.getPotential= permet de vérifier que la saisie des probabilités est correcte en
+   visualisant les LPC :
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+gnb.getPotential(bn.cpt("C"))
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_export html
+   <table style="border:1px solid black;">
+   <tr style='border:1px solid black;color:black;background-color:#808080'>
+         <th colspan='2'><center>C</center></th></tr>
+   <tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+         <center>non</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+         <center>oui</center></th></tr>
+   <tr><td style='color:black;background-color:#bfbf64;text-align:right;'>0.5000</td><td style='color:black;background-color:#bfbf64;text-align:right;'>0.5000</td></tr>
+   </table>
+   #+end_export
+
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+gnb.getPotential(bn.cpt("B"))
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_export html
+   <table style="border:1px solid black;">
+   <tr><th colspan='1'></th>
+         <th colspan='2' style='border:1px solid black;color:black;background-color:#808080;'><center>B</center>
+         </th></tr>
+   <tr><th style='border:1px solid black;color:black;background-color:#808080'><center>C</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+         <center>non</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+         <center>oui</center></th></tr>
+   <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>non</center></th><td style='color:black;background-color:#bfbf64;text-align:right;'>0.5000</td><td style='color:black;background-color:#bfbf64;text-align:right;'>0.5000</td></tr>
+   <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>oui</center></th><td style='color:black;background-color:#f88564;text-align:right;'>0.0500</td><td style='color:black;background-color:#85f864;text-align:right;'>0.9500</td></tr>
+   </table>
+   #+end_export
+
+1. Renseignez les LPC des autres variables.
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+# SOLUTION
+# --------
+bn.cpt("L")[{"B": "non"}] = [0.1, 0.9]
+bn.cpt("L")[{"B": "oui"}] = [0.99, 0.01]
+
+bn.cpt("O1")[{"L": "non"}] = [0.7, 0.3]
+bn.cpt("O1")[{"L": "oui"}] = [0.3, 0.7]
+
+bn.cpt("O2")[{"L": "non"}] = [0.9, 0.1]
+bn.cpt("O2")[{"L": "oui"}] = [0.1, 0.9]
+    #+END_SRC
+
+    #+RESULTS:
+    #+begin_export html
+    #+end_export
+
+*** Inférence
+
+1. Le RB est entièrement défini. Nous pouvons donc exploiter notre modèle afin de répondre aux
+   questions de l'exercice. Calculer les probabilités /a priori/ de chaque variable consiste à
+   calculer les lois $P(C)$, $P(B)$, $P(L)$, $P(O_{1})$ et $P(O_{2})$. Pour réaliser ces calculs, il
+   faut définir un moteur d'inférence (i.e. une machine à calculer les probabilités pour notre
+   RB). Dans cet exemple, nous utilisons la méthode appelée /lazy propagation/ qui est une technique
+   de calculs probabilistes exacts relativement sophistiquée utilisant les principes de la méthode
+   d'élimination que nous étudierons dans ce module.
+
+   Commençons par initialiser le moteur d'inférence avec la fonction =gum.LazyPropagation= :
+   #+BEGIN_SRC python :session :results value :tangle hector.py :exports both
+bn_ie = gum.LazyPropagation(bn) # ie pour inference engine
+   #+END_SRC
+
+   #+RESULTS:
+
+1. Il faut ensuite lancer les calculs de probabilité dans le RB avec la méthode =.makeInference= :
+   #+BEGIN_SRC python :session :results value :tangle hector.py :exports both
+bn_ie.makeInference()
+   #+END_SRC
+
+   #+RESULTS:
+   : None
+
+1. La loi de chaque variable est alors accessible /via/ la méthode =.posterior=. Par exemple, pour
+   la variable $O_{1}$ :
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+P_O1 = bn_ie.posterior("O1")
+gnb.getPotential(P_O1)
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_export html
+   <table style="border:1px solid black;">
+   <tr style='border:1px solid black;color:black;background-color:#808080'>
+         <th colspan='2'><center>O1</center></th></tr>
+   <tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+         <center>non</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+         <center>oui</center></th></tr>
+   <tr><td style='color:black;background-color:#b2cb64;text-align:right;'>0.5981</td><td style='color:black;background-color:#cbb264;text-align:right;'>0.4019</td></tr>
+   </table>
+   #+end_export
+
+1. Calculez les lois des autres variables.
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+# SOLUTION
+# --------
+P_C = bn_ie.posterior("C")
+gnb.getPotential(P_C)
+    #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+# SOLUTION
+# --------
+P_B = bn_ie.posterior("B")
+gnb.getPotential(P_B)
+    #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+# SOLUTION
+# --------
+P_L = bn_ie.posterior("L")
+gnb.getPotential(P_L)
+    #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+# SOLUTION
+# --------
+P_O2 = bn_ie.posterior("O2")
+gnb.getPotential(P_O2)
+    #+END_SRC
+
+1. Il est possible de visualiser ces lois directement sur la structure du RB grâce à la fonction
+   =gnb.getInference= :
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+gnb.getInference(bn)
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_export html
+   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="246pt" height="307pt" viewBox="0.00 0.00 246.00 307.00">
+   <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 303)">
+   <title>structs</title>
+   <text text-anchor="middle" x="119" y="-7.8" font-family="Times,serif" font-size="14.00" fill="#4a4a4a">Inference in   0.32ms</text>
+   <!-- C -->
+   <g id="node1" class="node">
+   <title>C</title>
+   <polygon fill="#e0e0e0" stroke="#000000" points="174,-299 64,-299 64,-257 174,-257 174,-299"/>
+   <svg viewBox="0 0 144.59375 53.538125" width="110px" height="42px" preserveAspectRatio="xMinYMin meet" x="64" y="-299"> <metadata>
+     <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work>
+       <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+       <dc:date>2023-05-01T00:13:35.018699</dc:date>
+       <dc:format>image/svg+xml</dc:format>
+       <dc:creator>
+        <cc:Agent>
+         <dc:title>Matplotlib v3.7.1, https://matplotlib.org/</dc:title>
+        </cc:Agent>
+       </dc:creator>
+      </cc:Work>
+     </rdf:RDF>
+    </metadata>
+    <defs>
+     <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+    </defs>
+    <g id="figure_1">
+     <g id="patch_1">
+      <path d="M 0 53.538125  L 144.59375 53.538125  L 144.59375 0  L 0 0  z " style="fill: #e0e0e0"/>
+     </g>
+     <g id="axes_1">
+      <g id="patch_2">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
+      </g>
+      <g id="patch_3">
+       <path d="M 29.39375 46.438125  L 85.19375 46.438125  L 85.19375 34.118125  L 29.39375 34.118125  z " clip-path="url(#paa63d84b02)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="patch_4">
+       <path d="M 29.39375 31.038125  L 85.19375 31.038125  L 85.19375 18.718125  L 29.39375 18.718125  z " clip-path="url(#paa63d84b02)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="matplotlib.axis_1">
+       <g id="xtick_1">
+        <g id="line2d_1">
+         <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#paa63d84b02)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_2">
+         <defs>
+          <path id="m0b4758341b" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#m0b4758341b" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_2">
+        <g id="line2d_3">
+         <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#paa63d84b02)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_4">
+         <g>
+          <use xlink:href="#m0b4758341b" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_3">
+        <g id="line2d_5">
+         <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#paa63d84b02)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_6">
+         <g>
+          <use xlink:href="#m0b4758341b" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="matplotlib.axis_2">
+       <g id="ytick_1">
+        <g id="line2d_7">
+         <defs>
+          <path id="m73f9922b5f" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#m73f9922b5f" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_1">
+         <!-- oui -->
+         <g transform="translate(7.159375 44.077344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6f" d="M 1959 3097  Q 1497 3097 1228 2736  Q 959 2375 959 1747  Q 959 1119 1226 758  Q 1494 397 1959 397  Q 2419 397 2687 759  Q 2956 1122 2956 1747  Q 2956 2369 2687 2733  Q 2419 3097 1959 3097  z M 1959 3584  Q 2709 3584 3137 3096  Q 3566 2609 3566 1747  Q 3566 888 3137 398  Q 2709 -91 1959 -91  Q 1206 -91 779 398  Q 353 888 353 1747  Q 353 2609 779 3096  Q 1206 3584 1959 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-75" d="M 544 1381  L 544 3500  L 1119 3500  L 1119 1403  Q 1119 906 1312 657  Q 1506 409 1894 409  Q 2359 409 2629 706  Q 2900 1003 2900 1516  L 2900 3500  L 3475 3500  L 3475 0  L 2900 0  L 2900 538  Q 2691 219 2414 64  Q 2138 -91 1772 -91  Q 1169 -91 856 284  Q 544 659 544 1381  z M 1991 3584  L 1991 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-69" d="M 603 3500  L 1178 3500  L 1178 0  L 603 0  L 603 3500  z M 603 4863  L 1178 4863  L 1178 4134  L 603 4134  L 603 4863  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6f"/>
+          <use xlink:href="#DejaVuSans-75" x="61.181641"/>
+          <use xlink:href="#DejaVuSans-69" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+       <g id="ytick_2">
+        <g id="line2d_8">
+         <g>
+          <use xlink:href="#m73f9922b5f" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_2">
+         <!-- non -->
+         <g transform="translate(3.6 28.677344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6e" d="M 3513 2113  L 3513 0  L 2938 0  L 2938 2094  Q 2938 2591 2744 2837  Q 2550 3084 2163 3084  Q 1697 3084 1428 2787  Q 1159 2491 1159 1978  L 1159 0  L 581 0  L 581 3500  L 1159 3500  L 1159 2956  Q 1366 3272 1645 3428  Q 1925 3584 2291 3584  Q 2894 3584 3203 3211  Q 3513 2838 3513 2113  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6e"/>
+          <use xlink:href="#DejaVuSans-6f" x="63.378906"/>
+          <use xlink:href="#DejaVuSans-6e" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="patch_5">
+       <path d="M 29.39375 46.438125  L 29.39375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_6">
+       <path d="M 140.99375 46.438125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_7">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_8">
+       <path d="M 29.39375 18.718125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="text_3">
+       <!-- 50.00% -->
+       <g transform="translate(102.864063 44.358438) scale(0.1 -0.1)">
+        <defs>
+         <path id="DejaVuSans-35" d="M 691 4666  L 3169 4666  L 3169 4134  L 1269 4134  L 1269 2991  Q 1406 3038 1543 3061  Q 1681 3084 1819 3084  Q 2600 3084 3056 2656  Q 3513 2228 3513 1497  Q 3513 744 3044 326  Q 2575 -91 1722 -91  Q 1428 -91 1123 -41  Q 819 9 494 109  L 494 744  Q 775 591 1075 516  Q 1375 441 1709 441  Q 2250 441 2565 725  Q 2881 1009 2881 1497  Q 2881 1984 2565 2268  Q 2250 2553 1709 2553  Q 1456 2553 1204 2497  Q 953 2441 691 2322  L 691 4666  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-30" d="M 2034 4250  Q 1547 4250 1301 3770  Q 1056 3291 1056 2328  Q 1056 1369 1301 889  Q 1547 409 2034 409  Q 2525 409 2770 889  Q 3016 1369 3016 2328  Q 3016 3291 2770 3770  Q 2525 4250 2034 4250  z M 2034 4750  Q 2819 4750 3233 4129  Q 3647 3509 3647 2328  Q 3647 1150 3233 529  Q 2819 -91 2034 -91  Q 1250 -91 836 529  Q 422 1150 422 2328  Q 422 3509 836 4129  Q 1250 4750 2034 4750  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-2e" d="M 684 794  L 1344 794  L 1344 0  L 684 0  L 684 794  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-25" d="M 4653 2053  Q 4381 2053 4226 1822  Q 4072 1591 4072 1178  Q 4072 772 4226 539  Q 4381 306 4653 306  Q 4919 306 5073 539  Q 5228 772 5228 1178  Q 5228 1588 5073 1820  Q 4919 2053 4653 2053  z M 4653 2450  Q 5147 2450 5437 2106  Q 5728 1763 5728 1178  Q 5728 594 5436 251  Q 5144 -91 4653 -91  Q 4153 -91 3862 251  Q 3572 594 3572 1178  Q 3572 1766 3864 2108  Q 4156 2450 4653 2450  z M 1428 4353  Q 1159 4353 1004 4120  Q 850 3888 850 3481  Q 850 3069 1003 2837  Q 1156 2606 1428 2606  Q 1700 2606 1854 2837  Q 2009 3069 2009 3481  Q 2009 3884 1853 4118  Q 1697 4353 1428 4353  z M 4250 4750  L 4750 4750  L 1831 -91  L 1331 -91  L 4250 4750  z M 1428 4750  Q 1922 4750 2215 4408  Q 2509 4066 2509 3481  Q 2509 2891 2217 2550  Q 1925 2209 1428 2209  Q 931 2209 642 2551  Q 353 2894 353 3481  Q 353 4063 643 4406  Q 934 4750 1428 4750  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-35"/>
+        <use xlink:href="#DejaVuSans-30" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-30" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-30" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_4">
+       <!-- 50.00% -->
+       <g transform="translate(102.864063 28.958438) scale(0.1 -0.1)">
+        <use xlink:href="#DejaVuSans-35"/>
+        <use xlink:href="#DejaVuSans-30" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-30" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-30" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_5">
+       <!-- C -->
+       <g transform="translate(81.004062 12.718125) scale(0.12 -0.12)">
+        <defs>
+         <path id="DejaVuSans-43" d="M 4122 4306  L 4122 3641  Q 3803 3938 3442 4084  Q 3081 4231 2675 4231  Q 1875 4231 1450 3742  Q 1025 3253 1025 2328  Q 1025 1406 1450 917  Q 1875 428 2675 428  Q 3081 428 3442 575  Q 3803 722 4122 1019  L 4122 359  Q 3791 134 3420 21  Q 3050 -91 2638 -91  Q 1578 -91 968 557  Q 359 1206 359 2328  Q 359 3453 968 4101  Q 1578 4750 2638 4750  Q 3056 4750 3426 4639  Q 3797 4528 4122 4306  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-43"/>
+       </g>
+      </g>
+     </g>
+    </g>
+    <defs>
+     <clipPath id="paa63d84b02">
+      <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
+     </clipPath>
+    </defs>
+   </svg>
+
+   </g>
+   <!-- B -->
+   <g id="node2" class="node">
+   <title>B</title>
+   <polygon fill="#e0e0e0" stroke="#000000" points="174,-221 64,-221 64,-179 174,-179 174,-221"/>
+   <svg viewBox="0 0 144.59375 53.538125" width="110px" height="42px" preserveAspectRatio="xMinYMin meet" x="64" y="-221"> <metadata>
+     <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work>
+       <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+       <dc:date>2023-05-01T00:13:35.060425</dc:date>
+       <dc:format>image/svg+xml</dc:format>
+       <dc:creator>
+        <cc:Agent>
+         <dc:title>Matplotlib v3.7.1, https://matplotlib.org/</dc:title>
+        </cc:Agent>
+       </dc:creator>
+      </cc:Work>
+     </rdf:RDF>
+    </metadata>
+    <defs>
+     <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+    </defs>
+    <g id="figure_1">
+     <g id="patch_1">
+      <path d="M 0 53.538125  L 144.59375 53.538125  L 144.59375 0  L 0 0  z " style="fill: #e0e0e0"/>
+     </g>
+     <g id="axes_1">
+      <g id="patch_2">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
+      </g>
+      <g id="patch_3">
+       <path d="M 29.39375 46.438125  L 110.30375 46.438125  L 110.30375 34.118125  L 29.39375 34.118125  z " clip-path="url(#p75732acdac)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="patch_4">
+       <path d="M 29.39375 31.038125  L 60.08375 31.038125  L 60.08375 18.718125  L 29.39375 18.718125  z " clip-path="url(#p75732acdac)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="matplotlib.axis_1">
+       <g id="xtick_1">
+        <g id="line2d_1">
+         <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p75732acdac)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_2">
+         <defs>
+          <path id="mb2e1798d76" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#mb2e1798d76" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_2">
+        <g id="line2d_3">
+         <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p75732acdac)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_4">
+         <g>
+          <use xlink:href="#mb2e1798d76" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_3">
+        <g id="line2d_5">
+         <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p75732acdac)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_6">
+         <g>
+          <use xlink:href="#mb2e1798d76" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="matplotlib.axis_2">
+       <g id="ytick_1">
+        <g id="line2d_7">
+         <defs>
+          <path id="m92f4d18ba5" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#m92f4d18ba5" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_1">
+         <!-- oui -->
+         <g transform="translate(7.159375 44.077344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6f" d="M 1959 3097  Q 1497 3097 1228 2736  Q 959 2375 959 1747  Q 959 1119 1226 758  Q 1494 397 1959 397  Q 2419 397 2687 759  Q 2956 1122 2956 1747  Q 2956 2369 2687 2733  Q 2419 3097 1959 3097  z M 1959 3584  Q 2709 3584 3137 3096  Q 3566 2609 3566 1747  Q 3566 888 3137 398  Q 2709 -91 1959 -91  Q 1206 -91 779 398  Q 353 888 353 1747  Q 353 2609 779 3096  Q 1206 3584 1959 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-75" d="M 544 1381  L 544 3500  L 1119 3500  L 1119 1403  Q 1119 906 1312 657  Q 1506 409 1894 409  Q 2359 409 2629 706  Q 2900 1003 2900 1516  L 2900 3500  L 3475 3500  L 3475 0  L 2900 0  L 2900 538  Q 2691 219 2414 64  Q 2138 -91 1772 -91  Q 1169 -91 856 284  Q 544 659 544 1381  z M 1991 3584  L 1991 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-69" d="M 603 3500  L 1178 3500  L 1178 0  L 603 0  L 603 3500  z M 603 4863  L 1178 4863  L 1178 4134  L 603 4134  L 603 4863  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6f"/>
+          <use xlink:href="#DejaVuSans-75" x="61.181641"/>
+          <use xlink:href="#DejaVuSans-69" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+       <g id="ytick_2">
+        <g id="line2d_8">
+         <g>
+          <use xlink:href="#m92f4d18ba5" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_2">
+         <!-- non -->
+         <g transform="translate(3.6 28.677344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6e" d="M 3513 2113  L 3513 0  L 2938 0  L 2938 2094  Q 2938 2591 2744 2837  Q 2550 3084 2163 3084  Q 1697 3084 1428 2787  Q 1159 2491 1159 1978  L 1159 0  L 581 0  L 581 3500  L 1159 3500  L 1159 2956  Q 1366 3272 1645 3428  Q 1925 3584 2291 3584  Q 2894 3584 3203 3211  Q 3513 2838 3513 2113  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6e"/>
+          <use xlink:href="#DejaVuSans-6f" x="63.378906"/>
+          <use xlink:href="#DejaVuSans-6e" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="patch_5">
+       <path d="M 29.39375 46.438125  L 29.39375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_6">
+       <path d="M 140.99375 46.438125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_7">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_8">
+       <path d="M 29.39375 18.718125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="text_3">
+       <!-- 72.50% -->
+       <g transform="translate(102.864063 44.358438) scale(0.1 -0.1)">
+        <defs>
+         <path id="DejaVuSans-37" d="M 525 4666  L 3525 4666  L 3525 4397  L 1831 0  L 1172 0  L 2766 4134  L 525 4134  L 525 4666  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-32" d="M 1228 531  L 3431 531  L 3431 0  L 469 0  L 469 531  Q 828 903 1448 1529  Q 2069 2156 2228 2338  Q 2531 2678 2651 2914  Q 2772 3150 2772 3378  Q 2772 3750 2511 3984  Q 2250 4219 1831 4219  Q 1534 4219 1204 4116  Q 875 4013 500 3803  L 500 4441  Q 881 4594 1212 4672  Q 1544 4750 1819 4750  Q 2544 4750 2975 4387  Q 3406 4025 3406 3419  Q 3406 3131 3298 2873  Q 3191 2616 2906 2266  Q 2828 2175 2409 1742  Q 1991 1309 1228 531  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-2e" d="M 684 794  L 1344 794  L 1344 0  L 684 0  L 684 794  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-35" d="M 691 4666  L 3169 4666  L 3169 4134  L 1269 4134  L 1269 2991  Q 1406 3038 1543 3061  Q 1681 3084 1819 3084  Q 2600 3084 3056 2656  Q 3513 2228 3513 1497  Q 3513 744 3044 326  Q 2575 -91 1722 -91  Q 1428 -91 1123 -41  Q 819 9 494 109  L 494 744  Q 775 591 1075 516  Q 1375 441 1709 441  Q 2250 441 2565 725  Q 2881 1009 2881 1497  Q 2881 1984 2565 2268  Q 2250 2553 1709 2553  Q 1456 2553 1204 2497  Q 953 2441 691 2322  L 691 4666  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-30" d="M 2034 4250  Q 1547 4250 1301 3770  Q 1056 3291 1056 2328  Q 1056 1369 1301 889  Q 1547 409 2034 409  Q 2525 409 2770 889  Q 3016 1369 3016 2328  Q 3016 3291 2770 3770  Q 2525 4250 2034 4250  z M 2034 4750  Q 2819 4750 3233 4129  Q 3647 3509 3647 2328  Q 3647 1150 3233 529  Q 2819 -91 2034 -91  Q 1250 -91 836 529  Q 422 1150 422 2328  Q 422 3509 836 4129  Q 1250 4750 2034 4750  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-25" d="M 4653 2053  Q 4381 2053 4226 1822  Q 4072 1591 4072 1178  Q 4072 772 4226 539  Q 4381 306 4653 306  Q 4919 306 5073 539  Q 5228 772 5228 1178  Q 5228 1588 5073 1820  Q 4919 2053 4653 2053  z M 4653 2450  Q 5147 2450 5437 2106  Q 5728 1763 5728 1178  Q 5728 594 5436 251  Q 5144 -91 4653 -91  Q 4153 -91 3862 251  Q 3572 594 3572 1178  Q 3572 1766 3864 2108  Q 4156 2450 4653 2450  z M 1428 4353  Q 1159 4353 1004 4120  Q 850 3888 850 3481  Q 850 3069 1003 2837  Q 1156 2606 1428 2606  Q 1700 2606 1854 2837  Q 2009 3069 2009 3481  Q 2009 3884 1853 4118  Q 1697 4353 1428 4353  z M 4250 4750  L 4750 4750  L 1831 -91  L 1331 -91  L 4250 4750  z M 1428 4750  Q 1922 4750 2215 4408  Q 2509 4066 2509 3481  Q 2509 2891 2217 2550  Q 1925 2209 1428 2209  Q 931 2209 642 2551  Q 353 2894 353 3481  Q 353 4063 643 4406  Q 934 4750 1428 4750  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-37"/>
+        <use xlink:href="#DejaVuSans-32" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-35" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-30" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_4">
+       <!-- 27.50% -->
+       <g transform="translate(102.864063 28.958438) scale(0.1 -0.1)">
+        <use xlink:href="#DejaVuSans-32"/>
+        <use xlink:href="#DejaVuSans-37" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-35" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-30" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_5">
+       <!-- B -->
+       <g transform="translate(81.077187 12.718125) scale(0.12 -0.12)">
+        <defs>
+         <path id="DejaVuSans-42" d="M 1259 2228  L 1259 519  L 2272 519  Q 2781 519 3026 730  Q 3272 941 3272 1375  Q 3272 1813 3026 2020  Q 2781 2228 2272 2228  L 1259 2228  z M 1259 4147  L 1259 2741  L 2194 2741  Q 2656 2741 2882 2914  Q 3109 3088 3109 3444  Q 3109 3797 2882 3972  Q 2656 4147 2194 4147  L 1259 4147  z M 628 4666  L 2241 4666  Q 2963 4666 3353 4366  Q 3744 4066 3744 3513  Q 3744 3084 3544 2831  Q 3344 2578 2956 2516  Q 3422 2416 3680 2098  Q 3938 1781 3938 1306  Q 3938 681 3513 340  Q 3088 0 2303 0  L 628 0  L 628 4666  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-42"/>
+       </g>
+      </g>
+     </g>
+    </g>
+    <defs>
+     <clipPath id="p75732acdac">
+      <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
+     </clipPath>
+    </defs>
+   </svg>
+
+   </g>
+   <!-- C&#45;&gt;B -->
+   <g id="edge1" class="edge">
+   <title>C-&gt;B</title>
+   <g id="a_edge1"><a xlink:title="0 → 1">
+   <path fill="none" stroke="#4a4a4a" d="M119,-256.63C119,-248.82 119,-239.73 119,-231.18"/>
+   <polygon fill="#4a4a4a" stroke="#4a4a4a" points="122.5,-231.16 119,-221.16 115.5,-231.16 122.5,-231.16"/>
+   </a>
+   </g>
+   </g>
+   <!-- L -->
+   <g id="node3" class="node">
+   <title>L</title>
+   <polygon fill="#e0e0e0" stroke="#000000" points="174,-143 64,-143 64,-101 174,-101 174,-143"/>
+   <svg viewBox="0 0 144.59375 53.538125" width="110px" height="42px" preserveAspectRatio="xMinYMin meet" x="64" y="-143"> <metadata>
+     <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work>
+       <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+       <dc:date>2023-05-01T00:13:35.104975</dc:date>
+       <dc:format>image/svg+xml</dc:format>
+       <dc:creator>
+        <cc:Agent>
+         <dc:title>Matplotlib v3.7.1, https://matplotlib.org/</dc:title>
+        </cc:Agent>
+       </dc:creator>
+      </cc:Work>
+     </rdf:RDF>
+    </metadata>
+    <defs>
+     <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+    </defs>
+    <g id="figure_1">
+     <g id="patch_1">
+      <path d="M 0 53.538125  L 144.59375 53.538125  L 144.59375 0  L 0 0  z " style="fill: #e0e0e0"/>
+     </g>
+     <g id="axes_1">
+      <g id="patch_2">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
+      </g>
+      <g id="patch_3">
+       <path d="M 29.39375 46.438125  L 57.82385 46.438125  L 57.82385 34.118125  L 29.39375 34.118125  z " clip-path="url(#p5df7899640)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="patch_4">
+       <path d="M 29.39375 31.038125  L 112.56365 31.038125  L 112.56365 18.718125  L 29.39375 18.718125  z " clip-path="url(#p5df7899640)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="matplotlib.axis_1">
+       <g id="xtick_1">
+        <g id="line2d_1">
+         <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p5df7899640)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_2">
+         <defs>
+          <path id="m3d66336442" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#m3d66336442" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_2">
+        <g id="line2d_3">
+         <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p5df7899640)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_4">
+         <g>
+          <use xlink:href="#m3d66336442" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_3">
+        <g id="line2d_5">
+         <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p5df7899640)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_6">
+         <g>
+          <use xlink:href="#m3d66336442" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="matplotlib.axis_2">
+       <g id="ytick_1">
+        <g id="line2d_7">
+         <defs>
+          <path id="ma76c4ae533" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#ma76c4ae533" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_1">
+         <!-- oui -->
+         <g transform="translate(7.159375 44.077344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6f" d="M 1959 3097  Q 1497 3097 1228 2736  Q 959 2375 959 1747  Q 959 1119 1226 758  Q 1494 397 1959 397  Q 2419 397 2687 759  Q 2956 1122 2956 1747  Q 2956 2369 2687 2733  Q 2419 3097 1959 3097  z M 1959 3584  Q 2709 3584 3137 3096  Q 3566 2609 3566 1747  Q 3566 888 3137 398  Q 2709 -91 1959 -91  Q 1206 -91 779 398  Q 353 888 353 1747  Q 353 2609 779 3096  Q 1206 3584 1959 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-75" d="M 544 1381  L 544 3500  L 1119 3500  L 1119 1403  Q 1119 906 1312 657  Q 1506 409 1894 409  Q 2359 409 2629 706  Q 2900 1003 2900 1516  L 2900 3500  L 3475 3500  L 3475 0  L 2900 0  L 2900 538  Q 2691 219 2414 64  Q 2138 -91 1772 -91  Q 1169 -91 856 284  Q 544 659 544 1381  z M 1991 3584  L 1991 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-69" d="M 603 3500  L 1178 3500  L 1178 0  L 603 0  L 603 3500  z M 603 4863  L 1178 4863  L 1178 4134  L 603 4134  L 603 4863  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6f"/>
+          <use xlink:href="#DejaVuSans-75" x="61.181641"/>
+          <use xlink:href="#DejaVuSans-69" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+       <g id="ytick_2">
+        <g id="line2d_8">
+         <g>
+          <use xlink:href="#ma76c4ae533" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_2">
+         <!-- non -->
+         <g transform="translate(3.6 28.677344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6e" d="M 3513 2113  L 3513 0  L 2938 0  L 2938 2094  Q 2938 2591 2744 2837  Q 2550 3084 2163 3084  Q 1697 3084 1428 2787  Q 1159 2491 1159 1978  L 1159 0  L 581 0  L 581 3500  L 1159 3500  L 1159 2956  Q 1366 3272 1645 3428  Q 1925 3584 2291 3584  Q 2894 3584 3203 3211  Q 3513 2838 3513 2113  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6e"/>
+          <use xlink:href="#DejaVuSans-6f" x="63.378906"/>
+          <use xlink:href="#DejaVuSans-6e" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="patch_5">
+       <path d="M 29.39375 46.438125  L 29.39375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_6">
+       <path d="M 140.99375 46.438125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_7">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_8">
+       <path d="M 29.39375 18.718125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="text_3">
+       <!-- 25.48% -->
+       <g transform="translate(102.864063 44.358438) scale(0.1 -0.1)">
+        <defs>
+         <path id="DejaVuSans-32" d="M 1228 531  L 3431 531  L 3431 0  L 469 0  L 469 531  Q 828 903 1448 1529  Q 2069 2156 2228 2338  Q 2531 2678 2651 2914  Q 2772 3150 2772 3378  Q 2772 3750 2511 3984  Q 2250 4219 1831 4219  Q 1534 4219 1204 4116  Q 875 4013 500 3803  L 500 4441  Q 881 4594 1212 4672  Q 1544 4750 1819 4750  Q 2544 4750 2975 4387  Q 3406 4025 3406 3419  Q 3406 3131 3298 2873  Q 3191 2616 2906 2266  Q 2828 2175 2409 1742  Q 1991 1309 1228 531  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-35" d="M 691 4666  L 3169 4666  L 3169 4134  L 1269 4134  L 1269 2991  Q 1406 3038 1543 3061  Q 1681 3084 1819 3084  Q 2600 3084 3056 2656  Q 3513 2228 3513 1497  Q 3513 744 3044 326  Q 2575 -91 1722 -91  Q 1428 -91 1123 -41  Q 819 9 494 109  L 494 744  Q 775 591 1075 516  Q 1375 441 1709 441  Q 2250 441 2565 725  Q 2881 1009 2881 1497  Q 2881 1984 2565 2268  Q 2250 2553 1709 2553  Q 1456 2553 1204 2497  Q 953 2441 691 2322  L 691 4666  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-2e" d="M 684 794  L 1344 794  L 1344 0  L 684 0  L 684 794  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-34" d="M 2419 4116  L 825 1625  L 2419 1625  L 2419 4116  z M 2253 4666  L 3047 4666  L 3047 1625  L 3713 1625  L 3713 1100  L 3047 1100  L 3047 0  L 2419 0  L 2419 1100  L 313 1100  L 313 1709  L 2253 4666  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-38" d="M 2034 2216  Q 1584 2216 1326 1975  Q 1069 1734 1069 1313  Q 1069 891 1326 650  Q 1584 409 2034 409  Q 2484 409 2743 651  Q 3003 894 3003 1313  Q 3003 1734 2745 1975  Q 2488 2216 2034 2216  z M 1403 2484  Q 997 2584 770 2862  Q 544 3141 544 3541  Q 544 4100 942 4425  Q 1341 4750 2034 4750  Q 2731 4750 3128 4425  Q 3525 4100 3525 3541  Q 3525 3141 3298 2862  Q 3072 2584 2669 2484  Q 3125 2378 3379 2068  Q 3634 1759 3634 1313  Q 3634 634 3220 271  Q 2806 -91 2034 -91  Q 1263 -91 848 271  Q 434 634 434 1313  Q 434 1759 690 2068  Q 947 2378 1403 2484  z M 1172 3481  Q 1172 3119 1398 2916  Q 1625 2713 2034 2713  Q 2441 2713 2670 2916  Q 2900 3119 2900 3481  Q 2900 3844 2670 4047  Q 2441 4250 2034 4250  Q 1625 4250 1398 4047  Q 1172 3844 1172 3481  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-25" d="M 4653 2053  Q 4381 2053 4226 1822  Q 4072 1591 4072 1178  Q 4072 772 4226 539  Q 4381 306 4653 306  Q 4919 306 5073 539  Q 5228 772 5228 1178  Q 5228 1588 5073 1820  Q 4919 2053 4653 2053  z M 4653 2450  Q 5147 2450 5437 2106  Q 5728 1763 5728 1178  Q 5728 594 5436 251  Q 5144 -91 4653 -91  Q 4153 -91 3862 251  Q 3572 594 3572 1178  Q 3572 1766 3864 2108  Q 4156 2450 4653 2450  z M 1428 4353  Q 1159 4353 1004 4120  Q 850 3888 850 3481  Q 850 3069 1003 2837  Q 1156 2606 1428 2606  Q 1700 2606 1854 2837  Q 2009 3069 2009 3481  Q 2009 3884 1853 4118  Q 1697 4353 1428 4353  z M 4250 4750  L 4750 4750  L 1831 -91  L 1331 -91  L 4250 4750  z M 1428 4750  Q 1922 4750 2215 4408  Q 2509 4066 2509 3481  Q 2509 2891 2217 2550  Q 1925 2209 1428 2209  Q 931 2209 642 2551  Q 353 2894 353 3481  Q 353 4063 643 4406  Q 934 4750 1428 4750  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-32"/>
+        <use xlink:href="#DejaVuSans-35" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-34" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-38" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_4">
+       <!-- 74.52% -->
+       <g transform="translate(102.864063 28.958438) scale(0.1 -0.1)">
+        <defs>
+         <path id="DejaVuSans-37" d="M 525 4666  L 3525 4666  L 3525 4397  L 1831 0  L 1172 0  L 2766 4134  L 525 4134  L 525 4666  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-37"/>
+        <use xlink:href="#DejaVuSans-34" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-35" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-32" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_5">
+       <!-- L -->
+       <g transform="translate(81.850625 12.718125) scale(0.12 -0.12)">
+        <defs>
+         <path id="DejaVuSans-4c" d="M 628 4666  L 1259 4666  L 1259 531  L 3531 531  L 3531 0  L 628 0  L 628 4666  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-4c"/>
+       </g>
+      </g>
+     </g>
+    </g>
+    <defs>
+     <clipPath id="p5df7899640">
+      <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
+     </clipPath>
+    </defs>
+   </svg>
+
+   </g>
+   <!-- B&#45;&gt;L -->
+   <g id="edge3" class="edge">
+   <title>B-&gt;L</title>
+   <g id="a_edge3"><a xlink:title="1 → 2">
+   <path fill="none" stroke="#4a4a4a" d="M119,-178.63C119,-170.82 119,-161.73 119,-153.18"/>
+   <polygon fill="#4a4a4a" stroke="#4a4a4a" points="122.5,-153.16 119,-143.16 115.5,-153.16 122.5,-153.16"/>
+   </a>
+   </g>
+   </g>
+   <!-- O1 -->
+   <g id="node4" class="node">
+   <title>O1</title>
+   <polygon fill="#e0e0e0" stroke="#000000" points="110,-65 0,-65 0,-23 110,-23 110,-65"/>
+   <svg viewBox="0 0 144.59375 53.538125" width="110px" height="42px" preserveAspectRatio="xMinYMin meet" x="0" y="-65"> <metadata>
+     <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work>
+       <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+       <dc:date>2023-05-01T00:13:35.154855</dc:date>
+       <dc:format>image/svg+xml</dc:format>
+       <dc:creator>
+        <cc:Agent>
+         <dc:title>Matplotlib v3.7.1, https://matplotlib.org/</dc:title>
+        </cc:Agent>
+       </dc:creator>
+      </cc:Work>
+     </rdf:RDF>
+    </metadata>
+    <defs>
+     <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+    </defs>
+    <g id="figure_1">
+     <g id="patch_1">
+      <path d="M 0 53.538125  L 144.59375 53.538125  L 144.59375 0  L 0 0  z " style="fill: #e0e0e0"/>
+     </g>
+     <g id="axes_1">
+      <g id="patch_2">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
+      </g>
+      <g id="patch_3">
+       <path d="M 29.39375 46.438125  L 74.24579 46.438125  L 74.24579 34.118125  L 29.39375 34.118125  z " clip-path="url(#p4bd950c38a)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="patch_4">
+       <path d="M 29.39375 31.038125  L 96.14171 31.038125  L 96.14171 18.718125  L 29.39375 18.718125  z " clip-path="url(#p4bd950c38a)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="matplotlib.axis_1">
+       <g id="xtick_1">
+        <g id="line2d_1">
+         <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p4bd950c38a)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_2">
+         <defs>
+          <path id="mde779a401b" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#mde779a401b" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_2">
+        <g id="line2d_3">
+         <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p4bd950c38a)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_4">
+         <g>
+          <use xlink:href="#mde779a401b" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_3">
+        <g id="line2d_5">
+         <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p4bd950c38a)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_6">
+         <g>
+          <use xlink:href="#mde779a401b" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="matplotlib.axis_2">
+       <g id="ytick_1">
+        <g id="line2d_7">
+         <defs>
+          <path id="m8df86c8471" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#m8df86c8471" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_1">
+         <!-- oui -->
+         <g transform="translate(7.159375 44.077344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6f" d="M 1959 3097  Q 1497 3097 1228 2736  Q 959 2375 959 1747  Q 959 1119 1226 758  Q 1494 397 1959 397  Q 2419 397 2687 759  Q 2956 1122 2956 1747  Q 2956 2369 2687 2733  Q 2419 3097 1959 3097  z M 1959 3584  Q 2709 3584 3137 3096  Q 3566 2609 3566 1747  Q 3566 888 3137 398  Q 2709 -91 1959 -91  Q 1206 -91 779 398  Q 353 888 353 1747  Q 353 2609 779 3096  Q 1206 3584 1959 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-75" d="M 544 1381  L 544 3500  L 1119 3500  L 1119 1403  Q 1119 906 1312 657  Q 1506 409 1894 409  Q 2359 409 2629 706  Q 2900 1003 2900 1516  L 2900 3500  L 3475 3500  L 3475 0  L 2900 0  L 2900 538  Q 2691 219 2414 64  Q 2138 -91 1772 -91  Q 1169 -91 856 284  Q 544 659 544 1381  z M 1991 3584  L 1991 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-69" d="M 603 3500  L 1178 3500  L 1178 0  L 603 0  L 603 3500  z M 603 4863  L 1178 4863  L 1178 4134  L 603 4134  L 603 4863  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6f"/>
+          <use xlink:href="#DejaVuSans-75" x="61.181641"/>
+          <use xlink:href="#DejaVuSans-69" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+       <g id="ytick_2">
+        <g id="line2d_8">
+         <g>
+          <use xlink:href="#m8df86c8471" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_2">
+         <!-- non -->
+         <g transform="translate(3.6 28.677344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6e" d="M 3513 2113  L 3513 0  L 2938 0  L 2938 2094  Q 2938 2591 2744 2837  Q 2550 3084 2163 3084  Q 1697 3084 1428 2787  Q 1159 2491 1159 1978  L 1159 0  L 581 0  L 581 3500  L 1159 3500  L 1159 2956  Q 1366 3272 1645 3428  Q 1925 3584 2291 3584  Q 2894 3584 3203 3211  Q 3513 2838 3513 2113  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6e"/>
+          <use xlink:href="#DejaVuSans-6f" x="63.378906"/>
+          <use xlink:href="#DejaVuSans-6e" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="patch_5">
+       <path d="M 29.39375 46.438125  L 29.39375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_6">
+       <path d="M 140.99375 46.438125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_7">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_8">
+       <path d="M 29.39375 18.718125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="text_3">
+       <!-- 40.19% -->
+       <g transform="translate(102.864063 44.358438) scale(0.1 -0.1)">
+        <defs>
+         <path id="DejaVuSans-34" d="M 2419 4116  L 825 1625  L 2419 1625  L 2419 4116  z M 2253 4666  L 3047 4666  L 3047 1625  L 3713 1625  L 3713 1100  L 3047 1100  L 3047 0  L 2419 0  L 2419 1100  L 313 1100  L 313 1709  L 2253 4666  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-30" d="M 2034 4250  Q 1547 4250 1301 3770  Q 1056 3291 1056 2328  Q 1056 1369 1301 889  Q 1547 409 2034 409  Q 2525 409 2770 889  Q 3016 1369 3016 2328  Q 3016 3291 2770 3770  Q 2525 4250 2034 4250  z M 2034 4750  Q 2819 4750 3233 4129  Q 3647 3509 3647 2328  Q 3647 1150 3233 529  Q 2819 -91 2034 -91  Q 1250 -91 836 529  Q 422 1150 422 2328  Q 422 3509 836 4129  Q 1250 4750 2034 4750  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-2e" d="M 684 794  L 1344 794  L 1344 0  L 684 0  L 684 794  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-31" d="M 794 531  L 1825 531  L 1825 4091  L 703 3866  L 703 4441  L 1819 4666  L 2450 4666  L 2450 531  L 3481 531  L 3481 0  L 794 0  L 794 531  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-39" d="M 703 97  L 703 672  Q 941 559 1184 500  Q 1428 441 1663 441  Q 2288 441 2617 861  Q 2947 1281 2994 2138  Q 2813 1869 2534 1725  Q 2256 1581 1919 1581  Q 1219 1581 811 2004  Q 403 2428 403 3163  Q 403 3881 828 4315  Q 1253 4750 1959 4750  Q 2769 4750 3195 4129  Q 3622 3509 3622 2328  Q 3622 1225 3098 567  Q 2575 -91 1691 -91  Q 1453 -91 1209 -44  Q 966 3 703 97  z M 1959 2075  Q 2384 2075 2632 2365  Q 2881 2656 2881 3163  Q 2881 3666 2632 3958  Q 2384 4250 1959 4250  Q 1534 4250 1286 3958  Q 1038 3666 1038 3163  Q 1038 2656 1286 2365  Q 1534 2075 1959 2075  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-25" d="M 4653 2053  Q 4381 2053 4226 1822  Q 4072 1591 4072 1178  Q 4072 772 4226 539  Q 4381 306 4653 306  Q 4919 306 5073 539  Q 5228 772 5228 1178  Q 5228 1588 5073 1820  Q 4919 2053 4653 2053  z M 4653 2450  Q 5147 2450 5437 2106  Q 5728 1763 5728 1178  Q 5728 594 5436 251  Q 5144 -91 4653 -91  Q 4153 -91 3862 251  Q 3572 594 3572 1178  Q 3572 1766 3864 2108  Q 4156 2450 4653 2450  z M 1428 4353  Q 1159 4353 1004 4120  Q 850 3888 850 3481  Q 850 3069 1003 2837  Q 1156 2606 1428 2606  Q 1700 2606 1854 2837  Q 2009 3069 2009 3481  Q 2009 3884 1853 4118  Q 1697 4353 1428 4353  z M 4250 4750  L 4750 4750  L 1831 -91  L 1331 -91  L 4250 4750  z M 1428 4750  Q 1922 4750 2215 4408  Q 2509 4066 2509 3481  Q 2509 2891 2217 2550  Q 1925 2209 1428 2209  Q 931 2209 642 2551  Q 353 2894 353 3481  Q 353 4063 643 4406  Q 934 4750 1428 4750  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-34"/>
+        <use xlink:href="#DejaVuSans-30" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-31" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-39" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_4">
+       <!-- 59.81% -->
+       <g transform="translate(102.864063 28.958438) scale(0.1 -0.1)">
+        <defs>
+         <path id="DejaVuSans-35" d="M 691 4666  L 3169 4666  L 3169 4134  L 1269 4134  L 1269 2991  Q 1406 3038 1543 3061  Q 1681 3084 1819 3084  Q 2600 3084 3056 2656  Q 3513 2228 3513 1497  Q 3513 744 3044 326  Q 2575 -91 1722 -91  Q 1428 -91 1123 -41  Q 819 9 494 109  L 494 744  Q 775 591 1075 516  Q 1375 441 1709 441  Q 2250 441 2565 725  Q 2881 1009 2881 1497  Q 2881 1984 2565 2268  Q 2250 2553 1709 2553  Q 1456 2553 1204 2497  Q 953 2441 691 2322  L 691 4666  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-38" d="M 2034 2216  Q 1584 2216 1326 1975  Q 1069 1734 1069 1313  Q 1069 891 1326 650  Q 1584 409 2034 409  Q 2484 409 2743 651  Q 3003 894 3003 1313  Q 3003 1734 2745 1975  Q 2488 2216 2034 2216  z M 1403 2484  Q 997 2584 770 2862  Q 544 3141 544 3541  Q 544 4100 942 4425  Q 1341 4750 2034 4750  Q 2731 4750 3128 4425  Q 3525 4100 3525 3541  Q 3525 3141 3298 2862  Q 3072 2584 2669 2484  Q 3125 2378 3379 2068  Q 3634 1759 3634 1313  Q 3634 634 3220 271  Q 2806 -91 2034 -91  Q 1263 -91 848 271  Q 434 634 434 1313  Q 434 1759 690 2068  Q 947 2378 1403 2484  z M 1172 3481  Q 1172 3119 1398 2916  Q 1625 2713 2034 2713  Q 2441 2713 2670 2916  Q 2900 3119 2900 3481  Q 2900 3844 2670 4047  Q 2441 4250 2034 4250  Q 1625 4250 1398 4047  Q 1172 3844 1172 3481  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-35"/>
+        <use xlink:href="#DejaVuSans-39" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-38" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-31" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_5">
+       <!-- O1 -->
+       <g transform="translate(76.653125 12.718125) scale(0.12 -0.12)">
+        <defs>
+         <path id="DejaVuSans-4f" d="M 2522 4238  Q 1834 4238 1429 3725  Q 1025 3213 1025 2328  Q 1025 1447 1429 934  Q 1834 422 2522 422  Q 3209 422 3611 934  Q 4013 1447 4013 2328  Q 4013 3213 3611 3725  Q 3209 4238 2522 4238  z M 2522 4750  Q 3503 4750 4090 4092  Q 4678 3434 4678 2328  Q 4678 1225 4090 567  Q 3503 -91 2522 -91  Q 1538 -91 948 565  Q 359 1222 359 2328  Q 359 3434 948 4092  Q 1538 4750 2522 4750  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-4f"/>
+        <use xlink:href="#DejaVuSans-31" x="78.710938"/>
+       </g>
+      </g>
+     </g>
+    </g>
+    <defs>
+     <clipPath id="p4bd950c38a">
+      <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
+     </clipPath>
+    </defs>
+   </svg>
+
+   </g>
+   <!-- L&#45;&gt;O1 -->
+   <g id="edge4" class="edge">
+   <title>L-&gt;O1</title>
+   <g id="a_edge4"><a xlink:title="2 → 3">
+   <path fill="none" stroke="#4a4a4a" d="M101.85,-100.63C94.69,-92.13 86.26,-82.12 78.53,-72.94"/>
+   <polygon fill="#4a4a4a" stroke="#4a4a4a" points="81.09,-70.55 71.98,-65.16 75.74,-75.06 81.09,-70.55"/>
+   </a>
+   </g>
+   </g>
+   <!-- O2 -->
+   <g id="node5" class="node">
+   <title>O2</title>
+   <polygon fill="#e0e0e0" stroke="#000000" points="238,-65 128,-65 128,-23 238,-23 238,-65"/>
+   <svg viewBox="0 0 144.59375 53.538125" width="110px" height="42px" preserveAspectRatio="xMinYMin meet" x="128" y="-65"> <metadata>
+     <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work>
+       <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+       <dc:date>2023-05-01T00:13:35.200254</dc:date>
+       <dc:format>image/svg+xml</dc:format>
+       <dc:creator>
+        <cc:Agent>
+         <dc:title>Matplotlib v3.7.1, https://matplotlib.org/</dc:title>
+        </cc:Agent>
+       </dc:creator>
+      </cc:Work>
+     </rdf:RDF>
+    </metadata>
+    <defs>
+     <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+    </defs>
+    <g id="figure_1">
+     <g id="patch_1">
+      <path d="M 0 53.538125  L 144.59375 53.538125  L 144.59375 0  L 0 0  z " style="fill: #e0e0e0"/>
+     </g>
+     <g id="axes_1">
+      <g id="patch_2">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
+      </g>
+      <g id="patch_3">
+       <path d="M 29.39375 46.438125  L 63.29783 46.438125  L 63.29783 34.118125  L 29.39375 34.118125  z " clip-path="url(#p0792c8cec3)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="patch_4">
+       <path d="M 29.39375 31.038125  L 107.08967 31.038125  L 107.08967 18.718125  L 29.39375 18.718125  z " clip-path="url(#p0792c8cec3)" style="fill: #8fbc8f"/>
+      </g>
+      <g id="matplotlib.axis_1">
+       <g id="xtick_1">
+        <g id="line2d_1">
+         <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p0792c8cec3)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_2">
+         <defs>
+          <path id="m7e68d94bf6" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#m7e68d94bf6" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_2">
+        <g id="line2d_3">
+         <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p0792c8cec3)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_4">
+         <g>
+          <use xlink:href="#m7e68d94bf6" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+       <g id="xtick_3">
+        <g id="line2d_5">
+         <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p0792c8cec3)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+        </g>
+        <g id="line2d_6">
+         <g>
+          <use xlink:href="#m7e68d94bf6" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="matplotlib.axis_2">
+       <g id="ytick_1">
+        <g id="line2d_7">
+         <defs>
+          <path id="maa1e07444d" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+         </defs>
+         <g>
+          <use xlink:href="#maa1e07444d" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_1">
+         <!-- oui -->
+         <g transform="translate(7.159375 44.077344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6f" d="M 1959 3097  Q 1497 3097 1228 2736  Q 959 2375 959 1747  Q 959 1119 1226 758  Q 1494 397 1959 397  Q 2419 397 2687 759  Q 2956 1122 2956 1747  Q 2956 2369 2687 2733  Q 2419 3097 1959 3097  z M 1959 3584  Q 2709 3584 3137 3096  Q 3566 2609 3566 1747  Q 3566 888 3137 398  Q 2709 -91 1959 -91  Q 1206 -91 779 398  Q 353 888 353 1747  Q 353 2609 779 3096  Q 1206 3584 1959 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-75" d="M 544 1381  L 544 3500  L 1119 3500  L 1119 1403  Q 1119 906 1312 657  Q 1506 409 1894 409  Q 2359 409 2629 706  Q 2900 1003 2900 1516  L 2900 3500  L 3475 3500  L 3475 0  L 2900 0  L 2900 538  Q 2691 219 2414 64  Q 2138 -91 1772 -91  Q 1169 -91 856 284  Q 544 659 544 1381  z M 1991 3584  L 1991 3584  z " transform="scale(0.015625)"/>
+           <path id="DejaVuSans-69" d="M 603 3500  L 1178 3500  L 1178 0  L 603 0  L 603 3500  z M 603 4863  L 1178 4863  L 1178 4134  L 603 4134  L 603 4863  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6f"/>
+          <use xlink:href="#DejaVuSans-75" x="61.181641"/>
+          <use xlink:href="#DejaVuSans-69" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+       <g id="ytick_2">
+        <g id="line2d_8">
+         <g>
+          <use xlink:href="#maa1e07444d" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+         </g>
+        </g>
+        <g id="text_2">
+         <!-- non -->
+         <g transform="translate(3.6 28.677344) scale(0.1 -0.1)">
+          <defs>
+           <path id="DejaVuSans-6e" d="M 3513 2113  L 3513 0  L 2938 0  L 2938 2094  Q 2938 2591 2744 2837  Q 2550 3084 2163 3084  Q 1697 3084 1428 2787  Q 1159 2491 1159 1978  L 1159 0  L 581 0  L 581 3500  L 1159 3500  L 1159 2956  Q 1366 3272 1645 3428  Q 1925 3584 2291 3584  Q 2894 3584 3203 3211  Q 3513 2838 3513 2113  z " transform="scale(0.015625)"/>
+          </defs>
+          <use xlink:href="#DejaVuSans-6e"/>
+          <use xlink:href="#DejaVuSans-6f" x="63.378906"/>
+          <use xlink:href="#DejaVuSans-6e" x="124.560547"/>
+         </g>
+        </g>
+       </g>
+      </g>
+      <g id="patch_5">
+       <path d="M 29.39375 46.438125  L 29.39375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_6">
+       <path d="M 140.99375 46.438125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_7">
+       <path d="M 29.39375 46.438125  L 140.99375 46.438125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="patch_8">
+       <path d="M 29.39375 18.718125  L 140.99375 18.718125  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+      </g>
+      <g id="text_3">
+       <!-- 30.38% -->
+       <g transform="translate(102.864063 44.358438) scale(0.1 -0.1)">
+        <defs>
+         <path id="DejaVuSans-33" d="M 2597 2516  Q 3050 2419 3304 2112  Q 3559 1806 3559 1356  Q 3559 666 3084 287  Q 2609 -91 1734 -91  Q 1441 -91 1130 -33  Q 819 25 488 141  L 488 750  Q 750 597 1062 519  Q 1375 441 1716 441  Q 2309 441 2620 675  Q 2931 909 2931 1356  Q 2931 1769 2642 2001  Q 2353 2234 1838 2234  L 1294 2234  L 1294 2753  L 1863 2753  Q 2328 2753 2575 2939  Q 2822 3125 2822 3475  Q 2822 3834 2567 4026  Q 2313 4219 1838 4219  Q 1578 4219 1281 4162  Q 984 4106 628 3988  L 628 4550  Q 988 4650 1302 4700  Q 1616 4750 1894 4750  Q 2613 4750 3031 4423  Q 3450 4097 3450 3541  Q 3450 3153 3228 2886  Q 3006 2619 2597 2516  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-30" d="M 2034 4250  Q 1547 4250 1301 3770  Q 1056 3291 1056 2328  Q 1056 1369 1301 889  Q 1547 409 2034 409  Q 2525 409 2770 889  Q 3016 1369 3016 2328  Q 3016 3291 2770 3770  Q 2525 4250 2034 4250  z M 2034 4750  Q 2819 4750 3233 4129  Q 3647 3509 3647 2328  Q 3647 1150 3233 529  Q 2819 -91 2034 -91  Q 1250 -91 836 529  Q 422 1150 422 2328  Q 422 3509 836 4129  Q 1250 4750 2034 4750  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-2e" d="M 684 794  L 1344 794  L 1344 0  L 684 0  L 684 794  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-38" d="M 2034 2216  Q 1584 2216 1326 1975  Q 1069 1734 1069 1313  Q 1069 891 1326 650  Q 1584 409 2034 409  Q 2484 409 2743 651  Q 3003 894 3003 1313  Q 3003 1734 2745 1975  Q 2488 2216 2034 2216  z M 1403 2484  Q 997 2584 770 2862  Q 544 3141 544 3541  Q 544 4100 942 4425  Q 1341 4750 2034 4750  Q 2731 4750 3128 4425  Q 3525 4100 3525 3541  Q 3525 3141 3298 2862  Q 3072 2584 2669 2484  Q 3125 2378 3379 2068  Q 3634 1759 3634 1313  Q 3634 634 3220 271  Q 2806 -91 2034 -91  Q 1263 -91 848 271  Q 434 634 434 1313  Q 434 1759 690 2068  Q 947 2378 1403 2484  z M 1172 3481  Q 1172 3119 1398 2916  Q 1625 2713 2034 2713  Q 2441 2713 2670 2916  Q 2900 3119 2900 3481  Q 2900 3844 2670 4047  Q 2441 4250 2034 4250  Q 1625 4250 1398 4047  Q 1172 3844 1172 3481  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-25" d="M 4653 2053  Q 4381 2053 4226 1822  Q 4072 1591 4072 1178  Q 4072 772 4226 539  Q 4381 306 4653 306  Q 4919 306 5073 539  Q 5228 772 5228 1178  Q 5228 1588 5073 1820  Q 4919 2053 4653 2053  z M 4653 2450  Q 5147 2450 5437 2106  Q 5728 1763 5728 1178  Q 5728 594 5436 251  Q 5144 -91 4653 -91  Q 4153 -91 3862 251  Q 3572 594 3572 1178  Q 3572 1766 3864 2108  Q 4156 2450 4653 2450  z M 1428 4353  Q 1159 4353 1004 4120  Q 850 3888 850 3481  Q 850 3069 1003 2837  Q 1156 2606 1428 2606  Q 1700 2606 1854 2837  Q 2009 3069 2009 3481  Q 2009 3884 1853 4118  Q 1697 4353 1428 4353  z M 4250 4750  L 4750 4750  L 1831 -91  L 1331 -91  L 4250 4750  z M 1428 4750  Q 1922 4750 2215 4408  Q 2509 4066 2509 3481  Q 2509 2891 2217 2550  Q 1925 2209 1428 2209  Q 931 2209 642 2551  Q 353 2894 353 3481  Q 353 4063 643 4406  Q 934 4750 1428 4750  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-33"/>
+        <use xlink:href="#DejaVuSans-30" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-33" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-38" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_4">
+       <!-- 69.62% -->
+       <g transform="translate(102.864063 28.958438) scale(0.1 -0.1)">
+        <defs>
+         <path id="DejaVuSans-36" d="M 2113 2584  Q 1688 2584 1439 2293  Q 1191 2003 1191 1497  Q 1191 994 1439 701  Q 1688 409 2113 409  Q 2538 409 2786 701  Q 3034 994 3034 1497  Q 3034 2003 2786 2293  Q 2538 2584 2113 2584  z M 3366 4563  L 3366 3988  Q 3128 4100 2886 4159  Q 2644 4219 2406 4219  Q 1781 4219 1451 3797  Q 1122 3375 1075 2522  Q 1259 2794 1537 2939  Q 1816 3084 2150 3084  Q 2853 3084 3261 2657  Q 3669 2231 3669 1497  Q 3669 778 3244 343  Q 2819 -91 2113 -91  Q 1303 -91 875 529  Q 447 1150 447 2328  Q 447 3434 972 4092  Q 1497 4750 2381 4750  Q 2619 4750 2861 4703  Q 3103 4656 3366 4563  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-39" d="M 703 97  L 703 672  Q 941 559 1184 500  Q 1428 441 1663 441  Q 2288 441 2617 861  Q 2947 1281 2994 2138  Q 2813 1869 2534 1725  Q 2256 1581 1919 1581  Q 1219 1581 811 2004  Q 403 2428 403 3163  Q 403 3881 828 4315  Q 1253 4750 1959 4750  Q 2769 4750 3195 4129  Q 3622 3509 3622 2328  Q 3622 1225 3098 567  Q 2575 -91 1691 -91  Q 1453 -91 1209 -44  Q 966 3 703 97  z M 1959 2075  Q 2384 2075 2632 2365  Q 2881 2656 2881 3163  Q 2881 3666 2632 3958  Q 2384 4250 1959 4250  Q 1534 4250 1286 3958  Q 1038 3666 1038 3163  Q 1038 2656 1286 2365  Q 1534 2075 1959 2075  z " transform="scale(0.015625)"/>
+         <path id="DejaVuSans-32" d="M 1228 531  L 3431 531  L 3431 0  L 469 0  L 469 531  Q 828 903 1448 1529  Q 2069 2156 2228 2338  Q 2531 2678 2651 2914  Q 2772 3150 2772 3378  Q 2772 3750 2511 3984  Q 2250 4219 1831 4219  Q 1534 4219 1204 4116  Q 875 4013 500 3803  L 500 4441  Q 881 4594 1212 4672  Q 1544 4750 1819 4750  Q 2544 4750 2975 4387  Q 3406 4025 3406 3419  Q 3406 3131 3298 2873  Q 3191 2616 2906 2266  Q 2828 2175 2409 1742  Q 1991 1309 1228 531  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-36"/>
+        <use xlink:href="#DejaVuSans-39" x="63.623047"/>
+        <use xlink:href="#DejaVuSans-2e" x="127.246094"/>
+        <use xlink:href="#DejaVuSans-36" x="159.033203"/>
+        <use xlink:href="#DejaVuSans-32" x="222.65625"/>
+        <use xlink:href="#DejaVuSans-25" x="286.279297"/>
+       </g>
+      </g>
+      <g id="text_5">
+       <!-- O2 -->
+       <g transform="translate(76.653125 12.718125) scale(0.12 -0.12)">
+        <defs>
+         <path id="DejaVuSans-4f" d="M 2522 4238  Q 1834 4238 1429 3725  Q 1025 3213 1025 2328  Q 1025 1447 1429 934  Q 1834 422 2522 422  Q 3209 422 3611 934  Q 4013 1447 4013 2328  Q 4013 3213 3611 3725  Q 3209 4238 2522 4238  z M 2522 4750  Q 3503 4750 4090 4092  Q 4678 3434 4678 2328  Q 4678 1225 4090 567  Q 3503 -91 2522 -91  Q 1538 -91 948 565  Q 359 1222 359 2328  Q 359 3434 948 4092  Q 1538 4750 2522 4750  z " transform="scale(0.015625)"/>
+        </defs>
+        <use xlink:href="#DejaVuSans-4f"/>
+        <use xlink:href="#DejaVuSans-32" x="78.710938"/>
+       </g>
+      </g>
+     </g>
+    </g>
+    <defs>
+     <clipPath id="p0792c8cec3">
+      <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
+     </clipPath>
+    </defs>
+   </svg>
+
+   </g>
+   <!-- L&#45;&gt;O2 -->
+   <g id="edge2" class="edge">
+   <title>L-&gt;O2</title>
+   <g id="a_edge2"><a xlink:title="2 → 4">
+   <path fill="none" stroke="#4a4a4a" d="M136.15,-100.63C143.31,-92.13 151.74,-82.12 159.47,-72.94"/>
+   <polygon fill="#4a4a4a" stroke="#4a4a4a" points="162.26,-75.06 166.02,-65.16 156.91,-70.55 162.26,-75.06"/>
+   </a>
+   </g>
+   </g>
+   </g>
+   </svg>
+   #+end_export
+   Notes :
+   - La fonction =getInference= gère l'initialisation du moteur d'inférence. Il n'est donc pas
+     nécessaire de créer un moteur d'inférence si vous souhaitez uniquement utiliser
+     =getInference=.
+   - N'hésitez pas à consulter l'[[https://pyagrum.readthedocs.io/en/1.7.1/lib.notebook.html#pyAgrum.lib.notebook.getInference][aide de la fonction =getInference=]] afin d'appréhender ces
+     différentes fonctionnalités.
+
+1. La seconde question consiste à calculer la probabilité de l'état de la batterie d'Hector sachant que l'observateur $O_{1}$ a observé un lâché de balle. Il s'agit autrement dit de
+   calculer la loi conditionnelle $P(B|O_{1}=\text{oui})$. Il faut donc conditionner le moteur
+   d'inférence avec l'information
+   $O_{1}=\text{oui}$ grâce à la méthode =.setEvidence=, puis refaire les calculs :
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+bn_ie.setEvidence({"O1":"oui"})
+bn_ie.makeInference()
+P_B_sachant_O1_oui = bn_ie.posterior("B")
+gnb.getPotential(P_B_sachant_O1_oui)
+   #+END_SRC
+   *Attention :* : La loi précédente correspond bien à $P(B|O_{1}=\text{oui})$ et non à $P(B|O_{1})$.
+   
+   #+RESULTS:
+   #+begin_export html
+   <table style="border:1px solid black;">
+   <tr style='border:1px solid black;color:black;background-color:#808080'>
+         <th colspan='2'><center>B</center></th></tr>
+   <tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+         <center>non</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+         <center>oui</center></th></tr>
+   <tr><td style='color:black;background-color:#c5b864;text-align:right;'>0.4516</td><td style='color:black;background-color:#b8c564;text-align:right;'>0.5484</td></tr>
+   </table>
+   #+end_export
+
+   Alternativement, on peut directement utiliser la méthode =getInference= en précisant le
+   conditionnement à appliquer /via/ l'argument =evs=. 
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+gnb.getInference(bn, evs={"O1":"oui"})
+   #+END_SRC
+
+2. La dernière question consiste à calculer la probabilité de l'état de la batterie d'Hector sachant
+   que l'observateur $O_{1}$ a observé un lâché de balle mais que l'observateur $O_{2}$ n'a rien vu
+   d'anormal. Il s'agit donc de
+   calculer la loi conditionnelle $P(B|O_{1}=\text{oui}, O_{2}=\text{non})$. Calculez cette loi avec
+   les deux méthodes précédentes. Pour le calcul avec =makeInference=, supprimer auparavant les
+   éventuels conditionnements précédents avec la méthode =.eraseAllEvidence= :
+   #+BEGIN_SRC python :session :results value :tangle hector.py :exports code
+bn_ie.eraseAllEvidence()
+   #+END_SRC
+
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+# SOLUTION
+# --------
+bn_ie.eraseAllEvidence()
+bn_ie.setEvidence({"O1":"oui", "O2":"non"})
+bn_ie.makeInference()
+P_B_sachant_O1_oui_O2_non = bn_ie.posterior("B")
+gnb.getPotential(P_B_sachant_O1_oui_O2_non)
+    #+END_SRC
+
+    #+RESULTS:
+    #+begin_export html
+    <table style="border:1px solid black;">
+    <tr style='border:1px solid black;color:black;background-color:#808080'>
+          <th colspan='2'><center>B</center></th></tr>
+    <tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+          <center>non</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+          <center>oui</center></th></tr>
+    <tr><td style='color:black;background-color:#f08d64;text-align:right;'>0.1130</td><td style='color:black;background-color:#8df064;text-align:right;'>0.8870</td></tr>
+    </table>
+    #+end_export
+
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+# SOLUTION
+# --------
+gnb.getInference(bn, evs={"O1":"oui", "O2":"non"})
+    #+END_SRC
+   
+   
+** Utilisation du logiciel =GeNIe=
+
+L'objectif est à présent de refaire le travail précédent mais cette fois-ci à partir du logiciel =GeNIe=.
+
+Rappelons que =GeNIe= est une interface graphique permettant de construire des RB. Pour télécharger
+cet outil, il faut se rendre sur le site de [[http://www.bayesfusion.com/#!downloads/rxu9q][BayesFusion, LLC]] et cliquer sur le 
+lien associé à la version académique.
+
+Pour les utilisateurs de =Linux=, =GeNIe= fonctionne bien sous =Wine=.
+
+** Interropérabilité entre =pyAgrum= et =GeNIe=                    :noexport:
+
+NE MARCHE PAS POUR L'INSTANT : DATE : 05/2023
+
+Le logiciel =GeNIe= sauvegarde les RB sous le format =xdsl= (qui est en fait du =XML=). Or,
+=pyAgrum= est capable de lire et d'écrire les RB dans ce format grâce à la fonction =gum.loadXDSL=
+et à la méthode =.saveXDSL=. 
+
+#+BEGIN_SRC python :session :results silent :tangle hector.py :exports code :eval no
+bn.saveXDSL("hector_bis.xdsl")
+#+END_SRC
+
+#+BEGIN_SRC python :session :results silent :tangle hector.py :exports code :eval no
+bn_bis = bn.loadXDSL("ex_hector.xdsl")
+#+END_SRC
