@@ -256,7 +256,7 @@ On suppose que la fiabilité des observateurs $O_{1}$ et $O_{2}$ est de respecti
 $70\%$ et $90\%$.
 
 L'objectif est de répondre aux trois questions suivantes en utilisant la librairie =PyAgrum=, puis
-le logiciel =GeNUe=.
+le logiciel =GeNIe=.
 
 1. Calculer la probabilité a priori de chacun des noeuds du réseau.
 2. $O_{1}$ observe que Hector a lâché une balle. Quelle est la probabilité que la batterie soit

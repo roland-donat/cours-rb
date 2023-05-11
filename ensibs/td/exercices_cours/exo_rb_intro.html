@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-04-30 dim. 00:46 -->
+<!-- 2023-05-11 jeu. 11:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rappels de probabilité et introduction aux réseaux bayésiens</title>
@@ -45,17 +45,29 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4bf31e5">Questions de cours</a></li>
-<li><a href="#org5d1c694">Exercice 1</a></li>
-<li><a href="#orgc9e3195">Exercice 2</a></li>
+<li><a href="#orge57ac0b">Questions de cours</a>
+<ul>
+<li><a href="#org9ef7947">Correction</a></li>
+</ul>
+</li>
+<li><a href="#org26bd2d7">Exercice 1</a>
+<ul>
+<li><a href="#orge670221">Correction</a></li>
+</ul>
+</li>
+<li><a href="#org85f195c">Exercice 2</a>
+<ul>
+<li><a href="#orgc8cdec8">Correction</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org4bf31e5" class="outline-2">
-<h2 id="org4bf31e5">Questions de cours</h2>
-<div class="outline-text-2" id="text-org4bf31e5">
+<div id="outline-container-orge57ac0b" class="outline-2">
+<h2 id="orge57ac0b">Questions de cours</h2>
+<div class="outline-text-2" id="text-orge57ac0b">
 <ol class="org-ol">
 <li><p>
 Soit \(X_{1}, \ldots, X_{n}\) une suite de variables aléatoires (v.a.). En supposant que la loi
@@ -73,19 +85,80 @@ la relation \(P(X_{1},\ldots,X_{n}) = P(X_{1}) \prod_{i=2}^{n} P(X_{i}|X_{i-1})\
 indépendantes.</li>
 </ol>
 </div>
+
+<div id="outline-container-org9ef7947" class="outline-3">
+<h3 id="org9ef7947">Correction</h3>
+<div class="outline-text-3" id="text-org9ef7947">
+<ol class="org-ol">
+<li><p>
+Oui. D'après les relations de dépendance décrivant le RB, la variable \(X_{1}\) n'a pas de variable
+parente, sa loi est donc déterminée par \(P(X_{1})\). Chaque variable \(X_{i}\), \(i \ge 2\), est
+caractérisée par la loi conditionnelle \(P(X_{i}|X_{i-1})\). Sous ces hypothèses de dépendance, la
+factorisation de la loi jointe des variables \(X_{1}, \ldots, X_{n}\) s'écrit :
+</p>
+\begin{equation*}
+P(X_{1},\ldots,X_{n}) = P(X_{1}) \times P(X_{2}|X_{1}) \times \cdots \times P(X_{n}|X_{n-1}).
+\end{equation*}
+<p>
+Il est à noter que ce réseau bayésien permet de représenter une chaîne de Markov.
+</p></li>
+<li>Oui, plus les variables sont connectées entre elles, plus les lois conditionnelles des variables
+dans le RB nécessiteront un grand nombre de paramètres à définir, et donc des complexités
+spatiales importantes.</li>
+<li><p>
+Dans ce RB, la factorisation de la loi jointe des variables \(X, Y, Z\) s'écrit :
+</p>
+\begin{equation*}
+P(X, Y, Z) = P(X) \times P(Y|X,Z) \times P(Z).
+\end{equation*}
+<p>
+Les v.a. \(X\) et \(Z\) sont indépendantes si et seulement si \(P(X,Z) = P(X) \times P(Z)\).
+En éliminant la variable Y par marginalisation sur les v.a. \(X\) et \(Z\) (i.e. en sommant sur la
+v.a. \(Y\), on a :
+</p>
+\begin{equation*}
+P(X, Z) = \sum_{Y} P(X, Y, Z).
+\end{equation*}
+<p>
+En utilisant la factorisation de la loi jointe dans ce RB, nous obtenons :
+</p>
+\begin{equation*}
+P(X, Z) = \sum_{Y} P(X) \times P(Y|X,Z) \times P(Z).
+\end{equation*}
+<p>
+Par distributivité de l'addition sur la multiplication, nous avons :
+</p>
+\begin{equation*}
+P(X, Z) = P(X) \times P(Z) \times \sum_{Y} P(Y|X,Z).
+\end{equation*}
+<p>
+Or, par définition d'une loi de probabilité conditionnelle \(\sum_{y} P(Y=y|X=x,Z=z) = 1\), pour toutes
+valeurs \(x\) et \(z\). Le terme
+\(\sum_{Y} P(Y|X,Z)\) disparaît donc dans le produit précédent et nous obtenons le résultat
+attendu :
+</p>
+\begin{equation*}
+P(X, Z) = P(X) \times P(Z).
+\end{equation*}
+<p>
+Sous les hypothèses du RB \(X \rightarrow Y \leftarrow Z\), \(X\) et \(Z\) sont indépendantes.
+</p></li>
+</ol>
+</div>
+</div>
 </div>
 
 
-<div id="outline-container-org5d1c694" class="outline-2">
-<h2 id="org5d1c694">Exercice 1</h2>
-<div class="outline-text-2" id="text-org5d1c694">
+<div id="outline-container-org26bd2d7" class="outline-2">
+<h2 id="org26bd2d7">Exercice 1</h2>
+<div class="outline-text-2" id="text-org26bd2d7">
 <p>
 Dans cet exercice, nous utiliserons la représentation graphique du réseau  bayésien (RB) présentée
-en Figure <a href="#orgb14e113">1</a>
+en Figure <a href="#org09d8c8f">1</a>
 </p>
 
 
-<div id="orgb14e113" class="figure">
+<div id="org09d8c8f" class="figure">
 <p><img src="./rb_3_var.png" alt="rb_3_var.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Graphe d'un RB à trois variables.</p>
@@ -198,18 +271,164 @@ Les lois de probabilité conditionnelles (LPC) de ce RB sont les suivantes :
 <li>Que peut-on dire sur la relation d'indépendance \(X \perp\!\!\!\perp Z \mid Y\) ?</li>
 </ol>
 </div>
+
+<div id="outline-container-orge670221" class="outline-3">
+<h3 id="orge670221">Correction</h3>
+<div class="outline-text-3" id="text-orge670221">
+<ol class="org-ol">
+<li><p>
+La loi jointe des v.a. \(X, Y, Z\) dans le RB de la Figure <a href="#org09d8c8f">1</a> est :
+</p>
+\begin{equation*}
+P(X, Y, Z) = P(X) P(Y|X) P(Z|Y).
+\end{equation*}</li>
+
+<li><p>
+Calculer les paramètres de la loi jointe consiste à calculer les probabilités \(P(X = x, Y = y, Z
+   = z)\) pour tous \(x \in \{x_{1}, x_{2}\}\), \(y \in \{y_{1}, y_{2}\}\), \(z \in \{z_{1},
+   z_{2}\}\). Dans ce cas, la loi jointe est caractérisée par huit probabilités et peut se mettre
+sous la forme de la table suivante :
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">\(X\)</th>
+<th scope="col" class="org-left">\(Y\)</th>
+<th scope="col" class="org-left">\(Z\)</th>
+<th scope="col" class="org-left">\(P(X, Y, Z)\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">\(x_{1}\)</td>
+<td class="org-left">\(y_{1}\)</td>
+<td class="org-left">\(z_{1}\)</td>
+<td class="org-left">\(P(X = x_{1}) \times P(Y=y_{1} \vert X=x_{1}) \times P(Z=z_{1} \vert   Y=y_{1})  = 1/2 \times 2/3 \times 0 = 0\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(x_{2}\)</td>
+<td class="org-left">\(y_{1}\)</td>
+<td class="org-left">\(z_{1}\)</td>
+<td class="org-left">\(P(X = x_{2}) \times P(Y=y_{1} \vert X=x_{1}) \times P(Z=z_{1} \vert   Y=y_{1})  = 1/2 \times 2/3 \times 0 = 0\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(x_{1}\)</td>
+<td class="org-left">\(y_{2}\)</td>
+<td class="org-left">\(z_{1}\)</td>
+<td class="org-left">\(P(X = x_{1}) \times P(Y=y_{2} \vert X=x_{1}) \times P(Z=z_{1} \vert   Y=y_{2})  = 1/2 \times 1/3 \times 1/2 = 1/12\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(x_{2}\)</td>
+<td class="org-left">\(y_{2}\)</td>
+<td class="org-left">\(z_{1}\)</td>
+<td class="org-left">\(1/2 \times 1/5 \times 1/2 = 1/20\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(x_{1}\)</td>
+<td class="org-left">\(y_{1}\)</td>
+<td class="org-left">\(z_{2}\)</td>
+<td class="org-left">\(1/2 \times 2/3 \times 1 = 1/3\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(x_{2}\)</td>
+<td class="org-left">\(y_{1}\)</td>
+<td class="org-left">\(z_{2}\)</td>
+<td class="org-left">\(1/2 \times 4/5 \times 1 = 2/5\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(x_{1}\)</td>
+<td class="org-left">\(y_{2}\)</td>
+<td class="org-left">\(z_{2}\)</td>
+<td class="org-left">\(1/2 \times 1/3 \times 1/2 = 1/12\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(x_{2}\)</td>
+<td class="org-left">\(y_{2}\)</td>
+<td class="org-left">\(z_{2}\)</td>
+<td class="org-left">\(1/2 \times 1/5 \times 1/2 = 1/20\)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Sans surprise, nous avons bien une loi de probabilité puisque :
+</p>
+\begin{equation*}
+\sum_{x \in \{x_{1}, x_{2}\}, y \in \{y_{1}, y_{2}\}, z \in \{z_{1}, z_{2}\}} P(X=x, Y=y, Z=z) = 1,
+\end{equation*}
+<p>
+avec \(P(X=x, Y=y, Z=z) \in [0,1]\), pour tous \(x \in \{x_{1}, x_{2}\}\), \(y \in \{y_{1}, y_{2}\}\), \(z \in \{z_{1},
+   z_{2}\}\).
+</p></li>
+
+<li><p>
+Dans ce RB, la factorisation de la loi jointe des variables \(X, Y, Z\) s'écrit :
+</p>
+\begin{equation*}
+P(X, Y, Z) = P(X) \times P(Y|X) \times P(Z|Y).
+\end{equation*}
+<p>
+Les v.a. \(X\) et \(Z\) sont indépendantes conditionnellement à \(Y\) si et seulement si \(P(X,Z|Y) = P(X|Y) \times P(Z|Y)\).
+Par définition, 
+</p>
+\begin{equation*}
+P(X, Z | Y) = \frac{P(X, Y, Z)}{P(Y)}.
+\end{equation*}
+<p>
+En utilisant la factorisation de la loi jointe dans ce RB, nous obtenons :
+</p>
+\begin{equation*}
+P(X, Z | Y) = P(X) \times P(Y|X) \times P(Z|Y) \times \frac{1}{P(Y)}
+\end{equation*}
+<p>
+En remarquant que \(P(X) \times P(Y|X) = P(X,Y)\) par définition, il vient :
+</p>
+\begin{equation*}
+P(X, Z | Y) = \frac{P(X, Y)}{P(Y)} \times P(Z|Y)
+\end{equation*}
+<p>
+D'où \(P(X,Z|Y) = P(X|Y) \times P(Z|Y)\) et donc \(X \perp\!\!\!\perp Z \mid Y\).
+</p></li>
+</ol>
+</div>
+</div>
 </div>
 
-<div id="outline-container-orgc9e3195" class="outline-2">
-<h2 id="orgc9e3195">Exercice 2</h2>
-<div class="outline-text-2" id="text-orgc9e3195">
+<div id="outline-container-org85f195c" class="outline-2">
+<h2 id="org85f195c">Exercice 2</h2>
+<div class="outline-text-2" id="text-org85f195c">
 <p>
 Dans cet exercice, nous utiliserons la représentation graphique du RB présentée en Figure
-<a href="#orgb37081b">2</a>. Toutes les v.a. du modèle sont supposées binaires. 
+<a href="#org203768d">2</a>. Toutes les v.a. du modèle sont supposées binaires. 
 </p>
 
 
-<div id="orgb37081b" class="figure">
+<div id="org203768d" class="figure">
 <p><img src="./rb_4_var.png" alt="rb_4_var.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;2&nbsp;: </span>Graphe d'un RB à quatre variables.</p>
@@ -228,6 +447,63 @@ définition de la loi jointe factorisée dans le RB et de la loi jointe naturell
 <li>\(X_{2} \perp\!\!\!\perp X_{3} \mid X_{1}, X_{4}\).</li>
 </ul></li>
 </ol>
+</div>
+
+<div id="outline-container-orgc8cdec8" class="outline-3">
+<h3 id="orgc8cdec8">Correction</h3>
+<div class="outline-text-3" id="text-orgc8cdec8">
+<ol class="org-ol">
+<li><p>
+La loi jointe des v.a. \(X_{1}, X_{2}, X_{3}, X_{4}\) dans le RB de la Figure <a href="#org203768d">2</a> est :
+</p>
+\begin{equation*}
+P(X_{1}, X_{2}, X_{3}, X_{4}) = P(X_{1}) P(X_{2}|X_{1}) P(X_{3}|X_{1}) P(X_{4}|X_{2},X_{3}).
+\end{equation*}</li>
+<li><p>
+La complexité spatiale du RB correspond à la somme des complexités spatiales des LPC de chaque
+variable :
+</p>
+\begin{equation*}
+CS(RB) = CS(P(X_{1})) + CS(P(X_{2}|X_{1})) + CS(P(X_{3}|X_{1})) + CS(P(X_{4}|X_{2}, X_{3}))
+\end{equation*}
+<p>
+Les v.a. \(X_{1}, X_{2}, X_{3}, X_{4}\) étant binaires, nous obtenons :
+</p>
+<ul class="org-ul">
+<li>\(CS(P(X_{1})) = 2\) ;</li>
+<li>\(CS(P(X_{2}|X_{1})) = 4\) ;</li>
+<li>\(CS(P(X_{3}|X_{1})) = 4\) ;</li>
+<li>\(CS(P(X_{4}|X_{2}, X_{3})) = 8\).</li>
+</ul>
+<p>
+D'où \(CS(RB) = 18\).
+</p></li>
+<li>La complexité spatiale de la loi jointe non factorisée (ou loi jointe naturelle) des v.a. \(X_{1},
+   X_{2}, X_{3}, X_{4}\) est \(CS(LJN) = 2^{4} = 16\)</li>
+<li><p>
+Dans le cas du RB, la complexité probabiliste,notée CP correspondant au nombre de paramètres probabilistes
+nécessaires pour définir le modèle, est :
+</p>
+<ul class="org-ul">
+<li>\(CP(P(X_{1})) = 1\) ;</li>
+<li>\(CP(P(X_{2}|X_{1})) = 2\) ;</li>
+<li>\(CP(P(X_{3}|X_{1})) = 2\) ;</li>
+<li>\(CP(P(X_{4}|X_{2}, X_{3})) = 4\).</li>
+</ul>
+<p>
+D'où \(CP(RB) = 9\).
+Pour la loi jointe naturelle des v.a., \(CP(LJN) = 16 - 1 = 15\).
+</p></li>
+<li>La technique générale pour répondre aux questions d'indépendance conditionnelle est la suivante :
+<ul class="org-ul">
+<li>Écrire la définition probabiliste de la relation d'indépendance à vérifier.</li>
+<li>À partir de l'expression de la factorisation de la loi jointe, éliminer les variables qui
+n'interviennent pas dans la relation d'indépendance à vérifier en effectuant une
+marginalisation.</li>
+<li>Diviser par la loi des variables de conditionnement.</li>
+</ul></li>
+</ol>
+</div>
 </div>
 </div>
 </div>
