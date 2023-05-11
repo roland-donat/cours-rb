@@ -270,7 +270,8 @@ le logiciel =GeNIe=.
 Pour utiliser la librairie =Python= =PyAgrum=, il faut dans un premier temps l'installer dans votre
 environnement. Notons que =PyAgrum= fonctionne dans n'importe quel environnement
 =Python=. Toutefois, certaines fonctions de visualisation ne sont disponibles que dans les
-environnements de type /notebook/ (e.g. Jupyter).
+environnements de type /notebook/ (e.g. Jupyter). De plus, ces fonctionnalités de visualisation
+nécessite l'installation de l'outil =graphviz= (sous Linux/Ubuntu, =sudo apt install graphviz=). 
 
 *** Création de la structure du modèle
 
