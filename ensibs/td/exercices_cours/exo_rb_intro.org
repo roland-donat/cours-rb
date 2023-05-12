@@ -498,5 +498,32 @@ Dans cet exercice, nous utiliserons la représentation graphique du RB présent�
      marginalisation. 
    - Diviser par la loi des variables de conditionnement.
 
+   Par exemple, démontrer $X_{1} \perp\!\!\!\perp X_{4} \mid X_{2}, X_{3}$ revient à montrer que
+   $P(X_{1}, X_{4}|X_{2}, X_{3}) = P(X_{1}|X_{2}, X_{3}) P(X_{4}|X_{2}, X_{3})$.
+
+   On part donc de la factorisation du RB :
+   $$
+   P(X_{1}, X_{2}, X_{3}, X_{4}) = P(X_{1}) P(X_{2}|X_{1}) P(X_{3}|X_{1}) P(X_{4}|X_{2},X_{3}).
+   $$
+   On divise par $P(X_{2}, X_{3})$ à gauche et à droite de l'expression précédente :
+   $$
+   \frac{P(X_{1}, X_{2}, X_{3}, X_{4})}{P(X_{2}, X_{3})} = P(X_{1}) P(X_{2}|X_{1}) P(X_{3}|X_{1})
+   P(X_{4}|X_{2},X_{3}) \frac{1}{P(X_{2}, X_{3})}.
+   $$
+   On remarque également :
+   $$
+   \sum_{X_{4}} P(X_{1}, X_{2}, X_{3}, X_{4}) = P(X_{1}) P(X_{2}|X_{1}) P(X_{3}|X_{1}) = P(X_{1}, X_{2}, X_{3})
+   \underbrace{\sum_{X_{4}} P(X_{4}|X_{2},X_{3})}_{\text{vecteur de 1}}
+   $$
+   On obtient donc :
+   $$
+   P(X_{1}, X_{2} | X_{3}, X_{4}) = \frac{P(X_{1}, X_{2}, X_{3})}{P(X_{2}, X_{3})} P(X_{4}|X_{2},X_{3}),
+   $$
+   Puis le résultat :
+   $$
+   P(X_{1}, X_{2} | X_{3}, X_{4}) = P(X_{1} | X_{2}, X_{3}) P(X_{4}|X_{2},X_{3}).
+   $$
+
+
 
 

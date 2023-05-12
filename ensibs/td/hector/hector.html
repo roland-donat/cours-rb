@@ -44,26 +44,26 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4a25686">1. Introduction</a></li>
-<li><a href="#org96487b7">2. Structure du réseau bayésien</a></li>
-<li><a href="#org7a90921">3. Lois de probabilité conditionnelles</a></li>
-<li><a href="#org1ff5162">4. Implémentation et exploitation du modèle</a>
+<li><a href="#org672c66d">1. Introduction</a></li>
+<li><a href="#org90209c2">2. Structure du réseau bayésien</a></li>
+<li><a href="#orgacb8467">3. Lois de probabilité conditionnelles</a></li>
+<li><a href="#org4f1645a">4. Implémentation et exploitation du modèle</a>
 <ul>
-<li><a href="#org4b41212">4.1. Utilisation de la librairie <code>PyAgrum</code></a>
+<li><a href="#org83f9dfa">4.1. Utilisation de la librairie <code>PyAgrum</code></a>
 <ul>
-<li><a href="#orga4b30c1">4.1.1. Création de la structure du modèle</a></li>
-<li><a href="#org22de144">4.1.2. Définition des LPC</a></li>
-<li><a href="#org00b64e2">4.1.3. Inférence</a></li>
+<li><a href="#orgec66cbc">4.1.1. Création de la structure du modèle</a></li>
+<li><a href="#orga042f5f">4.1.2. Définition des LPC</a></li>
+<li><a href="#orga9d53b2">4.1.3. Inférence</a></li>
 </ul>
 </li>
-<li><a href="#orge0f6d07">4.2. Utilisation du logiciel <code>GeNIe</code></a></li>
+<li><a href="#orga1dc4d6">4.2. Utilisation du logiciel <code>GeNIe</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="orgfc42e7f" class="figure">
+<div id="org2160ecb" class="figure">
 <p><img src="./hector.png" alt="hector.png" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
@@ -71,8 +71,8 @@
 
 
 
-<div id="outline-container-org4a25686" class="outline-2">
-<h2 id="org4a25686"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-org672c66d" class="outline-2">
+<h2 id="org672c66d"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Hector, le robot jongleur, lâche souvent les balles avec lesquelles il jongle quand sa batterie est
@@ -102,8 +102,8 @@ modéliser les résultats des observateurs en fonction de ce que fait Hector et 
 </div>
 </div>
 
-<div id="outline-container-org96487b7" class="outline-2">
-<h2 id="org96487b7"><span class="section-number-2">2.</span> Structure du réseau bayésien</h2>
+<div id="outline-container-org90209c2" class="outline-2">
+<h2 id="org90209c2"><span class="section-number-2">2.</span> Structure du réseau bayésien</h2>
 <div class="outline-text-2" id="text-2">
 <ol class="org-ol">
 <li>En supposant que toutes les variables soient booléennes, quelles variables allez-vous choisir pour
@@ -117,8 +117,8 @@ clairement la direction des arcs entre les nœuds.</li>
 </div>
 </div>
 
-<div id="outline-container-org7a90921" class="outline-2">
-<h2 id="org7a90921"><span class="section-number-2">3.</span> Lois de probabilité conditionnelles</h2>
+<div id="outline-container-orgacb8467" class="outline-2">
+<h2 id="orgacb8467"><span class="section-number-2">3.</span> Lois de probabilité conditionnelles</h2>
 <div class="outline-text-2" id="text-3">
 <ol class="org-ol">
 <li>À partir des informations disponibles, représenter les LPC correspondant à votre structure. Il
@@ -129,8 +129,8 @@ représentée naïvement (i.e. sans RB).</li>
 </div>
 </div>
 
-<div id="outline-container-org1ff5162" class="outline-2">
-<h2 id="org1ff5162"><span class="section-number-2">4.</span> Implémentation et exploitation du modèle</h2>
+<div id="outline-container-org4f1645a" class="outline-2">
+<h2 id="org4f1645a"><span class="section-number-2">4.</span> Implémentation et exploitation du modèle</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 On suppose que la fiabilité des observateurs \(O_{1}\) et \(O_{2}\) est de respectivement
@@ -152,8 +152,8 @@ Comparer aux résultats précédents.</li>
 </ol>
 </div>
 
-<div id="outline-container-org4b41212" class="outline-3">
-<h3 id="org4b41212"><span class="section-number-3">4.1.</span> Utilisation de la librairie <code>PyAgrum</code></h3>
+<div id="outline-container-org83f9dfa" class="outline-3">
+<h3 id="org83f9dfa"><span class="section-number-3">4.1.</span> Utilisation de la librairie <code>PyAgrum</code></h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Pour utiliser la librairie <code>Python</code> <code>PyAgrum</code>, il faut dans un premier temps l'installer dans votre
@@ -164,8 +164,8 @@ nécessite l'installation de l'outil <code>graphviz</code> (sous Linux/Ubuntu, <
 </p>
 </div>
 
-<div id="outline-container-orga4b30c1" class="outline-4">
-<h4 id="orga4b30c1"><span class="section-number-4">4.1.1.</span> Création de la structure du modèle</h4>
+<div id="outline-container-orgec66cbc" class="outline-4">
+<h4 id="orgec66cbc"><span class="section-number-4">4.1.1.</span> Création de la structure du modèle</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <ol class="org-ol">
 <li><p>
@@ -294,16 +294,16 @@ BN{nodes: 5, arcs: 0, domainSize: 32, dim: 5, mem: 80o}
 <p>
 Si vous utilisez un <i>notebook</i> ou un éditeur de code supportant le HTML, il est possible de
 visualiser graphiquement vos RB en utilisant le package 
-<code>pyAgrum.lib.notebook</code> fourni avec <code>PyAgrum</code>. Ce package apporte en particulier la fonction
-<code>getBN</code> :
+<code>pyAgrum.lib.notebook</code> fourni avec <code>PyAgrum</code>. Une fois ce package importé, l'exécution d'un bloc
+de code s'achevant par un objet <code>BayesNet</code> affichera le graphe du RB correspondant.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pyAgrum.lib.notebook <span style="color: #F0DFAF; font-weight: bold;">as</span> gnb <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Fonctions de visualisation pour notebook </span>
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Fonctions de visualisation pour notebook </span>
+<span style="color: #F0DFAF; font-weight: bold;">import</span> pyAgrum.lib.notebook <span style="color: #F0DFAF; font-weight: bold;">as</span> gnb 
 
-gnb.getBN(bn)
+bn
 </pre>
 </div>
-
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="350pt" height="44pt" viewBox="0.00 0.00 350.00 44.00">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 40)">
 <title>G</title>
@@ -358,6 +358,12 @@ gnb.getBN(bn)
 <p>
 On observe que notre RB possède bien 5 variables mais aucune relation de dépendance pour
 l'instant.
+</p>
+
+<p>
+<b>Note :</b> le package <code>pyAgrum.lib.notebook</code> apporte également plusieurs fonctions de
+visualisation, notamment la fonction <code>getBN</code> qui permet de générer le code SVG du graphe d'un
+objet <code>BayesNet</code>.
 </p></li>
 
 <li><p>
@@ -367,10 +373,9 @@ créer un arc allant de la variable \(C\) à la variable \(B\), on écrit :
 </p>
 <div class="org-src-container">
 <pre class="src src-python">bn.addArc(<span style="color: #CC9393;">"C"</span>, <span style="color: #CC9393;">"B"</span>)
-gnb.getBN(bn)
+bn
 </pre>
 </div>
-
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="278pt" height="116pt" viewBox="0.00 0.00 278.00 116.00">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
 <title>G</title>
@@ -435,8 +440,8 @@ gnb.getBN(bn)
 </ol>
 </div>
 </div>
-<div id="outline-container-org22de144" class="outline-4">
-<h4 id="org22de144"><span class="section-number-4">4.1.2.</span> Définition des LPC</h4>
+<div id="outline-container-orga042f5f" class="outline-4">
+<h4 id="orga042f5f"><span class="section-number-4">4.1.2.</span> Définition des LPC</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <ol class="org-ol">
 <li><p>
@@ -461,14 +466,12 @@ bn.cpt(<span style="color: #CC9393;">"B"</span>)[{<span style="color: #CC9393;">
 
 
 <p>
-La fonction <code>gnb.getPotential</code> permet de vérifier que la saisie des probabilités est correcte en
-visualisant les LPC :
+Vous pouvez vérifier les valeurs renseignées dans la LPC :
 </p>
 <div class="org-src-container">
-<pre class="src src-python">gnb.getPotential(bn.cpt(<span style="color: #CC9393;">"C"</span>))
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"C"</span>)
 </pre>
 </div>
-
 <table style="border:1px solid black;">
 <tr style='border:1px solid black;color:black;background-color:#808080'>
       <th colspan='2'><center>C</center></th></tr>
@@ -479,10 +482,9 @@ visualisant les LPC :
 </table>
 
 <div class="org-src-container">
-<pre class="src src-python">gnb.getPotential(bn.cpt(<span style="color: #CC9393;">"B"</span>))
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"B"</span>)
 </pre>
 </div>
-
 <table style="border:1px solid black;">
 <tr><th colspan='1'></th>
       <th colspan='2' style='border:1px solid black;color:black;background-color:#808080;'><center>B</center>
@@ -498,8 +500,8 @@ visualisant les LPC :
 </ol>
 </div>
 </div>
-<div id="outline-container-org00b64e2" class="outline-4">
-<h4 id="org00b64e2"><span class="section-number-4">4.1.3.</span> Inférence</h4>
+<div id="outline-container-orga9d53b2" class="outline-4">
+<h4 id="orga9d53b2"><span class="section-number-4">4.1.3.</span> Inférence</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <ol class="org-ol">
 <li><p>
@@ -526,11 +528,7 @@ Il faut ensuite lancer les calculs de probabilité dans le RB avec la méthode <
 <div class="org-src-container">
 <pre class="src src-python">bn_ie.makeInference()
 </pre>
-</div>
-
-<pre class="example">
-None
-</pre></li>
+</div></li>
 
 <li><p>
 La loi de chaque variable est alors accessible <i>via</i> la méthode <code>.posterior</code>. Par exemple, pour
@@ -538,10 +536,9 @@ la variable \(O_{1}\) :
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #DFAF8F;">P_O1</span> = bn_ie.posterior(<span style="color: #CC9393;">"O1"</span>)
-gnb.getPotential(P_O1)
+P_O1
 </pre>
 </div>
-
 <table style="border:1px solid black;">
 <tr style='border:1px solid black;color:black;background-color:#808080'>
       <th colspan='2'><center>O1</center></th></tr>
@@ -557,14 +554,13 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
 <code>gnb.getInference</code> :
 </p>
 <div class="org-src-container">
-<pre class="src src-python">gnb.getInference(bn)
+<pre class="src src-python">gnb.showInference(bn)
 </pre>
 </div>
-
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="246pt" height="307pt" viewBox="0.00 0.00 246.00 307.00">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 303)">
 <title>structs</title>
-<text text-anchor="middle" x="119" y="-7.8" font-family="Times,serif" font-size="14.00" fill="#4a4a4a">Inference in   0.54ms</text>
+<text text-anchor="middle" x="119" y="-7.8" font-family="Times,serif" font-size="14.00" fill="#4a4a4a">Inference in   0.29ms</text>
 <!-- C -->
 <g id="node1" class="node">
 <title>C</title>
@@ -573,7 +569,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:35.579982</dc:date>
+    <dc:date>2023-05-12T22:40:12.927633</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -595,42 +591,42 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 85.19375 46.438125  L 85.19375 34.118125  L 29.39375 34.118125  z " clip-path="url(#p2ba4d8017b)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 85.19375 46.438125  L 85.19375 34.118125  L 29.39375 34.118125  z " clip-path="url(#p6a5a170602)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 85.19375 31.038125  L 85.19375 18.718125  L 29.39375 18.718125  z " clip-path="url(#p2ba4d8017b)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 85.19375 31.038125  L 85.19375 18.718125  L 29.39375 18.718125  z " clip-path="url(#p6a5a170602)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p2ba4d8017b)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p6a5a170602)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="m7b975c4b75" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m6781c4b80c" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m7b975c4b75" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m6781c4b80c" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p2ba4d8017b)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p6a5a170602)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m7b975c4b75" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m6781c4b80c" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p2ba4d8017b)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p6a5a170602)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m7b975c4b75" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m6781c4b80c" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -639,10 +635,10 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="m6d21e95ff5" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m68a2f7e9d5" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m6d21e95ff5" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m68a2f7e9d5" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -662,7 +658,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#m6d21e95ff5" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m68a2f7e9d5" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -730,7 +726,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   </g>
  </g>
  <defs>
-  <clipPath id="p2ba4d8017b">
+  <clipPath id="p6a5a170602">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -745,7 +741,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:35.621418</dc:date>
+    <dc:date>2023-05-12T22:40:12.971251</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -767,42 +763,42 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 110.30375 46.438125  L 110.30375 34.118125  L 29.39375 34.118125  z " clip-path="url(#pf97ada081b)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 110.30375 46.438125  L 110.30375 34.118125  L 29.39375 34.118125  z " clip-path="url(#p18437cd2ec)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 60.08375 31.038125  L 60.08375 18.718125  L 29.39375 18.718125  z " clip-path="url(#pf97ada081b)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 60.08375 31.038125  L 60.08375 18.718125  L 29.39375 18.718125  z " clip-path="url(#p18437cd2ec)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#pf97ada081b)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p18437cd2ec)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="mdac5ac0ff9" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="mc794ab7302" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mdac5ac0ff9" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mc794ab7302" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#pf97ada081b)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p18437cd2ec)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#mdac5ac0ff9" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mc794ab7302" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#pf97ada081b)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p18437cd2ec)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#mdac5ac0ff9" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mc794ab7302" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -811,10 +807,10 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="m1c179a8b32" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="md33a3df585" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m1c179a8b32" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#md33a3df585" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -834,7 +830,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#m1c179a8b32" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#md33a3df585" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -904,7 +900,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   </g>
  </g>
  <defs>
-  <clipPath id="pf97ada081b">
+  <clipPath id="p18437cd2ec">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -928,7 +924,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:35.662367</dc:date>
+    <dc:date>2023-05-12T22:40:13.013851</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -950,42 +946,42 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 57.82385 46.438125  L 57.82385 34.118125  L 29.39375 34.118125  z " clip-path="url(#pdc606f281d)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 57.82385 46.438125  L 57.82385 34.118125  L 29.39375 34.118125  z " clip-path="url(#paf70741247)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 112.56365 31.038125  L 112.56365 18.718125  L 29.39375 18.718125  z " clip-path="url(#pdc606f281d)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 112.56365 31.038125  L 112.56365 18.718125  L 29.39375 18.718125  z " clip-path="url(#paf70741247)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#pdc606f281d)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#paf70741247)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="m6a4ab4969f" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m35ab0045d5" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m6a4ab4969f" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m35ab0045d5" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#pdc606f281d)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#paf70741247)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m6a4ab4969f" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m35ab0045d5" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#pdc606f281d)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#paf70741247)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m6a4ab4969f" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m35ab0045d5" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -994,10 +990,10 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="mf81b287c3a" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m64473baf7a" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mf81b287c3a" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m64473baf7a" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -1017,7 +1013,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#mf81b287c3a" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m64473baf7a" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -1090,7 +1086,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   </g>
  </g>
  <defs>
-  <clipPath id="pdc606f281d">
+  <clipPath id="paf70741247">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -1114,7 +1110,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:35.702189</dc:date>
+    <dc:date>2023-05-12T22:40:13.059524</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1136,42 +1132,42 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 74.24579 46.438125  L 74.24579 34.118125  L 29.39375 34.118125  z " clip-path="url(#pd4ccfc6192)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 74.24579 46.438125  L 74.24579 34.118125  L 29.39375 34.118125  z " clip-path="url(#p8982eb79c7)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 96.14171 31.038125  L 96.14171 18.718125  L 29.39375 18.718125  z " clip-path="url(#pd4ccfc6192)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 96.14171 31.038125  L 96.14171 18.718125  L 29.39375 18.718125  z " clip-path="url(#p8982eb79c7)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#pd4ccfc6192)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p8982eb79c7)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="mb707d3ac95" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m226420f883" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mb707d3ac95" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m226420f883" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#pd4ccfc6192)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p8982eb79c7)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#mb707d3ac95" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m226420f883" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#pd4ccfc6192)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p8982eb79c7)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#mb707d3ac95" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m226420f883" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -1180,10 +1176,10 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="m95351581aa" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="ma62a8d6d0a" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m95351581aa" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#ma62a8d6d0a" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -1203,7 +1199,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#m95351581aa" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#ma62a8d6d0a" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -1278,7 +1274,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   </g>
  </g>
  <defs>
-  <clipPath id="pd4ccfc6192">
+  <clipPath id="p8982eb79c7">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -1302,7 +1298,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:35.742138</dc:date>
+    <dc:date>2023-05-12T22:40:13.102515</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1324,42 +1320,42 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 63.29783 46.438125  L 63.29783 34.118125  L 29.39375 34.118125  z " clip-path="url(#p526f69d44f)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 63.29783 46.438125  L 63.29783 34.118125  L 29.39375 34.118125  z " clip-path="url(#p68cdf4370d)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 107.08967 31.038125  L 107.08967 18.718125  L 29.39375 18.718125  z " clip-path="url(#p526f69d44f)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 107.08967 31.038125  L 107.08967 18.718125  L 29.39375 18.718125  z " clip-path="url(#p68cdf4370d)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p526f69d44f)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p68cdf4370d)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="m7265b87f81" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="maf771802a8" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m7265b87f81" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#maf771802a8" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p526f69d44f)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p68cdf4370d)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m7265b87f81" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#maf771802a8" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p526f69d44f)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p68cdf4370d)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m7265b87f81" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#maf771802a8" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -1368,10 +1364,10 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="m6fe37c6ecf" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m1b07979d06" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m6fe37c6ecf" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1b07979d06" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -1391,7 +1387,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#m6fe37c6ecf" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1b07979d06" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -1466,7 +1462,7 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
   </g>
  </g>
  <defs>
-  <clipPath id="p526f69d44f">
+  <clipPath id="p68cdf4370d">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -1488,10 +1484,10 @@ Il est possible de visualiser ces lois directement sur la structure du RB grâce
 Notes :
 </p>
 <ul class="org-ul">
-<li>La fonction <code>getInference</code> gère l'initialisation du moteur d'inférence. Il n'est donc pas
+<li>La fonction <code>showInference</code> gère l'initialisation du moteur d'inférence. Il n'est donc pas
 nécessaire de créer un moteur d'inférence si vous souhaitez uniquement utiliser
-<code>getInference</code>.</li>
-<li>N'hésitez pas à consulter l'<a href="https://pyagrum.readthedocs.io/en/1.7.1/lib.notebook.html#pyAgrum.lib.notebook.getInference">aide de la fonction <code>getInference</code></a> afin d'appréhender ces
+<code>showInference</code>.</li>
+<li>N'hésitez pas à consulter l'<a href="https://pyagrum.readthedocs.io/en/1.7.1/lib.notebook.html#pyAgrum.lib.notebook.showInference">aide de la fonction <code>showInference</code></a> afin d'appréhender ces
 différentes fonctionnalités.</li>
 </ul></li>
 
@@ -1505,10 +1501,9 @@ d'inférence avec l'information
 <pre class="src src-python">bn_ie.setEvidence({<span style="color: #CC9393;">"O1"</span>:<span style="color: #CC9393;">"oui"</span>})
 bn_ie.makeInference()
 <span style="color: #DFAF8F;">P_B_sachant_O1_oui</span> = bn_ie.posterior(<span style="color: #CC9393;">"B"</span>)
-gnb.getPotential(P_B_sachant_O1_oui)
+P_B_sachant_O1_oui
 </pre>
 </div>
-
 <table style="border:1px solid black;">
 <tr style='border:1px solid black;color:black;background-color:#808080'>
       <th colspan='2'><center>B</center></th></tr>
@@ -1520,30 +1515,22 @@ gnb.getPotential(P_B_sachant_O1_oui)
 
 <p>
 <b>Attention :</b> : La loi précédente correspond bien à \(P(B|O_{1}=\text{oui})\) et non à \(P(B|O_{1})\).
-</p>
+</p></li>
+</ol>
 
-<table style="border:1px solid black;">
-<tr style='border:1px solid black;color:black;background-color:#808080'>
-      <th colspan='2'><center>B</center></th></tr>
-<tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
-      <center>non</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
-      <center>oui</center></th></tr>
-<tr><td style='color:black;background-color:#c5b864;text-align:right;'>0.4516</td><td style='color:black;background-color:#b8c564;text-align:right;'>0.5484</td></tr>
-</table>
 
 <p>
-Alternativement, on peut directement utiliser la méthode <code>getInference</code> en précisant le
+Alternativement, on peut directement utiliser la méthode <code>showInference</code> en précisant le
 conditionnement à appliquer <i>via</i> l'argument <code>evs</code>. 
 </p>
 <div class="org-src-container">
-<pre class="src src-python">gnb.getInference(bn, evs={<span style="color: #CC9393;">"O1"</span>:<span style="color: #CC9393;">"oui"</span>})
+<pre class="src src-python">gnb.showInference(bn, evs={<span style="color: #CC9393;">"O1"</span>:<span style="color: #CC9393;">"oui"</span>})
 </pre>
 </div>
-
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="246pt" height="307pt" viewBox="0.00 0.00 246.00 307.00">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 303)">
 <title>structs</title>
-<text text-anchor="middle" x="119" y="-7.8" font-family="Times,serif" font-size="14.00" fill="#4a4a4a">Inference in   0.28ms</text>
+<text text-anchor="middle" x="119" y="-7.8" font-family="Times,serif" font-size="14.00" fill="#4a4a4a">Inference in   0.27ms</text>
 <!-- C -->
 <g id="node1" class="node">
 <title>C</title>
@@ -1552,7 +1539,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:36.113250</dc:date>
+    <dc:date>2023-05-12T22:40:13.934729</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1574,42 +1561,42 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 74.072625 46.438125  L 74.072625 34.118125  L 29.39375 34.118125  z " clip-path="url(#p2325ec78c1)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 74.072625 46.438125  L 74.072625 34.118125  L 29.39375 34.118125  z " clip-path="url(#p4032ba6288)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 96.314875 31.038125  L 96.314875 18.718125  L 29.39375 18.718125  z " clip-path="url(#p2325ec78c1)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 96.314875 31.038125  L 96.314875 18.718125  L 29.39375 18.718125  z " clip-path="url(#p4032ba6288)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p2325ec78c1)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p4032ba6288)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="mcd6cbf7760" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="mf73e5059b5" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mcd6cbf7760" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mf73e5059b5" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p2325ec78c1)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p4032ba6288)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#mcd6cbf7760" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mf73e5059b5" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p2325ec78c1)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p4032ba6288)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#mcd6cbf7760" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mf73e5059b5" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -1618,10 +1605,10 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="ma23b8b20c4" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="meeb7fe7cf7" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#ma23b8b20c4" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#meeb7fe7cf7" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -1641,7 +1628,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#ma23b8b20c4" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#meeb7fe7cf7" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -1715,7 +1702,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   </g>
  </g>
  <defs>
-  <clipPath id="p2325ec78c1">
+  <clipPath id="p4032ba6288">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -1730,7 +1717,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:36.153414</dc:date>
+    <dc:date>2023-05-12T22:40:13.975099</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1752,42 +1739,42 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 90.594646 46.438125  L 90.594646 34.118125  L 29.39375 34.118125  z " clip-path="url(#p68c8a783a3)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 90.594646 46.438125  L 90.594646 34.118125  L 29.39375 34.118125  z " clip-path="url(#pd6d20945d3)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 79.792854 31.038125  L 79.792854 18.718125  L 29.39375 18.718125  z " clip-path="url(#p68c8a783a3)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 79.792854 31.038125  L 79.792854 18.718125  L 29.39375 18.718125  z " clip-path="url(#pd6d20945d3)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p68c8a783a3)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#pd6d20945d3)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="mbd128e7b64" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m0d8ba05841" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mbd128e7b64" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m0d8ba05841" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p68c8a783a3)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#pd6d20945d3)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#mbd128e7b64" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m0d8ba05841" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p68c8a783a3)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#pd6d20945d3)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#mbd128e7b64" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m0d8ba05841" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -1796,10 +1783,10 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="mf8e0760cee" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m99cd48e21d" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mf8e0760cee" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m99cd48e21d" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -1819,7 +1806,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#mf8e0760cee" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m99cd48e21d" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -1892,7 +1879,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   </g>
  </g>
  <defs>
-  <clipPath id="p68c8a783a3">
+  <clipPath id="pd6d20945d3">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -1916,7 +1903,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:36.193592</dc:date>
+    <dc:date>2023-05-12T22:40:14.016784</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1938,42 +1925,42 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 78.911217 46.438125  L 78.911217 34.118125  L 29.39375 34.118125  z " clip-path="url(#p64c6b5462e)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 78.911217 46.438125  L 78.911217 34.118125  L 29.39375 34.118125  z " clip-path="url(#p6dc1911519)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 91.476283 31.038125  L 91.476283 18.718125  L 29.39375 18.718125  z " clip-path="url(#p64c6b5462e)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 91.476283 31.038125  L 91.476283 18.718125  L 29.39375 18.718125  z " clip-path="url(#p6dc1911519)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p64c6b5462e)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p6dc1911519)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="m3af9bcffbe" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="md6e7943019" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m3af9bcffbe" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#md6e7943019" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p64c6b5462e)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p6dc1911519)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m3af9bcffbe" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#md6e7943019" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p64c6b5462e)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p6dc1911519)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m3af9bcffbe" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#md6e7943019" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -1982,10 +1969,10 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="m618b59f862" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="mff25d59115" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m618b59f862" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mff25d59115" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -2005,7 +1992,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#m618b59f862" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mff25d59115" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -2078,7 +2065,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   </g>
  </g>
  <defs>
-  <clipPath id="p64c6b5462e">
+  <clipPath id="p6dc1911519">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -2102,7 +2089,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:36.235397</dc:date>
+    <dc:date>2023-05-12T22:40:14.057774</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -2124,42 +2111,42 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 34.118125  L 29.39375 34.118125  z " clip-path="url(#p3b80f3f041)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 34.118125  L 29.39375 34.118125  z " clip-path="url(#pe6eaa3134d)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 29.39375 31.038125  L 29.39375 18.718125  L 29.39375 18.718125  z " clip-path="url(#p3b80f3f041)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 29.39375 31.038125  L 29.39375 18.718125  L 29.39375 18.718125  z " clip-path="url(#pe6eaa3134d)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p3b80f3f041)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#pe6eaa3134d)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="m14c45ea25c" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m23bcc2e00b" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m14c45ea25c" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m23bcc2e00b" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p3b80f3f041)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#pe6eaa3134d)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m14c45ea25c" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m23bcc2e00b" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p3b80f3f041)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#pe6eaa3134d)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m14c45ea25c" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m23bcc2e00b" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -2168,10 +2155,10 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="mfc88eb2775" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m5a971ecc3a" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mfc88eb2775" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m5a971ecc3a" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -2191,7 +2178,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#mfc88eb2775" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m5a971ecc3a" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -2250,7 +2237,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   </g>
  </g>
  <defs>
-  <clipPath id="p3b80f3f041">
+  <clipPath id="pe6eaa3134d">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -2274,7 +2261,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2023-05-11T12:36:36.277255</dc:date>
+    <dc:date>2023-05-12T22:40:14.095088</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -2296,42 +2283,42 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <path d="M 29.39375 46.438125  L 140.99375 46.438125  L 140.99375 18.718125  L 29.39375 18.718125  z " style="fill: #ffffff"/>
    </g>
    <g id="patch_3">
-    <path d="M 29.39375 46.438125  L 80.167724 46.438125  L 80.167724 34.118125  L 29.39375 34.118125  z " clip-path="url(#p6b84045b18)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 46.438125  L 80.167724 46.438125  L 80.167724 34.118125  L 29.39375 34.118125  z " clip-path="url(#p590f7ac632)" style="fill: #8fbc8f"/>
    </g>
    <g id="patch_4">
-    <path d="M 29.39375 31.038125  L 90.219776 31.038125  L 90.219776 18.718125  L 29.39375 18.718125  z " clip-path="url(#p6b84045b18)" style="fill: #8fbc8f"/>
+    <path d="M 29.39375 31.038125  L 90.219776 31.038125  L 90.219776 18.718125  L 29.39375 18.718125  z " clip-path="url(#p590f7ac632)" style="fill: #8fbc8f"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p6b84045b18)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 29.39375 46.438125  L 29.39375 18.718125  " clip-path="url(#p590f7ac632)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="m81681674d9" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m9447c906f7" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m81681674d9" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m9447c906f7" x="29.39375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
-      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p6b84045b18)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 85.19375 46.438125  L 85.19375 18.718125  " clip-path="url(#p590f7ac632)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m81681674d9" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m9447c906f7" x="85.19375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
-      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p6b84045b18)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
+      <path d="M 140.99375 46.438125  L 140.99375 18.718125  " clip-path="url(#p590f7ac632)" style="fill: none; stroke: #b0b0b0; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m81681674d9" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m9447c906f7" x="140.99375" y="46.438125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
     </g>
@@ -2340,10 +2327,10 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="m636524969b" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
+       <path id="m9e50098f1c" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m636524969b" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m9e50098f1c" x="29.39375" y="40.278125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -2363,7 +2350,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#m636524969b" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m9e50098f1c" x="29.39375" y="24.878125" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -2434,7 +2421,7 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
   </g>
  </g>
  <defs>
-  <clipPath id="p6b84045b18">
+  <clipPath id="p590f7ac632">
    <rect x="29.39375" y="18.718125" width="111.6" height="27.72"/>
   </clipPath>
  </defs>
@@ -2451,8 +2438,9 @@ conditionnement à appliquer <i>via</i> l'argument <code>evs</code>.
 </g>
 </g>
 </g>
-</svg></li>
+</svg>
 
+<ol class="org-ol">
 <li><p>
 La dernière question consiste à calculer la probabilité de l'état de la batterie d'Hector sachant
 que l'observateur \(O_{1}\) a observé un lâché de balle mais que l'observateur \(O_{2}\) n'a rien vu
@@ -2464,14 +2452,17 @@ les deux méthodes précédentes. Pour le calcul avec <code>makeInference</code>
 <div class="org-src-container">
 <pre class="src src-python">bn_ie.eraseAllEvidence()
 </pre>
-</div></li>
+</div>
+
+<p>
+De la même façon, en utilisant <code>gnb.showInference</code> :
+</p></li>
 </ol>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orge0f6d07" class="outline-3">
-<h3 id="orge0f6d07"><span class="section-number-3">4.2.</span> Utilisation du logiciel <code>GeNIe</code></h3>
+<div id="outline-container-orga1dc4d6" class="outline-3">
+<h3 id="orga1dc4d6"><span class="section-number-3">4.2.</span> Utilisation du logiciel <code>GeNIe</code></h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 L'objectif est à présent de refaire le travail précédent mais cette fois-ci à partir du logiciel <code>GeNIe</code>.

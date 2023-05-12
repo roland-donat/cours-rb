@@ -354,11 +354,15 @@ bn
 
    Si vous utilisez un /notebook/ ou un éditeur de code supportant le HTML, il est possible de
    visualiser graphiquement vos RB en utilisant le package 
-   =pyAgrum.lib.notebook= fourni avec =PyAgrum=. Ce package apporte en particulier la fonction
-   =getBN= :
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
-import pyAgrum.lib.notebook as gnb # Fonctions de visualisation pour notebook 
+   =pyAgrum.lib.notebook= fourni avec =PyAgrum=. Une fois ce package importé, l'exécution d'un bloc
+   de code s'achevant par un objet =BayesNet= affichera le graphe du RB correspondant.
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports code
+# Fonctions de visualisation pour notebook 
+import pyAgrum.lib.notebook as gnb 
 
+bn
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports results
 gnb.getBN(bn)
    #+END_SRC
 
@@ -419,11 +423,18 @@ gnb.getBN(bn)
    On observe que notre RB possède bien 5 variables mais aucune relation de dépendance pour
    l'instant.
 
+   *Note :* le package =pyAgrum.lib.notebook= apporte également plusieurs fonctions de
+   visualisation, notamment la fonction =getBN= qui permet de générer le code SVG du graphe d'un
+   objet =BayesNet=.
+
 1. Pour ajouter des relations de dépendance, il faut utiliser la méthode =.addArcs= en précisant
    l'identifiant de la variable source, puis l'identifiant de la variable cible. Par exemple, pour
    créer un arc allant de la variable $C$ à la variable $B$, on écrit :
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports code
 bn.addArc("C", "B")
+bn
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports results
 gnb.getBN(bn)
    #+END_SRC
 
@@ -432,12 +443,15 @@ gnb.getBN(bn)
    #+end_export
 
 1. Créez les autres relations de dépendance du modèle.
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports (if (eq td_corrige t) "code" "none")
 # SOLUTION
 # --------
 bn.addArc("B", "L")
 bn.addArc("L", "O1")
 bn.addArc("L", "O2")
+bn
+    #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "results" "none")
 gnb.getBN(bn)
     #+END_SRC
 
@@ -548,9 +562,11 @@ bn.cpt("B")[{"C": "non"}] = [0.5, 0.5]
 bn.cpt("B")[{"C": "oui"}] = [0.05, 0.95]
    #+END_SRC
 
-   La fonction =gnb.getPotential= permet de vérifier que la saisie des probabilités est correcte en
-   visualisant les LPC :
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+   Vous pouvez vérifier les valeurs renseignées dans la LPC :
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports code
+bn.cpt("C")
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports results
 gnb.getPotential(bn.cpt("C"))
    #+END_SRC
 
@@ -566,7 +582,10 @@ gnb.getPotential(bn.cpt("C"))
    </table>
    #+end_export
 
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports code
+bn.cpt("B")
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports results
 gnb.getPotential(bn.cpt("B"))
    #+END_SRC
 
@@ -585,7 +604,7 @@ gnb.getPotential(bn.cpt("B"))
    #+end_export
 
 1. Renseignez les LPC des autres variables.
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
 # SOLUTION
 # --------
 bn.cpt("L")[{"B": "non"}] = [0.1, 0.9]
@@ -597,10 +616,6 @@ bn.cpt("O1")[{"L": "oui"}] = [0.3, 0.7]
 bn.cpt("O2")[{"L": "non"}] = [0.9, 0.1]
 bn.cpt("O2")[{"L": "oui"}] = [0.1, 0.9]
     #+END_SRC
-
-    #+RESULTS:
-    #+begin_export html
-    #+end_export
 
 *** Inférence
 
@@ -620,61 +635,69 @@ bn_ie = gum.LazyPropagation(bn) # ie pour inference engine
    #+RESULTS:
 
 1. Il faut ensuite lancer les calculs de probabilité dans le RB avec la méthode =.makeInference= :
-   #+BEGIN_SRC python :session :results value :tangle hector.py :exports both
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports both
 bn_ie.makeInference()
    #+END_SRC
 
-   #+RESULTS:
-   : None
-
 1. La loi de chaque variable est alors accessible /via/ la méthode =.posterior=. Par exemple, pour
    la variable $O_{1}$ :
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports code
 P_O1 = bn_ie.posterior("O1")
+P_O1
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports results
 gnb.getPotential(P_O1)
    #+END_SRC
 
    #+RESULTS:
-   #+begin_export html
-   <table style="border:1px solid black;">
-   <tr style='border:1px solid black;color:black;background-color:#808080'>
-         <th colspan='2'><center>O1</center></th></tr>
-   <tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
-         <center>non</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
-         <center>oui</center></th></tr>
-   <tr><td style='color:black;background-color:#b2cb64;text-align:right;'>0.5981</td><td style='color:black;background-color:#cbb264;text-align:right;'>0.4019</td></tr>
-   </table>
-   #+end_export
 
 1. Calculez les lois des autres variables.
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports (if (eq td_corrige t) "code" "none")
 # SOLUTION
 # --------
 P_C = bn_ie.posterior("C")
+P_C
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "results" "none")
 gnb.getPotential(P_C)
-    #+END_SRC
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+   #+END_SRC
+
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports (if (eq td_corrige t) "code" "none")
 # SOLUTION
 # --------
 P_B = bn_ie.posterior("B")
+P_B
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "results" "none")
 gnb.getPotential(P_B)
-    #+END_SRC
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+   #+END_SRC
+
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports (if (eq td_corrige t) "code" "none")
 # SOLUTION
 # --------
 P_L = bn_ie.posterior("L")
 gnb.getPotential(P_L)
-    #+END_SRC
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "results" "none")
+gnb.getPotential(P_L)
+   #+END_SRC
+   
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports (if (eq td_corrige t) "code" "none")
 # SOLUTION
 # --------
 P_O2 = bn_ie.posterior("O2")
+P_O2
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "results" "none")
 gnb.getPotential(P_O2)
     #+END_SRC
 
 1. Il est possible de visualiser ces lois directement sur la structure du RB grâce à la fonction
    =gnb.getInference= :
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports code
+gnb.showInference(bn)
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports results
 gnb.getInference(bn)
    #+END_SRC
 
@@ -1605,39 +1628,34 @@ gnb.getInference(bn)
    </svg>
    #+end_export
    Notes :
-   - La fonction =getInference= gère l'initialisation du moteur d'inférence. Il n'est donc pas
+   - La fonction =showInference= gère l'initialisation du moteur d'inférence. Il n'est donc pas
      nécessaire de créer un moteur d'inférence si vous souhaitez uniquement utiliser
-     =getInference=.
-   - N'hésitez pas à consulter l'[[https://pyagrum.readthedocs.io/en/1.7.1/lib.notebook.html#pyAgrum.lib.notebook.getInference][aide de la fonction =getInference=]] afin d'appréhender ces
+     =showInference=.
+   - N'hésitez pas à consulter l'[[https://pyagrum.readthedocs.io/en/1.7.1/lib.notebook.html#pyAgrum.lib.notebook.showInference][aide de la fonction =showInference=]] afin d'appréhender ces
      différentes fonctionnalités.
 
 1. La seconde question consiste à calculer la probabilité de l'état de la batterie d'Hector sachant que l'observateur $O_{1}$ a observé un lâché de balle. Il s'agit autrement dit de
    calculer la loi conditionnelle $P(B|O_{1}=\text{oui})$. Il faut donc conditionner le moteur
    d'inférence avec l'information
    $O_{1}=\text{oui}$ grâce à la méthode =.setEvidence=, puis refaire les calculs :
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports code
 bn_ie.setEvidence({"O1":"oui"})
 bn_ie.makeInference()
 P_B_sachant_O1_oui = bn_ie.posterior("B")
+P_B_sachant_O1_oui
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports results
 gnb.getPotential(P_B_sachant_O1_oui)
    #+END_SRC
    *Attention :* : La loi précédente correspond bien à $P(B|O_{1}=\text{oui})$ et non à $P(B|O_{1})$.
    
-   #+RESULTS:
-   #+begin_export html
-   <table style="border:1px solid black;">
-   <tr style='border:1px solid black;color:black;background-color:#808080'>
-         <th colspan='2'><center>B</center></th></tr>
-   <tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
-         <center>non</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
-         <center>oui</center></th></tr>
-   <tr><td style='color:black;background-color:#c5b864;text-align:right;'>0.4516</td><td style='color:black;background-color:#b8c564;text-align:right;'>0.5484</td></tr>
-   </table>
-   #+end_export
 
-   Alternativement, on peut directement utiliser la méthode =getInference= en précisant le
+   Alternativement, on peut directement utiliser la méthode =showInference= en précisant le
    conditionnement à appliquer /via/ l'argument =evs=. 
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports both
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports code
+gnb.showInference(bn, evs={"O1":"oui"})
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports results
 gnb.getInference(bn, evs={"O1":"oui"})
    #+END_SRC
 
@@ -1651,31 +1669,26 @@ gnb.getInference(bn, evs={"O1":"oui"})
 bn_ie.eraseAllEvidence()
    #+END_SRC
 
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports (if (eq td_corrige t) "code" "none")
 # SOLUTION
 # --------
 bn_ie.eraseAllEvidence()
 bn_ie.setEvidence({"O1":"oui", "O2":"non"})
 bn_ie.makeInference()
 P_B_sachant_O1_oui_O2_non = bn_ie.posterior("B")
+P_B_sachant_O1_oui_O2_non
+   #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "results" "none")
 gnb.getPotential(P_B_sachant_O1_oui_O2_non)
-    #+END_SRC
+   #+END_SRC
 
-    #+RESULTS:
-    #+begin_export html
-    <table style="border:1px solid black;">
-    <tr style='border:1px solid black;color:black;background-color:#808080'>
-          <th colspan='2'><center>B</center></th></tr>
-    <tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
-          <center>non</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
-          <center>oui</center></th></tr>
-    <tr><td style='color:black;background-color:#f08d64;text-align:right;'>0.1130</td><td style='color:black;background-color:#8df064;text-align:right;'>0.8870</td></tr>
-    </table>
-    #+end_export
-
-   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "both" "none")
+   De la même façon, en utilisant =gnb.showInference= :
+   #+BEGIN_SRC python :session :results silent :tangle hector.py :exports (if (eq td_corrige t) "code" "none")
 # SOLUTION
 # --------
+gnb.showInference(bn, evs={"O1":"oui", "O2":"non"})
+    #+END_SRC
+   #+BEGIN_SRC python :session :results html :tangle hector.py :exports (if (eq td_corrige t) "results" "none")
 gnb.getInference(bn, evs={"O1":"oui", "O2":"non"})
     #+END_SRC
    

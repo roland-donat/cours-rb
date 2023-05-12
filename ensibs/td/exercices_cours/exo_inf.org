@@ -1,0 +1,473 @@
+# -*- coding: utf-8 -*-
+
+#+TITLE: Inférence probabiliste
+#+AUTHOR: Exercices de cours
+#+DATE: ENSIBS - Spécialité Informatique
+# Modélisation Stochastique par Réseaux Bayésiens 
+
+# Org-mode general options
+# ------------------------
+#+LANGUAGE: fr
+#+OPTIONS: H:3 num:nil toc:t \n:nil @:t ::t |:t ^:{} f:t TeX:t author:t d:nil htm/citel-style:nil
+#+OPTIONS: html-postamble:nil
+#+DRAWERS: OPTIONS CACHE MACROS
+#+STARTUP: content 
+#+STARTUP: hidestars
+#+TODO: TODO(t) INPROGRESS(p) | DONE(d)
+#+BIND: org-latex-table-scientific-notation "{%s}E{%s}"
+
+# HTML options
+# ------------
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../css/edgemind.css" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../css/myorg.css" />
+# CSS to get the ReadTheDoc style
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+
+# LaTeX options
+# -------------
+:OPTIONS:
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [a4paper,twoside,11pt]
+
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage[french]{babel}
+#+LATEX_HEADER: \usepackage[default,scale=0.95]{opensans}
+
+#+LATEX_HEADER: \frenchbsetup{ListOldLayout=true} %FBReduceListSpacing=true,CompactItemize=false}
+
+#+LATEX_HEADER: \usepackage{graphicx}
+# #+LATEX_HEADER: \usepackage[dvips,xetex]{graphicx}
+#+LATEX_HEADER: % Graphics path
+#+LATEX_HEADER: \graphicspath{ 
+#+LATEX_HEADER:   {./fig/}
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: \usepackage{amssymb}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{amsfonts}
+
+#+LATEX_HEADER: \usepackage{color}
+#+LATEX_HEADER: % EdgeMind Colors
+#+LATEX_HEADER: \definecolor{EMLogoBlue}        {cmyk}{0.96, 0.75, 0.30, 0.18} 
+#+LATEX_HEADER: \definecolor{EMLogoOrange}      {cmyk}{0.00, 0.61, 0.90, 0.00} 
+#+LATEX_HEADER: \definecolor{EMGrey}            {cmyk}{0.21, 0.17, 0.10, 0.00} 
+#+LATEX_HEADER: \definecolor{EMBrownLight}      {cmyk}{0.25, 0.47, 0.75, 0.15} 
+#+LATEX_HEADER: \definecolor{EMRed}             {cmyk}{0.21, 1.00, 0.92, 0.14} 
+#+LATEX_HEADER: \definecolor{EMBrown}           {cmyk}{0.34, 1.00, 0.91, 0.55} 
+
+#+LATEX_HEADER: \usepackage{verbatim}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{float}
+#+LATEX_HEADER: \usepackage{lmodern}
+
+#+LATEX_HEADER: \usepackage[pdfborder={0 0 0},bookmarks=true,bookmarksnumbered=true,pdfpagemode=None,pdfstartview=FitH,pdfpagelayout=SinglePage,colorlinks=true,linkcolor=EMBrown,urlcolor=EMBrown,citecolor=EMBrown]{hyperref}
+#+LATEX_HEADER: \usepackage{natbib}
+#+LATEX_HEADER: \usepackage{subfig}
+#+LATEX_HEADER: \captionsetup[table]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[figure]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[subfloat]{margin=0pt,font=footnotesize}
+#+LATEX_HEADER: \usepackage{booktabs}
+
+# #+LATEX_HEADER: \usepackage{minted}
+# #+LATEX_HEADER: \usemintedstyle{edgemind}
+# #+LATEX_HEADER: \renewcommand{\theFancyVerbLine}{\sffamily \footnotesize {\color{EMLogoBlue}\oldstylenums{\arabic{FancyVerbLine}}}}
+
+#+LATEX_HEADER: \usepackage{geometry}
+#+LATEX_HEADER: \geometry{
+#+LATEX_HEADER: %  nohead,
+#+LATEX_HEADER:   top=2.25cm, 
+#+LATEX_HEADER:   bottom=2.25cm, 
+#+LATEX_HEADER:  left=2.5cm, 
+#+LATEX_HEADER:  right=2.5cm}
+
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \onehalfspacing
+#+LATEX_HEADER: % Supprime l'indentation
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: % Espacement entre les paragraphes
+#+LATEX_HEADER: \setlength{\parskip}{2ex}
+
+
+:END:
+# Latex command to work with minted
+:CACHE:
+#+HEADER: :eval yes
+#+HEADER: :results silent
+#+HEADER: :exports results
+#+BEGIN_SRC emacs-lisp 
+;; (setq org-latex-pdf-process
+;;       '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "bibtex %b"
+;;         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+#+END_SRC
+:END:
+# LaTeX Macros maths
+#+MACRO: TEX-INDEP $\perp\!\!\!\perp$
+:OPTIONS:
+#+LATEX_HEADER: % ""
+#+LATEX_HEADER: \def\ofg#1{\og #1 \fg{}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % backslash
+#+LATEX_HEADER: \def\bs{\textbackslash}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Presentation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % bold math
+#+LATEX_HEADER: \def\mbf#1{\boldsymbol{#1}}
+#+LATEX_HEADER: % straight bold math
+#+LATEX_HEADER: \def\mbfs#1{\mathbf{#1}}
+#+LATEX_HEADER: % (), {}, [], ||
+#+LATEX_HEADER: \def\lrPar#1{\left( #1 \right)}
+#+LATEX_HEADER: \def\lrpar#1{( #1 )}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrace#1{\left\{ #1 \right\}}
+#+LATEX_HEADER: \def\lrbrace#1{\{ #1 \}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrack#1{\left[ #1 \right]}
+#+LATEX_HEADER: \def\lrbrack#1{[ #1 ]}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrMid#1{\left| #1 \right|}
+#+LATEX_HEADER: \def\lrmid#1{| #1 |}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrmmid#1{\Vert #1 \Vert}
+#+LATEX_HEADER: \def\lrMmid#1{\left\Vert #1 \right\Vert}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrfloor#1{\lfloor #1 \rfloor}
+#+LATEX_HEADER: \def\lrFloor#1{\left\lfloor #1 \right\rfloor}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrceil#1{\lceil #1 \rceil}
+#+LATEX_HEADER: \def\lrCeil#1{\left\lceil #1 \right\rceil}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \def\lrnorm#1{\| #1 \|}
+#+LATEX_HEADER: % \def\lrNorm#1{\left\| #1 \right\|}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % = definition
+#+LATEX_HEADER: \def\eqdef{\stackrel{\text{d\acute{e}f}}{=}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Operators
+#+LATEX_HEADER: % =========
+#+LATEX_HEADER: % sign
+#+LATEX_HEADER: \def\signe{\text{signe}}
+#+LATEX_HEADER: % support
+#+LATEX_HEADER: \def\supp{\text{supp}}
+#+LATEX_HEADER: % to
+#+LATEX_HEADER: \def\conv#1{\xrightarrow[#1]{}}
+#+LATEX_HEADER: % d of dx
+#+LATEX_HEADER: \def\d{\text{d}}
+#+LATEX_HEADER: % integral/sum
+#+LATEX_HEADER: \def\intsum{\textstyle{\sum}\hspace{-0.5cm}\displaystyle\int}
+#+LATEX_HEADER: % modulo
+#+LATEX_HEADER: \def\modulo{\text{mod}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Set
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Classic sets
+#+LATEX_HEADER: \def\bbbr{\mathbb{R}} 
+#+LATEX_HEADER: \def\bbbn{\mathbb{N}} 
+#+LATEX_HEADER: \def\bbbk{\mathbb{K}} 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Characteristic function
+#+LATEX_HEADER: \def\indic{\mbox{1\hspace{-.25em}I}} 
+#+LATEX_HEADER: % Imply
+#+LATEX_HEADER: \def\Then{\Rightarrow}
+#+LATEX_HEADER: % set { ... }
+#+LATEX_HEADER: \def\set#1{\lrbrace{ #1 }}
+#+LATEX_HEADER: \def\Set#1{\lrBrace{ #1 }}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % set minus (\)
+#+LATEX_HEADER: \def\sm{\setminus}
+#+LATEX_HEADER: % part set of a set
+#+LATEX_HEADER: \def\setofparts#1{\mathcal{P}\left(#1\right)}
+#+LATEX_HEADER: % Union/intersection
+#+LATEX_HEADER: \def\union{\cup}
+#+LATEX_HEADER: \def\Union{\bigcup}
+#+LATEX_HEADER: \def\inter{\cap}
+#+LATEX_HEADER: \def\Inter{\bigcap}
+#+LATEX_HEADER: % Complementary
+#+LATEX_HEADER: \def\comp#1{\overline{#1}}
+#+LATEX_HEADER: % Cardinality
+#+LATEX_HEADER: \def\card{\text{card}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Probability
+#+LATEX_HEADER: % ===========
+#+LATEX_HEADER: % P
+#+LATEX_HEADER: \def\P{\mathbb{P}}
+#+LATEX_HEADER: \def\Prob{P}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Espectancy E[.]
+#+LATEX_HEADER: \def\E#1{\mathbb{E}\left[#1\right]}
+#+LATEX_HEADER: % indep.
+#+LATEX_HEADER: \def\perp\!\!\!\perp{\perp\!\!\!\perp}
+#+LATEX_HEADER: \def\nindep{\perp\!\!\!\!\not\,\perp}
+#+LATEX_HEADER: % Variance, covariance et corrélation
+#+LATEX_HEADER: \def\Var{\text{Var}}
+#+LATEX_HEADER: \def\Med{\text{Med}}
+#+LATEX_HEADER: \def\Cov{\text{Cov}}
+#+LATEX_HEADER: \def\Cor{\text{Cor}}
+#+LATEX_HEADER: % Mean bar
+#+LATEX_HEADER: \def\avg#1{\overline{#1}}
+#+LATEX_HEADER: \def\Bar#1{\overline{#1}}
+#+LATEX_HEADER: \def\Tilde#1{\widetilde{#1}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % convergence
+#+LATEX_HEADER: \def\convP{\xrightarrow[]{P}}
+#+LATEX_HEADER: \def\convL{\xrightarrow[]{L^2}}
+#+LATEX_HEADER: \def\convD{\xrightarrow[]{\mathcal{L}}}
+#+LATEX_HEADER: % ~_{sth}
+#+LATEX_HEADER: \def\simu#1{\underset{#1}{\sim}}
+#+LATEX_HEADER: % ~ iid
+#+LATEX_HEADER: \def\simiid{\stackrel{\text{i.i.d.}}{\sim}}
+#+LATEX_HEADER: % ~ as
+#+LATEX_HEADER: \def\simas{\stackrel{\text{as.}}{\sim}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % GMs
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Parents
+#+LATEX_HEADER: \def\Pa{\text{Pa}}
+#+LATEX_HEADER: \def\pa{\text{pa}}
+#+LATEX_HEADER: % Children
+#+LATEX_HEADER: \def\Ch{\text{Ch}}
+#+LATEX_HEADER: \def\ch{\text{ch}}
+#+LATEX_HEADER: \def\En{\text{En}}
+#+LATEX_HEADER: \def\en{\text{en}}
+#+LATEX_HEADER: % Ancestors
+#+LATEX_HEADER: \def\An{\text{An}}
+#+LATEX_HEADER: \def\an{\text{an}}
+#+LATEX_HEADER: % Descandants
+#+LATEX_HEADER: \def\De{\text{De}}
+#+LATEX_HEADER: \def\de{\text{de}}
+#+LATEX_HEADER: % Non descandants
+#+LATEX_HEADER: \def\Nd{\text{Nd}}
+#+LATEX_HEADER: \def\nd{\text{nd}}
+#+LATEX_HEADER: % Family
+#+LATEX_HEADER: \def\Fa{\text{Fa}}
+#+LATEX_HEADER: \def\fa{\text{fa}}
+#+LATEX_HEADER: % Domaine
+#+LATEX_HEADER: \def\Dom{\text{Dom}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Optimisation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % argmin/argmax
+#+LATEX_HEADER: \def\argmin#1{\underset{#1}{\arg\min}~}
+#+LATEX_HEADER: \def\argmax#1{\underset{#1}{\arg\max}~}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Matrices
+#+LATEX_HEADER: % ========
+#+LATEX_HEADER: % diag
+#+LATEX_HEADER: \def\diag{\text{diag}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % SdF
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Propagation dcc
+#+LATEX_HEADER: \def\propdcc{\stackrel{\text{dcc}}{\rightsquigarrow}}
+:END:
+
+# Babel configuration
+# -------------------
+:CACHE:
+#+HEADER: :eval yes
+#+HEADER: :results silent
+#+HEADER: :exports results
+#+BEGIN_SRC emacs-lisp 
+(setq org-latex-listings 'minted)
+
+(setq org-latex-minted-options
+        '(("frame" "lines") ("linenos=false") ("fontsize=\\footnotesize")))
+
+#+END_SRC
+:END:
+
+
+* Questions de cours
+Soit $\phi$ un potentiel défini sur les variables $X$ et $Y$ à valeurs respectivement dans les
+ensembles $\mathcal{X}$ et $\mathcal{Y}$. $\phi$ est caractérisé par les valeurs suivantes :
+|-------------+---------+---------+---------+---------+---------+---------|
+| $X$         | $x_{1}$ | $x_{2}$ | $x_{1}$ | $x_{2}$ | $x_{1}$ | $x_{2}$ |
+|-------------+---------+---------+---------+---------+---------+---------|
+| $Y$         | $y_{1}$ | $y_{1}$ | $y_{2}$ | $y_{2}$ | $y_{3}$ | $y_{3}$ |
+|-------------+---------+---------+---------+---------+---------+---------|
+| $\phi(X,Y)$ | $3/5$   | $1/4$   | $1/5$   | $1/2$   | $1/5$   | $1/4$   |
+|-------------+---------+---------+---------+---------+---------+---------|
+- Préciser les domaines $\mathcal{X}$ et $\mathcal{Y}$.
+- Donner la complexité spatiale de $\phi$.
+- Donner le résultat de l'instanciation de $\phi$ sur $x_{1}$.
+- Donner le résultat de l'instanciation de $\phi$ sur $x_{2}$.
+- Calculer $\psi = \sum_{X} \phi$.
+- Calculer $\omega = \psi \cdot \phi$.
+- Le potentiel $\phi$ est-il également une loi de probabilité conditionnelle ? Si oui donner son expression.
+# 2. Soit le réseau bayésien $X_{1} \rightarrow X_{2} \rightarrow X_{3}$, les requêtes d'inférence
+#   suivantes sont elles correctes :
+#  | $\boldsymbol{Q} = (X_{1})$               | $\boldsymbol{E} = \varnothing$           |
+#  | $\boldsymbol{Q} = (X_{1}, X_{3})$        | $\boldsymbol{E} = ({X_{3} = x_{3}})$     |
+#  | $\boldsymbol{Q} = (X_{1}, X_{2}, X_{3})$ | $\boldsymbol{E} = \varnothing$           |
+
+** Correction                                                      :noexport:
+- $\mathcal{X} = \{x_{1},x_{2}\}$ et $\mathcal{Y} = \{y_{1},y_{2},y_{3}\}$.
+- $\text{Dom}(\phi) = \{\mathcal{X},\mathcal{Y}\}$, donc $\text{Dom}(\phi)^{*} = \mathcal{X} \times
+   \mathcal{Y} = \{x_{1},x_{2}\} \times \{y_{1},y_{2},y_{3}\}$, et définition, $CS(\phi)
+   = |\text{Dom}(\phi)^{*}| = |\mathcal{X}| \times |\mathcal{Y}| = 2 \times 3 = 6$.
+- $\phi(x_{1},Y) =$ 
+  |-----------------+---------+---------+---------|
+  | $X$             | $x_{1}$ | $x_{1}$ | $x_{1}$ |
+  |-----------------+---------+---------+---------|
+  | $Y$             | $y_{1}$ | $y_{2}$ | $y_{3}$ |
+  |-----------------+---------+---------+---------|
+  | $\phi(x_{1},Y)$ | $3/5$   | $1/5$   | $1/5$   |
+  |-----------------+---------+---------+---------|
+  $\phi(x_{2},Y) =$
+  |-------------+---------+---------+---------|
+  | $X$         | $x_{2}$ | $x_{2}$ | $x_{2}$ |
+  |-------------+---------+---------+---------|
+  | $Y$         | $y_{1}$ | $y_{2}$ | $y_{3}$ |
+  |-------------+---------+---------+---------|
+  | $\phi(X,Y)$ | $1/4$   | $1/2$   | $1/4$   |
+  |-------------+---------+---------+---------|
+- Par définition, on sait que $\text{Dom}(\psi) = \text{Dom}(\sum_{X} \phi) =
+  \text{Dom}(\phi)\setminus \{\mathcal{X}\} = \{\mathcal{Y}\}$. Le potentiel $\psi$ est défini par :
+  |-----------+----------------------------------------------------------+--------------------+--------------------|
+  | $Y$       | $y_{1}$                                                  | $y_{2}$            | $y_{3}$            |
+  |-----------+----------------------------------------------------------+--------------------+--------------------|
+  | $\psi(Y)$ | $\phi(x_{1},y{1}) + \phi(x_{2},y{1}) = 3/5 + 1/4 = 17/20$ | $1/5 + 1/2 = 7/10$ | $1/5 + 1/4 = 9/20$ |
+  |-----------+----------------------------------------------------------+--------------------+--------------------|
+- Par définition, on sait que $\text{Dom}(\omega) = \text{Dom}(\psi \cdot \phi) =
+  \text{Dom}(\psi) \cup \text{Dom}(\phi) = \{\mathcal{Y}\} \cup \{\mathcal{X}, \mathcal{Y}\} = \{\mathcal{X}, \mathcal{Y}\}$. Le potentiel $\omega$ est défini par :
+  |---------------+------------------------------------------------------------+------------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------|
+  | $X$           | $x_{1}$                                                    | $x_{2}$                                                    | $x_{1}$                                                   | $x_{2}$                                                   | $x_{1}$                                                   | $x_{2}$                                                   |
+  |---------------+------------------------------------------------------------+------------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------|
+  | $Y$           | $y_{1}$                                                    | $y_{1}$                                                    | $y_{2}$                                                   | $y_{2}$                                                   | $y_{3}$                                                   | $y_{3}$                                                   |
+  |---------------+------------------------------------------------------------+------------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------|
+  | $\omega(X,Y)$ | $\psi(y_{1}) \times \phi(x_{1},y_{1}) = 17/20 \times 3/5$  | $\psi(y_{1}) \times \phi(x_{2},y_{1}) = 17/20 \times 1/4$  | $\psi(y_{2}) \times \phi(x_{1},y_{2}) = 7/10 \times 1/5$  | $\psi(y_{2}) \times \phi(x_{2},y_{2}) = 7/10 \times 1/2$  | $\psi(y_{3}) \times \phi(x_{1},y_{3}) = 9/20 \times 1/5$  | $\psi(y_{3}) \times \phi(x_{2},y_{3}) = 9/20 \times 1/4$  |
+  |---------------+------------------------------------------------------------+------------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------|
+- Tout d'abord, on vérifie que pour tous $x \in \mathcal{X}$ et $y \in \mathcal{Y}$, $\phi(x,y) \in
+  [0,1]$. Ensuite, il faut trouver l'existence d'un sous ensemble de dimensions du domaine de
+  $\phi$ vérifiant la propriété de sommation à 1. $\phi$ étant de dimension 2, il y a trois 
+  sous ensembles de dimension possibles :
+  1. domaine normalisé : $\{\mathcal{X},\mathcal{Y}\}$ ; domaine de conditionnement :
+     $\varnothing$ 
+     $\implies \sum_{(x,y) \in \{\mathcal{X},\mathcal{Y}\}^{*}} \phi(x,y) = 2 \neq 1$;
+  2. domaine normalisé : $\{\mathcal{X}\}$ ; domaine de conditionnement :
+     $\{\mathcal{Y}\}$ ; 
+     $\implies \sum_{x \in \mathcal{X}} \phi(x,y_{1}) = 3/5 + 1/4 = 17/20 \neq 1$, inutile de
+     vérifier la sommation pour $y = y_{2}$ et $y = y_{3}$
+  3. domaine normalisé : $\{\mathcal{Y}\}$ ; domaine de conditionnement :
+     $\{\mathcal{X}\}$ 
+     $\implies \sum_{y \in \mathcal{Y}} \phi(x_{1},y) = \sum_{y \in \mathcal{Y}} \phi(x_{2},y) = 1$.
+     Le potentiel $\phi$ est donc une loi de probabilité sur le domaine $\mathcal{Y}$
+     conditionnellement au domaine $\mathcal{X}$.
+
+
+* Exercice 1
+L'objectif est d'appliquer l'algorithme d'élimination des variables sur le RB présenté en Figure [[fig_rb_hector_simple]].
+
+#+ATTR_HTML:
+#+ATTR_LATEX: :height 0.35\textheight
+#+CAPTION: Modèle RB de l'exercice 1 sur l'inférence probabiliste.
+#+NAME: fig_rb_hector_simple
+[[./rb_hector_simple.png]]
+
+# TODO: Si on veut demander aux étudiants le calcul de P(L|B), il faut introduire explicitement dans le
+# cours la division de potentiel (ou l'inverse d'un potentiel)
+Appliquer la méthode d'élimination pour calculer :
+1. $P(A)$;
+2. $P(L|B = n)$;
+3. $P(A,B|L = o)$.
+
+Dans chaque cas, essayer de trouver un ordre d'élimination limitant au maximum la taille des potentiels intermédiaires.
+
+** Correction                                                      :noexport:
+
+Commençons par écrire la factorisation de la loi jointe des variables $E$, $L$, $A$ et $B$ dans le
+RB de la Figure [[fig_rb_hector_simple]] :
+\begin{equation*}
+P(E,L,A,B) = P(E) \times P(L|E) \times P(A|L) \times P(B|L).
+\end{equation*}
+
+*** Calcul de $P(A)$
+Par définition, $P(A)$ est donnée par :
+\begin{equation*}
+P(A) = \sum_{E,L,B} P(E,L,A,B) = \sum_{E} \sum_{L} \sum_{B} P(E) \times P(L|E) \times P(A|L) \times P(B|L).
+\end{equation*}
+En distribuant astucieusement les sommes, on obtient :
+\begin{equation*}
+P(A) = \sum_{L} P(A|L) \sum_{E} P(L|E) \times P(E) \times \underbrace{\sum_{B} P(B|L)}_{= [1, \ldots, 1]}.
+\end{equation*}
+La variable $B$ a donc été éliminée. Passons à l'élimination de la variable E :
+\begin{equation*}
+P(A) = \sum_{L} P(A|L) \underbrace{\sum_{E} \underbrace{P(L|E) \times P(E)}_{\phi_{E}(L,E) = P(L,E)}}_{\psi_{E}(L) = P(L)} 
+\end{equation*}
+Terminons le processus en éliminant la varialbe L :
+\begin{equation*}
+P(A) = \underbrace{\sum_{L} \underbrace{P(A|L) \times \psi_{E}(L)}_{\phi_{L}(A,L)}}_{\psi_{L}(A)}
+\end{equation*}
+
+*** Calcul de $P(L|B=n)$
+Par définition, $P(L|B = n)$ est donnée par :
+\begin{equation*}
+P(L|B = n) = \frac{P(L,B = n)}{P(B = n)}.
+\end{equation*}
+Il faut donc calculer dans un premier temps, la loi $P(L,B)$ définie par :
+\begin{align*}
+P(L, B = n) & = \sum_{A,E} P(E,L,A,B = n) \\
+            & = \sum_{A} \sum_{E} P(E) \times P(L|E) \times P(A|L) \times P(B = n|L).
+\end{align*}
+Nous proposons la distribution suivante des sommations qui permet d'éliminer la variable $A$
+directement :
+\begin{equation*}
+P(L, B = n) =  P(B = n|L) \sum_{E} P(E) \times P(L|E) \times \underbrace{\sum_{A} P(A|L)}_{= [1, \ldots, 1]}.
+\end{equation*}
+Éliminons à présent la variable $E$ :
+\begin{equation*}
+P(L, B = n) =  P(B = n|L) \underbrace{\sum_{E} \underbrace{P(E) \times P(L|E)}_{\phi_{E}(L,E) = P(L,E)}}_{\psi_{E}(L) = P(L)}.
+\end{equation*}
+On obtient au final :
+\begin{equation*}
+P(L, B = n) =  P(B = n|L) \times \psi_{E}(L).
+\end{equation*}
+La loi $P(L|B=n)$ s'obtient par simple normalisation sur $L$ ou en effectuant explicitement le
+calcul suivant :
+\begin{equation*}
+P(L | B = n) =  \frac{P(L, B = n)}{\sum_{L} P(L, B = n)}.
+\end{equation*}
+
+
+*** Calcul de $P(A,B|L = o)$
+Par définition, $P(A, B|L = o)$ est donnée par :
+\begin{equation*}
+P(A, B|L = o) = \frac{P(A,B, L = o)}{P(L = o)}.
+\end{equation*}
+Il faut donc calculer dans un premier temps, la loi $P(A,B,L=o)$ définie par :
+\begin{align*}
+P(A,B, L = o) & = \sum_{E} P(E,L = o,A,B) \\
+              & = \sum_{E} P(E) \times P(L=o|E) \times P(A|L=o) \times P(B|L=o).
+\end{align*}
+Seule la variable E est à éliminer comme suit :
+directement :
+\begin{equation*}
+P(A,B, L = o) =  P(A|L=o) \times P(B|L=o) \times \underbrace{\sum_{E} \underbrace{P(E) \times P(L=o|E)}_{\phi_{E}(L=o,E) = P(L=o,E)}}_{\psi_{E}(L=o) = P(L=o)}.
+\end{equation*}
+Il vient alors :
+\begin{equation*}
+P(A,B, L = o) =  P(A|L=o) \times P(B|L=o) \times \psi_{E}(L=o).
+\end{equation*}
+La loi $P(A,B| L = o)$ s'obtient par simple normalisation sur les variables $(A,B)$ ou en effectuant explicitement le
+calcul suivant :
+\begin{equation*}
+P(A,B| L = o) = \frac{P(A,B, L = o)}{\sum_{A,B} P(A,B,L=o)}.
+\end{equation*}
+
+*** Calculs numériques
+
+Les calculs numériques sont réalisés sous =Python= avec librairie =pyAgrum= dans le script
+téléchargeable [[file:exercices_cours_inf_ex1.py][ici]].
+
