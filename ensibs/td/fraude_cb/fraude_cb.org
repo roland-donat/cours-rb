@@ -212,7 +212,7 @@
 
 #+ATTR_HTML: :width 50%
 #+CAPTION: Image générée par Midjourney
-[[./hector.png]]
+[[./fraude_cb.png]]
 
 
 
@@ -300,7 +300,6 @@ Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
 Implémenter le modèle de détection de fraude avec la librairie =pyAgrum=, puis vérifier les calculs
 d'inférence réalisés précédemment avec =GeNIe=.
 
-** Correction                                                      :noexport:
 #+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
 import pyAgrum as gum
 #+END_SRC
@@ -340,12 +339,12 @@ for va in [va_FR, va_VE, va_AE, va_AI, va_PO, va_AOD]:
 Spécification des liens de dépendances entre variables aléatoires dans le RB avec la méthode
 =addArc= comme suit :
 #+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
-rb_fraude_cb.addArc("VE"), "AE")
-rb_fraude_cb.addArc("VE"), "FR")
-rb_fraude_cb.addArc("FR"), "AE")
-rb_fraude_cb.addArc("FR"), "AI")
-rb_fraude_cb.addArc("PO"), "AI")
-rb_fraude_cb.addArc("PO"), "AOD")
+rb_fraude_cb.addArc("VE", "AE")
+rb_fraude_cb.addArc("VE", "FR")
+rb_fraude_cb.addArc("FR", "AE")
+rb_fraude_cb.addArc("FR", "AI")
+rb_fraude_cb.addArc("PO", "AI")
+rb_fraude_cb.addArc("PO", "AOD")
 #+END_SRC
 
 Définition des lois de probabilité conditionnelle (LPC) de chaque variable. 
@@ -390,9 +389,13 @@ print(inf_rb_fraude_cb.posterior("FR"))
 #+END_SRC
 Nous obtenons :
 #+RESULTS: inf-1
-#+BEGIN_SRC python
-<FR:non> :: 0.9976 /<FR:oui> :: 0.0024
-#+END_SRC
+#+begin_src python
+
+  FR               |
+non      |oui      |
+---------|---------|
+ 0.9900  | 0.0100  |
+#+end_src
 
 Nous cherchons à présent la probabilité d'une transaction frauduleuse sachant un certain nombre
 d'observations. Nous allons donc renseigner ces /évidences/ dans le moteur d'inférence et refaire
@@ -405,6 +408,10 @@ print(inf_rb_fraude_cb.posterior("FR"))
 #+END_SRC
 Ces observations se traduisent naturellement par une augmentation de la probabilité de fraude :
 #+RESULTS: inf-2
-#+BEGIN_SRC python
-<FR:non> :: 0.884724 /<FR:oui> :: 0.115276
-#+END_SRC
+#+begin_src python
+
+  FR               |
+non      |oui      |
+---------|---------|
+ 0.9900  | 0.0100  |
+#+end_src
