@@ -1,0 +1,427 @@
+# -*- coding: utf-8 -*-
+
+#+TITLE: Apprentissage des LPC
+#+AUTHOR: Exercices de cours
+#+DATE: ENSIBS - Spécialité Cyber Data
+# Modélisation Stochastique par Réseaux Bayésiens 
+
+# Org-mode general options
+# ------------------------
+#+LANGUAGE: fr
+#+OPTIONS: H:3 num:nil toc:t \n:nil @:t ::t |:t ^:{} f:t TeX:t author:t d:nil htm/citel-style:nil
+#+OPTIONS: html-postamble:nil
+#+DRAWERS: OPTIONS CACHE MACROS
+#+STARTUP: content 
+#+STARTUP: hidestars
+#+TODO: TODO(t) INPROGRESS(p) | DONE(d)
+#+BIND: org-latex-table-scientific-notation "{%s}E{%s}"
+
+# HTML options
+# ------------
+# HTML options
+# ------------
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://edgemind-sas.github.io/visual-identity/official_docs/css/edgemind.css" />
+
+
+# LaTeX options
+# -------------
+:OPTIONS:
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [a4paper,twoside,11pt]
+
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage[french]{babel}
+#+LATEX_HEADER: \usepackage[default,scale=0.95]{opensans}
+
+#+LATEX_HEADER: \frenchbsetup{ListOldLayout=true} %FBReduceListSpacing=true,CompactItemize=false}
+
+#+LATEX_HEADER: \usepackage{graphicx}
+# #+LATEX_HEADER: \usepackage[dvips,xetex]{graphicx}
+#+LATEX_HEADER: % Graphics path
+#+LATEX_HEADER: \graphicspath{ 
+#+LATEX_HEADER:   {./fig/}
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: \usepackage{amssymb}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{amsfonts}
+
+#+LATEX_HEADER: \usepackage{color}
+#+LATEX_HEADER: % EdgeMind Colors
+#+LATEX_HEADER: \definecolor{EMLogoBlue}        {cmyk}{0.96, 0.75, 0.30, 0.18} 
+#+LATEX_HEADER: \definecolor{EMLogoOrange}      {cmyk}{0.00, 0.61, 0.90, 0.00} 
+#+LATEX_HEADER: \definecolor{EMGrey}            {cmyk}{0.21, 0.17, 0.10, 0.00} 
+#+LATEX_HEADER: \definecolor{EMBrownLight}      {cmyk}{0.25, 0.47, 0.75, 0.15} 
+#+LATEX_HEADER: \definecolor{EMRed}             {cmyk}{0.21, 1.00, 0.92, 0.14} 
+#+LATEX_HEADER: \definecolor{EMBrown}           {cmyk}{0.34, 1.00, 0.91, 0.55} 
+
+#+LATEX_HEADER: \usepackage{verbatim}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{float}
+#+LATEX_HEADER: \usepackage{lmodern}
+
+#+LATEX_HEADER: \usepackage[pdfborder={0 0 0},bookmarks=true,bookmarksnumbered=true,pdfpagemode=None,pdfstartview=FitH,pdfpagelayout=SinglePage,colorlinks=true,linkcolor=EMBrown,urlcolor=EMBrown,citecolor=EMBrown]{hyperref}
+#+LATEX_HEADER: \usepackage{natbib}
+#+LATEX_HEADER: \usepackage{subfig}
+#+LATEX_HEADER: \captionsetup[table]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[figure]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[subfloat]{margin=0pt,font=footnotesize}
+#+LATEX_HEADER: \usepackage{booktabs}
+
+# #+LATEX_HEADER: \usepackage{minted}
+# #+LATEX_HEADER: \usemintedstyle{edgemind}
+# #+LATEX_HEADER: \renewcommand{\theFancyVerbLine}{\sffamily \footnotesize {\color{EMLogoBlue}\oldstylenums{\arabic{FancyVerbLine}}}}
+
+#+LATEX_HEADER: \usepackage{geometry}
+#+LATEX_HEADER: \geometry{
+#+LATEX_HEADER: %  nohead,
+#+LATEX_HEADER:   top=2.25cm, 
+#+LATEX_HEADER:   bottom=2.25cm, 
+#+LATEX_HEADER:  left=2.5cm, 
+#+LATEX_HEADER:  right=2.5cm}
+
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \onehalfspacing
+#+LATEX_HEADER: % Supprime l'indentation
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: % Espacement entre les paragraphes
+#+LATEX_HEADER: \setlength{\parskip}{2ex}
+
+
+:END:
+# Latex command to work with minted
+:CACHE:
+#+HEADER: :eval yes
+#+HEADER: :results silent
+#+HEADER: :exports results
+#+BEGIN_SRC emacs-lisp 
+;; (setq org-latex-pdf-process
+;;       '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "bibtex %b"
+;;         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+#+END_SRC
+:END:
+# LaTeX Macros maths
+#+MACRO: TEX-INDEP $\perp\!\!\!\perp$
+:OPTIONS:
+#+LATEX_HEADER: % ""
+#+LATEX_HEADER: \def\ofg#1{\og #1 \fg{}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % backslash
+#+LATEX_HEADER: \def\bs{\textbackslash}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Presentation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % bold math
+#+LATEX_HEADER: \def\mbf#1{\boldsymbol{#1}}
+#+LATEX_HEADER: % straight bold math
+#+LATEX_HEADER: \def\mbfs#1{\mathbf{#1}}
+#+LATEX_HEADER: % (), {}, [], ||
+#+LATEX_HEADER: \def\lrPar#1{\left( #1 \right)}
+#+LATEX_HEADER: \def\lrpar#1{( #1 )}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrace#1{\left\{ #1 \right\}}
+#+LATEX_HEADER: \def\lrbrace#1{\{ #1 \}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrack#1{\left[ #1 \right]}
+#+LATEX_HEADER: \def\lrbrack#1{[ #1 ]}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrMid#1{\left| #1 \right|}
+#+LATEX_HEADER: \def\lrmid#1{| #1 |}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrmmid#1{\Vert #1 \Vert}
+#+LATEX_HEADER: \def\lrMmid#1{\left\Vert #1 \right\Vert}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrfloor#1{\lfloor #1 \rfloor}
+#+LATEX_HEADER: \def\lrFloor#1{\left\lfloor #1 \right\rfloor}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrceil#1{\lceil #1 \rceil}
+#+LATEX_HEADER: \def\lrCeil#1{\left\lceil #1 \right\rceil}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \def\lrnorm#1{\| #1 \|}
+#+LATEX_HEADER: % \def\lrNorm#1{\left\| #1 \right\|}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % = definition
+#+LATEX_HEADER: \def\eqdef{\stackrel{\text{d\acute{e}f}}{=}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Operators
+#+LATEX_HEADER: % =========
+#+LATEX_HEADER: % sign
+#+LATEX_HEADER: \def\signe{\text{signe}}
+#+LATEX_HEADER: % support
+#+LATEX_HEADER: \def\supp{\text{supp}}
+#+LATEX_HEADER: % to
+#+LATEX_HEADER: \def\conv#1{\xrightarrow[#1]{}}
+#+LATEX_HEADER: % d of dx
+#+LATEX_HEADER: \def\d{\text{d}}
+#+LATEX_HEADER: % integral/sum
+#+LATEX_HEADER: \def\intsum{\textstyle{\sum}\hspace{-0.5cm}\displaystyle\int}
+#+LATEX_HEADER: % modulo
+#+LATEX_HEADER: \def\modulo{\text{mod}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Set
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Classic sets
+#+LATEX_HEADER: \def\bbbr{\mathbb{R}} 
+#+LATEX_HEADER: \def\bbbn{\mathbb{N}} 
+#+LATEX_HEADER: \def\bbbk{\mathbb{K}} 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Characteristic function
+#+LATEX_HEADER: \def\indic{\mbox{1\hspace{-.25em}I}} 
+#+LATEX_HEADER: % Imply
+#+LATEX_HEADER: \def\Then{\Rightarrow}
+#+LATEX_HEADER: % set { ... }
+#+LATEX_HEADER: \def\set#1{\lrbrace{ #1 }}
+#+LATEX_HEADER: \def\Set#1{\lrBrace{ #1 }}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % set minus (\)
+#+LATEX_HEADER: \def\sm{\setminus}
+#+LATEX_HEADER: % part set of a set
+#+LATEX_HEADER: \def\setofparts#1{\mathcal{P}\left(#1\right)}
+#+LATEX_HEADER: % Union/intersection
+#+LATEX_HEADER: \def\union{\cup}
+#+LATEX_HEADER: \def\Union{\bigcup}
+#+LATEX_HEADER: \def\inter{\cap}
+#+LATEX_HEADER: \def\Inter{\bigcap}
+#+LATEX_HEADER: % Complementary
+#+LATEX_HEADER: \def\comp#1{\overline{#1}}
+#+LATEX_HEADER: % Cardinality
+#+LATEX_HEADER: \def\card{\text{card}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Probability
+#+LATEX_HEADER: % ===========
+#+LATEX_HEADER: % P
+#+LATEX_HEADER: \def\P{\mathbb{P}}
+#+LATEX_HEADER: \def\Prob{P}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Espectancy E[.]
+#+LATEX_HEADER: \def\E#1{\mathbb{E}\left[#1\right]}
+#+LATEX_HEADER: % indep.
+#+LATEX_HEADER: \def\perp\!\!\!\perp{\perp\!\!\!\perp}
+#+LATEX_HEADER: \def\nindep{\perp\!\!\!\!\not\,\perp}
+#+LATEX_HEADER: % Variance, covariance et corrélation
+#+LATEX_HEADER: \def\Var{\text{Var}}
+#+LATEX_HEADER: \def\Med{\text{Med}}
+#+LATEX_HEADER: \def\Cov{\text{Cov}}
+#+LATEX_HEADER: \def\Cor{\text{Cor}}
+#+LATEX_HEADER: % Mean bar
+#+LATEX_HEADER: \def\avg#1{\overline{#1}}
+#+LATEX_HEADER: \def\Bar#1{\overline{#1}}
+#+LATEX_HEADER: \def\Tilde#1{\widetilde{#1}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % convergence
+#+LATEX_HEADER: \def\convP{\xrightarrow[]{P}}
+#+LATEX_HEADER: \def\convL{\xrightarrow[]{L^2}}
+#+LATEX_HEADER: \def\convD{\xrightarrow[]{\mathcal{L}}}
+#+LATEX_HEADER: % ~_{sth}
+#+LATEX_HEADER: \def\simu#1{\underset{#1}{\sim}}
+#+LATEX_HEADER: % ~ iid
+#+LATEX_HEADER: \def\simiid{\stackrel{\text{i.i.d.}}{\sim}}
+#+LATEX_HEADER: % ~ as
+#+LATEX_HEADER: \def\simas{\stackrel{\text{as.}}{\sim}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % GMs
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Parents
+#+LATEX_HEADER: \def\Pa{\text{Pa}}
+#+LATEX_HEADER: \def\pa{\text{pa}}
+#+LATEX_HEADER: % Children
+#+LATEX_HEADER: \def\Ch{\text{Ch}}
+#+LATEX_HEADER: \def\ch{\text{ch}}
+#+LATEX_HEADER: \def\En{\text{En}}
+#+LATEX_HEADER: \def\en{\text{en}}
+#+LATEX_HEADER: % Ancestors
+#+LATEX_HEADER: \def\An{\text{An}}
+#+LATEX_HEADER: \def\an{\text{an}}
+#+LATEX_HEADER: % Descandants
+#+LATEX_HEADER: \def\De{\text{De}}
+#+LATEX_HEADER: \def\de{\text{de}}
+#+LATEX_HEADER: % Non descandants
+#+LATEX_HEADER: \def\Nd{\text{Nd}}
+#+LATEX_HEADER: \def\nd{\text{nd}}
+#+LATEX_HEADER: % Family
+#+LATEX_HEADER: \def\Fa{\text{Fa}}
+#+LATEX_HEADER: \def\fa{\text{fa}}
+#+LATEX_HEADER: % Domaine
+#+LATEX_HEADER: \def\Dom{\text{Dom}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Optimisation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % argmin/argmax
+#+LATEX_HEADER: \def\argmin#1{\underset{#1}{\arg\min}~}
+#+LATEX_HEADER: \def\argmax#1{\underset{#1}{\arg\max}~}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Matrices
+#+LATEX_HEADER: % ========
+#+LATEX_HEADER: % diag
+#+LATEX_HEADER: \def\diag{\text{diag}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % SdF
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Propagation dcc
+#+LATEX_HEADER: \def\propdcc{\stackrel{\text{dcc}}{\rightsquigarrow}}
+:END:
+
+# Babel configuration
+# -------------------
+:CACHE:
+#+HEADER: :eval yes
+#+HEADER: :results silent
+#+HEADER: :exports results
+#+BEGIN_SRC emacs-lisp 
+(setq org-latex-listings 'minted)
+
+(setq org-latex-minted-options
+        '(("frame" "lines") ("linenos=false") ("fontsize=\\footnotesize")))
+
+#+END_SRC
+:END:
+
+* Exercice 1
+
+Dans cet exercice, nous étudions la loi d'un couple de v.a. binaires $\left(X, Y\right)$ à valeurs dans
+l'ensemble ${\text{F},\text{V}}$. Pour ce
+faire, nous disposons des données $\mathcal{D} = ((x_{1},y_{1}),\ldots,(x_{8},y_{8}))$ contenant les huit réalisations supposées
+i.i.d. des v.a. $(X, Y)$ suivantes :
+#+ATTR_LATEX: :environment tabular :align |l|cccccccc|
+#+ATTR_LATEX: :center t 
+#+ATTR_LATEX: :font \normalsize
+|-----+---+---+---+---+---+---+---+---|
+| $X$ | V | V | V | V | F | F | F | F |
+|-----+---+---+---+---+---+---+---+---|
+| $Y$ | F | V | V | V | F | V | V | V |
+|-----+---+---+---+---+---+---+---+---|
+
+_Modèle 1_ : $X$ et $Y$ sont supposées indépendantes.
+
+1. Dessiner le RB correspondant et donner la factorisation de la loi jointe du couple $(X,Y)$.
+2. Quelle est la complexité de stockage de ce modèle ?
+3. Combien de paramètres probabilistes indépendants sont à estimer pour définir la loi du couple $(X,Y)$
+   dans ce modèle ?
+4. Donner les estimations du maximum de vraisemblance des LPC de ce modèle.
+5. En utilisant les LPC obtenues à partir de la méthode du maximum de vraisemblance, donner
+   l'expression de la vraisemblance des données $\mathcal{D}$, notée $L_{1}$, sous la forme : 
+   \begin{equation}
+   L_{1}(\mathcal{D}) = \frac{a^{\alpha_{1}}}{b^{\alpha_{2}}}.
+   \end{equation}
+   où $a$, $b$, $\alpha_{1}$ et $\alpha_{2}$ sont à déterminer.
+6. En déduire l'expression de la log-vraisemblance des données, notée $\ell_{1}$, en fonction des
+   valeurs $a$, $b$, $\alpha_{1}$ et $\alpha_{2}$ calculées à la question précédente.
+
+_Modèle 2_ : $X \to Y$.
+
+1. Donner la factorisation de la loi jointe du couple $(X,Y)$ dans ce modèle.
+2. Quelle est la complexité de stockage de ce modèle ?
+3. Combien de paramètres probabilistes indépendants sont à estimer pour définir la loi du couple $(X,Y)$
+   dans ce modèle ?
+4. Donner les estimations du maximum de vraisemblance des LPC de ce modèle.
+5. En notant, $L_{2}$ la vraisemblance des données $\mathcal{D}$ dans le modèle $X \to Y$, comparer
+   $L_{1}$ et $L_{2}$.
+
+_Modèle 3_ : Loi jointe naturelle.
+
+1. Quelle est la complexité de stockage de ce modèle ?
+2. Combien de paramètres probabilistes indépendants sont à estimer pour définir la loi du couple $(X,Y)$
+   dans ce modèle ?
+3. Donner l'estimation du maximum de vraisemblance de la loi jointe. 
+
+** Correction                                                      :noexport:
+
+_Modèle 1_ : $X$ et $Y$ sont supposées indépendantes.
+
+1. Le modèle 1 se représente graphiquement par deux noeuds sans aucun lien. La loi jointe s'écrit
+   $P_{1}(X, Y) = P_{1}(X) \times P_{1}(Y)$.
+2. $CS(\text{Modèle 1}) = CS(P_{1}(X)) + CS(P_{1}(Y)) = 2 + 2 = 4$.
+3. $CP(\text{Modèle 1}) = CP(P_{1}(X)) + CP(P_{1}(Y)) = 1 + 1 = 2$.
+4. Par définition, 
+   $$
+   P_{1}^{MV}(X = V) = \frac{\text{Nombre de données $\{X = V\}$}}{\text{Nombre total de données}} =
+   4/8 = 1/2
+   $$
+   Et donc, $P_{1}^{MV}(X = F) = 1 - P_{1}^{MV}(X = V) = 1/2$.
+   
+   De même, 
+   $$
+   P_{1}^{MV}(Y = V) = \frac{\text{Nombre de données $\{Y = V\}$}}{\text{Nombre total de données}} =
+   6/8 = 3/4,
+   $$
+   et $P_{1}^{MV}(X = F) = 1 - P_{1}^{MV}(Y = V) = 1/4$.
+5. Par définition, la vraisemblance du modèle 1 par rapport aux données a pour expression :
+   \begin{align*}
+   L_{1}(\mathcal{D}) & = \prod_{i=1}^{8} P^{MV}_{1}(X = x_{i}, Y = y_{i}) \\
+                      & = \prod_{i=1}^{8} P^{MV}_{1}(X = x_{i}) \times P^{MV}_{1}(Y = y_{i}) \\
+                      & = P^{MV}_{1}(X = V)^{4} \times P^{MV}_{1}(X = F)^{4} \times P^{MV}_{1}(Y = V)^{6} \times P^{MV}_{1}(Y = F)^{2} \\
+                      & = \frac{1}{2^4} \times \frac{1}{2^4} \times \frac{3^6}{4^6} \times \frac{1}{4^2} \\
+   L_{1}(\mathcal{D}) & = \frac{3^6}{2^{24}} \approx 4.345 \times 10^{-5}.
+   \end{align*}
+6. On en déduit la log-vraisemblance :
+   $$
+   \ell_{1}(\mathcal{D}) = \ln{L_{1}(\mathcal{D})} = 6 \ln{3} - 24 \ln{2} \approx -10.043.
+   $$
+
+
+_Modèle 2_ : $X \to Y$.
+
+1. La loi jointe s'écrit
+   $P_{2}(X, Y) = P_{2}(X) \times P_{2}(Y | X)$.
+2. $CS(\text{Modèle 2}) = CS(P_{2}(X)) + CS(P_{2}(Y|X)) = 2 + 4 = 6$.
+3. $CP(\text{Modèle 2}) = CP(P_{2}(X)) + CP(P_{2}(Y|X)) = 1 + 1\times2 = 3$.
+4. Comme dans le modèle 1, nous avons $P_{2}^{MV}(X = V) = 1/2$.
+   De plus, 
+   $$
+   P_{2}^{MV}(Y = V|X = V) = \frac{\text{Nombre de données $\{Y = V; X = V\}$}}{\text{Nombre de
+   données $\{X = V\}$}} = \frac{3}{4}, 
+   $$ 
+   $$
+   P_{2}^{MV}(Y = V|X = F) = \frac{\text{Nombre de données $\{Y = V; X = F\}$}}{\text{Nombre de
+   données $\{X = F\}$}} = \frac{3}{4}.
+   $$ 
+5. On remarque tout d'abord que pour tout $x = V, F$, $P_{2}^{MV}(Y|X=x) = P_{2}^{MV}(Y)$. Cela
+   signifie que les variables $X$ et $Y$ sont numériquement indépendantes malgré le lien entre ces deux
+   variables dans le graphe du modèle 2 (modèle non fidèle). Dans le contexte des données
+   $\mathcal{D}$, les estimateurs du maximum de
+   vraisemblance des LPC entraînent une équivalence probabiliste des modèles 1 et 2. On peut donc en
+   déduire sans calcul que $L_{1}(\mathcal{D}) = L_{2}(\mathcal{D})$. \\
+
+   Pour s'en convaincre par le calcul, la vraisemblance du modèle 2 par rapport aux données a pour expression :
+   \begin{align*}
+   L_{2}(\mathcal{D}) = & \prod_{i=1}^{8} P^{MV}_{2}(X = x_{i}, Y = y_{i}) \\
+                      = & \prod_{i=1}^{8} P^{MV}_{2}(X = x_{i}) \times P^{MV}_{2}(Y = y_{i} | X = x_{i}) \\
+                      = & P^{MV}_{2}(X = V)^{4} \times P^{MV}_{2}(X = F)^{4} \times 
+                          P^{MV}_{2}(Y = V|X = V)^{3} \times 
+                          P^{MV}_{2}(Y = V|X = F)^{3} \times 
+                          P^{MV}_{2}(Y = F|X = V) \times
+                          P^{MV}_{2}(Y = F|X = F) \\
+                      = & \frac{1}{2^4} \times \frac{1}{2^4} \times \frac{3^3}{4^3} \times \frac{3^3}{4^3} \times \frac{1}{4} \times \frac{1}{4} \\
+   L_{2}(\mathcal{D}) = & \frac{3^6}{2^{24}}.
+   \end{align*}
+
+_Modèle 3_ : Loi jointe naturelle.
+
+1. $CS(\text{Modèle 3}) = CS(P_{3}(X, Y)) = 2 \times 2 = 4$.
+2. $CP(\text{Modèle 3}) = CP(P_{3}(X, Y)) = CS(P_{3}(X, Y)) - 1 = 3$.
+3. L'estimateur du maximum de vraisemblance de la loi jointe naturelle par rapport aux données
+   $\mathcal{D}$ est caractérisé par : 
+   $$
+   P_{3}^{MV}(X = V, Y = V) = \frac{\text{Nombre de données $\{X = V; Y = V\}$}}{\text{Nombre total de
+   données}} = \frac{3}{8},
+   $$ 
+   $$
+   P_{3}^{MV}(X = V, Y = F) = \frac{\text{Nombre de données $\{X = V; Y = F\}$}}{\text{Nombre total de
+   données}} = \frac{1}{8},
+   $$ 
+   $$
+   P_{3}^{MV}(X = F, Y = V) = \frac{\text{Nombre de données $\{X = F; Y = V\}$}}{\text{Nombre total de
+   données}} = \frac{3}{8}.
+   $$
+   Remarquons que :
+   - le modèle 3 étant équivalent au modèle 2 (RB totalement connecté), on a par conséquent $L_{3}(\cdot) =
+     L_{2}(\cdot)$, i.e. quelque soit le jeu de données considérées pour l'apprentissage des LPC ;
+   - $L_{1}(\mathcal{D}) = L_{2}(\mathcal{D}) = L_{3}(\mathcal{D})$ du fait de l'équivalence des
+     modèles 1 et 2 dans le contexte des données $\mathcal{D}$ de l'exercice.

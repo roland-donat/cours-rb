@@ -2,7 +2,7 @@
 
 #+TITLE: Rappels de probabilité et introduction aux réseaux bayésiens
 #+AUTHOR: Exercices de cours
-#+DATE: ENSIBS - Spécialité Informatique
+#+DATE: ENSIBS - Cyber Data
 # Modélisation Stochastique par Réseaux Bayésiens 
 
 # Org-mode general options
