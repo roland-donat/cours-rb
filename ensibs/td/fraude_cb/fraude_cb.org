@@ -1,0 +1,410 @@
+# -*- coding: utf-8 -*-
+
+#+TITLE: Détection de fraude à la carte de crédit
+#+AUTHOR: Travaux dirigés
+#+DATE: ENSIBS - Spécialité Cyber Data
+# Modélisation Stochastique par Réseaux Bayésiens 
+
+# ==============================================
+# Document Configuration
+# ======================
+# Orgmode
+:CONFIG:
+#+LANGUAGE: fr
+#+OPTIONS: H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} f:t TeX:t author:t d:nil timestamp:nil
+#+OPTIONS: html-postamble:nil
+#+STARTUP: content 
+#+STARTUP: hidestars
+#+DRAWERS: CONFIG OPTIONS CACHE MACROS
+#+TODO: TODO(t) INPROGRESS(p) | DONE(d)
+#+BIND: org-latex-table-scientific-notation "{%s}E{%s}"
+:END:
+
+# LaTeX options
+# -------------
+# LaTeX Macros maths
+#+MACRO: TEX-INDEP $\perp\!\!\!\perp$
+:OPTIONS:
+#+LATEX_HEADER: % ""
+#+LATEX_HEADER: \def\ofg#1{\og #1 \fg{}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % backslash
+#+LATEX_HEADER: \def\bs{\textbackslash}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Presentation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % bold math
+#+LATEX_HEADER: \def\mbf#1{\boldsymbol{#1}}
+#+LATEX_HEADER: % straight bold math
+#+LATEX_HEADER: \def\mbfs#1{\mathbf{#1}}
+#+LATEX_HEADER: % (), {}, [], ||
+#+LATEX_HEADER: \def\lrPar#1{\left( #1 \right)}
+#+LATEX_HEADER: \def\lrpar#1{( #1 )}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrace#1{\left\{ #1 \right\}}
+#+LATEX_HEADER: \def\lrbrace#1{\{ #1 \}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrBrack#1{\left[ #1 \right]}
+#+LATEX_HEADER: \def\lrbrack#1{[ #1 ]}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrMid#1{\left| #1 \right|}
+#+LATEX_HEADER: \def\lrmid#1{| #1 |}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrmmid#1{\Vert #1 \Vert}
+#+LATEX_HEADER: \def\lrMmid#1{\left\Vert #1 \right\Vert}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrfloor#1{\lfloor #1 \rfloor}
+#+LATEX_HEADER: \def\lrFloor#1{\left\lfloor #1 \right\rfloor}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \def\lrceil#1{\lceil #1 \rceil}
+#+LATEX_HEADER: \def\lrCeil#1{\left\lceil #1 \right\rceil}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \def\lrnorm#1{\| #1 \|}
+#+LATEX_HEADER: % \def\lrNorm#1{\left\| #1 \right\|}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % = definition
+#+LATEX_HEADER: \def\eqdef{\stackrel{\text{d\acute{e}f}}{=}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Operators
+#+LATEX_HEADER: % =========
+#+LATEX_HEADER: % sign
+#+LATEX_HEADER: \def\signe{\text{signe}}
+#+LATEX_HEADER: % support
+#+LATEX_HEADER: \def\supp{\text{supp}}
+#+LATEX_HEADER: % to
+#+LATEX_HEADER: \def\conv#1{\xrightarrow[#1]{}}
+#+LATEX_HEADER: % d of dx
+#+LATEX_HEADER: \def\d{\text{d}}
+#+LATEX_HEADER: % integral/sum
+#+LATEX_HEADER: \def\intsum{\textstyle{\sum}\hspace{-0.5cm}\displaystyle\int}
+#+LATEX_HEADER: % modulo
+#+LATEX_HEADER: \def\modulo{\text{mod}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Set
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Classic sets
+#+LATEX_HEADER: \def\bbbr{\mathbb{R}} 
+#+LATEX_HEADER: \def\bbbn{\mathbb{N}} 
+#+LATEX_HEADER: \def\bbbk{\mathbb{K}} 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Characteristic function
+#+LATEX_HEADER: \def\indic{\mbox{1\hspace{-.25em}I}} 
+#+LATEX_HEADER: % Imply
+#+LATEX_HEADER: \def\Then{\Rightarrow}
+#+LATEX_HEADER: % set { ... }
+#+LATEX_HEADER: \def\set#1{\lrbrace{ #1 }}
+#+LATEX_HEADER: \def\Set#1{\lrBrace{ #1 }}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % set minus (\)
+#+LATEX_HEADER: \def\sm{\setminus}
+#+LATEX_HEADER: % part set of a set
+#+LATEX_HEADER: \def\setofparts#1{\mathcal{P}\left(#1\right)}
+#+LATEX_HEADER: % Union/intersection
+#+LATEX_HEADER: \def\union{\cup}
+#+LATEX_HEADER: \def\Union{\bigcup}
+#+LATEX_HEADER: \def\inter{\cap}
+#+LATEX_HEADER: \def\Inter{\bigcap}
+#+LATEX_HEADER: % Complementary
+#+LATEX_HEADER: \def\comp#1{\overline{#1}}
+#+LATEX_HEADER: % Cardinality
+#+LATEX_HEADER: \def\card{\text{card}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Probability
+#+LATEX_HEADER: % ===========
+#+LATEX_HEADER: % P
+#+LATEX_HEADER: \def\P{\mathbb{P}}
+#+LATEX_HEADER: \def\Prob{P}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Espectancy E[.]
+#+LATEX_HEADER: \def\E#1{\mathbb{E}\left[#1\right]}
+#+LATEX_HEADER: % indep.
+#+LATEX_HEADER: \def\indep{\perp\!\!\!\perp}
+#+LATEX_HEADER: \def\nindep{\perp\!\!\!\!\not\,\perp}
+#+LATEX_HEADER: % Variance, covariance et corrélation
+#+LATEX_HEADER: \def\Var{\text{Var}}
+#+LATEX_HEADER: \def\Med{\text{Med}}
+#+LATEX_HEADER: \def\Cov{\text{Cov}}
+#+LATEX_HEADER: \def\Cor{\text{Cor}}
+#+LATEX_HEADER: % Mean bar
+#+LATEX_HEADER: \def\avg#1{\overline{#1}}
+#+LATEX_HEADER: \def\Bar#1{\overline{#1}}
+#+LATEX_HEADER: \def\Tilde#1{\widetilde{#1}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % convergence
+#+LATEX_HEADER: \def\convP{\xrightarrow[]{P}}
+#+LATEX_HEADER: \def\convL{\xrightarrow[]{L^2}}
+#+LATEX_HEADER: \def\convD{\xrightarrow[]{\mathcal{L}}}
+#+LATEX_HEADER: % ~_{sth}
+#+LATEX_HEADER: \def\simu#1{\underset{#1}{\sim}}
+#+LATEX_HEADER: % ~ iid
+#+LATEX_HEADER: \def\simiid{\stackrel{\text{i.i.d.}}{\sim}}
+#+LATEX_HEADER: % ~ as
+#+LATEX_HEADER: \def\simas{\stackrel{\text{as.}}{\sim}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % GMs
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: % Parents
+#+LATEX_HEADER: \def\Pa{\text{Pa}}
+#+LATEX_HEADER: \def\pa{\text{pa}}
+#+LATEX_HEADER: % Children
+#+LATEX_HEADER: \def\Ch{\text{Ch}}
+#+LATEX_HEADER: \def\ch{\text{ch}}
+#+LATEX_HEADER: \def\En{\text{En}}
+#+LATEX_HEADER: \def\en{\text{en}}
+#+LATEX_HEADER: % Ancestors
+#+LATEX_HEADER: \def\An{\text{An}}
+#+LATEX_HEADER: \def\an{\text{an}}
+#+LATEX_HEADER: % Descandants
+#+LATEX_HEADER: \def\De{\text{De}}
+#+LATEX_HEADER: \def\de{\text{de}}
+#+LATEX_HEADER: % Non descandants
+#+LATEX_HEADER: \def\Nd{\text{Nd}}
+#+LATEX_HEADER: \def\nd{\text{nd}}
+#+LATEX_HEADER: % Family
+#+LATEX_HEADER: \def\Fa{\text{Fa}}
+#+LATEX_HEADER: \def\fa{\text{fa}}
+#+LATEX_HEADER: % Domaine
+#+LATEX_HEADER: \def\Dom{\text{Dom}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Optimisation
+#+LATEX_HEADER: % ============
+#+LATEX_HEADER: % argmin/argmax
+#+LATEX_HEADER: \def\argmin#1{\underset{#1}{\arg\min}~}
+#+LATEX_HEADER: \def\argmax#1{\underset{#1}{\arg\max}~}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Matrices
+#+LATEX_HEADER: % ========
+#+LATEX_HEADER: % diag
+#+LATEX_HEADER: \def\diag{\text{diag}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % SdF
+#+LATEX_HEADER: % ===
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Propagation dcc
+#+LATEX_HEADER: \def\propdcc{\stackrel{\text{dcc}}{\rightsquigarrow}}
+:END:
+
+# HTML
+# ----
+:CONFIG:
+# Org HTML Macros
+#+MACRO: NEWLINE @@latex:\\@@ @@html:<br>@@
+#+MACRO: HTMLFONTSIZE @@html:<font size="$2">$1</font>@@
+#+MACRO: SUBTITLE @@html:<div class="slidesubtitle">$1</div>@@
+
+# HTML options
+# ------------
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://edgemind-sas.github.io/visual-identity/official_docs/css/edgemind.css" />
+:END:
+
+# ==============================================
+# Document starts here
+# ====================
+
+#+BEGIN_SRC emacs-lisp :results silent :tangle hector.py :exports results
+(setq td_corrige nil)
+#+END_SRC
+
+#+LATEX: \clearpage
+
+#+ATTR_HTML: :width 50%
+#+CAPTION: Image générée par Midjourney
+[[./hector.png]]
+
+
+
+* Problématique
+
+# Source :
+# This exercice is inspired from an assignment proposed in the course "Introduction to Artificial
+# Intelligence" by Pascal Poupart, School of Computer Science, University of Waterloo, Canada.
+
+Chaque année, les banques perdent d'importantes sommes d'argents suite
+aux pertes ou aux vols de cartes de crédit. Pour détecter l'occurrence de fraudes, l'industrie financière se tourne de plus en plus vers
+l'intelligence artificielle et l'analyse de données pour trouver des solutions à cette
+problématique. En effet, les propriétaires de carte de crédit ont tendance à faire leurs achats en suivant des
+schémas plus ou moins identifiables. Quand ce schéma n'est plus respecté, il y a de fortes chances
+qu'une fraude se soit produite. Les paragraphes suivants donnent des informations générales sur le
+comportement des propriétaires de carte :
+1. Quand un propriétaire de carte de crédit voyage à l'étranger, les transactions frauduleuses sont
+   plus probables car les touristes sont des cibles privilégiées pour les voleurs. Plus précisément,
+   on estime que $1\%$ des transactions sont frauduleuses quand le propriétaire de la carte de crédit
+   est en voyage, contre seulement $0.2\%$ de transactions frauduleuses à domicile. En moyenne, $5\%$
+   de toutes les transactions se produisent au cours de voyages à l'étranger. \\
+2. Si une transaction est frauduleuse, alors la probabilité qu'il s'agisse d'un achat à l'étranger
+   augmente, sauf si le propriétaire de la carte est précisément en voyage à l'étranger. Statistiquement, quand le propriétaire de la carte n'est pas en voyage, $10\%$ des transactions
+   frauduleuse concernent un achat à l'étranger alors que seulement $1\%$ des transactions normales
+   portent sur un achat à l'étranger. En revanche, quand le propriétaire est en voyage à l'étranger, $90\%$ des
+   transactions (frauduleuses ou non) sont des achats à
+   l'étranger. \\
+3. Les achats réalisés sur internet sont plus souvent frauduleux. Ceci est particulièrement vrai pour
+   les propriétaires de carte n'ayant pas d'ordinateur. En effet :
+   - Pour ceux qui ne possèdent pas d'ordinateur, seulement $0.1\%$ de leurs transactions normales sont
+     faites sur internet. Ce chiffre monte à $1.1\%$ en cas de transactions frauduleuses. 
+   - Pour les possesseurs d'ordinateur, $1\%$ des transactions normales a
+     lieu sur internet. En revanche, ce pourcentage s'élève à $2\%$ lors de transactions
+     frauduleuses.  
+   - On estime aujourd'hui que $75\%$ de la population possède un ordinateur \\
+4. Malheureusement, les banques ne savent pas si le propriétaire d'une carte possède un
+   ordinateur. Toutefois, ces dernières peuvent vérifier l'historique des transactions afin de
+   rechercher si des achats liés à du matériel informatique ont été effectués dernièrement. En
+   particulier, on estime que $10\%$ des propriétaires d'ordinateur ont fait des achats en rapport avec
+   l'informatique dernièrement contre $0.1\%$ pour ceux ne possédant pas d'ordinateur.
+
+* Modélisation
+
+- Construire un RB (graphe et LPC) visant à détecter des transactions frauduleuses. Le RB sera
+  composé des six variables Booléennes suivantes :
+  - FR : la transaction courante est frauduleuse.
+  - VE : le propriétaire de la carte est actuellement en voyage à l'étranger.
+  - AE : la transaction courante concerne un achat à l'étranger.
+  - AI : la transaction courante concerne un achat sur internet.
+  - PO : le propriétaire de la carte a un ordinateur.
+  - AOD : un achat lié à l'informatique a été effectué dernièrement. 
+2. Écrire l'expression de la loi jointe du modèle.
+3. Évaluer la complexité d'une représentation naïve de la loi jointe (i.e. sans RB) et de la
+   représentation par RB.
+
+* Indépendances conditionnelles
+
+Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
+- VE {{{TEX-INDEP}}} AI
+- VE $\perp\!\!\!\perp$ PO
+- VE $\perp\!\!\!\perp$ AI $|$ FR
+- FR $\perp\!\!\!\perp$ AOD
+- FR $\perp\!\!\!\perp$ AOD $|$ PO
+- VE $\perp\!\!\!\perp$ AOD $|$ AI
+
+
+* Implémentation du modèle avec =GeNIe=
+
+1. Utiliser le logiciel =GeNIe= pour construire le modèle sur la détection de fraude.
+
+* Inférence
+1. Quelle est la probabilité /a priori/ qu'une transaction donnée quelconque soit frauduleuse ?
+2. Quelle est la probabilité qu'une transaction donnée soit frauduleuse après avoir vérifié que le
+   client ait effectué un achat sur internet.
+3. Supposons à présent que vous avez volé une carte de crédit - attention c'est mal ! -. Supposons de
+   plus que vous connaissez les réseaux bayésiens et que vous savez que la banque du propriétaire de
+   la carte utilise le système de détection de fraudes reposant sur le RB décrit
+   précédemment. Malgré tout cela, vous souhaitez quand même faire un achat sur internet avec la
+   carte volée, quelle(s) action(s) pouvez-vous effectuer afin de réduire le risque que votre
+   transaction soit rejetée ? De combien pouvez-vous faire baisser la probabilité que la transaction
+   soit considérée comme frauduleuse ?
+
+* Implémentation du modèle avec =pyAgrum= 
+
+Implémenter le modèle de détection de fraude avec la librairie =pyAgrum=, puis vérifier les calculs
+d'inférence réalisés précédemment avec =GeNIe=.
+
+** Correction                                                      :noexport:
+#+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+import pyAgrum as gum
+#+END_SRC
+
+Création du réseau bayésien en instanciant un objet =BayesNet= : 
+#+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+rb_fraude_cb = gum.BayesNet("Réseau bayésien fraude CB")
+#+END_SRC
+
+Création des variables aléatoires associées au problème en utilisant des objets de type
+=LabelizedVariable= :
+#+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+va_FR = gum.LabelizedVariable("FR", "Transaction courante frauduleuse ?", 2)
+va_VE = gum.LabelizedVariable("VE", "Propriétaire CB à l'étranger ?", 2)
+va_AE = gum.LabelizedVariable("AE", "Transaction courante concerne un achat à l'étranger ?", 2)
+va_AI = gum.LabelizedVariable("AI", "Transaction courante concerne un achat sur internet ?", 2)
+va_PO = gum.LabelizedVariable("PO", "Propriétaire CB possède un PC ?", 2)
+va_AOD = gum.LabelizedVariable("AOD", "Achat informatique récent ?", 2)
+#+END_SRC
+Toutes les variables sont binaires ce qui explique le troisième argument de la méthode
+=LabelizedVariable= fixé à la valeur 2. Par défaut les variables sont alors à valeurs dans
+l'ensemble $\set{0,1}$ ce qui n'est pas forcément très intuitif. Nous pouvons améliorer cela en
+changeant la valeur =0= par le label =non= et la valeur =1= par le label =oui= /via/ la méthode
+=changeLabel= de la façon suivante :
+#+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+for va in [va_FR, va_VE, va_AE, va_AI, va_PO, va_AOD]:
+  va.changeLabel(0, "non")
+  va.changeLabel(1, "oui")
+#+END_SRC
+
+Ajout des variables aléatoires dans le RB avec la méthode =add= :
+#+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+for va in [va_FR, va_VE, va_AE, va_AI, va_PO, va_AOD]:
+  rb_fraude_cb.add(va)
+#+END_SRC
+
+Spécification des liens de dépendances entre variables aléatoires dans le RB avec la méthode
+=addArc= comme suit :
+#+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+rb_fraude_cb.addArc("VE"), "AE")
+rb_fraude_cb.addArc("VE"), "FR")
+rb_fraude_cb.addArc("FR"), "AE")
+rb_fraude_cb.addArc("FR"), "AI")
+rb_fraude_cb.addArc("PO"), "AI")
+rb_fraude_cb.addArc("PO"), "AOD")
+#+END_SRC
+
+Définition des lois de probabilité conditionnelle (LPC) de chaque variable. 
+#+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+rb_fraude_cb.cpt("VE")[:] = [0.95, 0.05]
+
+rb_fraude_cb.cpt("FR")[{"VE":"non"}] = [0.998, 0.002]
+rb_fraude_cb.cpt("FR")[{"VE":"oui"}] = [0.99, 0.01]
+
+rb_fraude_cb.cpt("AE")[{"VE":"non", "FR":"non"}] = [0.99, 0.01]
+rb_fraude_cb.cpt("AE")[{"VE":"non", "FR":"oui"}] = [0.9, 0.1]
+rb_fraude_cb.cpt("AE")[{"VE":"oui", "FR":"non"}] = [0.1, 0.9]
+rb_fraude_cb.cpt("AE")[{"VE":"oui", "FR":"oui"}] = [0.1, 0.9]
+
+rb_fraude_cb.cpt("AI")[{"FR":"non", "PO":"non"}] = [0.99, 0.01]
+rb_fraude_cb.cpt("AI")[{"FR":"non", "PO":"oui"}] = [0.9, 0.1]
+rb_fraude_cb.cpt("AI")[{"FR":"oui", "PO":"non"}] = [0.89, 0.11]
+rb_fraude_cb.cpt("AI")[{"FR":"oui", "PO":"oui"}] = [0.8, 0.2]
+
+rb_fraude_cb.cpt("PO")[:] = [0.25, 0.75]
+
+rb_fraude_cb.cpt("AOD")[{"PO":"non"}] = [0.99, 0.01]
+rb_fraude_cb.cpt("AOD")[{"PO":"oui"}] = [0.9, 0.1]
+#+END_SRC
+
+Initialisation d'un moteur d'inférence probabiliste adapté à notre RB. Nous utilisons dans cet
+exemple la méthode appelée /lazy propagation/ qui est une technique de calculs probabilistes exacts
+partageant des concepts communs avec la méthode d'élimination des variables que nous étudirons en
+détails dans le cours sur l'inférence.
+#+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+inf_rb_fraude_cb = gum.LazyPropagation(rb_fraude_cb)
+#+END_SRC
+L'objet =inf_rb_fraude_cb= peut être vu comme une machine à calculer des probabilités dans le
+RB =rb_fraude_cb= et va donc nous servir à répondre aux questions de la section suivante.
+
+Calculons les lois marginales de chacune des variables à l'aide de la méthode =makeInference= et
+affichons la loi de la v.a. =FR=.
+#+NAME: inf-1
+#+BEGIN_SRC python :results output code :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+inf_rb_fraude_cb.makeInference() 
+print(inf_rb_fraude_cb.posterior("FR"))
+#+END_SRC
+Nous obtenons :
+#+RESULTS: inf-1
+#+BEGIN_SRC python
+<FR:non> :: 0.9976 /<FR:oui> :: 0.0024
+#+END_SRC
+
+Nous cherchons à présent la probabilité d'une transaction frauduleuse sachant un certain nombre
+d'observations. Nous allons donc renseigner ces /évidences/ dans le moteur d'inférence et refaire
+le calcul de la loi marginal de la v.a. =FR=.  
+#+NAME: inf-2
+#+BEGIN_SRC python :results output code :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
+inf_rb_fraude_cb.setEvidence({"AE":"oui", "AI":"oui", "PO":"non"})
+inf_rb_fraude_cb.makeInference() 
+print(inf_rb_fraude_cb.posterior("FR"))
+#+END_SRC
+Ces observations se traduisent naturellement par une augmentation de la probabilité de fraude :
+#+RESULTS: inf-2
+#+BEGIN_SRC python
+<FR:non> :: 0.884724 /<FR:oui> :: 0.115276
+#+END_SRC
