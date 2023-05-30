@@ -413,5 +413,5 @@ Ces observations se traduisent naturellement par une augmentation de la probabil
   FR               |
 non      |oui      |
 ---------|---------|
- 0.9900  | 0.0100  |
+ 0.8847  | 0.1153  |
 #+end_src
