@@ -489,7 +489,7 @@ gnb.getPotential(bn.cpt("SYSTEM_N1"))
 Les fonctions =predict_proba=/=predict= permettent de réaliser des prédictions d'une variable cible du modèle à
 partir de données. Chaque ligne des données fournies est utilisée comme évidence (conditionnement)
 pour calculer la loi de la variable cible sachant les données observées.
-#+BEGIN_SRC python :session :results value :exports both :tangle projet_start.py
+#+BEGIN_SRC python :session :results silent :exports both :tangle projet_start.py
 pred_prob = bn.predict_proba(ot_odr_df[["SIG_OBS"]].iloc[-1000:], 
                              var_target="SYSTEM_N1",
                              show_progress=True)
@@ -502,4 +502,3 @@ pred = bn.predict(ot_odr_df[["SIG_OBS"]].iloc[-1000:],
 print(pred)
 #+END_SRC
 
-#+RESULTS:
