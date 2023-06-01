@@ -131,9 +131,9 @@ ot_odr_df_var.loc["SYSTEM_N3", "Description"] = "Identifiant de système de nive
 ot_odr_df_var.loc["EQU_ID", "Description"] = "Identifiant du véhicule concerné par l'OT"
 ot_odr_df_var.loc["DATE_OT", "Description"] = "Date de création de l'OT"
 ot_odr_df_var.loc["KILOMETRAGE", "Description"] = "Nombre de kilométres parcourus par le véhicule au moment de la création de l'OT"
-ot_odr_df_var.loc["SIG_ORGANE", "Description"] = "Signalement du conduction sur la partie organe"
-ot_odr_df_var.loc["SIG_CONTEXTE", "Description"] = "Signalement du conduction sur le contexte de l'anomalie"
-ot_odr_df_var.loc["SIG_OBS", "Description"] = "Signalement du conduction sur le symptôme observé"
+ot_odr_df_var.loc["SIG_ORGANE", "Description"] = "Signalement du conducteur sur la partie organe"
+ot_odr_df_var.loc["SIG_CONTEXTE", "Description"] = "Signalement du conducteur sur le contexte de l'anomalie"
+ot_odr_df_var.loc["SIG_OBS", "Description"] = "Signalement du conducteur sur le symptôme observé"
 ot_odr_df_var.loc["LIGNE", "Description"] = "Identifiant de la ligne du véhicule au moment du signalement conducteur"
 
 tabulate.tabulate(ot_odr_df_var[["Description"]], 
@@ -162,9 +162,9 @@ tabulate.tabulate(ot_odr_df_var[["Description"]],
 | EQU_ID        | Identifiant du véhicule concerné par l'OT                                       |
 | DATE_OT       | Date de création de l'OT                                                        |
 | KILOMETRAGE   | Nombre de kilométres parcourus par le véhicule au moment de la création de l'OT |
-| SIG_ORGANE    | Signalement du conduction sur la partie organe                                  |
-| SIG_CONTEXTE  | Signalement du conduction sur le contexte de l'anomalie                         |
-| SIG_OBS       | Signalement du conduction sur le symptôme observé                               |
+| SIG_ORGANE    | Signalement du conducteur sur la partie organe                                  |
+| SIG_CONTEXTE  | Signalement du conducteur sur le contexte de l'anomalie                         |
+| SIG_OBS       | Signalement du conducteur sur le symptôme observé                               |
 | LIGNE         | Identifiant de la ligne du véhicule au moment du signalement conducteur         |
 
 
@@ -280,18 +280,25 @@ Vous serez principalement évalué·es sur les critères suivants :
 
 * Pour se lancer en douceur                                        :noexport:
 
-** Analyses descriptives et visualisation
+Chargement des données
+#+BEGIN_SRC python :session :results silent :exports code
+import pandas as pd
+import os
 
-Il s'agit ici de réaliser des statistiques descriptives sur l'activité de maintenance de
-l'entreprise.
+ot_odr_filename = os.path.join(".", "OT_ODR.csv.bz2")
+ot_odr_df = pd.read_csv(ot_odr_filename,
+                        compression="bz2",
+                        sep=";")
 
-Le travail consiste par exemple à construire et visualiser certains indicateurs, par exemple :
-- historique des OT pour un véhicule donnée ;
-- temps de maintenance moyen pour chaque type de pannes et type de véhicules ;
-- répartition des actions de maintenance réalisées en fonction des caractéristiques des véhicules ;
-- temps et nombre de kilomètres moyen entre chaque les pannes d'un niveau système donné ;
-- etc.
+equipements_filename = os.path.join(".", 'EQUIPEMENTS.csv')
+equipements_df = pd.read_csv(equipements_filename,
+                             sep=";")
+#+END_SRC
 
-Les indicateurs produits sont à visualiser sous la forme d'un tableau de bord interactif développé
-de préférence en =Python= avec les librairies =Plotly Dash= ou =Streamlit=.
 
+
+
+
+* pyagrum-extra                                                    :noexport:
+
+pip install git+https://github.com/roland-donat/pyagrum-extra.git

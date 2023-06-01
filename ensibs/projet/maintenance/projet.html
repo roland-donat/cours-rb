@@ -23,36 +23,36 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgffd352e">Contexte et objectifs du projet</a></li>
-<li><a href="#orga19acbc">Problématique métier</a></li>
-<li><a href="#org24d824e">Présentation des données</a>
+<li><a href="#orga9f1d59">Contexte et objectifs du projet</a></li>
+<li><a href="#org695360f">Problématique métier</a></li>
+<li><a href="#org7a48836">Présentation des données</a>
 <ul>
-<li><a href="#org9c2d85f">Données <code>OT-ODR</code></a></li>
-<li><a href="#org4390e90">Données <code>EQUIPEMENTS</code></a></li>
+<li><a href="#orgf72f0e4">Données <code>OT-ODR</code></a></li>
+<li><a href="#org71f4cf5">Données <code>EQUIPEMENTS</code></a></li>
 </ul>
 </li>
 <li><a href="#sec-sujets">Travaux à réaliser</a>
 <ul>
-<li><a href="#orgcee4092">Développement d'une IA de diagnostic</a></li>
-<li><a href="#orgaad12f4">Développement d'un applicatif métier</a></li>
+<li><a href="#org23a746a">Développement d'une IA de diagnostic</a></li>
+<li><a href="#org57ca9f9">Développement d'un applicatif métier</a></li>
 </ul>
 </li>
-<li><a href="#orgd1aba95">Déroulement pratique et livrables</a></li>
-<li><a href="#orgfe51d5f">Critères d'évaluation</a></li>
+<li><a href="#org07eb94e">Déroulement pratique et livrables</a></li>
+<li><a href="#orga5bf5ab">Critères d'évaluation</a></li>
 </ul>
 </div>
 </div>
 
-<div id="orgdc9ed0a" class="figure">
+<div id="orgab8afcb" class="figure">
 <p><img src="./bus_maintenance.png" alt="bus maintenance city 2d isometric cartoon white background" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
 </div>
 
 
-<div id="outline-container-orgffd352e" class="outline-2">
-<h2 id="orgffd352e">Contexte et objectifs du projet</h2>
-<div class="outline-text-2" id="text-orgffd352e">
+<div id="outline-container-orga9f1d59" class="outline-2">
+<h2 id="orga9f1d59">Contexte et objectifs du projet</h2>
+<div class="outline-text-2" id="text-orga9f1d59">
 <p>
 Une entreprise de transport collectif cherche à améliorer l'efficacité des opérations de
 maintenance réalisées sur ses véhicules. Un axe d'amélioration porte sur l'élaboration de
@@ -81,9 +81,9 @@ projet.*
 </div>
 </div>
 
-<div id="outline-container-orga19acbc" class="outline-2">
-<h2 id="orga19acbc">Problématique métier</h2>
-<div class="outline-text-2" id="text-orga19acbc">
+<div id="outline-container-org695360f" class="outline-2">
+<h2 id="org695360f">Problématique métier</h2>
+<div class="outline-text-2" id="text-org695360f">
 <p>
 L'entreprise de transport exploite une flotte de véhicules qui circule pendant les horaires de
 service. Lorsqu'un problème survient sur un véhicule, le conducteur est chargé de faire un
@@ -119,9 +119,9 @@ du véhicule (kilométrage, type de moteur, marque, etc.).
 
 
 
-<div id="outline-container-org24d824e" class="outline-2">
-<h2 id="org24d824e">Présentation des données</h2>
-<div class="outline-text-2" id="text-org24d824e">
+<div id="outline-container-org7a48836" class="outline-2">
+<h2 id="org7a48836">Présentation des données</h2>
+<div class="outline-text-2" id="text-org7a48836">
 <p>
 Deux sources de données sont mises à disposition dans ce projet :
 </p>
@@ -147,14 +147,14 @@ et 2019.</li>
 </div>
 </div>
 
-<div id="outline-container-org9c2d85f" class="outline-3">
-<h3 id="org9c2d85f">Données <code>OT-ODR</code></h3>
-<div class="outline-text-3" id="text-org9c2d85f">
+<div id="outline-container-orgf72f0e4" class="outline-3">
+<h3 id="orgf72f0e4">Données <code>OT-ODR</code></h3>
+<div class="outline-text-3" id="text-orgf72f0e4">
 <p>
-Le Tableau <a href="#org94fbf71">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
+Le Tableau <a href="#orgb1d4398">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
 </p>
 
-<table id="org94fbf71" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgb1d4398" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>OT-ODR</code>.</caption>
 
 <colgroup>
@@ -226,17 +226,17 @@ Le Tableau <a href="#org94fbf71">1</a> donne une description des variables du je
 
 <tr>
 <td class="org-left">SIG_ORGANE</td>
-<td class="org-left">Signalement du conduction sur la partie organe</td>
+<td class="org-left">Signalement du conducteur sur la partie organe</td>
 </tr>
 
 <tr>
 <td class="org-left">SIG_CONTEXTE</td>
-<td class="org-left">Signalement du conduction sur le contexte de l'anomalie</td>
+<td class="org-left">Signalement du conducteur sur le contexte de l'anomalie</td>
 </tr>
 
 <tr>
 <td class="org-left">SIG_OBS</td>
-<td class="org-left">Signalement du conduction sur le symptôme observé</td>
+<td class="org-left">Signalement du conducteur sur le symptôme observé</td>
 </tr>
 
 <tr>
@@ -249,14 +249,14 @@ Le Tableau <a href="#org94fbf71">1</a> donne une description des variables du je
 </div>
 
 
-<div id="outline-container-org4390e90" class="outline-3">
-<h3 id="org4390e90">Données <code>EQUIPEMENTS</code></h3>
-<div class="outline-text-3" id="text-org4390e90">
+<div id="outline-container-org71f4cf5" class="outline-3">
+<h3 id="org71f4cf5">Données <code>EQUIPEMENTS</code></h3>
+<div class="outline-text-3" id="text-org71f4cf5">
 <p>
-Le Tableau <a href="#orgfc7d59e">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
+Le Tableau <a href="#org3518d3a">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
 </p>
 
-<table id="orgfc7d59e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org3518d3a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 2 :</span> Définition des variables du jeu de données <code>EQUIPEMENTS</code>.</caption>
 
 <colgroup>
@@ -304,9 +304,9 @@ Le Tableau <a href="#orgfc7d59e">2</a> donne une description des variables du je
 <div class="outline-text-2" id="text-sec-sujets">
 </div>
 
-<div id="outline-container-orgcee4092" class="outline-3">
-<h3 id="orgcee4092">Développement d'une IA de diagnostic</h3>
-<div class="outline-text-3" id="text-orgcee4092">
+<div id="outline-container-org23a746a" class="outline-3">
+<h3 id="org23a746a">Développement d'une IA de diagnostic</h3>
+<div class="outline-text-3" id="text-org23a746a">
 <p>
 Ce travail correspond au développement d'un moteur d'aide au diagnostic et à la recommandation de
 maintenance. Il s'agit donc en 
@@ -333,9 +333,9 @@ Le travail est à réaliser sous Python en utilisant la <a href="https://agrum.g
 </div>
 </div>
 
-<div id="outline-container-orgaad12f4" class="outline-3">
-<h3 id="orgaad12f4">Développement d'un applicatif métier</h3>
-<div class="outline-text-3" id="text-orgaad12f4">
+<div id="outline-container-org57ca9f9" class="outline-3">
+<h3 id="org57ca9f9">Développement d'un applicatif métier</h3>
+<div class="outline-text-3" id="text-org57ca9f9">
 <p>
 L'objectif de ce travail est de développer une application permettant d'interagir avec le
    moteur de recommandations de la section précédente de manière transparente pour 
@@ -360,9 +360,9 @@ ressources sur internet afin de monter en compétences (e.g. <a href="https://da
 </div>
 </div>
 
-<div id="outline-container-orgd1aba95" class="outline-2">
-<h2 id="orgd1aba95">Déroulement pratique et livrables</h2>
-<div class="outline-text-2" id="text-orgd1aba95">
+<div id="outline-container-org07eb94e" class="outline-2">
+<h2 id="org07eb94e">Déroulement pratique et livrables</h2>
+<div class="outline-text-2" id="text-org07eb94e">
 <p>
 Le projet est à réaliser par groupe de trois étudiant·es.
 </p>
@@ -392,9 +392,9 @@ réalisés, les performances obtenues et une conclusion.</li>
 </div>
 </div>
 
-<div id="outline-container-orgfe51d5f" class="outline-2">
-<h2 id="orgfe51d5f">Critères d'évaluation</h2>
-<div class="outline-text-2" id="text-orgfe51d5f">
+<div id="outline-container-orga5bf5ab" class="outline-2">
+<h2 id="orga5bf5ab">Critères d'évaluation</h2>
+<div class="outline-text-2" id="text-orga5bf5ab">
 <p>
 Vous serez principalement évalué·es sur les critères suivants :
 </p>
