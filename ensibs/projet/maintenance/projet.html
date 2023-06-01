@@ -23,36 +23,46 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga9f1d59">Contexte et objectifs du projet</a></li>
-<li><a href="#org695360f">Problématique métier</a></li>
-<li><a href="#org7a48836">Présentation des données</a>
+<li><a href="#org3e440dc">Contexte et objectifs du projet</a></li>
+<li><a href="#org25c74d0">Problématique métier</a></li>
+<li><a href="#org25452b1">Présentation des données</a>
 <ul>
-<li><a href="#orgf72f0e4">Données <code>OT-ODR</code></a></li>
-<li><a href="#org71f4cf5">Données <code>EQUIPEMENTS</code></a></li>
+<li><a href="#orgaee1d61">Données <code>OT-ODR</code></a></li>
+<li><a href="#org2377d10">Données <code>EQUIPEMENTS</code></a></li>
 </ul>
 </li>
 <li><a href="#sec-sujets">Travaux à réaliser</a>
 <ul>
-<li><a href="#org23a746a">Développement d'une IA de diagnostic</a></li>
-<li><a href="#org57ca9f9">Développement d'un applicatif métier</a></li>
+<li><a href="#org38a180a">Développement d'une IA de diagnostic</a></li>
+<li><a href="#org24ba81a">Développement d'un applicatif métier</a></li>
 </ul>
 </li>
-<li><a href="#org07eb94e">Déroulement pratique et livrables</a></li>
-<li><a href="#orga5bf5ab">Critères d'évaluation</a></li>
+<li><a href="#orge6c67aa">Déroulement pratique et livrables</a></li>
+<li><a href="#org505b3fa">Critères d'évaluation</a></li>
+<li><a href="#orgca64c22">Pour se lancer en douceur</a>
+<ul>
+<li><a href="#orgb923472">Préambule</a></li>
+<li><a href="#orgdd925ad">Chargement et brève analyse descriptive</a></li>
+<li><a href="#org50e790b">Préparation des données</a></li>
+<li><a href="#orgd4908bc">Création d'un premier modèle</a></li>
+<li><a href="#orgbe0fd57">Apprentissage des LPC</a></li>
+<li><a href="#org513f694">Prédictions</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="orgab8afcb" class="figure">
+<div id="orgbed8667" class="figure">
 <p><img src="./bus_maintenance.png" alt="bus maintenance city 2d isometric cartoon white background" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
 </div>
 
 
-<div id="outline-container-orga9f1d59" class="outline-2">
-<h2 id="orga9f1d59">Contexte et objectifs du projet</h2>
-<div class="outline-text-2" id="text-orga9f1d59">
+<div id="outline-container-org3e440dc" class="outline-2">
+<h2 id="org3e440dc">Contexte et objectifs du projet</h2>
+<div class="outline-text-2" id="text-org3e440dc">
 <p>
 Une entreprise de transport collectif cherche à améliorer l'efficacité des opérations de
 maintenance réalisées sur ses véhicules. Un axe d'amélioration porte sur l'élaboration de
@@ -81,9 +91,9 @@ projet.*
 </div>
 </div>
 
-<div id="outline-container-org695360f" class="outline-2">
-<h2 id="org695360f">Problématique métier</h2>
-<div class="outline-text-2" id="text-org695360f">
+<div id="outline-container-org25c74d0" class="outline-2">
+<h2 id="org25c74d0">Problématique métier</h2>
+<div class="outline-text-2" id="text-org25c74d0">
 <p>
 L'entreprise de transport exploite une flotte de véhicules qui circule pendant les horaires de
 service. Lorsqu'un problème survient sur un véhicule, le conducteur est chargé de faire un
@@ -119,9 +129,9 @@ du véhicule (kilométrage, type de moteur, marque, etc.).
 
 
 
-<div id="outline-container-org7a48836" class="outline-2">
-<h2 id="org7a48836">Présentation des données</h2>
-<div class="outline-text-2" id="text-org7a48836">
+<div id="outline-container-org25452b1" class="outline-2">
+<h2 id="org25452b1">Présentation des données</h2>
+<div class="outline-text-2" id="text-org25452b1">
 <p>
 Deux sources de données sont mises à disposition dans ce projet :
 </p>
@@ -147,14 +157,14 @@ et 2019.</li>
 </div>
 </div>
 
-<div id="outline-container-orgf72f0e4" class="outline-3">
-<h3 id="orgf72f0e4">Données <code>OT-ODR</code></h3>
-<div class="outline-text-3" id="text-orgf72f0e4">
+<div id="outline-container-orgaee1d61" class="outline-3">
+<h3 id="orgaee1d61">Données <code>OT-ODR</code></h3>
+<div class="outline-text-3" id="text-orgaee1d61">
 <p>
-Le Tableau <a href="#orgb1d4398">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
+Le Tableau <a href="#org1bfddf9">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
 </p>
 
-<table id="orgb1d4398" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org1bfddf9" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>OT-ODR</code>.</caption>
 
 <colgroup>
@@ -249,14 +259,14 @@ Le Tableau <a href="#orgb1d4398">1</a> donne une description des variables du je
 </div>
 
 
-<div id="outline-container-org71f4cf5" class="outline-3">
-<h3 id="org71f4cf5">Données <code>EQUIPEMENTS</code></h3>
-<div class="outline-text-3" id="text-org71f4cf5">
+<div id="outline-container-org2377d10" class="outline-3">
+<h3 id="org2377d10">Données <code>EQUIPEMENTS</code></h3>
+<div class="outline-text-3" id="text-org2377d10">
 <p>
-Le Tableau <a href="#org3518d3a">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
+Le Tableau <a href="#org92ba297">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
 </p>
 
-<table id="org3518d3a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org92ba297" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 2 :</span> Définition des variables du jeu de données <code>EQUIPEMENTS</code>.</caption>
 
 <colgroup>
@@ -304,9 +314,9 @@ Le Tableau <a href="#org3518d3a">2</a> donne une description des variables du je
 <div class="outline-text-2" id="text-sec-sujets">
 </div>
 
-<div id="outline-container-org23a746a" class="outline-3">
-<h3 id="org23a746a">Développement d'une IA de diagnostic</h3>
-<div class="outline-text-3" id="text-org23a746a">
+<div id="outline-container-org38a180a" class="outline-3">
+<h3 id="org38a180a">Développement d'une IA de diagnostic</h3>
+<div class="outline-text-3" id="text-org38a180a">
 <p>
 Ce travail correspond au développement d'un moteur d'aide au diagnostic et à la recommandation de
 maintenance. Il s'agit donc en 
@@ -333,9 +343,9 @@ Le travail est à réaliser sous Python en utilisant la <a href="https://agrum.g
 </div>
 </div>
 
-<div id="outline-container-org57ca9f9" class="outline-3">
-<h3 id="org57ca9f9">Développement d'un applicatif métier</h3>
-<div class="outline-text-3" id="text-org57ca9f9">
+<div id="outline-container-org24ba81a" class="outline-3">
+<h3 id="org24ba81a">Développement d'un applicatif métier</h3>
+<div class="outline-text-3" id="text-org24ba81a">
 <p>
 L'objectif de ce travail est de développer une application permettant d'interagir avec le
    moteur de recommandations de la section précédente de manière transparente pour 
@@ -360,9 +370,9 @@ ressources sur internet afin de monter en compétences (e.g. <a href="https://da
 </div>
 </div>
 
-<div id="outline-container-org07eb94e" class="outline-2">
-<h2 id="org07eb94e">Déroulement pratique et livrables</h2>
-<div class="outline-text-2" id="text-org07eb94e">
+<div id="outline-container-orge6c67aa" class="outline-2">
+<h2 id="orge6c67aa">Déroulement pratique et livrables</h2>
+<div class="outline-text-2" id="text-orge6c67aa">
 <p>
 Le projet est à réaliser par groupe de trois étudiant·es.
 </p>
@@ -392,9 +402,9 @@ réalisés, les performances obtenues et une conclusion.</li>
 </div>
 </div>
 
-<div id="outline-container-orga5bf5ab" class="outline-2">
-<h2 id="orga5bf5ab">Critères d'évaluation</h2>
-<div class="outline-text-2" id="text-orga5bf5ab">
+<div id="outline-container-org505b3fa" class="outline-2">
+<h2 id="org505b3fa">Critères d'évaluation</h2>
+<div class="outline-text-2" id="text-org505b3fa">
 <p>
 Vous serez principalement évalué·es sur les critères suivants :
 </p>
@@ -459,6 +469,605 @@ Vous serez principalement évalué·es sur les critères suivants :
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+
+
+<div id="outline-container-orgca64c22" class="outline-2">
+<h2 id="orgca64c22">Pour se lancer en douceur</h2>
+<div class="outline-text-2" id="text-orgca64c22">
+</div>
+<div id="outline-container-orgb923472" class="outline-3">
+<h3 id="orgb923472">Préambule</h3>
+<div class="outline-text-3" id="text-orgb923472">
+<p>
+Pour réaliser l'apprentissage des LPC, nous allons utiliser la librairie utilitaire <code>pyagrum_extra</code>
+à télécharger ici :
+<a href="https://github.com/roland-donat/pyagrum-extra/blob/master/pyagrum-extra/pyagrum_extra.py">https://github.com/roland-donat/pyagrum-extra/blob/master/pyagrum-extra/pyagrum_extra.py</a>.
+</p>
+
+<p>
+Une fois téléchargé, placez ce fichier à la racine de votre projet.
+</p>
+
+<p>
+Cette librairie ajoute des fonctions <code>fit</code> et <code>predict</code> à <code>pyAgrum</code> permettant de faciliter l'apprentissage et
+l'exploitation d'un RB. Vous pourrez ainsi importer <code>pyAgrum</code> de la façon suivante :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">from</span> pyagrum_extra <span style="color: #F0DFAF; font-weight: bold;">import</span> gum
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdd925ad" class="outline-3">
+<h3 id="orgdd925ad">Chargement et brève analyse descriptive</h3>
+<div class="outline-text-3" id="text-orgdd925ad">
+<p>
+Chargement des données :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+<span style="color: #F0DFAF; font-weight: bold;">import</span> os
+
+<span style="color: #DFAF8F;">ot_odr_filename</span> = os.path.join(<span style="color: #CC9393;">"."</span>, <span style="color: #CC9393;">"OT_ODR.csv.bz2"</span>)
+<span style="color: #DFAF8F;">ot_odr_df</span> = pd.read_csv(ot_odr_filename,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   compression=<span style="color: #CC9393;">"bz2"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   sep=<span style="color: #CC9393;">";"</span>)
+
+<span style="color: #DFAF8F;">equipements_filename</span> = os.path.join(<span style="color: #CC9393;">"."</span>, <span style="color: #CC9393;">'EQUIPEMENTS.csv'</span>)
+<span style="color: #DFAF8F;">equipements_df</span> = pd.read_csv(equipements_filename,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>sep=<span style="color: #CC9393;">";"</span>)
+</pre>
+</div>
+
+<p>
+Analyse des modalités des variables de signalement :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">var_sig</span> = [<span style="color: #CC9393;">"SIG_ORGANE"</span>, <span style="color: #CC9393;">"SIG_CONTEXTE"</span>, <span style="color: #CC9393;">"SIG_OBS"</span>]
+ot_odr_df[var_sig].describe()
+</pre>
+</div>
+
+<pre class="example">
+                       SIG_ORGANE SIG_CONTEXTE            SIG_OBS
+count                      506558       506558             506558
+unique                        116         5509                 59
+top     ECLAIRAGE FEUX EXTERIEURS      ARRIERE  NE FONCTIONNE PAS
+freq                       189559        32095             150740
+</pre>
+
+
+<p>
+Analyse des modalités des variables systèmes :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">var_sys</span> = [<span style="color: #CC9393;">"SYSTEM_N1"</span>, <span style="color: #CC9393;">"SYSTEM_N2"</span>, <span style="color: #CC9393;">"SYSTEM_N3"</span>]
+ot_odr_df[var_sys].describe()
+</pre>
+</div>
+
+<pre class="example">
+                    SYSTEM_N1                SYSTEM_N2                    SYSTEM_N3
+count                  506558                   506558                       506558
+unique                     10                       45                          150
+top     EQUIPEMENT ELECTRIQUE  ECLAIRAGE-SIGNALISATION  ECLAIRAGE-SIGNALISATION EXT
+freq                   285348                   261949                       245663
+</pre>
+
+
+<p>
+Analyse des modalités des variables type travail et OdR :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">var_odr</span> = [<span style="color: #CC9393;">"TYPE_TRAVAIL"</span>, <span style="color: #CC9393;">"ODR_LIBELLE"</span>]
+ot_odr_df[var_odr].describe()
+</pre>
+</div>
+
+<pre class="example">
+       TYPE_TRAVAIL                               ODR_LIBELLE
+count        506558                                    506558
+unique           12                                      1410
+top     ELECTRICITE  REMPLACEMENT D'UNE LAMPE DE CODE / PHARE
+freq         258129                                     40302
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org50e790b" class="outline-3">
+<h3 id="org50e790b">Préparation des données</h3>
+<div class="outline-text-3" id="text-org50e790b">
+<p>
+On change le type des variables catégorielles avec la méthode <code>.astype('category')</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">var_cat</span> = [<span style="color: #CC9393;">'ODR_LIBELLE'</span>, <span style="color: #CC9393;">'TYPE_TRAVAIL'</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">'SYSTEM_N1'</span>, <span style="color: #CC9393;">'SYSTEM_N2'</span>, <span style="color: #CC9393;">'SYSTEM_N3'</span>, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">'SIG_ORGANE'</span>, <span style="color: #CC9393;">'SIG_CONTEXTE'</span>, <span style="color: #CC9393;">'SIG_OBS'</span>, <span style="color: #CC9393;">'LIGNE'</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> var_cat:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">ot_odr_df</span>[var] = ot_odr_df[var].astype(<span style="color: #CC9393;">'category'</span>)
+
+ot_odr_df.info()
+</pre>
+</div>
+
+<p>
+<b>Note: Ceci est nécessaire pour utiliser la fonction <code>.fit</code> de la librairie <code>pyagrum_extra</code>.</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd4908bc" class="outline-3">
+<h3 id="orgd4908bc">Création d'un premier modèle</h3>
+<div class="outline-text-3" id="text-orgd4908bc">
+<p>
+Nous proposons de créer un modèle permettant d'expliquer la variable <code>SYSTEM_N1</code> à partir de
+<code>SIG_OBS</code>.
+</p>
+
+<p>
+On commence par créer les variables du réseau.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">var_to_model</span> = [<span style="color: #CC9393;">"SYSTEM_N1"</span>, <span style="color: #CC9393;">"SIG_OBS"</span>]
+
+<span style="color: #DFAF8F;">var_bn</span> = {}
+<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> var_to_model:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_values</span> = <span style="color: #DCDCCC; font-weight: bold;">len</span>(ot_odr_df[var].cat.categories)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">var_bn</span>[var] = gum.LabelizedVariable(var, var, nb_values)
+</pre>
+</div>
+
+<p>
+On renseigne les modalités des variables pour être fidèle à celles des données.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> var_bn:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">for</span> i, modalite <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DCDCCC; font-weight: bold;">enumerate</span>(ot_odr_df[var].cat.categories):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   var_bn[var].changeLabel(i, modalite)
+</pre>
+</div>
+
+<p>
+Ensuite, on crée le réseau bayésien et on ajoute les variables sélectionnées.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pyAgrum <span style="color: #F0DFAF; font-weight: bold;">as</span> gum
+
+<span style="color: #DFAF8F;">bn</span> = gum.BayesNet(<span style="color: #CC9393;">"mod&#232;le simple"</span>)
+
+<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> var_bn.values():
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bn.add(var)
+</pre>
+</div>
+
+<p>
+Pour finir, on fixe la structure.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.addArc(<span style="color: #CC9393;">"SIG_OBS"</span>, <span style="color: #CC9393;">"SYSTEM_N1"</span>)
+</pre>
+</div>
+
+<p>
+Nous pouvons utiliser temporairement un notebook Jupyter afin de vérifier graphiquement la structure
+et les LPC de notre modèle.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pyAgrum.lib.notebook <span style="color: #F0DFAF; font-weight: bold;">as</span> gnb 
+
+bn
+</pre>
+</div>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="147pt" height="116pt" viewBox="0.00 0.00 147.09 116.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<title>G</title>
+<!-- SYSTEM_N1 -->
+<g id="node1" class="node">
+<title>SYSTEM_N1</title>
+<g id="a_node1"><a xlink:title="(0) SYSTEM_N1">
+<ellipse fill="#404040" stroke="black" cx="69.54" cy="-18" rx="69.59" ry="18"/>
+<text text-anchor="middle" x="69.54" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">SYSTEM_N1</text>
+</a>
+</g>
+</g>
+<!-- SIG_OBS -->
+<g id="node2" class="node">
+<title>SIG_OBS</title>
+<g id="a_node2"><a xlink:title="(1) SIG_OBS">
+<ellipse fill="#404040" stroke="black" cx="69.54" cy="-90" rx="52.79" ry="18"/>
+<text text-anchor="middle" x="69.54" y="-86.3" font-family="Times,serif" font-size="14.00" fill="white">SIG_OBS</text>
+</a>
+</g>
+</g>
+<!-- SIG_OBS&#45;&gt;SYSTEM_N1 -->
+<g id="edge1" class="edge">
+<title>SIG_OBS-&gt;SYSTEM_N1</title>
+<g id="a_edge1"><a xlink:title="1 → 0">
+<path fill="none" stroke="#4a4a4a" d="M69.54,-71.7C69.54,-63.98 69.54,-54.71 69.54,-46.11"/>
+<polygon fill="#4a4a4a" stroke="#4a4a4a" points="73.04,-46.1 69.54,-36.1 66.04,-46.1 73.04,-46.1"/>
+</a>
+</g>
+</g>
+</g>
+</svg>
+
+<p>
+Loi de probabilité de <code>SIG_OBS</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"SIG_OBS"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr style='border:1px solid black;color:black;background-color:#808080'>
+      <th colspan='59'><center>SIG_OBS</center></th></tr>
+<tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>A-COUPS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ABSENT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ALLUME</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ARRACHE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ASPIRER</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BALANCE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BLESSE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BLOQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BROUTE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BRUTAL</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BRUYANT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CALE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CASSE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CLAQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CLIGNOTE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CREVE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DEBOITE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DECLENCHEMENT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DEGONFLE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DELOCALISE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DEREGLE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DESSERRE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DUR</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ENFONCE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FAUX CONTACT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FENDU</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FERME MAL</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FONCTIONNE MAL</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FUITE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FUME/CHAUFFE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>INCOMPLET</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>INSUFFISANT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>INTERMITTENT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>INTERRUPTEUR H.S</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>JEU</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>LACERE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>MANQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>MAUVAIS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>N'EMET PAS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>N'ENCRE PAS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>NE FONCTIONNE PAS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>NE TIRE PAS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ODEUR</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>OUVRE MAL</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>PATINE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>RAYE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>REFUSE TITRE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>SALE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>SECOUSSE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TAGUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TANGUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TEMOIN OUVERTURE H.S</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TIRE A DROITE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TIRE A GAUCHE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TORDU</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>USE/VIDE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>VIBRE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>VOYANT ALLUME</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>VOYANT HS</center></th></tr>
+<tr><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+</table>
+
+<p>
+# #+BEGIN_SRC python :session :results silent :exports code
+</p>
+
+<p>
+# #+END_SRC
+</p>
+
+<p>
+Loi de probabilité de <code>SYSTEM_N1</code> | <code>SIG_OBS</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"SYSTEM_N1"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr><th colspan='1'></th>
+      <th colspan='10' style='border:1px solid black;color:black;background-color:#808080;'><center>SYSTEM_N1</center>
+      </th></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#808080'><center>SIG_OBS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DIVERS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT CHASSIS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT CLIMATIQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT DE CARROSSERIE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT DE FREINAGE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT DE MOTORISATION</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT DE TRANSMISSION</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT ELECTRIQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT EMBARQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT PNEUMATIQUE</center></th></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>A-COUPS</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ABSENT</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ALLUME</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ARRACHE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ASPIRER</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BALANCE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BLESSE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BLOQUE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BROUTE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BRUTAL</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BRUYANT</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CALE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CASSE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CLAQUE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CLIGNOTE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CREVE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DEBOITE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DECLENCHEMENT</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DEGONFLE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DELOCALISE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DEREGLE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DESSERRE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DUR</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ENFONCE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FAUX CONTACT</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FENDU</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FERME MAL</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FONCTIONNE MAL</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FUITE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FUME/CHAUFFE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INCOMPLET</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INSUFFISANT</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INTERMITTENT</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INTERRUPTEUR H.S</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>JEU</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>LACERE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>MANQUE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>MAUVAIS</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>N'EMET PAS</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>N'ENCRE PAS</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>NE FONCTIONNE PAS</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>NE TIRE PAS</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ODEUR</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>OUVRE MAL</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>PATINE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>RAYE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>REFUSE TITRE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>SALE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>SECOUSSE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TAGUE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TANGUE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TEMOIN OUVERTURE H.S</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TIRE A DROITE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TIRE A GAUCHE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TORDU</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>USE/VIDE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>VIBRE</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>VOYANT ALLUME</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>VOYANT HS</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+</table>
+
+<p>
+On remarque naturellement que les LPC ne contiennent pour l'instant que des zéros&#x2026;
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgbe0fd57" class="outline-3">
+<h3 id="orgbe0fd57">Apprentissage des LPC</h3>
+<div class="outline-text-3" id="text-orgbe0fd57">
+<p>
+Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la méthode <code>.fit</code>
+de la librairie <code>pyagrum_extra</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.fit_bis(ot_odr_df, verbose_mode=<span style="color: #BFEBBF;">True</span>)
+</pre>
+</div>
+
+<pre class="example">
+None
+</pre>
+
+
+<p>
+Après apprentissage, nous obtenons les LPC suivantes.
+Loi de probabilité de <code>SIG_OBS</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"SIG_OBS"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr style='border:1px solid black;color:black;background-color:#808080'>
+      <th colspan='59'><center>SIG_OBS</center></th></tr>
+<tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>A-COUPS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ABSENT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ALLUME</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ARRACHE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ASPIRER</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BALANCE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BLESSE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BLOQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BROUTE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BRUTAL</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>BRUYANT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CALE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CASSE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CLAQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CLIGNOTE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>CREVE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DEBOITE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DECLENCHEMENT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DEGONFLE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DELOCALISE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DEREGLE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DESSERRE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DUR</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ENFONCE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FAUX CONTACT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FENDU</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FERME MAL</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FONCTIONNE MAL</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FUITE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>FUME/CHAUFFE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>INCOMPLET</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>INSUFFISANT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>INTERMITTENT</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>INTERRUPTEUR H.S</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>JEU</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>LACERE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>MANQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>MAUVAIS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>N'EMET PAS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>N'ENCRE PAS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>NE FONCTIONNE PAS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>NE TIRE PAS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>ODEUR</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>OUVRE MAL</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>PATINE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>RAYE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>REFUSE TITRE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>SALE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>SECOUSSE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TAGUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TANGUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TEMOIN OUVERTURE H.S</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TIRE A DROITE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TIRE A GAUCHE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>TORDU</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>USE/VIDE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>VIBRE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>VOYANT ALLUME</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>VOYANT HS</center></th></tr>
+<tr><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0032</td><td style='color:black;background-color:#f28b64;text-align:right;'>0.0978</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0084</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0001</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0016</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0278</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0001</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0152</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td><td style='color:black;background-color:#e59864;text-align:right;'>0.1964</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0053</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0047</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0263</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0063</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0077</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0034</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0155</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0010</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0745</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0436</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0036</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0011</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0145</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0050</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0090</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0077</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0220</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0001</td><td style='color:black;background-color:#d8a564;text-align:right;'>0.2976</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0022</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0016</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0001</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0245</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0008</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0010</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0013</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0494</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0135</td></tr>
+</table>
+
+<p>
+Loi de probabilité de <code>SYSTEM_N1</code> | <code>SIG_OBS</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"SYSTEM_N1"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr><th colspan='1'></th>
+      <th colspan='10' style='border:1px solid black;color:black;background-color:#808080;'><center>SYSTEM_N1</center>
+      </th></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#808080'><center>SIG_OBS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>DIVERS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT CHASSIS</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT CLIMATIQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT DE CARROSSERIE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT DE FREINAGE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT DE MOTORISATION</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT DE TRANSMISSION</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT ELECTRIQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT EMBARQUE</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>EQUIPEMENT PNEUMATIQUE</center></th></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>A-COUPS</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td><td style='color:black;background-color:#cfae64;text-align:right;'>0.3728</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0075</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0752</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0827</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1548</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1529</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1222</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0013</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0301</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ABSENT</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0009</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0362</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0704</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0070</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#93ea64;text-align:right;'>0.8435</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0399</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ALLUME</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1110</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#c6b764;text-align:right;'>0.4402</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#c6b764;text-align:right;'>0.4402</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ARRACHE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0253</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td><td style='color:black;background-color:#a2db64;text-align:right;'>0.7252</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0103</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#e09d64;text-align:right;'>0.2348</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0007</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0026</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ASPIRER</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#82fb64;text-align:right;'>0.9744</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0256</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BALANCE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#a7d664;text-align:right;'>0.6828</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0050</td><td style='color:black;background-color:#e59864;text-align:right;'>0.2020</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0211</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0136</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0310</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0434</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BLESSE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#92eb64;text-align:right;'>0.8507</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0498</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0100</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f38a64;text-align:right;'>0.0896</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BLOQUE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0001</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0852</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0370</td><td style='color:black;background-color:#bbc264;text-align:right;'>0.5294</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0302</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0138</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0072</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1701</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1112</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0159</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BROUTE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1246</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#b0cd64;text-align:right;'>0.6169</td><td style='color:black;background-color:#df9e64;text-align:right;'>0.2477</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BRUTAL</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#8af364;text-align:right;'>0.9091</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0303</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0303</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0303</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BRUYANT</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0018</td><td style='color:black;background-color:#d8a564;text-align:right;'>0.2973</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0788</td><td style='color:black;background-color:#e69764;text-align:right;'>0.1895</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1209</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1692</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0102</td><td style='color:black;background-color:#f68764;text-align:right;'>0.0666</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0181</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0477</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CALE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0335</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0037</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0372</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0297</td><td style='color:black;background-color:#aad364;text-align:right;'>0.6580</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0335</td><td style='color:black;background-color:#e79664;text-align:right;'>0.1859</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0186</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CASSE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0078</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0093</td><td style='color:black;background-color:#c5b864;text-align:right;'>0.4506</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0008</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0028</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0008</td><td style='color:black;background-color:#bcc164;text-align:right;'>0.5212</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0060</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CLAQUE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#d0ad64;text-align:right;'>0.3625</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0030</td><td style='color:black;background-color:#c0bd64;text-align:right;'>0.4850</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0491</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0206</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0052</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0566</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0007</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0169</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CLIGNOTE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0529</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0063</td><td style='color:black;background-color:#f28b64;text-align:right;'>0.0944</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0364</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1562</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0169</td><td style='color:black;background-color:#b3ca64;text-align:right;'>0.5887</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0326</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0157</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CREVE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#96e764;text-align:right;'>0.8165</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0036</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0396</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0468</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0216</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f68764;text-align:right;'>0.0683</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0036</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DEBOITE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0139</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0047</td><td style='color:black;background-color:#add064;text-align:right;'>0.6333</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0076</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0073</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0010</td><td style='color:black;background-color:#d5a864;text-align:right;'>0.3261</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0051</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0007</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DECLENCHEMENT</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0528</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#a7d664;text-align:right;'>0.6826</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1577</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0528</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0528</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DEGONFLE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#abd264;text-align:right;'>0.6489</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0019</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0709</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0803</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0244</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0034</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0269</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1425</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DELOCALISE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0038</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0460</td><td style='color:black;background-color:#85f864;text-align:right;'>0.9502</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DEREGLE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#e79664;text-align:right;'>0.1849</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#b0cd64;text-align:right;'>0.6096</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0137</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0068</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1438</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0342</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0068</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DESSERRE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0240</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0018</td><td style='color:black;background-color:#a1dc64;text-align:right;'>0.7327</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0036</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0008</td><td style='color:black;background-color:#e39a64;text-align:right;'>0.2170</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0138</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DUR</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0075</td><td style='color:black;background-color:#b2cb64;text-align:right;'>0.5982</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0034</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1682</td><td style='color:black;background-color:#f18c64;text-align:right;'>0.1056</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0201</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0029</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0511</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0431</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ENFONCE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0243</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0018</td><td style='color:black;background-color:#98e564;text-align:right;'>0.8038</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0029</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0098</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1551</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0014</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FAUX CONTACT</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0050</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0550</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0050</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#90ed64;text-align:right;'>0.8600</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0550</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FENDU</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0097</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#8cf164;text-align:right;'>0.8932</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f28b64;text-align:right;'>0.0971</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FERME MAL</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0121</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0020</td><td style='color:black;background-color:#92eb64;text-align:right;'>0.8508</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0020</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0040</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f38a64;text-align:right;'>0.0907</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0040</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0343</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FONCTIONNE MAL</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0349</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0440</td><td style='color:black;background-color:#d1ac64;text-align:right;'>0.3531</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0317</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0170</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0045</td><td style='color:black;background-color:#cab364;text-align:right;'>0.4103</td><td style='color:black;background-color:#f28b64;text-align:right;'>0.0952</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0092</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FUITE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0483</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0598</td><td style='color:black;background-color:#e89564;text-align:right;'>0.1745</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1246</td><td style='color:black;background-color:#df9e64;text-align:right;'>0.2497</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0042</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0343</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0011</td><td style='color:black;background-color:#d8a564;text-align:right;'>0.3035</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>FUME/CHAUFFE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0477</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1176</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0544</td><td style='color:black;background-color:#d9a464;text-align:right;'>0.2958</td><td style='color:black;background-color:#ccb164;text-align:right;'>0.3929</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0072</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0466</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0033</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0339</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INCOMPLET</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0087</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0017</td><td style='color:black;background-color:#dca164;text-align:right;'>0.2686</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0711</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0121</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#afce64;text-align:right;'>0.6239</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0139</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INSUFFISANT</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0024</td><td style='color:black;background-color:#de9f64;text-align:right;'>0.2501</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1608</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0161</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0424</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0011</td><td style='color:black;background-color:#bdc064;text-align:right;'>0.5083</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0151</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0037</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INTERMITTENT</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0520</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0268</td><td style='color:black;background-color:#ee8f64;text-align:right;'>0.1304</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0575</td><td style='color:black;background-color:#e19c64;text-align:right;'>0.2316</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0161</td><td style='color:black;background-color:#d1ac64;text-align:right;'>0.3588</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0835</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0433</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INTERRUPTEUR H.S</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0051</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0590</td><td style='color:black;background-color:#cdb064;text-align:right;'>0.3833</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0053</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0121</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0051</td><td style='color:black;background-color:#c8b564;text-align:right;'>0.4279</td><td style='color:black;background-color:#f28b64;text-align:right;'>0.1014</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0009</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>JEU</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#d4a964;text-align:right;'>0.3305</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#b8c564;text-align:right;'>0.5500</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1110</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>LACERE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0157</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0010</td><td style='color:black;background-color:#94e964;text-align:right;'>0.8354</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0008</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0028</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1432</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>MANQUE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0061</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0128</td><td style='color:black;background-color:#dba264;text-align:right;'>0.2809</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0078</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0552</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0009</td><td style='color:black;background-color:#b0cd64;text-align:right;'>0.6167</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0169</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>MAUVAIS</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#aad364;text-align:right;'>0.6598</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#e29b64;text-align:right;'>0.2207</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1110</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>N'EMET PAS</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#82fb64;text-align:right;'>0.9757</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>N'ENCRE PAS</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0172</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0345</td><td style='color:black;background-color:#85f864;text-align:right;'>0.9483</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>NE FONCTIONNE PAS</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0078</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0218</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0351</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0009</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0024</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#90ed64;text-align:right;'>0.8636</td><td style='color:black;background-color:#f68764;text-align:right;'>0.0672</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0007</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>NE TIRE PAS</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0098</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0036</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0134</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0134</td><td style='color:black;background-color:#92eb64;text-align:right;'>0.8481</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0241</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0536</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0018</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0322</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ODEUR</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0417</td><td style='color:black;background-color:#d7a664;text-align:right;'>0.3068</td><td style='color:black;background-color:#f68764;text-align:right;'>0.0644</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1705</td><td style='color:black;background-color:#dba264;text-align:right;'>0.2740</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0101</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0745</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0215</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0366</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>OUVRE MAL</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0238</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#97e664;text-align:right;'>0.8095</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1667</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>PATINE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f68764;text-align:right;'>0.0673</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0481</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0096</td><td style='color:black;background-color:#d1ac64;text-align:right;'>0.3558</td><td style='color:black;background-color:#ccb164;text-align:right;'>0.3942</td><td style='color:black;background-color:#ef8f64;text-align:right;'>0.1250</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>RAYE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0114</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0010</td><td style='color:black;background-color:#9de064;text-align:right;'>0.7627</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0056</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#e39a64;text-align:right;'>0.2173</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0008</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>REFUSE TITRE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0025</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0051</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#7ffe64;text-align:right;'>0.9924</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>SALE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0755</td><td style='color:black;background-color:#9edf64;text-align:right;'>0.7547</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0377</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f28b64;text-align:right;'>0.0943</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0314</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0063</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>SECOUSSE</center></th><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#c9b464;text-align:right;'>0.4200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#c9b464;text-align:right;'>0.4200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TAGUE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#e09d64;text-align:right;'>0.2418</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#a4d964;text-align:right;'>0.7059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0065</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0261</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0131</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0065</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TANGUE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#85f864;text-align:right;'>0.9471</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TEMOIN OUVERTURE H.S</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0181</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0040</td><td style='color:black;background-color:#e29b64;text-align:right;'>0.2254</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0040</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0101</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#a1dc64;text-align:right;'>0.7324</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0060</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TIRE A DROITE</center></th><td style='color:black;background-color:#fc8164;text-align:right;'>0.0168</td><td style='color:black;background-color:#daa364;text-align:right;'>0.2849</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0056</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0447</td><td style='color:black;background-color:#c6b764;text-align:right;'>0.4413</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0615</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0056</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1229</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0168</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TIRE A GAUCHE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1707</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0061</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0061</td><td style='color:black;background-color:#a0dd64;text-align:right;'>0.7378</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0183</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0549</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0061</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TORDU</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0233</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#84f964;text-align:right;'>0.9535</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0233</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>USE/VIDE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#e59864;text-align:right;'>0.2006</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#a5d864;text-align:right;'>0.7021</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0029</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0708</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0192</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0044</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>VIBRE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0014</td><td style='color:black;background-color:#e19c64;text-align:right;'>0.2299</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0068</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1646</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0503</td><td style='color:black;background-color:#cfae64;text-align:right;'>0.3687</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0544</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0844</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0122</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0272</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>VOYANT ALLUME</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0001</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0289</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0224</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0353</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1466</td><td style='color:black;background-color:#d1ac64;text-align:right;'>0.3563</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0071</td><td style='color:black;background-color:#d1ac64;text-align:right;'>0.3584</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0068</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0381</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>VOYANT HS</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0041</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0032</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0456</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0209</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0088</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0054</td><td style='color:black;background-color:#90ed64;text-align:right;'>0.8619</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0486</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td></tr>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org513f694" class="outline-3">
+<h3 id="org513f694">Prédictions</h3>
+<div class="outline-text-3" id="text-org513f694">
+<p>
+Les fonctions <code>predict_proba=/=predict</code> permettent de réaliser des prédictions d'une variable cible du modèle à
+partir de données. Chaque ligne des données fournies est utilisée comme évidence (conditionnement)
+pour calculer la loi de la variable cible sachant les données observées.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">pred_prob</span> = bn.predict_proba(ot_odr_df[[<span style="color: #CC9393;">"SIG_OBS"</span>]].iloc[-1000:], 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>var_target=<span style="color: #CC9393;">"SYSTEM_N1"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>show_progress=<span style="color: #BFEBBF;">True</span>)
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(pred_prob)
+
+<span style="color: #DFAF8F;">pred</span> = bn.predict(ot_odr_df[[<span style="color: #CC9393;">"SIG_OBS"</span>]].iloc[-1000:], 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> var_target=<span style="color: #CC9393;">"SYSTEM_N1"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> show_progress=<span style="color: #BFEBBF;">True</span>)
+
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(pred)
+</pre>
+</div>
+
+<pre class="example">
+None
+</pre>
+</div>
 </div>
 </div>
 </div>

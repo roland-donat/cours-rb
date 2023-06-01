@@ -278,10 +278,26 @@ Vous serez principalement évalué·es sur les critères suivants :
 | Respect de la contrainte temporelle lors de la soutenance.              |  2     |
 
 
-* Pour se lancer en douceur                                        :noexport:
+* Pour se lancer en douceur
 
-Chargement des données
-#+BEGIN_SRC python :session :results silent :exports code
+** Préambule
+
+Pour réaliser l'apprentissage des LPC, nous allons utiliser la librairie utilitaire =pyagrum_extra=
+à télécharger ici :
+https://github.com/roland-donat/pyagrum-extra/blob/master/pyagrum-extra/pyagrum_extra.py.
+
+Une fois téléchargé, placez ce fichier à la racine de votre projet.
+
+Cette librairie ajoute des fonctions =fit= et =predict= à =pyAgrum= permettant de faciliter l'apprentissage et
+l'exploitation d'un RB. Vous pourrez ainsi importer =pyAgrum= de la façon suivante :
+#+BEGIN_SRC python :session :results value :exports both :tangle projet_start.py
+from pyagrum_extra import gum
+#+END_SRC
+
+** Chargement et brève analyse descriptive
+
+Chargement des données :
+#+BEGIN_SRC python :session :results silent :exports code :tangle projet_start.py
 import pandas as pd
 import os
 
@@ -295,10 +311,195 @@ equipements_df = pd.read_csv(equipements_filename,
                              sep=";")
 #+END_SRC
 
+Analyse des modalités des variables de signalement :
+#+BEGIN_SRC python :session :results value :exports both
+var_sig = ["SIG_ORGANE", "SIG_CONTEXTE", "SIG_OBS"]
+ot_odr_df[var_sig].describe()
+#+END_SRC
+
+#+RESULTS:
+:                        SIG_ORGANE SIG_CONTEXTE            SIG_OBS
+: count                      506558       506558             506558
+: unique                        116         5509                 59
+: top     ECLAIRAGE FEUX EXTERIEURS      ARRIERE  NE FONCTIONNE PAS
+: freq                       189559        32095             150740
+
+Analyse des modalités des variables systèmes :
+#+BEGIN_SRC python :session :results value :exports both
+var_sys = ["SYSTEM_N1", "SYSTEM_N2", "SYSTEM_N3"]
+ot_odr_df[var_sys].describe()
+#+END_SRC
+
+#+RESULTS:
+:                     SYSTEM_N1                SYSTEM_N2                    SYSTEM_N3
+: count                  506558                   506558                       506558
+: unique                     10                       45                          150
+: top     EQUIPEMENT ELECTRIQUE  ECLAIRAGE-SIGNALISATION  ECLAIRAGE-SIGNALISATION EXT
+: freq                   285348                   261949                       245663
+
+Analyse des modalités des variables type travail et OdR :
+#+BEGIN_SRC python :session :results value :exports both
+var_odr = ["TYPE_TRAVAIL", "ODR_LIBELLE"]
+ot_odr_df[var_odr].describe()
+#+END_SRC
+
+#+RESULTS:
+:        TYPE_TRAVAIL                               ODR_LIBELLE
+: count        506558                                    506558
+: unique           12                                      1410
+: top     ELECTRICITE  REMPLACEMENT D'UNE LAMPE DE CODE / PHARE
+: freq         258129                                     40302
+
+** Préparation des données
+
+On change le type des variables catégorielles avec la méthode =.astype('category')= :
+#+BEGIN_SRC python :session :results silent :exports both :tangle projet_start.py
+var_cat = ['ODR_LIBELLE', 'TYPE_TRAVAIL',
+           'SYSTEM_N1', 'SYSTEM_N2', 'SYSTEM_N3', 
+           'SIG_ORGANE', 'SIG_CONTEXTE', 'SIG_OBS', 'LIGNE']
+for var in var_cat:
+    ot_odr_df[var] = ot_odr_df[var].astype('category')
+
+ot_odr_df.info()
+#+END_SRC
+
+*Note: Ceci est nécessaire pour utiliser la fonction =.fit= de la librairie =pyagrum_extra=.*
+
+** Création d'un premier modèle
+
+Nous proposons de créer un modèle permettant d'expliquer la variable =SYSTEM_N1= à partir de
+=SIG_OBS=.
+
+On commence par créer les variables du réseau.
+#+BEGIN_SRC python :session :results silent :exports both :tangle projet_start.py
+var_to_model = ["SYSTEM_N1", "SIG_OBS"]
+
+var_bn = {}
+for var in var_to_model:
+    nb_values = len(ot_odr_df[var].cat.categories)
+    var_bn[var] = gum.LabelizedVariable(var, var, nb_values)
+#+END_SRC
+
+#+RESULTS:
+
+On renseigne les modalités des variables pour être fidèle à celles des données.
+#+BEGIN_SRC python :session :results silent :exports both :tangle projet_start.py
+for var in var_bn:
+    for i, modalite in enumerate(ot_odr_df[var].cat.categories):
+        var_bn[var].changeLabel(i, modalite)
+#+END_SRC
+
+#+RESULTS:
+
+Ensuite, on crée le réseau bayésien et on ajoute les variables sélectionnées.
+#+BEGIN_SRC python :session :results silent :exports both :tangle projet_start.py
+import pyAgrum as gum
+
+bn = gum.BayesNet("modèle simple")
+
+for var in var_bn.values():
+    bn.add(var)
+#+END_SRC
+
+#+RESULTS:
+
+Pour finir, on fixe la structure.
+#+BEGIN_SRC python :session :results silent :exports both :tangle projet_start.py
+bn.addArc("SIG_OBS", "SYSTEM_N1")
+#+END_SRC
+
+Nous pouvons utiliser temporairement un notebook Jupyter afin de vérifier graphiquement la structure
+et les LPC de notre modèle.
+#+BEGIN_SRC python :session :results silent :exports code
+import pyAgrum.lib.notebook as gnb 
+
+bn
+#+END_SRC
+#+BEGIN_SRC python :session :results html :exports results
+gnb.getBN(bn)
+#+END_SRC
+
+#+RESULTS:
+#+begin_export html
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8pt" height="8pt" viewBox="0.00 0.00 8.00 8.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 4)">
+<title>G</title>
+</g>
+</svg>
+#+end_export
+
+Loi de probabilité de =SIG_OBS= :
+#+BEGIN_SRC python :session :results silent :exports code
+bn.cpt("SIG_OBS")
+#+END_SRC
+#+BEGIN_SRC python :session :results html :exports results
+gnb.getPotential(bn.cpt("SIG_OBS"))
+#+END_SRC
+# Loi de probabilité de =SIG_ORGANE= :
+# #+BEGIN_SRC python :session :results silent :exports code
+# bn.cpt("SIG_ORGANE")
+# #+END_SRC
+# #+BEGIN_SRC python :session :results html :exports results
+# gnb.getPotential(bn.cpt("SIG_ORGANE"))
+# #+END_SRC
+Loi de probabilité de =SYSTEM_N1= | =SIG_OBS= :
+#+BEGIN_SRC python :session :results silent :exports code
+bn.cpt("SYSTEM_N1")
+#+END_SRC
+#+BEGIN_SRC python :session :results html :exports results
+gnb.getPotential(bn.cpt("SYSTEM_N1"))
+#+END_SRC
+
+On remarque naturellement que les LPC ne contiennent pour l'instant que des zéros...
 
 
+** Apprentissage des LPC
 
+Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la méthode =.fit=
+de la librairie =pyagrum_extra= :
+#+BEGIN_SRC python :session :results value :exports both :tangle projet_start.py
+bn.fit_bis(ot_odr_df, verbose_mode=True)
+#+END_SRC
 
-* pyagrum-extra                                                    :noexport:
+Après apprentissage, nous obtenons les LPC suivantes.
+Loi de probabilité de =SIG_OBS= :
+#+BEGIN_SRC python :session :results silent :exports code
+bn.cpt("SIG_OBS")
+#+END_SRC
+#+BEGIN_SRC python :session :results html :exports results
+gnb.getPotential(bn.cpt("SIG_OBS"))
+#+END_SRC
+# Loi de probabilité de =SIG_ORGANE= :
+# #+BEGIN_SRC python :session :results silent :exports code
+# bn.cpt("SIG_ORGANE")
+# #+END_SRC
+# #+BEGIN_SRC python :session :results html :exports results
+# gnb.getPotential(bn.cpt("SIG_ORGANE"))  # 
+# #+END_SRC
+Loi de probabilité de =SYSTEM_N1= | =SIG_OBS= :
+#+BEGIN_SRC python :session :results silent :exports code
+bn.cpt("SYSTEM_N1")
+#+END_SRC
+#+BEGIN_SRC python :session :results html :exports results
+gnb.getPotential(bn.cpt("SYSTEM_N1"))
+#+END_SRC
 
-pip install git+https://github.com/roland-donat/pyagrum-extra.git
+** Prédictions
+
+Les fonctions =predict_proba=/=predict= permettent de réaliser des prédictions d'une variable cible du modèle à
+partir de données. Chaque ligne des données fournies est utilisée comme évidence (conditionnement)
+pour calculer la loi de la variable cible sachant les données observées.
+#+BEGIN_SRC python :session :results value :exports both :tangle projet_start.py
+pred_prob = bn.predict_proba(ot_odr_df[["SIG_OBS"]].iloc[-1000:], 
+                             var_target="SYSTEM_N1",
+                             show_progress=True)
+print(pred_prob)
+
+pred = bn.predict(ot_odr_df[["SIG_OBS"]].iloc[-1000:], 
+                  var_target="SYSTEM_N1",
+                  show_progress=True)
+
+print(pred)
+#+END_SRC
+
+#+RESULTS:
