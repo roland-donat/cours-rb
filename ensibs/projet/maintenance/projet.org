@@ -393,8 +393,6 @@ for var in var_bn:
 
 Ensuite, on crée le réseau bayésien et on ajoute les variables sélectionnées.
 #+BEGIN_SRC python :session :results silent :exports both :tangle projet_start.py
-import pyAgrum as gum
-
 bn = gum.BayesNet("modèle simple")
 
 for var in var_bn.values():
