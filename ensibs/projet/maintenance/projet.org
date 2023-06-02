@@ -500,3 +500,13 @@ pred = bn.predict(ot_odr_df[["SIG_OBS"]].iloc[-1000:],
 print(pred)
 #+END_SRC
 
+** Application
+
+Un exemple rudimentaire d'application web de diagnostic est proposé dans le fichier [[file:diag.py]].
+
+Pour tester l'application, il faut :
+1. Placer le fichier [[file:diag.py]] dans le même répertoire que les fichiers
+   =OT_ODR.csv.bz2= et =pyagrum_extra.py=.
+2. Installer la librairie =Dash=, i.e. =pip install dash=.
+3. Lancer la commande =python diag.py=.
+4. Ouvrir un navigateur web à l'adresse [[http://127.0.0.1:8050/]].

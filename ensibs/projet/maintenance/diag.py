@@ -6,7 +6,7 @@ from dash import html
 from dash.dependencies import Input, Output
 import plotly.express as px
 from pyagrum_extra import gum
-import ipdb
+#import ipdb
 
 # Modélisation
 # ============
