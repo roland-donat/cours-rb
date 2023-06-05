@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<smile version="1.0" id="Network2" numsamples="1000" discsamples="10000">
+	<nodes>
+		<cpt id="Node1">
+			<state id="porte_1" />
+			<state id="porte_2" />
+			<state id="porte_3" />
+			<probabilities>0.3333333333333333 0.3333333333333333 0.3333333333333334</probabilities>
+		</cpt>
+		<cpt id="Copy_of_Node1">
+			<state id="porte_1" />
+			<state id="porte_2" />
+			<state id="porte_3" />
+			<probabilities>0.3333333333333333 0.3333333333333333 0.3333333333333334</probabilities>
+		</cpt>
+		<cpt id="Copy_2_of_Node1">
+			<state id="porte_1" />
+			<state id="porte_2" />
+			<state id="porte_3" />
+			<parents>Copy_of_Node1 Node1</parents>
+			<probabilities>0 0.5 0.5 0 0 1 0 1 0 0 0 1 0.5 0 0.5 1 0 0 0 1 0 1 0 0 0.5 0.5 0</probabilities>
+		</cpt>
+		<cpt id="Copy_3_of_Node1">
+			<state id="non" />
+			<state id="oui" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<deterministic id="Copy_5_of_Node1">
+			<state id="porte_1" />
+			<state id="porte_2" />
+			<state id="porte_3" />
+			<parents>Copy_2_of_Node1 Copy_3_of_Node1 Copy_of_Node1</parents>
+			<resultingstates>porte_1 porte_2 porte_3 porte_3 porte_3 porte_2 porte_1 porte_2 porte_3 porte_3 porte_2 porte_1 porte_1 porte_2 porte_3 porte_2 porte_1 porte_3</resultingstates>
+		</deterministic>
+		<deterministic id="Copy_4_of_Node1">
+			<state id="non" />
+			<state id="oui" />
+			<parents>Copy_5_of_Node1 Node1</parents>
+			<resultingstates>oui non non non oui non non non oui</resultingstates>
+		</deterministic>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 2.0.5406.0" name="Network2" faultnameformat="nodestate">
+			<node id="Node1">
+				<name>Position Voiture</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>455 43 502 72</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Copy_of_Node1">
+				<name>Choix initial joueur</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>201 45 248 74</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Copy_2_of_Node1">
+				<name>Choix présenteur</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>323 248 370 277</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Copy_3_of_Node1">
+				<name>Changement porte joueur</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>58 251 105 280</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Copy_4_of_Node1">
+				<name>Gain voiture</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>457 512 504 541</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Copy_5_of_Node1">
+				<name>Choix final joueur</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>199 445 246 474</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<textbox>
+				<caption>Problème de Monty Hall (cf. Wikipedia)\n\nLe problème de Monty Hall est un casse-tête probabiliste librement inspiré du jeu télévisé américain Let&apos;s Make a Deal.\n\nLe jeu oppose un présentateur à un candidat (le joueur). Ce joueur est placé devant trois portes fermées. Derrière l&apos;une d&apos;elles se trouve une voiture et derrière chacune des deux autres se trouve une chèvre. Il doit tout d&apos;abord désigner une porte. Puis le présentateur doit ouvrir une porte qui n&apos;est ni celle choisie par le candidat, ni celle cachant la voiture (le présentateur sait quelle est la bonne porte dès le début). Le candidat a alors le droit d&apos;ouvrir la porte qu&apos;il a choisie initialement, ou d&apos;ouvrir la troisième porte.\n\nLes questions qui se posent au candidat sont :\n- Que doit-il faire ?\n- Quelles sont ses chances de gagner la voiture en agissant au mieux ?\n\nObjectif et formalisation du problème\n\nL&apos;objectif de cet exercice est de réaliser une modélisation du Monty Hall permettant d&apos;évaluer la pertinence des décisions possibles du joueur du point de vue probabiliste.\n\nPour ce faire voici une description formelle du déroulement du jeu :\n- Soient trois portes, l&apos;une cache une voiture, les deux autres une chèvre. La répartition voiture-chèvres derrière chaque porte se faire de manière aléatoire et équiprobable. Autrement dit, la probabilité que la voiture se trouve derrière chaque porte est de 1/3.\n- Le présentateur connaît la position de la voiture.\n- Le joueur choisit une des portes, mais rien n&apos;est révélé.\n- Le présentateur ouvre une autre porte ne révélant pas la voiture.\n- Le présentateur propose au candidat de changer son choix de porte à ouvrir.\n- Le présentateur ouvre la porte finalement choisie par le joueur et le jeu prend fin.\n\nRemarque : Le présentateur n&apos;ouvre jamais la porte devant la voiture, en effet :\n\n- Si le joueur choisit une porte à chèvre, le présentateur ouvrira la seule autre porte à chèvre.\n- Si le joueur choisit la porte à voiture, le présentateur ouvrira au hasard et de manière équiprobable une des deux portes à chèvre.</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>689 61 1518 421</position>
+			</textbox>
+		</genie>
+	</extensions>
+</smile>
