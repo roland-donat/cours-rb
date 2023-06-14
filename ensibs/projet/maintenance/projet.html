@@ -23,47 +23,47 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org297f882">Contexte et objectifs du projet</a></li>
-<li><a href="#orgcb51baa">Problématique métier</a></li>
-<li><a href="#orgf773235">Présentation des données</a>
+<li><a href="#orgc2ef44a">Contexte et objectifs du projet</a></li>
+<li><a href="#org8b8a20f">Problématique métier</a></li>
+<li><a href="#orgc5aa1f5">Présentation des données</a>
 <ul>
-<li><a href="#orga996ba8">Données <code>OT-ODR</code></a></li>
-<li><a href="#orgec60fba">Données <code>EQUIPEMENTS</code></a></li>
+<li><a href="#org9841c6b">Données <code>OT-ODR</code></a></li>
+<li><a href="#org4465d05">Données <code>EQUIPEMENTS</code></a></li>
 </ul>
 </li>
 <li><a href="#sec-sujets">Travaux à réaliser</a>
 <ul>
-<li><a href="#orgd27ca2d">Développement d'une IA de diagnostic</a></li>
-<li><a href="#org1e1fbe1">Développement d'un applicatif métier</a></li>
+<li><a href="#org9fb3e88">Développement d'une IA de diagnostic</a></li>
+<li><a href="#orga7b3c82">Développement d'un applicatif métier</a></li>
 </ul>
 </li>
-<li><a href="#org9c2dc6e">Déroulement pratique et livrables</a></li>
-<li><a href="#orge83b884">Critères d'évaluation</a></li>
-<li><a href="#org5f14fba">Pour se lancer en douceur</a>
+<li><a href="#org29032df">Déroulement pratique et livrables</a></li>
+<li><a href="#orgd78a3e6">Critères d'évaluation</a></li>
+<li><a href="#org05f7d71">Pour se lancer en douceur</a>
 <ul>
-<li><a href="#org353bb62">Préambule</a></li>
-<li><a href="#org45a7683">Chargement et brève analyse descriptive</a></li>
-<li><a href="#org9f705f0">Préparation des données</a></li>
-<li><a href="#org7d386f5">Création d'un premier modèle</a></li>
-<li><a href="#org60a79b4">Apprentissage des LPC</a></li>
-<li><a href="#org56858d2">Prédictions</a></li>
-<li><a href="#org2ac8661">Application</a></li>
+<li><a href="#orgdc4d73e">Préambule</a></li>
+<li><a href="#org210dac7">Chargement et brève analyse descriptive</a></li>
+<li><a href="#org8d52fdb">Préparation des données</a></li>
+<li><a href="#org2dd17cb">Création d'un premier modèle</a></li>
+<li><a href="#orgca6cf5a">Apprentissage des LPC</a></li>
+<li><a href="#org50b4d83">Prédictions</a></li>
+<li><a href="#org9edbed0">Application</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="orgc6fbc06" class="figure">
+<div id="org07b5a86" class="figure">
 <p><img src="./bus_maintenance.png" alt="bus maintenance city 2d isometric cartoon white background" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
 </div>
 
 
-<div id="outline-container-org297f882" class="outline-2">
-<h2 id="org297f882">Contexte et objectifs du projet</h2>
-<div class="outline-text-2" id="text-org297f882">
+<div id="outline-container-orgc2ef44a" class="outline-2">
+<h2 id="orgc2ef44a">Contexte et objectifs du projet</h2>
+<div class="outline-text-2" id="text-orgc2ef44a">
 <p>
 Une entreprise de transport collectif cherche à améliorer l'efficacité des opérations de
 maintenance réalisées sur ses véhicules. Un axe d'amélioration porte sur l'élaboration de
@@ -92,9 +92,9 @@ projet.*
 </div>
 </div>
 
-<div id="outline-container-orgcb51baa" class="outline-2">
-<h2 id="orgcb51baa">Problématique métier</h2>
-<div class="outline-text-2" id="text-orgcb51baa">
+<div id="outline-container-org8b8a20f" class="outline-2">
+<h2 id="org8b8a20f">Problématique métier</h2>
+<div class="outline-text-2" id="text-org8b8a20f">
 <p>
 L'entreprise de transport exploite une flotte de véhicules qui circule pendant les horaires de
 service. Lorsqu'un problème survient sur un véhicule, le conducteur est chargé de faire un
@@ -130,9 +130,9 @@ du véhicule (kilométrage, type de moteur, marque, etc.).
 
 
 
-<div id="outline-container-orgf773235" class="outline-2">
-<h2 id="orgf773235">Présentation des données</h2>
-<div class="outline-text-2" id="text-orgf773235">
+<div id="outline-container-orgc5aa1f5" class="outline-2">
+<h2 id="orgc5aa1f5">Présentation des données</h2>
+<div class="outline-text-2" id="text-orgc5aa1f5">
 <p>
 Deux sources de données sont mises à disposition dans ce projet :
 </p>
@@ -158,14 +158,14 @@ et 2019.</li>
 </div>
 </div>
 
-<div id="outline-container-orga996ba8" class="outline-3">
-<h3 id="orga996ba8">Données <code>OT-ODR</code></h3>
-<div class="outline-text-3" id="text-orga996ba8">
+<div id="outline-container-org9841c6b" class="outline-3">
+<h3 id="org9841c6b">Données <code>OT-ODR</code></h3>
+<div class="outline-text-3" id="text-org9841c6b">
 <p>
-Le Tableau <a href="#org65bd1f5">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
+Le Tableau <a href="#org4f76b09">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
 </p>
 
-<table id="org65bd1f5" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org4f76b09" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>OT-ODR</code>.</caption>
 
 <colgroup>
@@ -260,14 +260,14 @@ Le Tableau <a href="#org65bd1f5">1</a> donne une description des variables du je
 </div>
 
 
-<div id="outline-container-orgec60fba" class="outline-3">
-<h3 id="orgec60fba">Données <code>EQUIPEMENTS</code></h3>
-<div class="outline-text-3" id="text-orgec60fba">
+<div id="outline-container-org4465d05" class="outline-3">
+<h3 id="org4465d05">Données <code>EQUIPEMENTS</code></h3>
+<div class="outline-text-3" id="text-org4465d05">
 <p>
-Le Tableau <a href="#orgc6f5645">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
+Le Tableau <a href="#orgd50ae4a">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
 </p>
 
-<table id="orgc6f5645" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgd50ae4a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 2 :</span> Définition des variables du jeu de données <code>EQUIPEMENTS</code>.</caption>
 
 <colgroup>
@@ -315,9 +315,9 @@ Le Tableau <a href="#orgc6f5645">2</a> donne une description des variables du je
 <div class="outline-text-2" id="text-sec-sujets">
 </div>
 
-<div id="outline-container-orgd27ca2d" class="outline-3">
-<h3 id="orgd27ca2d">Développement d'une IA de diagnostic</h3>
-<div class="outline-text-3" id="text-orgd27ca2d">
+<div id="outline-container-org9fb3e88" class="outline-3">
+<h3 id="org9fb3e88">Développement d'une IA de diagnostic</h3>
+<div class="outline-text-3" id="text-org9fb3e88">
 <p>
 Ce travail correspond au développement d'un moteur d'aide au diagnostic et à la recommandation de
 maintenance. Il s'agit donc en 
@@ -344,9 +344,9 @@ Le travail est à réaliser sous Python en utilisant la <a href="https://agrum.g
 </div>
 </div>
 
-<div id="outline-container-org1e1fbe1" class="outline-3">
-<h3 id="org1e1fbe1">Développement d'un applicatif métier</h3>
-<div class="outline-text-3" id="text-org1e1fbe1">
+<div id="outline-container-orga7b3c82" class="outline-3">
+<h3 id="orga7b3c82">Développement d'un applicatif métier</h3>
+<div class="outline-text-3" id="text-orga7b3c82">
 <p>
 L'objectif de ce travail est de développer une application permettant d'interagir avec le
    moteur de recommandations de la section précédente de manière transparente pour 
@@ -371,9 +371,9 @@ ressources sur internet afin de monter en compétences (e.g. <a href="https://da
 </div>
 </div>
 
-<div id="outline-container-org9c2dc6e" class="outline-2">
-<h2 id="org9c2dc6e">Déroulement pratique et livrables</h2>
-<div class="outline-text-2" id="text-org9c2dc6e">
+<div id="outline-container-org29032df" class="outline-2">
+<h2 id="org29032df">Déroulement pratique et livrables</h2>
+<div class="outline-text-2" id="text-org29032df">
 <p>
 Le projet est à réaliser par groupe de trois étudiant·es.
 </p>
@@ -403,9 +403,9 @@ réalisés, les performances obtenues et une conclusion.</li>
 </div>
 </div>
 
-<div id="outline-container-orge83b884" class="outline-2">
-<h2 id="orge83b884">Critères d'évaluation</h2>
-<div class="outline-text-2" id="text-orge83b884">
+<div id="outline-container-orgd78a3e6" class="outline-2">
+<h2 id="orgd78a3e6">Critères d'évaluation</h2>
+<div class="outline-text-2" id="text-orgd78a3e6">
 <p>
 Vous serez principalement évalué·es sur les critères suivants :
 </p>
@@ -474,13 +474,13 @@ Vous serez principalement évalué·es sur les critères suivants :
 </div>
 
 
-<div id="outline-container-org5f14fba" class="outline-2">
-<h2 id="org5f14fba">Pour se lancer en douceur</h2>
-<div class="outline-text-2" id="text-org5f14fba">
+<div id="outline-container-org05f7d71" class="outline-2">
+<h2 id="org05f7d71">Pour se lancer en douceur</h2>
+<div class="outline-text-2" id="text-org05f7d71">
 </div>
-<div id="outline-container-org353bb62" class="outline-3">
-<h3 id="org353bb62">Préambule</h3>
-<div class="outline-text-3" id="text-org353bb62">
+<div id="outline-container-orgdc4d73e" class="outline-3">
+<h3 id="orgdc4d73e">Préambule</h3>
+<div class="outline-text-3" id="text-orgdc4d73e">
 <p>
 Pour réaliser l'apprentissage des LPC, nous allons utiliser la librairie utilitaire <code>pyagrum_extra</code>
 à télécharger ici :
@@ -502,9 +502,9 @@ l'exploitation d'un RB. Vous pourrez ainsi importer <code>pyAgrum</code> de la f
 </div>
 </div>
 
-<div id="outline-container-org45a7683" class="outline-3">
-<h3 id="org45a7683">Chargement et brève analyse descriptive</h3>
-<div class="outline-text-3" id="text-org45a7683">
+<div id="outline-container-org210dac7" class="outline-3">
+<h3 id="org210dac7">Chargement et brève analyse descriptive</h3>
+<div class="outline-text-3" id="text-org210dac7">
 <p>
 Chargement des données :
 </p>
@@ -578,9 +578,9 @@ freq         258129                                     40302
 </div>
 </div>
 
-<div id="outline-container-org9f705f0" class="outline-3">
-<h3 id="org9f705f0">Préparation des données</h3>
-<div class="outline-text-3" id="text-org9f705f0">
+<div id="outline-container-org8d52fdb" class="outline-3">
+<h3 id="org8d52fdb">Préparation des données</h3>
+<div class="outline-text-3" id="text-org8d52fdb">
 <p>
 On change le type des variables catégorielles avec la méthode <code>.astype('category')</code> :
 </p>
@@ -601,9 +601,9 @@ ot_odr_df.info()
 </div>
 </div>
 
-<div id="outline-container-org7d386f5" class="outline-3">
-<h3 id="org7d386f5">Création d'un premier modèle</h3>
-<div class="outline-text-3" id="text-org7d386f5">
+<div id="outline-container-org2dd17cb" class="outline-3">
+<h3 id="org2dd17cb">Création d'un premier modèle</h3>
+<div class="outline-text-3" id="text-org2dd17cb">
 <p>
 Nous proposons de créer un modèle permettant d'expliquer la variable <code>SYSTEM_N1</code> à partir de
 <code>SIG_OBS</code>.
@@ -865,9 +865,9 @@ On remarque naturellement que les LPC ne contiennent pour l'instant que des zér
 </div>
 
 
-<div id="outline-container-org60a79b4" class="outline-3">
-<h3 id="org60a79b4">Apprentissage des LPC</h3>
-<div class="outline-text-3" id="text-org60a79b4">
+<div id="outline-container-orgca6cf5a" class="outline-3">
+<h3 id="orgca6cf5a">Apprentissage des LPC</h3>
+<div class="outline-text-3" id="text-orgca6cf5a">
 <p>
 Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la méthode <code>.fit</code>
 de la librairie <code>pyagrum_extra</code> :
@@ -1041,9 +1041,9 @@ Loi de probabilité de <code>SYSTEM_N1</code> | <code>SIG_OBS</code> :
 </div>
 </div>
 
-<div id="outline-container-org56858d2" class="outline-3">
-<h3 id="org56858d2">Prédictions</h3>
-<div class="outline-text-3" id="text-org56858d2">
+<div id="outline-container-org50b4d83" class="outline-3">
+<h3 id="org50b4d83">Prédictions</h3>
+<div class="outline-text-3" id="text-org50b4d83">
 <p>
 Les fonctions <code>predict_proba=/=predict</code> permettent de réaliser des prédictions d'une variable cible du modèle à
 partir de données. Chaque ligne des données fournies est utilisée comme évidence (conditionnement)
@@ -1065,9 +1065,9 @@ pour calculer la loi de la variable cible sachant les données observées.
 </div>
 </div>
 
-<div id="outline-container-org2ac8661" class="outline-3">
-<h3 id="org2ac8661">Application</h3>
-<div class="outline-text-3" id="text-org2ac8661">
+<div id="outline-container-org9edbed0" class="outline-3">
+<h3 id="org9edbed0">Application</h3>
+<div class="outline-text-3" id="text-org9edbed0">
 <p>
 Un exemple rudimentaire d'application web de diagnostic est proposé dans le fichier <a href="diag.py">diag.py</a>.
 </p>

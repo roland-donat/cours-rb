@@ -44,53 +44,53 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdf2b540">Introduction</a>
+<li><a href="#org4f86c4c">Introduction</a>
 <ul>
-<li><a href="#org34e8546">Objectifs pédagogiques</a></li>
-<li><a href="#org36735f7">Prérequis</a></li>
-<li><a href="#org2ce742c">Intervenant : Roland Donat</a></li>
-<li><a href="#org4e93f11">Sources pédagogiques</a></li>
-<li><a href="#orgcd2ac79">Démarche d'amélioration continue</a></li>
+<li><a href="#orgdb19fb8">Objectifs pédagogiques</a></li>
+<li><a href="#org6f8467e">Prérequis</a></li>
+<li><a href="#orgae8928b">Intervenant : Roland Donat</a></li>
+<li><a href="#org7a8b593">Sources pédagogiques</a></li>
+<li><a href="#orgeb7f4b3">Démarche d'amélioration continue</a></li>
 </ul>
 </li>
-<li><a href="#orgc78cd8e">Déroulement des séances</a>
+<li><a href="#orge605645">Déroulement des séances</a>
 <ul>
-<li><a href="#org20c9bcd">Session 1 : Rappels de probabilité et introduction aux réseaux bayésiens</a></li>
-<li><a href="#org075755e">Session 2 : Inférence dans les RB</a></li>
-<li><a href="#org1a23a07">Session 3 : Apprentissage des LPC</a></li>
-<li><a href="#org1b94d14">Sessions 4-5 : Projet final</a></li>
+<li><a href="#org28eabda">Session 1 : Rappels de probabilité et introduction aux réseaux bayésiens</a></li>
+<li><a href="#orgf574273">Session 2 : Inférence dans les RB</a></li>
+<li><a href="#orgdf51872">Session 3 : Apprentissage des LPC</a></li>
+<li><a href="#org8b34b31">Sessions 4-5 : Projet final</a></li>
 </ul>
 </li>
-<li><a href="#org5ad963f">Évaluation</a>
+<li><a href="#org9784cf7">Évaluation</a>
 <ul>
-<li><a href="#org90d4a95">Quiz</a></li>
-<li><a href="#org3346447">Dates importantes</a></li>
-<li><a href="#orgbd0aff9">Notation</a></li>
+<li><a href="#org1d93997">Quiz</a></li>
+<li><a href="#orgd335d22">Dates importantes</a></li>
+<li><a href="#org614783d">Notation</a></li>
 </ul>
 </li>
-<li><a href="#org511b44c">Quelques outils informatiques autour des réseaux bayésiens</a>
+<li><a href="#org63bd084">Quelques outils informatiques autour des réseaux bayésiens</a>
 <ul>
-<li><a href="#orgaff4be5">Logiciel <code>GeNIe</code></a></li>
-<li><a href="#org97da07b">Librairie <code>pyAgrum</code></a></li>
+<li><a href="#org16a2304">Logiciel <code>GeNIe</code></a></li>
+<li><a href="#org5ad0ea2">Librairie <code>pyAgrum</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="orgfa20476" class="figure">
+<div id="org5494933" class="figure">
 <p><img src="./fig/rb_conceptual_illustration.png" alt="bayesian network concept illustration AI digital art white background" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
 </div>
 
-<div id="outline-container-orgdf2b540" class="outline-2">
-<h2 id="orgdf2b540">Introduction</h2>
-<div class="outline-text-2" id="text-orgdf2b540">
+<div id="outline-container-org4f86c4c" class="outline-2">
+<h2 id="org4f86c4c">Introduction</h2>
+<div class="outline-text-2" id="text-org4f86c4c">
 </div>
-<div id="outline-container-org34e8546" class="outline-3">
-<h3 id="org34e8546">Objectifs pédagogiques</h3>
-<div class="outline-text-3" id="text-org34e8546">
+<div id="outline-container-orgdb19fb8" class="outline-3">
+<h3 id="orgdb19fb8">Objectifs pédagogiques</h3>
+<div class="outline-text-3" id="text-orgdb19fb8">
 <ol class="org-ol">
 <li>Se sensibiliser et pratiquer la modélisation probabiliste</li>
 <li>Savoir construire un réseau bayésien adapté à une problématique concrète</li>
@@ -101,9 +101,9 @@
 </div>
 </div>
 
-<div id="outline-container-org36735f7" class="outline-3">
-<h3 id="org36735f7">Prérequis</h3>
-<div class="outline-text-3" id="text-org36735f7">
+<div id="outline-container-org6f8467e" class="outline-3">
+<h3 id="org6f8467e">Prérequis</h3>
+<div class="outline-text-3" id="text-org6f8467e">
 <ol class="org-ol">
 <li>Notions de base sur la théorie des probabilités :
 <ul class="org-ul">
@@ -115,18 +115,18 @@
 </div>
 </div>
 
-<div id="outline-container-org2ce742c" class="outline-3">
-<h3 id="org2ce742c">Intervenant : Roland Donat</h3>
-<div class="outline-text-3" id="text-org2ce742c">
+<div id="outline-container-orgae8928b" class="outline-3">
+<h3 id="orgae8928b">Intervenant : Roland Donat</h3>
+<div class="outline-text-3" id="text-orgae8928b">
 <ul class="org-ul">
 <li>Co-fondateur de la société <a href="http://www.edgemind.fr">EdgeMind</a></li>
 <li>Enseignant-Chercheur associé UBS</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4e93f11" class="outline-3">
-<h3 id="org4e93f11">Sources pédagogiques</h3>
-<div class="outline-text-3" id="text-org4e93f11">
+<div id="outline-container-org7a8b593" class="outline-3">
+<h3 id="org7a8b593">Sources pédagogiques</h3>
+<div class="outline-text-3" id="text-org7a8b593">
 <p>
 Ce cours a été préparé en s'inspirant des sources suivantes :
 </p>
@@ -138,9 +138,9 @@ Ce cours a été préparé en s'inspirant des sources suivantes :
 </div>
 </div>
 
-<div id="outline-container-orgcd2ac79" class="outline-3">
-<h3 id="orgcd2ac79">Démarche d'amélioration continue</h3>
-<div class="outline-text-3" id="text-orgcd2ac79">
+<div id="outline-container-orgeb7f4b3" class="outline-3">
+<h3 id="orgeb7f4b3">Démarche d'amélioration continue</h3>
+<div class="outline-text-3" id="text-orgeb7f4b3">
 <p>
 Étant joueur, chaque année je me permets de mettre en place un petit jeu visant à améliorer la qualité des supports
 pédagogiques qui vous sont proposés.
@@ -168,13 +168,13 @@ journée de cours suivante.</li>
 </div>
 
 
-<div id="outline-container-orgc78cd8e" class="outline-2">
-<h2 id="orgc78cd8e">Déroulement des séances</h2>
-<div class="outline-text-2" id="text-orgc78cd8e">
+<div id="outline-container-orge605645" class="outline-2">
+<h2 id="orge605645">Déroulement des séances</h2>
+<div class="outline-text-2" id="text-orge605645">
 </div>
-<div id="outline-container-org20c9bcd" class="outline-3">
-<h3 id="org20c9bcd">Session 1 : Rappels de probabilité et introduction aux réseaux bayésiens</h3>
-<div class="outline-text-3" id="text-org20c9bcd">
+<div id="outline-container-org28eabda" class="outline-3">
+<h3 id="org28eabda">Session 1 : Rappels de probabilité et introduction aux réseaux bayésiens</h3>
+<div class="outline-text-3" id="text-org28eabda">
 <ul class="org-ul">
 <li><a href="cours/cours_intro/rb_intro.pdf">Slides du cours</a></li>
 <li><a href="./td/exercices_cours/exo_rb_intro.html">Exercices de cours</a></li>
@@ -184,9 +184,9 @@ journée de cours suivante.</li>
 </div>
 
 
-<div id="outline-container-org075755e" class="outline-3">
-<h3 id="org075755e">Session 2 : Inférence dans les RB</h3>
-<div class="outline-text-3" id="text-org075755e">
+<div id="outline-container-orgf574273" class="outline-3">
+<h3 id="orgf574273">Session 2 : Inférence dans les RB</h3>
+<div class="outline-text-3" id="text-orgf574273">
 <ul class="org-ul">
 <li><a href="cours/cours_inference/rb_inference.pdf">Slide du cours</a></li>
 <li><a href="td/exercices_cours/exo_inf.html">Exercices de cours</a></li>
@@ -196,9 +196,9 @@ journée de cours suivante.</li>
 </div>
 
 
-<div id="outline-container-org1a23a07" class="outline-3">
-<h3 id="org1a23a07">Session 3 : Apprentissage des LPC</h3>
-<div class="outline-text-3" id="text-org1a23a07">
+<div id="outline-container-orgdf51872" class="outline-3">
+<h3 id="orgdf51872">Session 3 : Apprentissage des LPC</h3>
+<div class="outline-text-3" id="text-orgdf51872">
 <ul class="org-ul">
 <li><a href="cours/cours_apprentissage/rb_apprentissage_lpc.pdf">Slides du cours</a></li>
 <li><a href="td/exercices_cours/exo_app_lpc.html">Exercices de cours</a></li>
@@ -206,9 +206,9 @@ journée de cours suivante.</li>
 </div>
 </div>
 
-<div id="outline-container-org1b94d14" class="outline-3">
-<h3 id="org1b94d14">Sessions 4-5 : Projet final</h3>
-<div class="outline-text-3" id="text-org1b94d14">
+<div id="outline-container-org8b34b31" class="outline-3">
+<h3 id="org8b34b31">Sessions 4-5 : Projet final</h3>
+<div class="outline-text-3" id="text-org8b34b31">
 <ul class="org-ul">
 <li>Objectif : Développer une IA de diagnostic de pannes</li>
 <li>Informations pratiques : <a href="projet/maintenance/projet.html">Projet IA diagnostic</a></li>
@@ -217,13 +217,13 @@ journée de cours suivante.</li>
 </div>
 </div>
 
-<div id="outline-container-org5ad963f" class="outline-2">
-<h2 id="org5ad963f">Évaluation</h2>
-<div class="outline-text-2" id="text-org5ad963f">
+<div id="outline-container-org9784cf7" class="outline-2">
+<h2 id="org9784cf7">Évaluation</h2>
+<div class="outline-text-2" id="text-org9784cf7">
 </div>
-<div id="outline-container-org90d4a95" class="outline-3">
-<h3 id="org90d4a95">Quiz</h3>
-<div class="outline-text-3" id="text-org90d4a95">
+<div id="outline-container-org1d93997" class="outline-3">
+<h3 id="org1d93997">Quiz</h3>
+<div class="outline-text-3" id="text-org1d93997">
 <ul class="org-ul">
 <li>Objectif : vérification des principaux concepts étudiés en cours et en TD</li>
 <li>Forme : Quiz à réaliser sur la plateforme Moodle</li>
@@ -232,9 +232,9 @@ journée de cours suivante.</li>
 </div>
 </div>
 
-<div id="outline-container-org3346447" class="outline-3">
-<h3 id="org3346447">Dates importantes</h3>
-<div class="outline-text-3" id="text-org3346447">
+<div id="outline-container-orgd335d22" class="outline-3">
+<h3 id="orgd335d22">Dates importantes</h3>
+<div class="outline-text-3" id="text-orgd335d22">
 <ul class="org-ul">
 <li><a href="https://moodle.univ-ubs.fr/mod/quiz/view.php?id=375954">Quiz 1</a> : mardi 16 mai 2023 : 9h45-10h15</li>
 <li><a href="https://moodle.univ-ubs.fr/mod/quiz/view.php?id=375959">Quiz 2</a> : jeudi 1er juin 2023 : 8h00-8h30 - <a href="quiz/monty_hall/monty_hall.xdsl">Correction Monty Hall</a></li>
@@ -248,41 +248,36 @@ journée de cours suivante.</li>
 </div>
 </div>
 
-<div id="outline-container-orgbd0aff9" class="outline-3">
-<h3 id="orgbd0aff9">Notation</h3>
-<div class="outline-text-3" id="text-orgbd0aff9">
+<div id="outline-container-org614783d" class="outline-3">
+<h3 id="org614783d">Notation</h3>
+<div class="outline-text-3" id="text-org614783d">
 <p>
 Posons tout d'abord :
 </p>
 <ul class="org-ul">
 <li>\(N_{\text{Q}_{1}}\), \(N_{\text{Q}_{2}}\) et \(N_{\text{Q}_{3}}\), les notes des quiz 1, 2 et 3 ;</li>
 <li>\(N_{\text{P}}\), la note du projet ;</li>
-<li>\(N_{\text{Q}} = N_{\text{Q}_{1}} + N_{\text{Q}_{2}} + N_{\text{Q}_{3}}\).</li>
+<li>\(N_{\text{Q}} = \frac{2}{3} \times (N_{\text{Q}_{1}} + N_{\text{Q}_{2}} + N_{\text{Q}_{3}})\).</li>
 </ul>
 
 <p>
 La note finale pour ce module, notée \(N_{\text{MS}}\), est obtenue en appliquant la formule magique
 suivante :
 \[
-N_{\text{MS}} = \max\{N_{1}, N_{2}\},
+N_{\text{MS}} = 0.4*N_{\text{Q}} + 0.6*N_{\text{P}}$,
 \]
-où
 </p>
-<ul class="org-ul">
-<li>\(N_{1} = 0.4*N_{\text{Q}} + 0.6*N_{\text{P}}\) ;</li>
-<li>\(N_{2} = 0.6*N_{\text{Q}} + 0.4*N_{\text{P}}\).</li>
-</ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org511b44c" class="outline-2">
-<h2 id="org511b44c">Quelques outils informatiques autour des réseaux bayésiens</h2>
-<div class="outline-text-2" id="text-org511b44c">
+<div id="outline-container-org63bd084" class="outline-2">
+<h2 id="org63bd084">Quelques outils informatiques autour des réseaux bayésiens</h2>
+<div class="outline-text-2" id="text-org63bd084">
 </div>
-<div id="outline-container-orgaff4be5" class="outline-3">
-<h3 id="orgaff4be5">Logiciel <code>GeNIe</code></h3>
-<div class="outline-text-3" id="text-orgaff4be5">
+<div id="outline-container-org16a2304" class="outline-3">
+<h3 id="org16a2304">Logiciel <code>GeNIe</code></h3>
+<div class="outline-text-3" id="text-org16a2304">
 <p>
 Le logiciel <code>GeNIe</code> est une interface graphique permettant de construire des modèles à partir du
 formalisme des réseaux bayésiens. Ce logiciel repose sur la librairie <code>SMILE</code> écrite en <code>C++</code>
@@ -303,9 +298,9 @@ lien associé à la version académique. Pour les utilisateurs de <code>Linux</c
 </div>
 </div>
 
-<div id="outline-container-org97da07b" class="outline-3">
-<h3 id="org97da07b">Librairie <code>pyAgrum</code></h3>
-<div class="outline-text-3" id="text-org97da07b">
+<div id="outline-container-org5ad0ea2" class="outline-3">
+<h3 id="org5ad0ea2">Librairie <code>pyAgrum</code></h3>
+<div class="outline-text-3" id="text-org5ad0ea2">
 <p>
 <code>pyAgrum</code> est un <i>wrapper</i> <code>Python</code> pour la librairie <code>aGrUM</code> écrite en <code>C++</code>. <code>aGrUM</code> est une
 librairie conçue pour développer rapidement des outils reposant sur l'utilisation de modèles
