@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Modélisation stochastique et approche bayésienne  <br> <br> <br> <font size="10">Introduction aux Réseaux Bayésiens</font></title>
+<meta name="author" content="Roland Donat"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="https://roland-donat.github.io/ubs/Charte_graphique/ensibs/ensibs_reveal.css"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="https://roland-donat.github.io/ubs/Charte_graphique/ensibs/ensibs-ppt-couv.jpg"><h1 class="title">Modélisation stochastique et approche bayésienne  <br> <br> <br> <font size="10">Introduction aux Réseaux Bayésiens</font></h1><p class="subtitle"></p>
+<h2 class="author">Roland Donat</h2><h2 class="date"> <br>CyberData S4</h2>
+</section>
+<section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-orgbb3e038">Objectifs de la séance</a></li>
+<li><a href="#/slide-org058f0e0">Un peu d'Histoire</a></li>
+<li><a href="#/slide-org5b9087d">Le raisonnement bayésien</a></li>
+<li><a href="#/slide-orgd7ac69e">Les réseaux bayésiens</a></li>
+<li><a href="#/slide-orga959f7b">Inférence</a></li>
+<li><a href="#/slide-orgaeb87c2">Construction pratique d'un réseau bayésien</a></li>
+<li><a href="#/slide-orgbe75675">Outils pour manipuler les RB</a></li>
+<li><a href="#/slide-orgb88b646">Évaluation</a></li>
+<li><a href="#/slide-org5612c7a">Application : <i>Trading</i> et <i>bitcoins</i></a></li>
+<li><a href="#/slide-org2bcf6fc">Résumé de la séance</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<section>
+<section id="slide-orgbb3e038">
+<h2 id="orgbb3e038">Objectifs de la séance</h2>
+<ul>
+<li>Replacer le développement des techniques bayésiennes dans l'Histoire scientifique</li>
+<li>Comprendre le principe de raisonnement bayésien</li>
+<li>Introduire le formalisme des réseaux bayésiens</li>
+<li>Savoir construire un réseau bayésien pour un problème donné</li>
+<li>Découvrir les outils de modélisation <code>GeNIe</code> et <code>PyAgrum</code></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org058f0e0">
+<h2 id="org058f0e0">Un peu d'Histoire</h2>
+
+<div id="org880cc71" class="figure">
+<p><img src="./fig/time-travel.jpg" alt="Classification dinosaures" width="80%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org13bc641">
+<h3 id="org13bc641">Une histoire de jeux</h3>
+<div class="block-example" id="org4baea0f">
+<p>
+<h4>Révérend Thomas Bayes (1702–1761)</h4>
+</p>
+<ul>
+<li>1763 : <i>An Essay towards solving a Problem in the Doctrine of Chances</i></li>
+<li><b>Notion de probabilité conditionnelle :</b> <i>If there be two subsequent events, the probability of the second \(b/N\) and the probability of both together \(P/N\), and it being first discovered that  the second event has also happened, the probability I am right [i.e., the conditional probability  of the first event being true given that the second has happened] is \(P/b\).</i></li>
+<li><b>Théorème de Bayes</b></li>
+
+</ul>
+
+</div>
+<p>
+ <br>
+</p>
+
+<div id="orgc9e85e0" class="figure">
+<p><img src="./fig/thomas_bayes.jpeg" alt="Thomas Bayes" width="30%" />
+</p>
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgd81be34">
+<h3 id="orgd81be34">Les travaux se poursuivent&#x2026;</h3>
+<div class="block-example" id="org2654d2d">
+<p>
+<h4>Pierre-Simon Laplace (1749–1827)</h4>
+</p>
+<ul>
+<li>1774 : Mémoire sur la Probabilité des Causes par les Événements</li>
+<li>1812 : Reformulation et clarification des travaux de Bayes</li>
+
+</ul>
+
+</div>
+<p>
+ <br>
+</p>
+
+<div id="orga17083d" class="figure">
+<p><img src="./fig/pierre-simon_laplace.jpg" alt="pierre-simon_laplace" width="30%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org676084e">
+<h3 id="org676084e">deux siècles plus tard&#x2026;</h3>
+<div class="block-example" id="org32743e2">
+<p>
+<h4>Fréquentistes vs Bayésiens (la guerre est toujours en cours)</h4>
+</p>
+<ul>
+<li>Fréquentistes : Seules les données ont de l'importance !</li>
+<li>Bayésiens : Les préjugés sont précieux !</li>
+
+</ul>
+
+</div>
+<p>
+ <br>
+ <br>
+</p>
+
+<div id="org48a27de" class="figure">
+<p><img src="./fig/Bayes_vs_Frequentist.png" alt="Fréquentiste vs Bayésiens" width="66%" />
+</p>
+</div>
+
+<p>
+Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christophe Michel</a>, 2018.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org31b6b4c">
+<h3 id="org31b6b4c">Les débuts de l'IA</h3>
+<div class="block-example" id="org62d8d13">
+<p>
+<h4>L'ère des systèmes experts (1970-1990)</h4>
+</p>
+<ul>
+<li>Formalisation des connaissances sur un système sous forme de <b>règles déterministes</b></li>
+<li>Moteur d'inférence reposant sur la logique booléenne</li>
+<li>Déduction d'informations à partir d'une base de règles</li>
+<li>Exemple : <code>SI X = VRAI ET Y = FAUX ALORS Z = VRAI</code></li>
+
+</ul>
+
+</div>
+<p>
+ <br>
+</p>
+
+<div id="org792d276" class="figure">
+<p><img src="./fig/expert_system.jpg" alt="Expert system" width="40%" />
+</p>
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf44f345">
+<h3 id="orgf44f345">La domination de l'IA</h3>
+<div class="block-example" id="org27ad710">
+<p>
+<h4>Judea Pearl (1936–) : Père des réseaux bayésiens</h4>
+</p>
+<ul>
+<li>1982 : <i>Reverend Bayes on inference engines : A distributed hierarchical approach</i></li>
+<li>\(P(\text{Revenus} > 1500) = 0.3\) et \(P(\text{Abonné salle de sport}) = 0.2\) Alors \(P(\text{Achat
+  chaussures running}) = 0.07\)</li>
+
+</ul>
+
+<ul>
+<li>1988 : <i>Probabilistic Reasoning in Intelligent Systems : Networks of Plausible Inference</i></li>
+<li>2011 : Judea Pearl reçoit le Prix Turing</li>
+
+</ul>
+
+</div>
+<p>
+ <br>
+</p>
+
+<div id="org74de09a" class="figure">
+<p><img src="./fig/judea_pearl.jpg" alt="Thomas Bayes" width="25%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org5b9087d">
+<h2 id="org5b9087d">Le raisonnement bayésien</h2>
+
+<div id="org08f1984" class="figure">
+<p><img src="./fig/bayes_panneau.jpg" alt="Panneau bayésien" width="80%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgeec81c1">
+<h3 id="orgeec81c1">Principe général</h3>
+<div class="column" style="float:left; width: 50%">
+
+<div class="block-definition" id="org358ae85">
+<p>
+<h4>Principes de la philosophie bayésienne</h4>
+</p>
+<ul>
+<li>L'approche bayésienne repose sur l'utilisation du langage des probabilités
+pour réaliser des raisonnements</li>
+<li>Cette approche de raisonnement généralise la logique booléenne</li>
+<li>Chaque raisonnement se matérialise par une suite de calculs probabilistes</li>
+<li>Chaque raisonnement tient compte des <i>a priori</i> sur les phénomènes étudiés</li>
+<li>La conclusion d'un raisonnement bayésien est donnée sous la forme d'une loi de probabilité</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="column" style="float:right; width: 50%">
+
+
+<div id="org9bc3835" class="figure">
+<p><img src="./fig/frequentists_vs_bayesians_2x.png" alt="Bayes vs Freq" class="fragment (appear)" width="80%" />
+</p>
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orga2b9752">
+<h3 id="orga2b9752">Exemple de raisonnement</h3>
+<div class="block-example" id="org48432d9">
+<p>
+<h4>Alarme et vol de voiture</h4>
+</p>
+<ul>
+<li>Situation : J'ai été réveillé par l'alarme de ma voiture en pleine nuit</li>
+<li>Question : Ma voiture est-elle en train de se faire voler ?</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="orgaea5780">
+<p>
+<h4>Raisonnement de type bayésien</h4>
+</p>
+<ol>
+<li><b>Modélisation :</b> on liste les phénomènes qui pourraient expliquer l'alarme (e.g. fausse
+alarme, tremblement de terre, criminalité, etc&#x2026;) et on tente d'établir leur probabilité</li>
+<li><b>Inférence :</b> on réalise des calculs de probabilité pour obtenir la réponse qui nous
+intéresse, i.e. ma voiture est-elle en train de se faire voler ?</li>
+<li><b>Décision :</b> si, compte tenu du contexte, la probabilité d'un vol est inférieur à un seuil
+donné, je me recouche, sinon j'appelle la police</li>
+
+</ol>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orga4c7025">
+<h3 id="orga4c7025">Théorème de Bayes</h3>
+<div class="block-definition" id="org4cead7e">
+<p>
+<h4>Théorème de Bayes</h4>
+</p>
+
+<ul>
+<li>Le théorème (ou formule) de Bayes permet d'exprimer la loi d'un phénomène \(Y\) conditionnellement à
+un phénomène \(X\) en fonction de la loi du phénomène \(X\) 
+conditionnellement au phénomène \(Y\) et de la loi
+    marginale du phénomène \(X\).</li>
+
+<li>Soient \(X\) et \(Y\) deux variables aléatoires (v.a.) représentant deux phénomènes aléatoires, on a :
+\[
+  P(Y|X) = \frac{P(X|Y) P(Y)}{P(X)}
+  \]
+<ul>
+<li>les lois \(P(X)\) et \(P(Y)\) sont appelées lois <i>a priori</i> des
+phénomènes \(X\) et \(Y\) respectivement (ou lois marginales)</li>
+<li>la loi \(P(X|Y)\) représente la vraisemblance du phénomène \(X\) par rapport au phénomène \(Y\),
+autrement dit la "plausibilité" d'observer \(X\) alors que \(Y\) s'est produit</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="orgfbe4437">
+<p>
+<h4>Conséquence</h4>
+</p>
+
+<ul>
+<li>Le théorème de Bayes permet d'effectuer des
+raisonnements probabilistes (de l'inférence) impliquant <b>deux phénomènes aléatoires</b> à l'aide d'<i>a
+priori</i> et de conditionnement</li>
+<li>Et si la problématique décisionnelle implique plus de deux phénomènes ou variables aléatoires,
+<b>les réseaux bayésiens vont nous sauver !</b></li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org2e4fbf2">
+<h4 id="org2e4fbf2">Théorème de Bayes</h4>
+<p>
+<div class="slidesubtitle">Retour sur l'exemple du vol de voiture</div>
+</p>
+
+<div class="block-example" id="org65890a7">
+<p>
+<h4>Modélisation</h4>
+</p>
+<ul>
+<li>Fiabilité de l'alarme : \(P(\text{Alarme} | \text{Vol}) = 0.999\)</li>
+<li>Taux de fausses alarmes : \(P(\text{Alarme} | \text{Pas de vol}) = 0.005\)</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org846899a">
+<h4 id="org846899a">Théorème de Bayes</h4>
+<p>
+<div class="slidesubtitle">Retour sur l'exemple du vol de voiture</div>
+</p>
+
+<div class="block-example" id="org01833e2">
+<p>
+<h4>Modélisation</h4>
+</p>
+<ul>
+<li>Fiabilité de l'alarme : \(P(\text{Alarme} | \text{Vol}) = 0.999\)</li>
+<li>Taux de fausses alarmes : \(P(\text{Alarme} | \text{Pas de vol}) = 0.005\)</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="org54d5649">
+<p>
+<h4>L'alarme retentit 😨... Dois-je appeler la police ?</h4>
+</p>
+
+<p>
+<b>Je suis fréquentiste (personne n'est parfait) :</b>
+</p>
+<ul>
+<li><p>
+je construits un test d'hypothèses :
+</p>
+<div>
+\begin{cases}
+H_{0} : & ~\text{Pas de vol} \\
+H_{1} : & ~\text{Vol}
+\end{cases}
+
+</div></li>
+<li>Je sais que \(P(\text{Alarme} | \text{Pas de vol}) = 0.005 < 0.05\)</li>
+<li>Il est trop improbable qu'il s'agisse
+d'une fausse alarme compte tenu de sa fiabilité, je rejette l'hypothèse \(H_{0}\)&#x2026;</li>
+<li>J'appelle la police !</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org7a09dfb">
+<h4 id="org7a09dfb">Théorème de Bayes</h4>
+<p>
+<div class="slidesubtitle">Retour sur l'exemple du vol de voiture</div>
+</p>
+
+<div class="block-example" id="orge3785ae">
+<p>
+<h4>Modélisation</h4>
+</p>
+<ul>
+<li>Fiabilité de l'alarme : \(P(\text{Alarme} | \text{Vol}) = 0.999\)</li>
+<li>Taux de fausses alarmes : \(P(\text{Alarme} | \text{Pas de vol}) = 0.005\)</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="orgf7459d7">
+<p>
+<h4>L'alarme retentit 😨... Dois-je appeler la police ?</h4>
+</p>
+
+<p>
+<b>Je suis bayésien :</b>
+</p>
+<ul>
+<li>Je dois calculer \(P(\text{Vol}|\text{Alarme})\), i.e. probabilité d'un vol sachant que l'alarme retentit</li>
+<li>D'après le théorème de Bayes :
+\[
+  P(\text{Vol}|\text{Alarme}) = \frac{P(\text{Alarme} | \text{Vol}) P(\text{Vol})}{P(\text{Alarme})}
+  \]</li>
+<li>La décision repose donc sur ma "croyance" <i>a priori</i> sur l'occurrence d'un vol représentée
+mathématiquement par la probabilité \(P(\text{Vol})\)</li>
+<li>Par exemple, si j'habite dans les Bouches-du-Rhône, la probabilité \(P(\text{Vol})\) est plus
+importante que si j'habite dans la Creuse</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf3b4795">
+<h3 id="orgf3b4795">Exemple de bayésiens</h3>
+<div class="block-example" id="orgaa0e5a6">
+<p>
+<h4>Question</h4>
+</p>
+
+<p>
+Vous connaissez tous une industrie qui repose sur les raisonnements bayésiens, laquelle ?
+</p>
+
+</div>
+<p>
+ <br>
+</p>
+
+<div id="org4eb3485" class="figure">
+<p><img src="./fig/paris_sportifs.png" alt="Paris sportifs" class="fragment (appear)" width="70%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgd7ac69e">
+<h2 id="orgd7ac69e">Les réseaux bayésiens</h2>
+
+<div id="org735bdf0" class="figure">
+<p><img src="./fig/bayesnets_illustration.png" alt="Bayesnet" width="75%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orga2e11a0">
+<h3 id="orga2e11a0">Les réseaux bayésiens en trois points</h3>
+<div class="block-example" id="org944743e">
+<p>
+<h4>Qu'est ce que c'est?</h4>
+</p>
+
+<ul>
+<li>Les réseaux bayésiens désignent un formalisme de modélisation graphique</li>
+<li>Ce formalisme permet de représenter des phénomènes aléatoires complexes sous forme de lois de probabilité
+conditionnelles</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="org5c9d45a">
+<p>
+<h4>Sur quoi ça repose?</h4>
+</p>
+
+<ul>
+<li>Théorie des graphes (aspect qualitatif)</li>
+<li>Théorie des probabilités (aspect quantitatif)</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="orgfa654e9">
+<p>
+<h4>En quoi est-ce intéressant</h4>
+</p>
+
+<ul>
+<li>Formalisme graphique intuitif (facilite la communication)</li>
+<li>Puissance de modélisation</li>
+<li>Puissance de raisonnement par inférence probabiliste</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org20b626f">
+<h3 id="org20b626f">Un exemple pour comprendre</h3>
+<div class="block-example" id="orgca89862">
+<p>
+<h4>Vol ou pas vol ?</h4>
+</p>
+
+<ul>
+<li>Replaçons nous dans notre problématique d'alarme et de vol de voiture</li>
+<li>Considérons à présent que notre alarme est sensible aux orages</li>
+<li>Cela se matérialise par une probabilité de fausses alarmes qui augmente avec la présence d'un
+orage et de son intensité (données constructeurs)</li>
+<li>On suppose également que la survenue d'un orage peut avoir été prévue par les services météo
+(données sur les performances des prévisions météo)</li>
+<li><b>La problématique du vol et de l'alarme n'est donc plus bivariée !</b></li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="orgddeda70">
+<p>
+<h4>L'alarme retentit en pleine nuit... Dois-je appeler la police ?</h4>
+</p>
+
+<ul>
+<li>Si j'entends un fort orage</li>
+<li>Si avant de dormir, j'ai lu un bulletin météo indiquant que de petits orages risquaient d'avoir
+lieu pendant la nuit ?</li>
+<li>Que dire sur la météo si je vois un voleur s'emparer de mon véhicule ?</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgcdb3971">
+<h4 id="orgcdb3971">Un exemple pour comprendre</h4>
+
+<div id="org510253f" class="figure">
+<p><img src="./fig/rb_definition_alarme_1.png" alt="RB alarme definition" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org6b13817">
+<h4 id="org6b13817">Un exemple pour comprendre</h4>
+
+<div id="org3bebab7" class="figure">
+<p><img src="./fig/rb_definition_alarme_2.png" alt="RB alarme definition" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org2728e3c">
+<h4 id="org2728e3c">Un exemple pour comprendre</h4>
+
+<div id="org7c88854" class="figure">
+<p><img src="./fig/rb_definition_alarme_3.png" alt="RB alarme definition" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org544254a">
+<h4 id="org544254a">Un exemple pour comprendre</h4>
+
+<div id="org7373397" class="figure">
+<p><img src="./fig/rb_definition_alarme_4.png" alt="RB alarme definition" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org7f2fcd9">
+<h4 id="org7f2fcd9">Un exemple pour comprendre</h4>
+
+<div id="org62cf641" class="figure">
+<p><img src="./fig/rb_definition_alarme_5.png" alt="RB alarme definition" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org3fcde3e">
+<h4 id="org3fcde3e">Un exemple pour comprendre</h4>
+
+<div id="org464a4c4" class="figure">
+<p><img src="./fig/rb_definition_alarme_6.png" alt="RB alarme definition" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org130ce2c">
+<h4 id="org130ce2c">Un exemple pour comprendre</h4>
+
+<div id="orgcf853b3" class="figure">
+<p><img src="./fig/rb_definition_alarme_7.png" alt="RB alarme definition" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgec7875c">
+<h4 id="orgec7875c">Un exemple pour comprendre</h4>
+
+<div id="org9a6ab35" class="figure">
+<p><img src="./fig/rb_definition_alarme_8.png" alt="RB alarme definition" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgf935def">
+<h4 id="orgf935def">Un exemple pour comprendre</h4>
+
+<div id="org1d6e072" class="figure">
+<p><img src="./fig/rb_definition_alarme_9.png" alt="RB alarme definition" width="100%" />
+</p>
+</div>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org1d15df8">
+<h3 id="org1d15df8">Définition formelle</h3>
+<div class="block-definition" id="org9e7eff7">
+<p>
+<h4>Réseau bayésien (RB)</h4>
+</p>
+
+<p>
+Un réseau bayésien (RB), noté \(\mathcal{M}\), permet de représenter la loi (jointe) d'une suite de
+variables aléatoires (v.a.) \(X_{1},\ldots,X_{n}\) par : 
+</p>
+<ul>
+<li>Un graphe orienté sans circuit \(\mathcal{G}\) où :
+<ul>
+<li><b>Les noeuds</b> représentent les v.a.</li>
+<li><b>Les arcs</b> indiquent des relations de dépendances</li>
+
+</ul></li>
+<li>Les <b>Lois de Probabilité Conditionnelles (LPC)</b> de chaque v.a. \(X_{i}\) sachant ses parents
+\(\text{pa}(X_{i})\), notées \(P(X_{i}|\text{pa}(X_{i}))\)</li>
+
+</ul>
+
+</div>
+<p>
+ <br>
+</p>
+
+
+<div id="org733b868" class="figure">
+<p><img src="./fig/rb_definition_alarme.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org72e2af7">
+<h3 id="org72e2af7">Domaines d'application</h3>
+<div class="block-example" id="orga9e164a">
+<p>
+<h4>Quelques champs d'applications</h4>
+</p>
+
+<ul>
+<li>Intelligence artificielle</li>
+<li>Biologie, Médecine</li>
+<li>Marketing, Finance</li>
+<li>Sûreté de fonctionnement</li>
+<li>etc&#x2026;</li>
+<li><b>Applications à l'aide à la décision en général</b></li>
+
+</ul>
+
+<p>
+Exemple : <a href="https://roland-donat.github.io/cours-rb/stid_intro/exemples/alarme.xdsl">Modèle du réseau bayésien <code>Alarme</code></a>
+</p>
+
+</div>
+
+
+<div class="block-example" id="org3e5f0d9">
+<p>
+<h4>Types d'analyses possibles</h4>
+</p>
+
+<ul>
+<li>Analyse prévisionnelle : Expliquer un phénomène par rapport à son contexte</li>
+<li>Diagnostic : Comprendre le contexte/les causes associé à l'occurrence d'un événement</li>
+<li>Simulation : Étudier un système complexe en générant des scénarios</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org0603aa6">
+<h3 id="org0603aa6">Propriété fondamentale</h3>
+<div class="block-definition" id="org7e0977a">
+<p>
+<h4>Factorisation de la loi jointe</h4>
+</p>
+
+<p>
+La loi jointe d'une suite de v.a. \(X_{1}, \ldots, X_{n}\) représentée par un réseau bayésien se
+factorise comme le produit des LPC de chacune des variables :
+\[
+P(X_{1}, \ldots,X_{n}) = \prod_{i=1}^{n} P(X_{i}| \text{pa}(X_{i}))
+\]
+</p>
+
+</div>
+
+<div class="fragment (appear) block-definition" id="org5c1eae7">
+<p>
+<h4>Rappel</h4>
+</p>
+
+<ul>
+<li>Rappel de la formule de Bayes généralisée (toujours vraie) :
+\[
+  P(X_{1}, \ldots,X_{n}) = P(X_{1}) \times P(X_{2}|X_{1}) \times P(X_{3}|X_{1},X_{2}) \times \ldots \times P(X_{n}|X_{1}, \ldots,X_{n-1})
+  \]</li>
+<li>La factorisation dans un RB permet de simplifier la formule de Bayes généralisée</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orge2995e0">
+<h4 id="orge2995e0">Propriété fondamentale</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org90bec5a" class="figure">
+<p><img src="./fig/rb_definition_alarme_graphe.png" alt="RB alarme definition" width="75%" />
+</p>
+</div>
+
+<div class="fragment (appear) block-example" id="org597605c">
+<p>
+<h4>Factorisation</h4>
+</p>
+
+<div>
+\begin{align}
+& P(\text{Voleur},\text{Alarme},\text{Orage},\text{Météo}) \\
+& = P(\text{Voleur}) \times
+P(\text{Alarme}|\text{Voleur}; \text{Orage}) \times P(\text{Orage}) \times
+P(\text{Météo}|\text{Orage})
+\end{align}
+
+</div>
+
+<p>
+ <br>
+</p>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org7963519">
+<h3 id="org7963519">Complexité</h3>
+<p>
+<div class="slidesubtitle">Complexité spatiale d'une LPC discrète et finie</div>
+</p>
+
+<div class="block-definition" id="orgada1323">
+<p>
+<h4>Complexité spatiale d'une LPC discrète et finie</h4>
+</p>
+
+<ul>
+<li>Soient \(\boldsymbol{X} = X_{1},\ldots,X_{n}\) et \(\boldsymbol{Y} = Y_{1},\ldots,Y_{m}\) deux suites de
+v.a. à valeurs dans les ensembles discrets et finis \(\mathcal{X}_{1}, \ldots,
+  \mathcal{X}_{n}\) et \(\mathcal{Y}_{1}, \ldots, \mathcal{Y}_{m}\)</li>
+
+<li>La complexité spatiale associée à la LPC \(P(X_{1},\ldots,X_{n}|Y_{1},\ldots,Y_{m}) = P(\boldsymbol{X}|\boldsymbol{Y})\),
+notée \(CS(P(\boldsymbol{X}|\boldsymbol{Y}))\), est définie par le <b>nombre de configurations de
+valeurs différentes que peuvent prendre les v.a. \(X_{1},\ldots,X_{n}, Y_{1}, \ldots, Y_{m}\)</b></li>
+
+</ul>
+
+<ul>
+<li class="fragment appear">Autrement dit : 
+\[
+  CS(P(\boldsymbol{X}|\boldsymbol{Y})) = \prod_{i = 1}^{n} |\mathcal{X}_{i}| \prod_{j =
+  1}^{m} |\mathcal{Y}_{j}|
+  \]
+où \(|\mathcal{X}_{i}|\) est le nombre d'éléments dans l'ensemble \(\mathcal{X}_{i}\)</li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="orgf7db1a8">
+<p>
+<h4>Exercice</h4>
+</p>
+
+<ul>
+<li>Donner les complexités spatiales des LPC du RB "Alarme"</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orge08478a">
+<h4 id="orge08478a">Complexité</h4>
+<p>
+<div class="slidesubtitle">Complexité probabiliste d'une LPC discrète et finie</div>
+</p>
+
+<div class="block-definition" id="org57de055">
+<p>
+<h4>Complexité probabiliste d'une LPC discrète et finie</h4>
+</p>
+
+<ul>
+<li>Soient \(\boldsymbol{X} = X_{1},\ldots,X_{n}\) et \(\boldsymbol{Y} = Y_{1},\ldots,Y_{m}\) deux suites de
+v.a. à valeurs dans les ensembles discrets et finis \(\mathcal{X}_{1}, \ldots,
+  \mathcal{X}_{n}\) et \(\mathcal{Y}_{1}, \ldots, \mathcal{Y}_{m}\)</li>
+
+<li>La complexité probabiliste associée à la LPC \(P(X_{1},\ldots,X_{n}|Y_{1},\ldots,Y_{m}) = P(\boldsymbol{X}|\boldsymbol{Y})\),
+notée \(CP(P(\boldsymbol{X}|\boldsymbol{Y}))\), est définie par le <b>nombre de paramètres
+(probabilités) nécessaires pour définir la LPC</b></li>
+
+</ul>
+
+<ul>
+<li class="fragment appear">Autrement dit : 
+\[
+  CP(P(\boldsymbol{X}|\boldsymbol{Y})) = \prod_{i = 1}^{n} (|\mathcal{X}_{i}| - 1) \prod_{j =
+  1}^{m} |\mathcal{Y}_{j}|
+  \]</li>
+
+<li class="fragment appear">La CP tient simplement compte du fait qu'une LPC doit sommer à 1 pour chaque configuration des
+variables de conditionnement</li>
+<li class="fragment appear">La CP mesure le potentiel de modélisation d'une loi (notion de degré de liberté)</li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="org5289264">
+<p>
+<h4>Exercice</h4>
+</p>
+
+<ul>
+<li>Donner les complexités probabilistes des LPC du RB "Alarme"</li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-orgc5752e2">
+<h4 id="orgc5752e2">Complexité</h4>
+<p>
+<div class="slidesubtitle">Complexité d'un réseau bayésien</div>
+</p>
+
+<div class="block-definition" id="org610d05a">
+<p>
+<h4>Complexité d'une loi jointe représentée par un RB</h4>
+</p>
+
+<ul>
+<li>Soit \(X_{1},\ldots,X_{n}\) une suite de v.a. à valeurs dans les ensembles discrets et finis
+\(\mathcal{X}_{1}, \ldots, \mathcal{X}_{n}\)</li>
+<li>La complexité spatiale (resp. probabiliste) d'une loi jointe factorisée dans un RB est définie
+comme étant la somme des complexités spatiales (resp. probabilistes) associées à chacune des LPC
+\(P(X_{i}|\text{pa}(X_{i}))\)</li>
+
+</ul>
+
+<ul>
+<li class="fragment appear">La <b>complexité spatiale</b> du RB a pour expression :
+\[
+  CS(RB) = \sum_{i = 1}^{n}
+  CS(P(X_{i}|\text{pa}(X_{i}))) = \sum_{i = 1}^{n} |\mathcal{X}_{i}| \times
+  \prod_{\mathcal{X} \in \text{pa}(\mathcal{X}_{i})} |\mathcal{X}|
+  \]</li>
+<li class="fragment appear">La <b>complexité probabiliste</b> a pour expression :
+\[
+  CP(RB) = \sum_{i = 1}^{n}
+  CP(P(X_{i}|\text{pa}(X_{i}))) = \sum_{i = 1}^{n} (|\mathcal{X}_{i}| - 1) \times
+  \prod_{\mathcal{X} \in \text{pa}(\mathcal{X}_{i})} |\mathcal{X}|
+  \]</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgdd96c2c">
+<h4 id="orgdd96c2c">Complexité</h4>
+<p>
+<div class="slidesubtitle">Conséquences pratiques</div>
+</p>
+
+
+<div class="block-definition" id="orgcebd9f0">
+<p>
+<h4>RB = Représentation parcimonieuse</h4>
+</p>
+
+<ul>
+<li><b>Un RB est une représentation compacte d'un processus aléatoire</b></li>
+
+<li>Moins il y a d'arcs dans le graphe :
+<ul>
+<li>Plus des hypothèses d'indépendances conditionnelles entre les variables sont posées</li>
+<li>Plus le potentiel de modélisation, i.e. la capacité à représenter des phénomènes complexes, diminue (\(CP\) faible)</li>
+<li>Plus la représentation par RB est avantageuse du point de vue du stockage, du paramétrage et de la complexité calculatoire (\(CS\) faible)</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="orgb08f2f4">
+<p>
+<h4>Exercice</h4>
+</p>
+
+<p>
+Calculer les complexités du modèle "Alarme" avec et sans RB
+</p>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orge549b3b">
+<h3 id="orge549b3b">Relations d'indépendances</h3>
+<div class="block-definition" id="org92c4fbf">
+<p>
+<h4>RB et indépendances conditionnelles</h4>
+</p>
+
+<ul>
+<li>Un RB peut être vu comme un codage de relations d'indépendances conditionnelles parmi un ensemble de variables aléatoires</li>
+<li>Attention : 
+<ul>
+<li>L'absence d'arc entre deux variables ne signifie pas qu'elles sont indépendantes</li>
+<li>Un arc entre deux variables ne signifie pas toujours qu'elles sont dépendantes</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-definition" id="org291f53d">
+<p>
+<h4>Structures fondamentales</h4>
+</p>
+
+<ul>
+<li>Les relations d'indépendances dans un RB se déduisent des trois structures fondamentales
+suivantes : 
+<ul>
+<li>Connexion série : \(X \rightarrow Y \rightarrow Z\)</li>
+<li>Connexion divergente : \(X \leftarrow Y  \rightarrow Z\)</li>
+<li>Connexion convergente (ou V-structure) : \(X \rightarrow Y \leftarrow Z\)</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgf7d4d39">
+<h4 id="orgf7d4d39">Relations d'indépendances</h4>
+<p>
+<div class="slidesubtitle">Connexion série</div>
+</p>
+
+
+<div id="org348f2f0" class="figure">
+<p><img src="./fig/RB_conn_serie.png" alt="Connexion serie" width="60%" />
+</p>
+</div>
+
+
+<div class="block-definition" id="org8b3e7a3">
+<p>
+<h4>Propriétés</h4>
+</p>
+
+<ul>
+<li><b>\(X\) et \(Z\) sont <i>a priori</i> dépendantes</b></li>
+
+</ul>
+
+<ul>
+<li class="fragment appear"><b>Si \(Y\) est connue</b>, alors \(X\) et \(Z\) sont <b>indépendantes</b></li>
+<li class="fragment appear">On dit que \(X\) et \(Z\) sont <b>indépendantes conditionnellement à \(Y\)</b></li>
+<li class="fragment appear">Si on fixe la connaissance marginale sur \(Y\), i.e. \(P(Y)\), la connaissance marginale sur
+\(X\) <b>ne modifie pas</b> la connaissance marginale sur \(Z\), i.e. \(P(Z)\), (et inversement)</li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-org9bad42e">
+<h4 id="org9bad42e">Relations d'indépendances</h4>
+<p>
+<div class="slidesubtitle">Connexion divergente</div>
+</p>
+
+
+<div id="org3c3422b" class="figure">
+<p><img src="./fig/RB_conn_div.png" alt="Connexion divergeante" width="60%" />
+</p>
+</div>
+
+
+<div class="block-definition" id="orgf544e1c">
+<p>
+<h4>Propriétés</h4>
+</p>
+
+<ul>
+<li><b>\(X\) et \(Z\) sont <i>a priori</i> dépendantes</b></li>
+
+</ul>
+
+<ul>
+<li class="fragment appear"><b>Si \(Y\) est connue</b>, alors \(X\) et \(Z\) sont <b>indépendantes</b></li>
+<li class="fragment appear">On dit que \(X\) et \(Z\) sont <b>indépendantes conditionnellement à \(Y\)</b></li>
+<li class="fragment appear">Si on fixe la connaissance marginale sur \(Y\), i.e. \(P(Y)\), la connaissance marginale sur
+\(X\) <b>ne modifie pas</b> la connaissance marginale sur \(Z\), i.e. \(P(Z)\), (et inversement)</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org7f8b81a">
+<h4 id="org7f8b81a">Relations d'indépendances</h4>
+<p>
+<div class="slidesubtitle">Connexion convergente</div>
+</p>
+
+
+<div id="org13ee164" class="figure">
+<p><img src="./fig/RB_conn_v.png" alt="Connexion convergente" width="60%" />
+</p>
+</div>
+
+
+<div class="block-definition" id="orgddb93fe">
+<p>
+<h4>Propriétés</h4>
+</p>
+
+<ul>
+<li><b>\(X\) et \(Z\) sont <i>a priori</i> indépendantes</b></li>
+
+</ul>
+
+<ul>
+<li class="fragment appear"><b>Si \(Y\) est connue</b>, alors \(X\) et \(Z\) sont <b>dépendantes</b></li>
+<li class="fragment appear">On dit que \(X\) et \(Z\) sont <b>dépendantes conditionnellement à \(Y\)</b></li>
+<li class="fragment appear">Si on fixe la connaissance marginale sur \(Y\), i.e. \(P(Y)\), la connaissance marginale sur
+\(X\) <b>modifie</b> la connaissance marginale sur \(Z\), i.e. \(P(Z)\), (et inversement)</li>
+
+</ul>
+
+</div>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orga959f7b">
+<h2 id="orga959f7b">Inférence</h2>
+
+<div id="org1f94714" class="figure">
+<p><img src="./fig/inferences.jpg" alt="Inférence" width="85%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org8feacd3">
+<h3 id="org8feacd3">Problématique</h3>
+
+<div id="org10fd108" class="figure">
+<p><img src="./fig/rb_inference_alarme_pb.png" alt="Inférence problématique" width="95%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org685cdb3">
+<h4 id="org685cdb3">Problématique</h4>
+
+<div id="org8a71b25" class="figure">
+<p><img src="./fig/rb_inference_alarme_ex_1.png" alt="Inférence problématique" width="95%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgdad6eb4">
+<h4 id="orgdad6eb4">Problématique</h4>
+
+<div id="org5ca4217" class="figure">
+<p><img src="./fig/rb_inference_alarme_ex_2.png" alt="Inférence problématique" width="95%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf93c77b">
+<h3 id="orgf93c77b">Méthode d'élimination des variables</h3>
+<p>
+<div class="slidesubtitle">Principe</div>
+</p>
+
+<div class="block-definition" id="orgd5e065a">
+<p>
+<h4>Hypothèses d'utilisation</h4>
+</p>
+
+<ul>
+<li>Méthode adaptée pour les réseaux bayésiens à <b>variables discrètes et finies</b>,
+i.e. LPC sous forme de tables (matrices)</li>
+<li>Si le phénomène étudié implique des variables continues et/ou non finies, il faut les <b>discrétiser</b>
+au préalable</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="orgcba2f7a">
+<p>
+<h4>Principe</h4>
+</p>
+
+<ul>
+<li>"Éliminer" par marginalisations successives toutes les variables de la loi jointe qui
+n'apparaissent pas dans le calcul à réaliser</li>
+<li>Simplifier le calcul à réaliser grâce à la propriété de factorisation des RB et choississant un
+"bon" ordre d'élimination des variables</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="org0f210d6">
+<p>
+<h4>Propriétés</h4>
+</p>
+
+<ul>
+<li>L'ordre d'élimination des variables n'influe pas sur le résultat, i.e. tous les ordres aboutissent au même (bon) résultat</li>
+<li><b>En revanche, la rapidité des calculs est fortement liée à l'ordre d'élimination</b></li>
+<li>Méthode de référence implémentée dans la plupart des outils de réseaux bayésiens</li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-org9722370">
+<h4 id="org9722370">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org64ae5d1" class="figure">
+<p><img src="./fig/rb_definition_alarme_graphe_va.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="orgda1da58">
+<p>
+<h4>Inférence dans le réseau bayésien Alarme</h4>
+</p>
+
+<ul>
+<li>La problématique fait intervenir 4 variables aléatoires : Voleur (\(V\)), Alarme (\(A\)), Orage (\(O\)),
+Info météo (\(M\))</li>
+<li>Le RB qui modélise la problématique permet de factoriser la loi jointe des variables aléatoire comme suit :
+\[  
+  P(V,A,O,M) = P(V) \times P(A|V; O) \times P(O) \times P(M|O)
+  \]</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org2b306f3">
+<h4 id="org2b306f3">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+<div class="block-example" id="org740130a">
+<p>
+<h4>Calcul de P(Voleur=oui|Alarme=oui)</h4>
+</p>
+
+<p>
+Par définition :
+\[
+P(V = \text{oui}|A = \text{oui}) = \frac{P(V = \text{oui}; A = \text{oui})}{P(A = \text{oui})}
+\]
+</p>
+
+</div>
+
+<div class="fragment (appear) block-example" id="org07f909d">
+<p>
+<h4>Calcul du numérateur</h4>
+On marginalise simplement sur les variables Voleur et Alarme :
+\[
+P(V = \text{oui}; A = \text{oui}) = \sum_{O \in \{\text{non},
+  \text{faible},\text{fort}\}} \sum_{M \in \{\text{non},
+  \text{oui}\}} P(V = \text{oui}; A = \text{oui},O,M) 
+\]
+</p>
+
+</div>
+
+</section>
+<section id="slide-org8b4faae">
+<h4 id="org8b4faae">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+<div class="block-example" id="orga4d5af6">
+<p>
+<h4>Calcul du numérateur par "élimination"</h4>
+</p>
+
+<p>
+On utilise la propriété de factorisation :
+</p>
+<div>
+\begin{align}
+& P(V = \text{oui}; A = \text{oui}) \\
+& = \sum_{O \in \{\text{non},
+  \text{faible},\text{fort}\}} \sum_{M \in \{\text{non},
+  \text{oui}\}} P(V = \text{oui}) \times
+  P(A = \text{oui}|V = \text{oui}; O) \times P(O) \times P(M|O)
+\end{align}
+
+</div>
+
+<p>
+On "élimine" successivement les variables \(M\) et \(O\) en distibuant les sommes dans la
+factorisation :
+</p>
+<div>
+\begin{align}
+& P(V = \text{oui}; A = \text{oui}) \\
+& =  P(V = \text{oui}) \times
+  \sum_{O \in \{\text{non},
+  \text{faible},\text{fort}\}} P(A = \text{oui}|V = \text{oui}; O) \times P(O) \times \sum_{M \in \{\text{non},
+  \text{oui}\}} P(M|O)
+\end{align}
+
+</div>
+
+</div>
+
+<div class="block-example" id="org36747cd">
+<p>
+<h4>Calcul du dénominateur par "élimination"</h4>
+</p>
+
+<p>
+Principe identique :
+</p>
+<div>
+\begin{align}
+& P(A = \text{oui}) \\
+& = \sum_{V \in \{\text{non}, \text{oui}\}} P(V) \times
+   \sum_{O \in \{\text{non},
+  \text{faible},\text{fort}\}} P(A = \text{oui}|V; O) \times P(O) \times \sum_{M \in \{\text{non},
+  \text{oui}\}} P(M|O)
+\end{align}
+
+</div>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgaeb87c2">
+<h2 id="orgaeb87c2">Construction pratique d'un réseau bayésien</h2>
+
+<div id="orgd7673cd" class="figure">
+<p><img src="./fig/information-network-regina-valluzzi.jpg" alt="information-network-regina-valluzzi" width="50%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org46b7eeb">
+<h3 id="org46b7eeb">Problématique</h3>
+<div class="block-definition" id="org383fd56">
+<p>
+<h4>Objectif</h4>
+</p>
+
+<ul>
+<li>Modéliser un phénomène aléatoire impliquant différentes variables \(X_{1}, \ldots, X_{D}\)</li>
+<li>Utiliser un réseau bayésien afin de représenter au mieux les relations entre les variables</li>
+
+</ul>
+
+</div>
+
+
+<div class="fragment (appear) block-definition" id="org79d6cf1">
+<p>
+<h4>Problèmes</h4>
+</p>
+
+<ul>
+<li>Comment déterminer la structure du réseau bayésien (i.e. le graphe)?</li>
+<li>Comment estimer les lois de probabilité conditionnelles (LPC) \(P(X_{d}|\text{pa}(X_{d})),~ d = 1, \ldots, D\) ?</li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="org2124d64">
+<p>
+<h4>Approches envisageables</h4>
+</p>
+
+<ul>
+<li>Approche par expertise : utilisation d'avis d'experts et connaissances métiers</li>
+<li>Approche statistique : utilisation de bases de données (contenant éventuellement des
+informations incomplètes)</li>
+<li>Approche mixte : expertise + bases de données</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgd276f3e">
+<h4 id="orgd276f3e">Problématique</h4>
+<p>
+<div class="slidesubtitle">Exemple : Vente d'un livret</div>
+</p>
+
+
+<div id="org77b2514" class="figure">
+<p><img src="./fig/rb_vente_var.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgbc03186">
+<h4 id="orgbc03186">Problématique</h4>
+<p>
+<div class="slidesubtitle">Apprentissage de la structure</div>
+</p>
+
+
+<div id="orgf14b1d9" class="figure">
+<p><img src="./fig/rb_vente_graphe_app.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org08ead18">
+<h4 id="org08ead18">Problématique</h4>
+<p>
+<div class="slidesubtitle">Apprentissage des LPC (structure fixée)</div>
+</p>
+
+
+<div id="org188f54d" class="figure">
+<p><img src="./fig/rb_vente_lpc_app.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgeee29a0">
+<h4 id="orgeee29a0">Problématique</h4>
+<p>
+<div class="slidesubtitle">Apprentissage complet du réseau bayésien</div>
+</p>
+
+
+<div id="orgcc092d1" class="figure">
+<p><img src="./fig/rb_vente_graphe_lpc_app.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org6fc4b11">
+<h3 id="org6fc4b11">Construction par expertise</h3>
+<p>
+<div class="slidesubtitle">Acquisition de l'information</div>
+</p>
+
+<div class="block-definition" id="org17b9c3b">
+<p>
+<h4>Acquisition de l'information</h4>
+</p>
+
+<ul>
+<li>Trouver des personnes expertes fiables et coopératives</li>
+<li>Familiariser ces personnes à la notion de probabilité</li>
+<li>Tenir compte de leurs biais éventuels (souvent inconscients)</li>
+<li>Utiliser un outil pour faciliter le recueil des informations</li>
+<li>Exemple : échelle de probabilité :</li>
+
+</ul>
+
+
+<div id="orgd124f74" class="figure">
+<p><img src="./fig/echelle_prob.png" alt="Echelle prob" width="90%" />
+</p>
+</div>
+
+<p>
+ <br>
+</p>
+
+</div>
+
+
+
+</section>
+<section id="slide-org423a2f8">
+<h4 id="org423a2f8">Construction par expertise</h4>
+<p>
+<div class="slidesubtitle">Attention au connexions convergentes (V-structures)</div>
+</p>
+
+<div class="block-alert" id="orgde07ea7">
+<p>
+<h4>Problème</h4>
+</p>
+
+<ul>
+<li>L'expertise métier permet en général de construire des RB fidèles à la réalité opérationnelle</li>
+<li>En revanche, l'humain a intuitivement tendance à introduire des connexions convergentes
+<ul>
+<li>Exemple : Soit \(Y\) un phénomène à expliquer et \(X_{1}, \ldots, X_{D}\), \(D\) facteurs explicatifs possibles</li>
+<li>Structure naturelle : \(X_{1} \to Y, \ldots, X_{D} \to Y\)</li>
+<li>Risque d'explosion combinatoire : Définir \(P(Y|X_{1},\ldots,X_{D})\) nécessite \(2^{D}\) valeurs
+dans le cas où les variables sont binaires</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="org03dbe8d">
+<p>
+<h4>Solutions possibles</h4>
+</p>
+
+<ul>
+<li>Inverser les flèches et utiliser une structure naïve : \(Y \to X_{1}, \ldots, Y \to X_{D}\) en
+assumant les simplifications induites</li>
+<li>Introduction d'un modèle de LPC particulier, e.g. modèle OU-bruité</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org4e38c4d">
+<h3 id="org4e38c4d">Apprentissage des LPC</h3>
+<div class="block-definition" id="orge6141a0">
+<p>
+<h4>Hypothèses</h4>
+</p>
+
+<ul>
+<li>On modélise un phénomène aléatoire caractérisé par des variables aléatoires \(X_{1}, \ldots, X_{D}\)
+dont la loi est représentée par un RB</li>
+<li>Les variables aléatoires \(X_{1}, \ldots, X_{D}\) sont discrètes et finies</li>
+<li>Le graphe du RB est supposé connu</li>
+<li>On dispose d'un jeu de données \(\boldsymbol{D} = (\boldsymbol{x}_{1}, \ldots, \boldsymbol{x}_{N})\)
+où chaque observation \(\boldsymbol{x}_{n}\) est caractérisée par \(D\) variables \((x_{n,1},\ldots,x_{n,D})\)</li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-definition" id="orge9b0c50">
+<p>
+<h4>Méthode du maximum de vraisemblance</h4>
+</p>
+
+<p>
+L'estimation du maximum de vraisemblance de chaque LPC d'un RB a pour expression :
+\[
+\hat{P}^{\text{MV}}(X_{d} = x_{d,k}|\text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}) =
+\frac{N_{d,j,k}}{\sum_{k = 1} N_{d,j,k}}
+\]
+</p>
+<ul>
+<li>\(x_{d,k}\) : \(k\) -ème valeur possible pour la v.a. \(X_{d}\)</li>
+<li>\(\boldsymbol{x}^{\prime}_{d,j}\) : \(j\) -ème configuration de valeurs possibles pour les parents de la
+v.a. \(X_{d}\)</li>
+<li>\(N_{d,j,k}\) : Nombre d'occurrences de l'événement \(\{X_{d} = x_{d,k}~ \text{et}~
+    \text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}\}\) dans les données</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgf94505c">
+<h4 id="orgf94505c">Apprentissage des LPC</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org7004912" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_mod.png" alt="LPC app" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org0557aac">
+<h4 id="org0557aac">Apprentissage des LPC</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org1503a8f" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex1.png" alt="LPC app" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org99e4f86">
+<h4 id="org99e4f86">Apprentissage des LPC</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org1360880" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex2.png" alt="LPC app" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgfe753ba">
+<h4 id="orgfe753ba">Apprentissage des LPC</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org9151645" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex3.png" alt="LPC app" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgb875454">
+<h4 id="orgb875454">Apprentissage des LPC</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org6ca48cb" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex4.png" alt="LPC app" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org60876d4">
+<h4 id="org60876d4">Apprentissage des LPC</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orga985f70" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex5.png" alt="LPC app" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org029c7e5">
+<h4 id="org029c7e5">Apprentissage des LPC</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgbe1ac3d" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex6.png" alt="LPC app" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgf03c7ba">
+<h4 id="orgf03c7ba">Apprentissage des LPC</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org12e2b8c" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex7.png" alt="LPC app" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org2dbe836">
+<h4 id="org2dbe836">Apprentissage des LPC</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgc1e5535" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex8.png" alt="LPC app" width="90%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgbe75675">
+<h2 id="orgbe75675">Outils pour manipuler les RB</h2>
+<div class="block-example" id="orgcf1ef74">
+<p>
+<h4>Outils graphiques</h4>
+</p>
+
+<ul>
+<li><a href="https://download.bayesfusion.com/files.html?category=Academia"><code>GeNIe</code></a> : outil gratuit pour les étudiants et le monde académique sous <code>Windows</code> et <code>Linux</code>
+(avec <code>Wine</code>)</li>
+<li><a href="https://www.bayesia.com/"><code>BayesiaLab</code></a> : outil payant sous <code>Windows</code> et <code>Linux</code></li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="org699d427">
+<p>
+<h4>Librairies informatiques</h4>
+</p>
+
+<ul>
+<li><a href="https://agrum.gitlab.io/"><code>PyAgrum</code></a> : librairie <code>Python</code> <i>opensource</i></li>
+<li><a href="https://www.bnlearn.com/examples/pkg-gRain/"><code>bnlearn</code></a> : librairie <code>R</code> <i>opensource</i></li>
+
+</ul>
+
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgb88b646">
+<h2 id="orgb88b646">Évaluation</h2>
+<div class="block-example" id="orgb6c8978">
+<p>
+<h4>Objectif</h4>
+</p>
+
+<p>
+Utiliser le formalisme des réseaux bayésiens dans votre projet tutoré :
+</p>
+<ul>
+<li>Mettre en place un modèle</li>
+<li>Réaliser un apprentissage sur vos données</li>
+<li>Exploiter votre modèle pour contribuer à répondre à votre problématique</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org8066a98">
+<p>
+<h4>Évaluation</h4>
+</p>
+
+<p>
+L'évaluation est sur 5 points :
+</p>
+<ul>
+<li>Construire un RB cohérent avec votre problématique : 1 point</li>
+<li>Utiliser vos données pour apprendre les LPC : 1 point</li>
+<li>Exploiter le modèle : 1 point</li>
+<li>Utiliser <code>pyAgrum</code> ou <code>bnlearn</code> : 1 point</li>
+<li>Intégrer ce travail de manière cohérente dans vos projets tutorés : 1 point</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org5612c7a">
+<h2 id="org5612c7a">Application : <i>Trading</i> et <i>bitcoins</i></h2>
+
+<div id="orgc7d7b5d" class="figure">
+<p><img src="./fig/trading_view.png" alt="Binance trading view" width="90%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgfdbd629">
+<h3 id="orgfdbd629">Éléments de vocabulaire du <i>trading</i></h3>
+
+<div id="org8d3f860" class="figure">
+<p><img src="./fig/trading_vocab.png" alt="Binance trading view" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org31f5476">
+<h4 id="org31f5476">Éléments de vocabulaire du <i>trading</i></h4>
+
+<div id="orgbe5ffa8" class="figure">
+<p><img src="./fig/trading_bougie.png" alt="Binance trading view" width="90%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org6260014">
+<h3 id="org6260014">Problématiques décisionnelles du <i>trading</i></h3>
+<p>
+<div class="slidesubtitle">Objectifs</div>
+</p>
+
+
+<div id="orgf4957c2" class="figure">
+<p><img src="./fig/trading_objectifs.png" alt="Binance trading view" width="90%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org6c152d5">
+<h4 id="org6c152d5">Problématiques décisionnelles du <i>trading</i></h4>
+<p>
+<div class="slidesubtitle">Modélisation</div>
+</p>
+
+<div class="block-definition" id="orgb8b230f">
+<p>
+<h4>Données</h4>
+</p>
+
+<ul>
+<li>Historique du cours Bitcoin/USD de périodicité 3 minutes</li>
+<li>Indicateurs :
+<ul>
+<li>Ratio du plus bas par rapport à la différence entre fermeture et ouverture (<i>Shadow Low Body Ratio</i>)</li>
+<li>Quantile glissant du volume sur 100 unités de temps (<i>Moving Volume Quantile</i> 100)</li>
+<li>Autres indicateurs étranges issus du monde du <i>trading</i></li>
+
+</ul></li>
+<li>Pourcentage d'évolution du plus haut, plus bas et à la fermeture à l'unité de temps suivante</li>
+<li>Données : <a href="https://roland-donat.github.io/cours-rb/usecase/btc/data_btc_usdc_3m.csv">https://roland-donat.github.io/cours-rb/usecase/btc/data_btc_usdc_3m.csv</a></li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org0ce7137">
+<p>
+<h4>Modélisation</h4>
+</p>
+
+<ul>
+<li>Discrétisation des variables</li>
+<li>Construction d'un RB visant à prévoir les bougies à \(t + 1\) et \(t+2\) compte tenu d'indicateurs observés à
+l'instant \(t\)</li>
+<li>Utilisation du logiciel GeNIe</li>
+<li>Modèle : <a href="https://roland-donat.github.io/cours-rb/usecase/btc/bn_btc_usdc_3m.xdsl">https://roland-donat.github.io/cours-rb/usecase/btc/bn_btc_usdc_3m.xdsl</a></li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org2bcf6fc">
+<h2 id="org2bcf6fc">Résumé de la séance</h2>
+<div class="block-definition" id="orgfb56ba0">
+<p>
+<h4>Points clés</h4>
+</p>
+
+<p>
+Donnez 5 éléments clés que vous avez retenus lors de cette séance
+</p>
+<ul>
+<li></li>
+
+<li></li>
+
+<li></li>
+
+<li></li>
+
+<li></li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orga7d03b9">
+<h3 id="orga7d03b9">Merci pour votre attention !</h3>
+<p>
+<div class="slidesubtitle">Des questions ?</div>
+</p>
+
+
+
+<div id="orga72c95c" class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/commons/questions.png" alt="FAQ" width="85%" />
+</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+controlsLayout: 'edges', slideNumber:"c/t", center: false, transition: 'fade',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

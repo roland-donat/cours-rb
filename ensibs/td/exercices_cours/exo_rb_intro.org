@@ -297,7 +297,7 @@
 3. Soit le réseau bayésien $X \rightarrow Y \leftarrow Z$. Montrer que les v.a. $X$ et $Z$ sont
    indépendantes. 
 
-** Correction
+** Correction                                                      :noexport:
 1. Oui. D'après les relations de dépendance décrivant le RB, la variable $X_{1}$ n'a pas de variable
    parente, sa loi est donc déterminée par $P(X_{1})$. Chaque variable $X_{i}$, $i \ge 2$, est
    caractérisée par la loi conditionnelle $P(X_{i}|X_{i-1})$. Sous ces hypothèses de dépendance, la
@@ -385,7 +385,7 @@ Les lois de probabilité conditionnelles (LPC) de ce RB sont les suivantes :
 2. Calculer tous les paramètres de la loi jointe naturelle du modèle.
 3. Que peut-on dire sur la relation d'indépendance $X \perp\!\!\!\perp Z \mid Y$ ?
 
-** Correction
+** Correction                                                      :noexport:
 1. La loi jointe des v.a. $X, Y, Z$ dans le RB de la Figure [[fig_rb_3_var]] est :
    \begin{equation*}
    P(X, Y, Z) = P(X) P(Y|X) P(Z|Y).
@@ -464,7 +464,7 @@ Dans cet exercice, nous utiliserons la représentation graphique du RB présent�
    - $X_{2} \perp\!\!\!\perp X_{3} \mid X_{1}$ ;
    - $X_{2} \perp\!\!\!\perp X_{3} \mid X_{1}, X_{4}$.
 
-** Correction
+** Correction                                                      :noexport:
 
 1. La loi jointe des v.a. $X_{1}, X_{2}, X_{3}, X_{4}$ dans le RB de la Figure [[fig_rb_4_var]] est :
    \begin{equation*}
