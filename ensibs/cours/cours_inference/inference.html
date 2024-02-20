@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Modélisation stochastique et approche bayésienne  <br> <br> <br> <font size="10">Inférence probabiliste</font></title>
+<meta name="author" content="Roland Donat"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="https://roland-donat.github.io/ubs/Charte_graphique/ensibs/ensibs_reveal.css"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: {
+Macros: {
+lrpar: ["\\left( #1 \\right)", 1],
+lrPar: ["\\left( #1 \\right)", 1],
+Prob: ["P"],
+inter: ["\\cap"],
+}
+}
+});
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="https://roland-donat.github.io/ubs/Charte_graphique/ensibs/ensibs-ppt-couv.jpg"><h1 class="title">Modélisation stochastique et approche bayésienne  <br> <br> <br> <font size="10">Inférence probabiliste</font></h1><p class="subtitle"></p>
+<h2 class="author">Roland Donat</h2><h2 class="date"> <br>Spécialité Cyber Data</h2>
+</section>
+<section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-org5daa873">Objectifs de la séance</a></li>
+<li><a href="#/slide-org3a1f342">Introduction à l'inférence probabiliste</a></li>
+<li><a href="#/slide-org69a0d5c">Méthode d'élimination</a></li>
+<li><a href="#/slide-orgf75fa70">Résumé de la séance</a></li>
+<li><a href="#/slide-org790f6d9">Bibliographie</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<section>
+<section id="slide-org5daa873">
+<h2 id="org5daa873">Objectifs de la séance</h2>
+<div class="column" style="float:left; width: 50%">
+
+<ul>
+<li>Comprendre la notion d'inférence probabiliste dans un réseau bayésien</li>
+<li>Maîtriser les calculs effectués par un algorithme d'inférence exacte</li>
+<li>Prendre conscience des avantages et des limites de l'inférence dans les réseaux bayésiens</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width: 50%">
+
+
+<div id="orgc57a280" class="figure">
+<p><img src="./fig/objectives.png" alt="Objectives" width="100%" />
+</p>
+</div>
+
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org3a1f342">
+<h2 id="org3a1f342">Introduction à l'inférence probabiliste</h2>
+
+<div id="orgd1def4b" class="figure">
+<p><img src="./fig/inference.png" alt="Inférence" width="70%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org8d6024c">
+<h3 id="org8d6024c">Introduction à l'inférence probabiliste</h3>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org13684f5" class="figure">
+<p><img src="./fig/rb_inference_alarme_pb.png" alt="Inférence problématique" width="95%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org62fc232">
+<h4 id="org62fc232">Introduction à l'inférence probabiliste</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org994e6a9" class="figure">
+<p><img src="./fig/rb_inference_alarme_ex_1.png" alt="Inférence problématique" width="95%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org4d901ae">
+<h4 id="org4d901ae">Introduction à l'inférence probabiliste</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org31ec871" class="figure">
+<p><img src="./fig/rb_inference_alarme_ex_2.png" alt="Inférence problématique" width="95%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf5a42f4">
+<h3 id="orgf5a42f4">Introduction à l'inférence probabiliste</h3>
+<p>
+<div class="slidesubtitle">Formalisation</div>
+</p>
+
+<div class="block-definition" id="org7e96c2b">
+<p>
+<h4>Définition</h4>
+</p>
+
+<ul>
+<li>Soit un RB représentant la loi jointe d'une suite de v.a. \(\boldsymbol{X} = \lrpar{X_{1}, \ldots, X_{n}}\) à valeurs dans
+\(\mathcal{X}_{1}, \ldots, \mathcal{X}_{n}\) respectivement</li>
+<li><b>Objectif</b> : calculer les lois de la forme
+\[
+  \Prob\lrPar{\boldsymbol{Q}|\boldsymbol{E} = \boldsymbol{e}}
+  \]</li>
+<li>\(\boldsymbol{Q} = \lrpar{Q_{1},\ldots,Q_{\ell}} \subseteq \boldsymbol{X}\) est une suite de
+v.a. appelée "requête" de l'inférence</li>
+<li>\(\boldsymbol{E} = \lrpar{E_{1},\ldots,E_{m}} \subseteq \boldsymbol{X}\) est une suite de v.a.,
+observées aux valeurs \(\boldsymbol{e} = \lrpar{e_{1},\ldots, e_{m}}\), appelée "évidence" de l'inférence</li>
+<li>Contrainte : \(\boldsymbol{Q} \inter \boldsymbol{E} = \varnothing\)</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orga18ba37">
+<h3 id="orga18ba37">Introduction à l'inférence probabiliste</h3>
+<p>
+<div class="slidesubtitle">Algorithmes d'inférence</div>
+</p>
+
+<div class="block-definition" id="org2d7e621">
+<p>
+<h4>Inférence exacte</h4>
+</p>
+<ul>
+<li>Algorithme <i>belief propagation</i> (Pearl, J., 1988) adapté aux structures
+d'arbres (ou polyarbres)</li>
+<li>Méthodes reposant sur la construction de l'arbre de jonction (Lauritzen, S. L. and Spiegelhalter, D. J., 1988)</li>
+<li><b>Méthodes d'élimination des variables</b> (Cozman, Fabio G., 2000,  Dechter, R., 1999)</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org7dca82a">
+<p>
+<h4>Inférence approchée déterministe</h4>
+</p>
+<ul>
+<li>Algorithme <i>loopy belief propagation</i> (Murphy, K. P. and Weiss, Y. and Jordan, M. I., 1999) : Utilisation de la méthode \textit{belief
+propagation} sur un graphe général</li>
+<li>Méthode de raisonnement par pertinence (Lin, Yan and Druzdzel, Marek J., 1999)</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org5fcca7c">
+<p>
+<h4>Inférence approchée stochastique</h4>
+</p>
+<ul>
+<li>Méthode d'échantillonnage type Monte-Carlo</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org69a0d5c">
+<h2 id="org69a0d5c">Méthode d'élimination</h2>
+<div class="block-definition" id="org2609651">
+<p>
+<h4>Hypothèses d'utilisation</h4>
+</p>
+
+<ul>
+<li>Méthode adaptée pour les réseaux bayésiens à <b>variables discrètes et finies</b>,
+i.e. LPC sous forme de tables (matrices)</li>
+<li>Si le phénomène étudié implique des variables continues et/ou non finies, il faut les <b>discrétiser</b>
+au préalable</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org77c9ec8">
+<p>
+<h4>Principe</h4>
+</p>
+
+<ul>
+<li>"Éliminer" par marginalisations successives toutes les variables de la loi jointe qui
+n'apparaissent pas dans le calcul à réaliser</li>
+<li>Simplifier le calcul à réaliser grâce à la propriété de factorisation des RB et choississant un
+"bon" ordre d'élimination des variables</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="org324e9bc">
+<p>
+<h4>Propriétés</h4>
+</p>
+
+<ul>
+<li>L'ordre d'élimination des variables n'influe pas sur le résultat, i.e. tous les ordres aboutissent au même (bon) résultat</li>
+<li><b>En revanche, la rapidité des calculs est fortement liée à l'ordre d'élimination</b></li>
+<li>Méthode de référence implémentée dans la plupart des outils de réseaux bayésiens</li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-org16cecb3">
+<h4 id="org16cecb3">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgb52a90c" class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_graphe_va.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="org7f9b693">
+<p>
+<h4>Inférence dans le réseau bayésien Alarme</h4>
+</p>
+
+<ul>
+<li>La problématique fait intervenir 4 variables aléatoires : Voleur (\(V\)), Alarme (\(A\)), Orage (\(O\)),
+Info météo (\(M\))</li>
+<li>Le RB qui modélise la problématique permet de factoriser la loi jointe des variables aléatoire comme suit :
+\[  
+  P(V,A,O,M) = P(V) \times P(A|V; O) \times P(O) \times P(M|O)
+  \]</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgdc7aa5a">
+<h4 id="orgdc7aa5a">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+<div class="block-example" id="orgb4d9ff4">
+<p>
+<h4>Calcul de P(Voleur=oui|Alarme=oui)</h4>
+</p>
+
+<p>
+Par définition :
+\[
+P(V = \text{oui}|A = \text{oui}) = \frac{P(V = \text{oui}; A = \text{oui})}{P(A = \text{oui})}
+\]
+</p>
+
+</div>
+
+<div class="fragment (appear) block-example" id="org01f57e3">
+<p>
+<h4>Calcul du numérateur</h4>
+On marginalise simplement sur les variables Voleur et Alarme :
+\[
+P(V = \text{oui}; A = \text{oui}) = \sum_{O \in \{\text{non},
+  \text{faible},\text{fort}\}} \sum_{M \in \{\text{non},
+  \text{oui}\}} P(V = \text{oui}; A = \text{oui},O,M) 
+\]
+</p>
+
+</div>
+
+</section>
+<section id="slide-org7c2f84b">
+<h4 id="org7c2f84b">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+<div class="block-example" id="orgfafe021">
+<p>
+<h4>Calcul du numérateur par "élimination"</h4>
+</p>
+
+<p>
+On utilise la propriété de factorisation :
+</p>
+<div>
+\begin{align}
+& P(V = \text{oui}; A = \text{oui}) \\
+& = \sum_{O \in \{\text{non},
+  \text{faible},\text{fort}\}} \sum_{M \in \{\text{non},
+  \text{oui}\}} P(V = \text{oui}) \times
+  P(A = \text{oui}|V = \text{oui}; O) \times P(O) \times P(M|O)
+\end{align}
+
+</div>
+
+<p>
+On "élimine" successivement les variables \(M\) et \(O\) en distibuant les sommes dans la
+factorisation :
+</p>
+<div>
+\begin{align}
+& P(V = \text{oui}; A = \text{oui}) \\
+& =  P(V = \text{oui}) \times
+  \sum_{O \in \{\text{non},
+  \text{faible},\text{fort}\}} P(A = \text{oui}|V = \text{oui}; O) \times P(O) \times \sum_{M \in \{\text{non},
+  \text{oui}\}} P(M|O)
+\end{align}
+
+</div>
+
+</div>
+
+<div class="block-example" id="org09b981b">
+<p>
+<h4>Calcul du dénominateur par "élimination"</h4>
+</p>
+
+<p>
+Principe identique :
+</p>
+<div>
+\begin{align}
+& P(A = \text{oui}) \\
+& = \sum_{V \in \{\text{non}, \text{oui}\}} P(V) \times
+   \sum_{O \in \{\text{non},
+  \text{faible},\text{fort}\}} P(A = \text{oui}|V; O) \times P(O) \times \sum_{M \in \{\text{non},
+  \text{oui}\}} P(M|O)
+\end{align}
+
+</div>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org2f3cec2">
+<h3 id="org2f3cec2">Complexité</h3>
+<p>
+<div class="slidesubtitle">Complexité spatiale d'une LPC discrète et finie</div>
+</p>
+
+<div class="block-definition" id="org9383812">
+<p>
+<h4>Complexité spatiale d'une LPC discrète et finie</h4>
+</p>
+
+<ul>
+<li>Soient \(\boldsymbol{X} = X_{1},\ldots,X_{n}\) et \(\boldsymbol{Y} = Y_{1},\ldots,Y_{m}\) deux suites de
+v.a. à valeurs dans les ensembles discrets et finis \(\mathcal{X}_{1}, \ldots,
+  \mathcal{X}_{n}\) et \(\mathcal{Y}_{1}, \ldots, \mathcal{Y}_{m}\)</li>
+
+<li>La complexité spatiale associée à la LPC \(P(X_{1},\ldots,X_{n}|Y_{1},\ldots,Y_{m}) = P(\boldsymbol{X}|\boldsymbol{Y})\),
+notée \(CS(P(\boldsymbol{X}|\boldsymbol{Y}))\), est définie par le <b>nombre de configurations de
+valeurs différentes que peuvent prendre les v.a. \(X_{1},\ldots,X_{n}, Y_{1}, \ldots, Y_{m}\)</b></li>
+
+</ul>
+
+<ul>
+<li class="fragment appear">Autrement dit : 
+\[
+  CS(P(\boldsymbol{X}|\boldsymbol{Y})) = \prod_{i = 1}^{n} |\mathcal{X}_{i}| \prod_{j =
+  1}^{m} |\mathcal{Y}_{j}|
+  \]
+où \(|\mathcal{X}_{i}|\) est le nombre d'éléments dans l'ensemble \(\mathcal{X}_{i}\)</li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="orgc8f0c29">
+<p>
+<h4>Exercice</h4>
+</p>
+
+<ul>
+<li>Donner les complexités spatiales des LPC du RB "Alarme"</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org9a8f12f">
+<h4 id="org9a8f12f">Complexité</h4>
+<p>
+<div class="slidesubtitle">Complexité probabiliste d'une LPC discrète et finie</div>
+</p>
+
+<div class="block-definition" id="org5339b07">
+<p>
+<h4>Complexité probabiliste d'une LPC discrète et finie</h4>
+</p>
+
+<ul>
+<li>Soient \(\boldsymbol{X} = X_{1},\ldots,X_{n}\) et \(\boldsymbol{Y} = Y_{1},\ldots,Y_{m}\) deux suites de
+v.a. à valeurs dans les ensembles discrets et finis \(\mathcal{X}_{1}, \ldots,
+  \mathcal{X}_{n}\) et \(\mathcal{Y}_{1}, \ldots, \mathcal{Y}_{m}\)</li>
+
+<li>La complexité probabiliste associée à la LPC \(P(X_{1},\ldots,X_{n}|Y_{1},\ldots,Y_{m}) = P(\boldsymbol{X}|\boldsymbol{Y})\),
+notée \(CP(P(\boldsymbol{X}|\boldsymbol{Y}))\), est définie par le <b>nombre de paramètres
+(probabilités) nécessaires pour définir la LPC</b></li>
+
+</ul>
+
+<ul>
+<li class="fragment appear">Autrement dit : 
+\[
+  CP(P(\boldsymbol{X}|\boldsymbol{Y})) = \prod_{i = 1}^{n} (|\mathcal{X}_{i}| - 1) \prod_{j =
+  1}^{m} |\mathcal{Y}_{j}|
+  \]</li>
+
+<li class="fragment appear">La CP tient simplement compte du fait qu'une LPC doit sommer à 1 pour chaque configuration des
+variables de conditionnement</li>
+<li class="fragment appear">La CP mesure le potentiel de modélisation d'une loi (notion de degré de liberté)</li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="org12683b6">
+<p>
+<h4>Exercice</h4>
+</p>
+
+<ul>
+<li>Donner les complexités probabilistes des LPC du RB "Alarme"</li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-org6020d50">
+<h4 id="org6020d50">Complexité</h4>
+<p>
+<div class="slidesubtitle">Complexité d'un réseau bayésien</div>
+</p>
+
+<div class="block-definition" id="org5fac567">
+<p>
+<h4>Complexité d'une loi jointe représentée par un RB</h4>
+</p>
+
+<ul>
+<li>Soit \(X_{1},\ldots,X_{n}\) une suite de v.a. à valeurs dans les ensembles discrets et finis
+\(\mathcal{X}_{1}, \ldots, \mathcal{X}_{n}\)</li>
+<li>La complexité spatiale (resp. probabiliste) d'une loi jointe factorisée dans un RB est définie
+comme étant la somme des complexités spatiales (resp. probabilistes) associées à chacune des LPC
+\(P(X_{i}|\text{pa}(X_{i}))\)</li>
+
+</ul>
+
+<ul>
+<li class="fragment appear">La <b>complexité spatiale</b> du RB a pour expression :
+\[
+  CS(RB) = \sum_{i = 1}^{n}
+  CS(P(X_{i}|\text{pa}(X_{i}))) = \sum_{i = 1}^{n} |\mathcal{X}_{i}| \times
+  \prod_{\mathcal{X} \in \text{pa}(\mathcal{X}_{i})} |\mathcal{X}|
+  \]</li>
+<li class="fragment appear">La <b>complexité probabiliste</b> a pour expression :
+\[
+  CP(RB) = \sum_{i = 1}^{n}
+  CP(P(X_{i}|\text{pa}(X_{i}))) = \sum_{i = 1}^{n} (|\mathcal{X}_{i}| - 1) \times
+  \prod_{\mathcal{X} \in \text{pa}(\mathcal{X}_{i})} |\mathcal{X}|
+  \]</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org45ee860">
+<h4 id="org45ee860">Complexité</h4>
+<p>
+<div class="slidesubtitle">Conséquences pratiques</div>
+</p>
+
+
+<div class="block-definition" id="org3279c0a">
+<p>
+<h4>RB = Représentation parcimonieuse</h4>
+</p>
+
+<ul>
+<li><b>Un RB est une représentation compacte d'un processus aléatoire</b></li>
+
+<li>Moins il y a d'arcs dans le graphe :
+<ul>
+<li>Plus des hypothèses d'indépendances conditionnelles entre les variables sont posées</li>
+<li>Plus le potentiel de modélisation, i.e. la capacité à représenter des phénomènes complexes, diminue (\(CP\) faible)</li>
+<li>Plus la représentation par RB est avantageuse du point de vue du stockage, du paramétrage et de la complexité calculatoire (\(CS\) faible)</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="org46f5fe6">
+<p>
+<h4>Exercice</h4>
+</p>
+
+<p>
+Calculer les complexités du modèle "Alarme" avec et sans RB
+</p>
+
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf75fa70">
+<h2 id="orgf75fa70">Résumé de la séance</h2>
+<div class="block-definition" id="org8c9f201">
+<p>
+<h4>Points clés</h4>
+</p>
+<ul>
+<li>Un réseau bayésien permet de formaliser et réprésenter un phénomène aléatoire sous forme de
+graphe :  
+<ul>
+<li>Noeuds du graphe = Variables aléatoires</li>
+<li>Arcs entre noeuds = Relations de dépendance</li>
+
+</ul></li>
+<li>L'information apportée par la structure du graphe permet en général de simplifier la loi
+jointe du phénomène aléatoire étudié (notion de parcimonie)</li>
+<li>Si les LPC du RB sont connues, des algorithmes d'inférence probabiliste permettent de déduire
+de nouvelles connaissances sur le phénomène aléatoire étudié</li>
+<li>Les réseaux bayésiens sont intéressants pour les raisons suivantes :
+<ul>
+<li>Lisibilité et interprétabilité des modèles</li>
+<li>Rigueur mathématique</li>
+<li>Fort potentiel de modélisation</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb2b1be6">
+<h3 id="orgb2b1be6">Merci pour votre attention !</h3>
+<p>
+<div class="slidesubtitle">Des questions ?</div>
+</p>
+
+
+
+<div id="orge89cd7f" class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/commons/questions.png" alt="FAQ" width="60%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org790f6d9">
+<h2 id="org790f6d9">Bibliographie</h2>
+<p>
+Cozman, Fabio G. (2000). <i>Generalizing {Variable} {Elimination} in {Bayesian} {Networks}</i>, Editora Tec Art.</p>
+
+<p>
+Dechter, R. (1999). <i>Bucket {Elimination}: {A} {Unifying} {Framework} for {Reasoning}</i>, Artificial Intelligence.</p>
+
+<p>
+Lauritzen, S. L. and Spiegelhalter, D. J. (1988). <i>Local {Computations} with {Probabilities} on {Graphical} {Structures} and {Their} {Application} to {Expert} {Systems}</i>, Journal of the Royal Statistical Society.</p>
+
+<p>
+Lin, Yan and Druzdzel, Marek J. (1999). <i>Relevance-based {Incremental} {Belief} {Updating} in {Bayesian} {Networks}</i>, International Journal of Pattern Recognition and Artificial Intelligence.</p>
+
+<p>
+Murphy, K. P. and Weiss, Y. and Jordan, M. I. (1999). <i>Loopy {Belief} {Propagation} for {Approximate} {Inference}: {An} {Empirical} {Study}</i>.</p>
+
+<p>
+Pearl, J. (1988). <i>Probabilistic {Reasoning} in {Intelligent} {Systems}: {Networks} of {Plausible} {Inference}</i>, Morgan Kaufmann.</p>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+controlsLayout: 'edges', slideNumber:"c/t", center: false, transition: 'fade',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>
