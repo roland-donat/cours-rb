@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-23 mar. 21:57 -->
+<!-- 2024-02-24 sam. 23:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Inférence probabiliste</title>
@@ -45,31 +45,16 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2e3860a">Questions de cours</a>
-<ul>
-<li><a href="#orgfb518c3">Correction</a></li>
-</ul>
-</li>
-<li><a href="#orgff278b7">Exercice 1</a>
-<ul>
-<li><a href="#org82fa247">Correction</a>
-<ul>
-<li><a href="#orga78111f">Calcul de \(P(A)\)</a></li>
-<li><a href="#org90ab164">Calcul de \(P(L|B=n)\)</a></li>
-<li><a href="#org16c1c3b">Calcul de \(P(A,B|L = o)\)</a></li>
-<li><a href="#orge206e12">Calculs numériques</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="#org339d1bc">Questions de cours</a></li>
+<li><a href="#org92c0ccd">Exercice 1</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org2e3860a" class="outline-2">
-<h2 id="org2e3860a">Questions de cours</h2>
-<div class="outline-text-2" id="text-org2e3860a">
+<div id="outline-container-org339d1bc" class="outline-2">
+<h2 id="org339d1bc">Questions de cours</h2>
+<div class="outline-text-2" id="text-org339d1bc">
 <p>
 Soit \(\phi\) un potentiel défini sur les variables \(X\) et \(Y\) à valeurs respectivement dans les
 ensembles \(\mathcal{X}\) et \(\mathcal{Y}\). \(\phi\) est caractérisé par les valeurs suivantes :
@@ -136,372 +121,43 @@ ensembles \(\mathcal{X}\) et \(\mathcal{Y}\). \(\phi\) est caractérisé par les
 <li>Le potentiel \(\phi\) est-il également une loi de probabilité conditionnelle ? Si oui donner son expression.</li>
 </ul>
 </div>
-
-<div id="outline-container-orgfb518c3" class="outline-3">
-<h3 id="orgfb518c3">Correction</h3>
-<div class="outline-text-3" id="text-orgfb518c3">
-<ul class="org-ul">
-<li>\(\mathcal{X} = \{x_{1},x_{2}\}\) et \(\mathcal{Y} = \{y_{1},y_{2},y_{3}\}\).</li>
-<li>\(\text{Dom}(\phi) = \{\mathcal{X},\mathcal{Y}\}\), donc \(\text{Dom}(\phi)^{*} = \mathcal{X} \times
-   \mathcal{Y} = \{x_{1},x_{2}\} \times \{y_{1},y_{2},y_{3}\}\), et définition, \(CS(\phi)
-   = |\text{Dom}(\phi)^{*}| = |\mathcal{X}| \times |\mathcal{Y}| = 2 \times 3 = 6\).</li>
-<li><p>
-\(\phi(x_{1},Y) =\) 
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+</div>
 
 
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">\(X\)</th>
-<th scope="col" class="org-left">\(x_{1}\)</th>
-<th scope="col" class="org-left">\(x_{1}\)</th>
-<th scope="col" class="org-left">\(x_{1}\)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">\(Y\)</td>
-<td class="org-left">\(y_{1}\)</td>
-<td class="org-left">\(y_{2}\)</td>
-<td class="org-left">\(y_{3}\)</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">\(\phi(x_{1},Y)\)</td>
-<td class="org-left">\(3/5\)</td>
-<td class="org-left">\(1/5\)</td>
-<td class="org-left">\(1/5\)</td>
-</tr>
-</tbody>
-</table>
+<div id="outline-container-org92c0ccd" class="outline-2">
+<h2 id="org92c0ccd">Exercice 1</h2>
+<div class="outline-text-2" id="text-org92c0ccd">
 <p>
-\(\phi(x_{2},Y) =\)
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">\(X\)</th>
-<th scope="col" class="org-left">\(x_{2}\)</th>
-<th scope="col" class="org-left">\(x_{2}\)</th>
-<th scope="col" class="org-left">\(x_{2}\)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">\(Y\)</td>
-<td class="org-left">\(y_{1}\)</td>
-<td class="org-left">\(y_{2}\)</td>
-<td class="org-left">\(y_{3}\)</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">\(\phi(X,Y)\)</td>
-<td class="org-left">\(1/4\)</td>
-<td class="org-left">\(1/2\)</td>
-<td class="org-left">\(1/4\)</td>
-</tr>
-</tbody>
-</table></li>
-<li><p>
-Par définition, on sait que \(\text{Dom}(\psi) = \text{Dom}(\sum_{X} \phi) =
-  \text{Dom}(\phi)\setminus \{\mathcal{X}\} = \{\mathcal{Y}\}\). Le potentiel \(\psi\) est défini par :
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">\(Y\)</th>
-<th scope="col" class="org-left">\(y_{1}\)</th>
-<th scope="col" class="org-left">\(y_{2}\)</th>
-<th scope="col" class="org-left">\(y_{3}\)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">\(\psi(Y)\)</td>
-<td class="org-left">\(\phi(x_{1},y{1}) + \phi(x_{2},y{1}) = 3/5 + 1/4 = 17/20\)</td>
-<td class="org-left">\(1/5 + 1/2 = 7/10\)</td>
-<td class="org-left">\(1/5 + 1/4 = 9/20\)</td>
-</tr>
-</tbody>
-</table></li>
-<li><p>
-Par définition, on sait que \(\text{Dom}(\omega) = \text{Dom}(\psi \cdot \phi) =
-  \text{Dom}(\psi) \cup \text{Dom}(\phi) = \{\mathcal{Y}\} \cup \{\mathcal{X}, \mathcal{Y}\} = \{\mathcal{X}, \mathcal{Y}\}\). Le potentiel \(\omega\) est défini par :
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">\(X\)</th>
-<th scope="col" class="org-left">\(x_{1}\)</th>
-<th scope="col" class="org-left">\(x_{2}\)</th>
-<th scope="col" class="org-left">\(x_{1}\)</th>
-<th scope="col" class="org-left">\(x_{2}\)</th>
-<th scope="col" class="org-left">\(x_{1}\)</th>
-<th scope="col" class="org-left">\(x_{2}\)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">\(Y\)</td>
-<td class="org-left">\(y_{1}\)</td>
-<td class="org-left">\(y_{1}\)</td>
-<td class="org-left">\(y_{2}\)</td>
-<td class="org-left">\(y_{2}\)</td>
-<td class="org-left">\(y_{3}\)</td>
-<td class="org-left">\(y_{3}\)</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">\(\omega(X,Y)\)</td>
-<td class="org-left">\(\psi(y_{1}) \times \phi(x_{1},y_{1}) = 17/20 \times 3/5\)</td>
-<td class="org-left">\(\psi(y_{1}) \times \phi(x_{2},y_{1}) = 17/20 \times 1/4\)</td>
-<td class="org-left">\(\psi(y_{2}) \times \phi(x_{1},y_{2}) = 7/10 \times 1/5\)</td>
-<td class="org-left">\(\psi(y_{2}) \times \phi(x_{2},y_{2}) = 7/10 \times 1/2\)</td>
-<td class="org-left">\(\psi(y_{3}) \times \phi(x_{1},y_{3}) = 9/20 \times 1/5\)</td>
-<td class="org-left">\(\psi(y_{3}) \times \phi(x_{2},y_{3}) = 9/20 \times 1/4\)</td>
-</tr>
-</tbody>
-</table></li>
-<li>Tout d'abord, on vérifie que pour tous \(x \in \mathcal{X}\) et \(y \in \mathcal{Y}\), \(\phi(x,y) \in
-  [0,1]\). Ensuite, il faut trouver l'existence d'un sous ensemble de dimensions du domaine de
-\(\phi\) vérifiant la propriété de sommation à 1. \(\phi\) étant de dimension 2, il y a trois 
-sous ensembles de dimension possibles :
-<ol class="org-ol">
-<li>domaine normalisé : \(\{\mathcal{X},\mathcal{Y}\}\) ; domaine de conditionnement :
-\(\varnothing\) 
-\(\implies \sum_{(x,y) \in \{\mathcal{X},\mathcal{Y}\}^{*}} \phi(x,y) = 2 \neq 1\);</li>
-<li>domaine normalisé : \(\{\mathcal{X}\}\) ; domaine de conditionnement :
-\(\{\mathcal{Y}\}\) ; 
-\(\implies \sum_{x \in \mathcal{X}} \phi(x,y_{1}) = 3/5 + 1/4 = 17/20 \neq 1\), inutile de
-vérifier la sommation pour \(y = y_{2}\) et \(y = y_{3}\)</li>
-<li>domaine normalisé : \(\{\mathcal{Y}\}\) ; domaine de conditionnement :
-\(\{\mathcal{X}\}\) 
-\(\implies \sum_{y \in \mathcal{Y}} \phi(x_{1},y) = \sum_{y \in \mathcal{Y}} \phi(x_{2},y) = 1\).
-Le potentiel \(\phi\) est donc une loi de probabilité sur le domaine \(\mathcal{Y}\)
-conditionnellement au domaine \(\mathcal{X}\).</li>
-</ol></li>
-</ul>
-</div>
-</div>
-</div>
-
-
-<div id="outline-container-orgff278b7" class="outline-2">
-<h2 id="orgff278b7">Exercice 1</h2>
-<div class="outline-text-2" id="text-orgff278b7">
-<p>
-L'objectif est d'appliquer l'algorithme d'élimination des variables sur le RB présenté en Figure <a href="#org970c4c1">1</a>.
+L'objectif est d'appliquer l'algorithme d'élimination des variables sur le RB présenté en Figure
+<a href="#org9fb8162">1</a>. 
 </p>
 
 
-<div id="org970c4c1" class="figure">
+<div id="org9fb8162" class="figure">
 <p><img src="./rb_hector_simple.png" alt="rb_hector_simple.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Modèle RB de l'exercice 1 sur l'inférence probabiliste.</p>
 </div>
 
-<p>
+<ol class="org-ol">
+<li>Donner le nombre de paramètres pour définir la loi jointe représentée par le RB.</li>
+<li>Même question sans utiliser la factorisation de la loi jointe associée au RB.</li>
+<li>Reprendre les questions précédentes en calculant le nombre de paramètres probabilistes nécessaire
+à la définition de la loi jointe factorisée dans le RB et de la loi jointe naturelle des variables.</li>
+<li><p>
 Appliquer la méthode d'élimination pour calculer :
 </p>
-<ol class="org-ol">
+<ul class="org-ul">
 <li>\(P(A)\);</li>
 <li>\(P(L|B = n)\);</li>
 <li>\(P(A,B|L = o)\).</li>
+</ul>
+
+<p>
+Dans chaque cas, essayez de trouver un ordre d'élimination limitant au maximum la taille des
+potentiels intermédiaires. 
+</p></li>
 </ol>
-
-<p>
-Dans chaque cas, essayer de trouver un ordre d'élimination limitant au maximum la taille des potentiels intermédiaires.
-</p>
-</div>
-
-<div id="outline-container-org82fa247" class="outline-3">
-<h3 id="org82fa247">Correction</h3>
-<div class="outline-text-3" id="text-org82fa247">
-<p>
-Commençons par écrire la factorisation de la loi jointe des variables \(E\), \(L\), \(A\) et \(B\) dans le
-RB de la Figure <a href="#org970c4c1">1</a> :
-</p>
-\begin{equation*}
-P(E,L,A,B) = P(E) \times P(L|E) \times P(A|L) \times P(B|L).
-\end{equation*}
-</div>
-
-<div id="outline-container-orga78111f" class="outline-4">
-<h4 id="orga78111f">Calcul de \(P(A)\)</h4>
-<div class="outline-text-4" id="text-orga78111f">
-<p>
-Par définition, \(P(A)\) est donnée par :
-</p>
-\begin{equation*}
-P(A) = \sum_{E,L,B} P(E,L,A,B) = \sum_{E} \sum_{L} \sum_{B} P(E) \times P(L|E) \times P(A|L) \times P(B|L).
-\end{equation*}
-<p>
-En distribuant astucieusement les sommes, on obtient :
-</p>
-\begin{equation*}
-P(A) = \sum_{L} P(A|L) \sum_{E} P(L|E) \times P(E) \times \underbrace{\sum_{B} P(B|L)}_{= [1, \ldots, 1]}.
-\end{equation*}
-<p>
-La variable \(B\) a donc été éliminée. Passons à l'élimination de la variable E :
-</p>
-\begin{equation*}
-P(A) = \sum_{L} P(A|L) \underbrace{\sum_{E} \underbrace{P(L|E) \times P(E)}_{\phi_{E}(L,E) = P(L,E)}}_{\psi_{E}(L) = P(L)} 
-\end{equation*}
-<p>
-Terminons le processus en éliminant la varialbe L :
-</p>
-\begin{equation*}
-P(A) = \underbrace{\sum_{L} \underbrace{P(A|L) \times \psi_{E}(L)}_{\phi_{L}(A,L)}}_{\psi_{L}(A)}
-\end{equation*}
-</div>
-</div>
-
-<div id="outline-container-org90ab164" class="outline-4">
-<h4 id="org90ab164">Calcul de \(P(L|B=n)\)</h4>
-<div class="outline-text-4" id="text-org90ab164">
-<p>
-Par définition, \(P(L|B = n)\) est donnée par :
-</p>
-\begin{equation*}
-P(L|B = n) = \frac{P(L,B = n)}{P(B = n)}.
-\end{equation*}
-<p>
-Il faut donc calculer dans un premier temps, la loi \(P(L,B)\) définie par :
-</p>
-\begin{align*}
-P(L, B = n) & = \sum_{A,E} P(E,L,A,B = n) \\
-            & = \sum_{A} \sum_{E} P(E) \times P(L|E) \times P(A|L) \times P(B = n|L).
-\end{align*}
-<p>
-Nous proposons la distribution suivante des sommations qui permet d'éliminer la variable \(A\)
-directement :
-</p>
-\begin{equation*}
-P(L, B = n) =  P(B = n|L) \sum_{E} P(E) \times P(L|E) \times \underbrace{\sum_{A} P(A|L)}_{= [1, \ldots, 1]}.
-\end{equation*}
-<p>
-Éliminons à présent la variable \(E\) :
-</p>
-\begin{equation*}
-P(L, B = n) =  P(B = n|L) \underbrace{\sum_{E} \underbrace{P(E) \times P(L|E)}_{\phi_{E}(L,E) = P(L,E)}}_{\psi_{E}(L) = P(L)}.
-\end{equation*}
-<p>
-On obtient au final :
-</p>
-\begin{equation*}
-P(L, B = n) =  P(B = n|L) \times \psi_{E}(L).
-\end{equation*}
-<p>
-La loi \(P(L|B=n)\) s'obtient par simple normalisation sur \(L\) ou en effectuant explicitement le
-calcul suivant :
-</p>
-\begin{equation*}
-P(L | B = n) =  \frac{P(L, B = n)}{\sum_{L} P(L, B = n)}.
-\end{equation*}
-</div>
-</div>
-
-
-<div id="outline-container-org16c1c3b" class="outline-4">
-<h4 id="org16c1c3b">Calcul de \(P(A,B|L = o)\)</h4>
-<div class="outline-text-4" id="text-org16c1c3b">
-<p>
-Par définition, \(P(A, B|L = o)\) est donnée par :
-</p>
-\begin{equation*}
-P(A, B|L = o) = \frac{P(A,B, L = o)}{P(L = o)}.
-\end{equation*}
-<p>
-Il faut donc calculer dans un premier temps, la loi \(P(A,B,L=o)\) définie par :
-</p>
-\begin{align*}
-P(A,B, L = o) & = \sum_{E} P(E,L = o,A,B) \\
-              & = \sum_{E} P(E) \times P(L=o|E) \times P(A|L=o) \times P(B|L=o).
-\end{align*}
-<p>
-Seule la variable E est à éliminer comme suit :
-directement :
-</p>
-\begin{equation*}
-P(A,B, L = o) =  P(A|L=o) \times P(B|L=o) \times \underbrace{\sum_{E} \underbrace{P(E) \times P(L=o|E)}_{\phi_{E}(L=o,E) = P(L=o,E)}}_{\psi_{E}(L=o) = P(L=o)}.
-\end{equation*}
-<p>
-Il vient alors :
-</p>
-\begin{equation*}
-P(A,B, L = o) =  P(A|L=o) \times P(B|L=o) \times \psi_{E}(L=o).
-\end{equation*}
-<p>
-La loi \(P(A,B| L = o)\) s'obtient par simple normalisation sur les variables \((A,B)\) ou en effectuant explicitement le
-calcul suivant :
-</p>
-\begin{equation*}
-P(A,B| L = o) = \frac{P(A,B, L = o)}{\sum_{A,B} P(A,B,L=o)}.
-\end{equation*}
-</div>
-</div>
-
-<div id="outline-container-orge206e12" class="outline-4">
-<h4 id="orge206e12">Calculs numériques</h4>
-<div class="outline-text-4" id="text-orge206e12">
-<p>
-Les calculs numériques sont réalisés sous <code>Python</code> avec librairie <code>pyAgrum</code> dans le script
-téléchargeable <a href="exercices_cours_inf_ex1.py">ici</a>.
-</p>
-</div>
-</div>
 </div>
 </div>
 </div>

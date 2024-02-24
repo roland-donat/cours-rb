@@ -30,10 +30,18 @@
 MathJax.Hub.Config({
 TeX: {
 Macros: {
+pa: ["\\text{pa}"],
+Pa: ["\\text{Pa}"],
 lrpar: ["\\left( #1 \\right)", 1],
 lrPar: ["\\left( #1 \\right)", 1],
+set: ["\\left\\lbrace #1 \\right\\rbrace", 1],
 Prob: ["P"],
 inter: ["\\cap"],
+union: ["\\cup"],
+Dom: ["\\text{Dom}"],
+mbf: ["\\boldsymbol{#1}", 1],
+mathbfcal: ["\\boldsymbol{\\mathcal{#1}}", 1],
+sm: ["\\setminus"],
 }
 }
 });
@@ -49,11 +57,14 @@ inter: ["\\cap"],
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#/slide-org5daa873">Objectifs de la séance</a></li>
-<li><a href="#/slide-org3a1f342">Introduction à l'inférence probabiliste</a></li>
-<li><a href="#/slide-org69a0d5c">Méthode d'élimination</a></li>
-<li><a href="#/slide-orgf75fa70">Résumé de la séance</a></li>
-<li><a href="#/slide-org790f6d9">Bibliographie</a></li>
+<li><a href="#/slide-orgeb45e21">Objectifs de la séance</a></li>
+<li><a href="#/slide-orge15fc52">Introduction à l'inférence probabiliste</a></li>
+<li><a href="#/slide-org9758ba3">Notion de potentiel</a></li>
+<li><a href="#/slide-orgdae4268">Complexité</a></li>
+<li><a href="#/slide-org535d5eb">Méthode d'élimination des variables</a></li>
+<li><a href="#/slide-org43b28a1">Résumé de la séance</a></li>
+<li><a href="#/slide-org5f8de4c">Bibliographie</a></li>
+<li><a href="#/slide-orge990dd3">Algorithme d'élimination</a></li>
 </ul>
 </div>
 </div>
@@ -61,13 +72,14 @@ inter: ["\\cap"],
 
 
 <section>
-<section id="slide-org5daa873">
-<h2 id="org5daa873">Objectifs de la séance</h2>
+<section id="slide-orgeb45e21">
+<h2 id="orgeb45e21">Objectifs de la séance</h2>
 <div class="column" style="float:left; width: 50%">
 
 <ul>
 <li>Comprendre la notion d'inférence probabiliste dans un réseau bayésien</li>
 <li>Maîtriser les calculs effectués par un algorithme d'inférence exacte</li>
+<li>Introduire la notion de complexité dans le cadre des réseaux bayésiens</li>
 <li>Prendre conscience des avantages et des limites de l'inférence dans les réseaux bayésiens</li>
 
 </ul>
@@ -77,22 +89,20 @@ inter: ["\\cap"],
 <div class="column" style="float:right; width: 50%">
 
 
-<div id="orgc57a280" class="figure">
+<div id="orgb77d722" class="figure">
 <p><img src="./fig/objectives.png" alt="Objectives" width="100%" />
 </p>
 </div>
 
 </div>
 
-
-
 </section>
 </section>
 <section>
-<section id="slide-org3a1f342">
-<h2 id="org3a1f342">Introduction à l'inférence probabiliste</h2>
+<section id="slide-orge15fc52">
+<h2 id="orge15fc52">Introduction à l'inférence probabiliste</h2>
 
-<div id="orgd1def4b" class="figure">
+<div id="org4ee8cc8" class="figure">
 <p><img src="./fig/inference.png" alt="Inférence" width="70%" />
 </p>
 </div>
@@ -100,40 +110,40 @@ inter: ["\\cap"],
 </section>
 </section>
 <section>
-<section id="slide-org8d6024c">
-<h3 id="org8d6024c">Introduction à l'inférence probabiliste</h3>
+<section id="slide-org39cf36d">
+<h3 id="org39cf36d">Introduction à l'inférence probabiliste</h3>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org13684f5" class="figure">
+<div id="org63f9eb6" class="figure">
 <p><img src="./fig/rb_inference_alarme_pb.png" alt="Inférence problématique" width="95%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org62fc232">
-<h4 id="org62fc232">Introduction à l'inférence probabiliste</h4>
+<section id="slide-orga2ca6ef">
+<h4 id="orga2ca6ef">Introduction à l'inférence probabiliste</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org994e6a9" class="figure">
+<div id="orgb2b7b33" class="figure">
 <p><img src="./fig/rb_inference_alarme_ex_1.png" alt="Inférence problématique" width="95%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org4d901ae">
-<h4 id="org4d901ae">Introduction à l'inférence probabiliste</h4>
+<section id="slide-org90803f9">
+<h4 id="org90803f9">Introduction à l'inférence probabiliste</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org31ec871" class="figure">
+<div id="orgcc7a2a3" class="figure">
 <p><img src="./fig/rb_inference_alarme_ex_2.png" alt="Inférence problématique" width="95%" />
 </p>
 </div>
@@ -141,13 +151,13 @@ inter: ["\\cap"],
 </section>
 </section>
 <section>
-<section id="slide-orgf5a42f4">
-<h3 id="orgf5a42f4">Introduction à l'inférence probabiliste</h3>
+<section id="slide-org48a35cd">
+<h3 id="org48a35cd">Introduction à l'inférence probabiliste</h3>
 <p>
 <div class="slidesubtitle">Formalisation</div>
 </p>
 
-<div class="block-definition" id="org7e96c2b">
+<div class="block-definition" id="org6b84c9e">
 <p>
 <h4>Définition</h4>
 </p>
@@ -172,13 +182,13 @@ observées aux valeurs \(\boldsymbol{e} = \lrpar{e_{1},\ldots, e_{m}}\), appelé
 </section>
 </section>
 <section>
-<section id="slide-orga18ba37">
-<h3 id="orga18ba37">Introduction à l'inférence probabiliste</h3>
+<section id="slide-orgceb9055">
+<h3 id="orgceb9055">Introduction à l'inférence probabiliste</h3>
 <p>
 <div class="slidesubtitle">Algorithmes d'inférence</div>
 </p>
 
-<div class="block-definition" id="org2d7e621">
+<div class="block-definition" id="orgf931b29">
 <p>
 <h4>Inférence exacte</h4>
 </p>
@@ -192,20 +202,20 @@ d'arbres (ou polyarbres)</li>
 
 </div>
 
-<div class="block-definition" id="org7dca82a">
+<div class="block-definition" id="org6992ccc">
 <p>
 <h4>Inférence approchée déterministe</h4>
 </p>
 <ul>
-<li>Algorithme <i>loopy belief propagation</i> (Murphy, K. P. and Weiss, Y. and Jordan, M. I., 1999) : Utilisation de la méthode \textit{belief
-propagation} sur un graphe général</li>
+<li>Algorithme <i>loopy belief propagation</i> (Murphy, K. P. and Weiss, Y. and Jordan, M. I., 1999) : Utilisation de la méthode
+<i>belief propagation</i> sur un graphe général</li>
 <li>Méthode de raisonnement par pertinence (Lin, Yan and Druzdzel, Marek J., 1999)</li>
 
 </ul>
 
 </div>
 
-<div class="block-definition" id="org5fcca7c">
+<div class="block-definition" id="org618f5ee">
 <p>
 <h4>Inférence approchée stochastique</h4>
 </p>
@@ -216,181 +226,745 @@ propagation} sur un graphe général</li>
 
 </div>
 
+
 </section>
 </section>
 <section>
-<section id="slide-org69a0d5c">
-<h2 id="org69a0d5c">Méthode d'élimination</h2>
-<div class="block-definition" id="org2609651">
-<p>
-<h4>Hypothèses d'utilisation</h4>
+<section id="slide-org9758ba3">
+<h2 id="org9758ba3">Notion de potentiel</h2>
+
+<div id="orge23b6eb" class="figure">
+<p><img src="./fig/potential.png" alt="Inférence" width="70%" />
 </p>
-
-<ul>
-<li>Méthode adaptée pour les réseaux bayésiens à <b>variables discrètes et finies</b>,
-i.e. LPC sous forme de tables (matrices)</li>
-<li>Si le phénomène étudié implique des variables continues et/ou non finies, il faut les <b>discrétiser</b>
-au préalable</li>
-
-</ul>
-
 </div>
-
-<div class="block-definition" id="org77c9ec8">
-<p>
-<h4>Principe</h4>
-</p>
-
-<ul>
-<li>"Éliminer" par marginalisations successives toutes les variables de la loi jointe qui
-n'apparaissent pas dans le calcul à réaliser</li>
-<li>Simplifier le calcul à réaliser grâce à la propriété de factorisation des RB et choississant un
-"bon" ordre d'élimination des variables</li>
-
-</ul>
-
-</div>
-
-<div class="block-example" id="org324e9bc">
-<p>
-<h4>Propriétés</h4>
-</p>
-
-<ul>
-<li>L'ordre d'élimination des variables n'influe pas sur le résultat, i.e. tous les ordres aboutissent au même (bon) résultat</li>
-<li><b>En revanche, la rapidité des calculs est fortement liée à l'ordre d'élimination</b></li>
-<li>Méthode de référence implémentée dans la plupart des outils de réseaux bayésiens</li>
-
-</ul>
-
-</div>
-
 
 </section>
-<section id="slide-org16cecb3">
-<h4 id="org16cecb3">Méthode d'élimination des variables</h4>
+</section>
+<section>
+<section id="slide-org76057f9">
+<h3 id="org76057f9">Notion de potentiel</h3>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
+<div class="column" style="float:left; width: 33%">
 
-<div id="orgb52a90c" class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/rb_definition_alarme_graphe_va.png" alt="RB alarme definition" width="55%" />
+
+<div id="orgcf4c61c" class="figure">
+<p><img src="./fig/dfpot_3_var.png" alt="dfpot 3 var" height="100%" />
 </p>
 </div>
 
-<div class="block-example" id="org7f9b693">
+</div>
+
+<div class="column" style="float:right; width: 66%">
+
+<div class="block-definition" id="org772cea9">
 <p>
-<h4>Inférence dans le réseau bayésien Alarme</h4>
+<h4>Caractéristiques d'un potentiel</h4>
+</p>
+<ul>
+<li>\(\Dom\lrPar{\Phi} = \set{\mathcal{X},\mathcal{Y},\mathcal{Z}}\) avec :
+<ul>
+<li>\(\mathcal{X} = \set{x_{1},x_{2}}\)</li>
+<li>\(\mathcal{Y} = \set{y_{1},y_{2},y_{3}}\)</li>
+<li>\(\mathcal{Z} = \set{z_{1},z_{2}}\)</li>
+
+</ul></li>
+<li>Configurations de \(\Phi\) : \(\Dom\lrPar{\Phi}^{*} = \set{x_{1},x_{2}} \times
+  \set{y_{1},y_{2},y_{3}} \times \set{z_{1},z_{2}}\)</li>
+<li>\(\Phi\) possède \(|\Dom\lrPar{\Phi}^{*}| = |\mathcal{X}| \times |\mathcal{Y}| \times |\mathcal{Z}| = 2 \times 3 \times 2 = 12\) configurations</li>
+<li>Pour toute configuration \((x,y,z) \in \mathcal{X} \times \mathcal{Y} \times \mathcal{Z}\), \(\Phi\) prend la valeur \(\Phi\lrPar{x,y,z}\)</li>
+
+</ul>
+
+</div>
+
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7b36ab1">
+<h3 id="org7b36ab1">Notion de potentiel</h3>
+<p>
+<div class="slidesubtitle">Définition</div>
 </p>
 
+<div class="block-definition" id="orgf236cfe">
+<p>
+<h4>Concept général</h4>
+</p>
 <ul>
-<li>La problématique fait intervenir 4 variables aléatoires : Voleur (\(V\)), Alarme (\(A\)), Orage (\(O\)),
-Info météo (\(M\))</li>
-<li>Le RB qui modélise la problématique permet de factoriser la loi jointe des variables aléatoire comme suit :
-\[  
-  P(V,A,O,M) = P(V) \times P(A|V; O) \times P(O) \times P(M|O)
+<li>Un potentiel est une application de plusieurs variables à valeurs dans un ensemble quelconque et
+muni d'opérations particulières</li>
+<li>L'ensemble des potentiels est muni d'opérations particulières</li>
+<li>Les potentiels définis dans ce cours sont des cas particuliers de tenseurs</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="orgdd32994">
+<p>
+<h4>Potentiel discret et fini réel</h4>
+</p>
+<ul>
+<li><p>
+Soit \(\mathcal{X}_{1}, \ldots, \mathcal{X}_{D}\) une famille d'ensembles discrets et finis. \(\Phi\)
+est un potentiel réel sur le domaine \(\set{\mathcal{X}_{1}, \ldots, \mathcal{X}_{D}}\) si 
+\(\Phi\) est une application définie par
+</p>
+<div>
+\begin{equation*}
+\Phi : 
+\left\lbrace
+  \begin{array}{ccc}
+    \mathcal{X}_{1} \times \ldots \times \mathcal{X}_{D}
+    & \mapsto & \mathbb{R} \\
+    \lrPar{x_{1}, \ldots, x_{D}} & \mapsto & \Phi\lrPar{x_{1},\ldots,x_{D}} 
+  \end{array}
+\right..
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org2d697d5">
+<p>
+<h4>Vocabulaire et notations</h4>
+</p>
+<ul>
+<li>Le domaine du potentiel \(\Phi\) est noté \(\Dom\lrPar{\Phi} = \set{\mathcal{X}_{1}, \ldots, \mathcal{X}_{D}}\)</li>
+<li>\(\Dom\lrPar{\Phi}^{*} = \prod_{d = 1}^{D} \mathcal{X}_{d} = \mathcal{X}_{1} \times \ldots \times
+  \mathcal{X}_{D}\)</li>
+<li>Tout élément \(\lrpar{x_{1},\ldots,x_{D}} \in \Dom\lrPar{\Phi}^{*}\) est appelé configuration</li>
+<li>Si \(|\Dom\lrpar{\Phi}| = D\), on dit que \(\Phi\) est un potentiel à \(D\) dimensions</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org09662e9">
+<h3 id="org09662e9">Notion de potentiel</h3>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="org3300690" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_0.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgc8f718a">
+<h4 id="orgc8f718a">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="org3bd12fe" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_0_bis.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orge709a81">
+<h4 id="orge709a81">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="orgff34454" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_1.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgce39c75">
+<h4 id="orgce39c75">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="org085ede9" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_2.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org277ab6c">
+<h4 id="org277ab6c">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="org63e21f8" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_3.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgd6ce9fa">
+<h4 id="orgd6ce9fa">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="org44b3c96" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_4.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org0be4682">
+<h4 id="org0be4682">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="org6a971f3" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_5.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orge1321d0">
+<h4 id="orge1321d0">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="orgfef12a9" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_6.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org630863b">
+<h4 id="org630863b">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="org4cf683f" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_7.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org35ea642">
+<h4 id="org35ea642">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="orgcedc07d" class="figure">
+<p><img src="./fig/dfpot_prod_2_var_8.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org4508ce8">
+<h4 id="org4508ce8">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
+</p>
+
+
+<div id="org9aec3b2" class="figure">
+<p><img src="./fig/dfpot_prod_2_var.png" alt="dfpot prod" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org992f9f6">
+<h4 id="org992f9f6">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Produit de deux potentiels - Définition</div>
+</p>
+
+<div class="block-definition" id="org96f2e94">
+<p>
+<h4>Produit de deux potentiels discrets et finis</h4>
+</p>
+<ul>
+<li>Soient deux potentiels réels discrets et finis \(\Phi_{1}\) et \(\Phi_{2}\)</li>
+<li>Notons :
+<ul>
+<li>\(\mathbfcal{X} = \Dom\lrPar{\Phi_{1}} \setminus \Dom\lrPar{\Phi_{2}}\)</li>
+<li>\(\mathbfcal{Y} = \Dom\lrPar{\Phi_{2}} \setminus \Dom\lrPar{\Phi_{1}}\)</li>
+<li>\(\mathbfcal{Z} = \Dom\lrPar{\Phi_{1}} \inter \Dom\lrPar{\Phi_{2}}\)</li>
+
+</ul></li>
+<li><p>
+Le produit de \(\Phi_{1}\) et \(\Phi_{2}\) est un potentiel \(\Psi = \Phi_{1} \cdot \Phi_{2}\) de domaine \(\Dom\lrPar{\Psi} = \Dom\lrPar{\Phi_{1}} \union \Dom\lrPar{\Phi_{2}}\) vérifiant pour toute
+configuration \((\mbf{x},\mbf{z},\mbf{y}) \in \mathbfcal{X}^{*} \times \mathbfcal{Z}^{*} \times
+  \mathbfcal{Y}^{*}\) : 
+</p>
+<div>
+\begin{equation*}
+  \Psi\lrpar{\mbf{x},\mbf{z},\mbf{y}} =
+  \Phi_{1}\lrpar{\mbf{x},\mbf{z}} \cdot \Phi_{2}\lrpar{\mbf{z},\mbf{y}}
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf3c59db">
+<h3 id="orgf3c59db">Notion de potentiel</h3>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
+</p>
+
+
+<div id="org917e500" class="figure">
+<p><img src="./fig/dfpot_marg_3_var_0.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgf6045c2">
+<h4 id="orgf6045c2">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
+</p>
+
+
+<div id="orgf1e6245" class="figure">
+<p><img src="./fig/dfpot_marg_3_var_0_bis.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org4297b72">
+<h4 id="org4297b72">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
+</p>
+
+
+<div id="orga8d72a6" class="figure">
+<p><img src="./fig/dfpot_marg_3_var_0_ter.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgd3e9803">
+<h4 id="orgd3e9803">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
+</p>
+
+
+<div id="orgc0a7e88" class="figure">
+<p><img src="./fig/dfpot_marg_3_var_0_ter2.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgd29bc39">
+<h4 id="orgd29bc39">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
+</p>
+
+
+<div id="org50dd1e1" class="figure">
+<p><img src="./fig/dfpot_marg_3_var_1.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org8f70ccf">
+<h4 id="org8f70ccf">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
+</p>
+
+
+<div id="orgc4854ff" class="figure">
+<p><img src="./fig/dfpot_marg_3_var_2.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org3b98e75">
+<h4 id="org3b98e75">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
+</p>
+
+
+<div id="org4ddce3c" class="figure">
+<p><img src="./fig/dfpot_marg_3_var_3.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgd80ecc5">
+<h4 id="orgd80ecc5">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
+</p>
+
+
+<div id="orgd53da16" class="figure">
+<p><img src="./fig/dfpot_marg_3_var_4.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org03e347e">
+<h4 id="org03e347e">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
+</p>
+
+
+<div id="org2e8b6cf" class="figure">
+<p><img src="./fig/dfpot_marg_3_var.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orga7fcdb5">
+<h4 id="orga7fcdb5">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Sommation/Marginalisation - Définition</div>
+</p>
+
+<div class="block-definition" id="org2c00a38">
+<p>
+<h4>Sommation/Marginalisation d'un potentiel discret et fini</h4>
+</p>
+<ul>
+<li>Soit un potentiel réel discret et fini \(\Phi\)</li>
+<li><p>
+Le résultat de la sommation de \(\Phi\) sur le domaine \(\mathbfcal{W}\) est un potentiel \(\Psi = \sum_{\mathbfcal{W}} \Phi\) de domaine \(\Dom\lrPar{\Psi} = \Dom\lrPar{\Phi} \sm \mathbfcal{W}\) vérifiant pour toute configuration \(\mbf{x} \in \Dom\lrPar{\Psi}^{*}\):
+</p>
+<div>
+\begin{equation*}
+  \Psi\lrpar{\mbf{x}} = \sum_{\mbf{w} \in \mathbfcal{W}} \Phi\lrpar{\mbf{x},\mbf{w}}
+\end{equation*}
+
+</div></li>
+<li>Cette opération est également appelée marginalisation du potentiel \(\Phi\) sur le domaine \(\Dom\lrPar{\Phi} \sm \mathbfcal{W}\)</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orga1dd7b9">
+<h3 id="orga1dd7b9">Notion de potentiel</h3>
+<p>
+<div class="slidesubtitle">Instanciation - Exemple</div>
+</p>
+
+
+<div id="orgdd558f4" class="figure">
+<p><img src="./fig/dfpot_inst_3_var_0.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org278f5cc">
+<h4 id="org278f5cc">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Instanciation - Exemple</div>
+</p>
+
+
+<div id="org40e3720" class="figure">
+<p><img src="./fig/dfpot_inst_3_var_1.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgafa370a">
+<h4 id="orgafa370a">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Instanciation - Exemple</div>
+</p>
+
+
+<div id="orgb584657" class="figure">
+<p><img src="./fig/dfpot_inst_3_var_2.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org7727349">
+<h4 id="org7727349">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Instanciation - Exemple</div>
+</p>
+
+
+<div id="org97a21a0" class="figure">
+<p><img src="./fig/dfpot_inst_3_var_3.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org8083035">
+<h4 id="org8083035">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Instanciation - Exemple</div>
+</p>
+
+
+<div id="orgeadf17c" class="figure">
+<p><img src="./fig/dfpot_inst_3_var.png" alt="dfpot sum" width="85%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org1fd226a">
+<h4 id="org1fd226a">Notion de potentiel</h4>
+<p>
+<div class="slidesubtitle">Instanciation - Définition</div>
+</p>
+
+<div class="block-definition" id="orgefb4813">
+<p>
+<h4>Instanciation d'un potentiel discret et fini</h4>
+</p>
+<ul>
+<li>Soit un potentiel réel discret et fini \(\Phi\)</li>
+<li>L'instanciation de \(\Phi\) sur la configuration \(\mbf{y} \in \mathbfcal{Y} \subseteq
+  \Dom\lrPar{\Phi}\) est la projection du potentiel \(\Phi\) sur le domaine \(\Dom\lrPar{\Phi_{\mbf{y}}}
+  = \lrPar{\Dom\lrPar{\Phi} \sm \mathbfcal{Y}} \union \mbf{y}\)</li>
+<li>\(\Phi\) instancié sur \(\mbf{y}\) est un potentiel défini sur toutes les configurations \(\mbf{x} \in
+  \lrPar{\Dom\lrPar{\Phi} \sm \mathbfcal{Y}}^{*}\) tel que \(\Phi\lrpar{\mbf{x},\mbf{y}}\)</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org5cfb9c1">
+<h3 id="org5cfb9c1">Les LPC : des potentiels particuliers</h3>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+<div class="column" style="float:left; width: 40%">
+
+
+<div id="org8428230" class="figure">
+<p><img src="./fig/dfcpd_3_var.png" alt="dfcpd 3 var" height="100%" />
+</p>
+</div>
+
+</div>
+
+<div class="column" style="float:right; width: 55%">
+
+<div class="block-example" id="orgedbfc54">
+<p>
+<h4>Retour sur la LPC de la variable Alarme</h4>
+</p>
+<ul>
+<li>Variable normalisée : 
+<ul>
+<li>Alarme : à valeurs dans \(\set{\text{non},\text{oui}}\)</li>
+
+</ul></li>
+<li>Variables de conditionnement :
+<ul>
+<li>Voleur : à valeurs dans \(\set{\text{non},\text{oui}}\)</li>
+<li>Orage : à valeurs dans \(\set{\text{non}, \text{faible},\text{fort}}\)</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+<section id="slide-org46634d3">
+<h4 id="org46634d3">Les LPC : des potentiels particuliers</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+<div class="column" style="float:left; width: 40%">
+
+
+<div id="org60a5efe" class="figure">
+<p><img src="./fig/dfcpd_3_var_pot_2.png" alt="dfcpd 3 var" height="100%" />
+</p>
+</div>
+
+</div>
+
+<div class="column" style="float:right; width: 55%">
+
+<div class="block-example" id="org841224f">
+<p>
+<h4>Retour sur la LPC de la variable Alarme</h4>
+</p>
+<ul>
+<li>Variable normalisée : 
+<ul>
+<li>Alarme : à valeurs dans \(\set{\text{non},\text{oui}}\)</li>
+
+</ul></li>
+<li>Variables de conditionnement :
+<ul>
+<li>Voleur : à valeurs dans \(\set{\text{non},\text{oui}}\)</li>
+<li>Orage : à valeurs dans \(\set{\text{non}, \text{faible},\text{fort}}\)</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+<section id="slide-org605c973">
+<h4 id="org605c973">Les LPC : des potentiels particuliers</h4>
+<p>
+<div class="slidesubtitle">Définition</div>
+</p>
+
+<div class="block-definition" id="orge61fbc5">
+<p>
+<h4>Potentiel et LPC</h4>
+</p>
+<ul>
+<li>Soit un potentiel réel discret et fini à valeur dans \([0,1]\) noté \(p\)</li>
+<li><p>
+S'il existe deux sous-domaines disjoints \(\mathbfcal{X}\) et \(\mathbfcal{Y}\) avec \(\Dom\lrPar{p} =
+  \mathbfcal{X} \union \mathbfcal{Y}\) tels que pour toute configuration \(\mbf{y} \in \mathbfcal{Y}^{*}\)
+</p>
+<div>
+\begin{equation*}
+\sum_{\mbf{x} \in \mathbfcal{X}^{*}} p\lrpar{\mbf{x},\mbf{y}} = 1.
+\end{equation*}
+
+</div></li>
+<li>Le potentiel \(p\) est une Loi de Probabilité Conditionnelle (LPC) sur \(\mathbfcal{X}\)
+conditionnellement à \(\mathbfcal{Y}\)</li>
+<li>Les domaines \(\mathbfcal{X}\) et \(\mathbfcal{Y}\) étant discrets et finis, la LPC \(p\) peut se
+représenter sous la forme d'une Table de Probabilité Conditionnelle (TPC)</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org37890e6">
+<p>
+<h4>Vocabulaire</h4>
+</p>
+<ul>
+<li>Le domaine \(\mathbfcal{Y}\) est appelé domaine de conditionnement</li>
+<li>Le domaine \(\mathbfcal{X}\) est appelé domaine normalisé</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgdae4268">
+<h2 id="orgdae4268">Complexité</h2>
+
+<div id="orgf4e404a" class="figure">
+<p><img src="./fig/complexity.png" alt="Complexité" width="70%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org18f7026">
+<h3 id="org18f7026">Complexité d'un potentiel</h3>
+<div class="block-definition" id="org9091e4c">
+<p>
+<h4>Complexité spatiale</h4>
+</p>
+<ul>
+<li>Soit un potentiel réel discret et fini \(\Phi\) tel que \(\Dom\lrPar{\Phi} = \set{\mathcal{X}_{1},
+  \ldots, \mathcal{X}_{D}}\)</li>
+<li>La complexité spatiale de \(\Phi\), notée \(\text{CS}\lrpar{\Phi}\), correspond au nombre de
+configurations du domaine de \(\Phi\) :
+\[
+  \text{CS}\lrpar{\Phi} = |\Dom\lrpar{\Phi}^{*}|
   \]</li>
 
 </ul>
 
 </div>
 
-</section>
-<section id="slide-orgdc7aa5a">
-<h4 id="orgdc7aa5a">Méthode d'élimination des variables</h4>
+<div class="block-definition" id="org8cdb0ba">
 <p>
-<div class="slidesubtitle">Exemple</div>
+<h4>Conséquence</h4>
 </p>
+<ul>
+<li>\(\text{CS}\lrpar{\Phi} \simeq v^{D}\) quand \(v\) et/ou \(D\) sont grands avec :</li>
+<li>\(D\) : nombre de variables représenté dans le domaine du potentiel</li>
+<li>\(v = \max \set{|\mathcal{X}_{1}|, \ldots, |\mathcal{X}_{D}|}\) : Plus grand nombre de valeurs prises
+par une v.a.</li>
 
-<div class="block-example" id="orgb4d9ff4">
-<p>
-<h4>Calcul de P(Voleur=oui|Alarme=oui)</h4>
-</p>
-
-<p>
-Par définition :
-\[
-P(V = \text{oui}|A = \text{oui}) = \frac{P(V = \text{oui}; A = \text{oui})}{P(A = \text{oui})}
-\]
-</p>
+</ul>
 
 </div>
 
-<div class="fragment (appear) block-example" id="org01f57e3">
+<div class="block-definition" id="org77204b1">
 <p>
-<h4>Calcul du numérateur</h4>
-On marginalise simplement sur les variables Voleur et Alarme :
-\[
-P(V = \text{oui}; A = \text{oui}) = \sum_{O \in \{\text{non},
-  \text{faible},\text{fort}\}} \sum_{M \in \{\text{non},
-  \text{oui}\}} P(V = \text{oui}; A = \text{oui},O,M) 
-\]
+<h4>Complexité algorithmique</h4>
 </p>
 
-</div>
+<ul>
+<li>Soient deux potentiels réels discrets et finis \(\Phi_{1}\) et \(\Phi_{2}\)</li>
+<li>\(\text{CA}\lrpar{\Phi_{1} \cdot \Phi_{2}} = \text{CA}\lrpar{\Phi_{1} + \Phi_{2}}
+  \simeq |\lrpar{\Dom\lrpar{\Phi_{1}} \union \Dom\lrpar{\Phi_{2}}}^{*}|\)</li>
+<li>\(\text{CA}\lrpar{\sum_{\mathbfcal{W}}\Phi_{1}} \simeq |\lrpar{\Dom\lrpar{\Phi_{1}} \sm
+  \mathbfcal{W}}^{*}|\)</li>
+<li>Les complexités algorithmiques et spatiales sont du même ordre</li>
 
-</section>
-<section id="slide-org7c2f84b">
-<h4 id="org7c2f84b">Méthode d'élimination des variables</h4>
-<p>
-<div class="slidesubtitle">Exemple</div>
-</p>
-
-<div class="block-example" id="orgfafe021">
-<p>
-<h4>Calcul du numérateur par "élimination"</h4>
-</p>
-
-<p>
-On utilise la propriété de factorisation :
-</p>
-<div>
-\begin{align}
-& P(V = \text{oui}; A = \text{oui}) \\
-& = \sum_{O \in \{\text{non},
-  \text{faible},\text{fort}\}} \sum_{M \in \{\text{non},
-  \text{oui}\}} P(V = \text{oui}) \times
-  P(A = \text{oui}|V = \text{oui}; O) \times P(O) \times P(M|O)
-\end{align}
-
-</div>
-
-<p>
-On "élimine" successivement les variables \(M\) et \(O\) en distibuant les sommes dans la
-factorisation :
-</p>
-<div>
-\begin{align}
-& P(V = \text{oui}; A = \text{oui}) \\
-& =  P(V = \text{oui}) \times
-  \sum_{O \in \{\text{non},
-  \text{faible},\text{fort}\}} P(A = \text{oui}|V = \text{oui}; O) \times P(O) \times \sum_{M \in \{\text{non},
-  \text{oui}\}} P(M|O)
-\end{align}
-
-</div>
-
-</div>
-
-<div class="block-example" id="org09b981b">
-<p>
-<h4>Calcul du dénominateur par "élimination"</h4>
-</p>
-
-<p>
-Principe identique :
-</p>
-<div>
-\begin{align}
-& P(A = \text{oui}) \\
-& = \sum_{V \in \{\text{non}, \text{oui}\}} P(V) \times
-   \sum_{O \in \{\text{non},
-  \text{faible},\text{fort}\}} P(A = \text{oui}|V; O) \times P(O) \times \sum_{M \in \{\text{non},
-  \text{oui}\}} P(M|O)
-\end{align}
-
-</div>
+</ul>
 
 </div>
 
@@ -398,13 +972,13 @@ Principe identique :
 </section>
 </section>
 <section>
-<section id="slide-org2f3cec2">
-<h3 id="org2f3cec2">Complexité</h3>
+<section id="slide-org559dd24">
+<h3 id="org559dd24">Complexité d'une LPC</h3>
 <p>
-<div class="slidesubtitle">Complexité spatiale d'une LPC discrète et finie</div>
+<div class="slidesubtitle">Complexité spatiale</div>
 </p>
 
-<div class="block-definition" id="org9383812">
+<div class="block-definition" id="orga978989">
 <p>
 <h4>Complexité spatiale d'une LPC discrète et finie</h4>
 </p>
@@ -418,10 +992,7 @@ v.a. à valeurs dans les ensembles discrets et finis \(\mathcal{X}_{1}, \ldots,
 notée \(CS(P(\boldsymbol{X}|\boldsymbol{Y}))\), est définie par le <b>nombre de configurations de
 valeurs différentes que peuvent prendre les v.a. \(X_{1},\ldots,X_{n}, Y_{1}, \ldots, Y_{m}\)</b></li>
 
-</ul>
-
-<ul>
-<li class="fragment appear">Autrement dit : 
+<li>Autrement dit : 
 \[
   CS(P(\boldsymbol{X}|\boldsymbol{Y})) = \prod_{i = 1}^{n} |\mathcal{X}_{i}| \prod_{j =
   1}^{m} |\mathcal{Y}_{j}|
@@ -432,11 +1003,23 @@ où \(|\mathcal{X}_{i}|\) est le nombre d'éléments dans l'ensemble \(\mathcal{
 
 </div>
 
-<div class="fragment (appear) block-example" id="orgc8f0c29">
+</section>
+<section id="slide-org35c17e9">
+<h4 id="org35c17e9">Complexité d'une LPC</h4>
+<p>
+<div class="slidesubtitle">Complexité spatiale</div>
+</p>
+
+
+<div id="org185bcf8" class="figure">
+<p><img src="./fig/rb_definition_alarme.png" alt="RB alarme definition" width="80%" />
+</p>
+</div>
+
+<div class="block-example" id="orgfd4d130">
 <p>
 <h4>Exercice</h4>
 </p>
-
 <ul>
 <li>Donner les complexités spatiales des LPC du RB "Alarme"</li>
 
@@ -445,13 +1028,13 @@ où \(|\mathcal{X}_{i}|\) est le nombre d'éléments dans l'ensemble \(\mathcal{
 </div>
 
 </section>
-<section id="slide-org9a8f12f">
-<h4 id="org9a8f12f">Complexité</h4>
+<section id="slide-org83be017">
+<h4 id="org83be017">Complexité d'une LPC</h4>
 <p>
-<div class="slidesubtitle">Complexité probabiliste d'une LPC discrète et finie</div>
+<div class="slidesubtitle">Complexité probabiliste</div>
 </p>
 
-<div class="block-definition" id="org5339b07">
+<div class="block-definition" id="orgec3d3f7">
 <p>
 <h4>Complexité probabiliste d'une LPC discrète et finie</h4>
 </p>
@@ -465,24 +1048,21 @@ v.a. à valeurs dans les ensembles discrets et finis \(\mathcal{X}_{1}, \ldots,
 notée \(CP(P(\boldsymbol{X}|\boldsymbol{Y}))\), est définie par le <b>nombre de paramètres
 (probabilités) nécessaires pour définir la LPC</b></li>
 
-</ul>
-
-<ul>
-<li class="fragment appear">Autrement dit : 
+<li>Autrement dit : 
 \[
   CP(P(\boldsymbol{X}|\boldsymbol{Y})) = \prod_{i = 1}^{n} (|\mathcal{X}_{i}| - 1) \prod_{j =
   1}^{m} |\mathcal{Y}_{j}|
   \]</li>
 
-<li class="fragment appear">La CP tient simplement compte du fait qu'une LPC doit sommer à 1 pour chaque configuration des
+<li>La CP tient simplement compte du fait qu'une LPC doit sommer à 1 pour chaque configuration des
 variables de conditionnement</li>
-<li class="fragment appear">La CP mesure le potentiel de modélisation d'une loi (notion de degré de liberté)</li>
+<li>La CP mesure le potentiel de modélisation d'une loi (notion de degré de liberté)</li>
 
 </ul>
 
 </div>
 
-<div class="fragment (appear) block-example" id="org12683b6">
+<div class="block-example" id="org33702b9">
 <p>
 <h4>Exercice</h4>
 </p>
@@ -496,13 +1076,15 @@ variables de conditionnement</li>
 
 
 </section>
-<section id="slide-org6020d50">
-<h4 id="org6020d50">Complexité</h4>
+</section>
+<section>
+<section id="slide-orga17035d">
+<h3 id="orga17035d">Complexité d'un réseau bayésien</h3>
 <p>
-<div class="slidesubtitle">Complexité d'un réseau bayésien</div>
+<div class="slidesubtitle">Définition</div>
 </p>
 
-<div class="block-definition" id="org5fac567">
+<div class="block-definition" id="org950144e">
 <p>
 <h4>Complexité d'une loi jointe représentée par un RB</h4>
 </p>
@@ -514,16 +1096,13 @@ variables de conditionnement</li>
 comme étant la somme des complexités spatiales (resp. probabilistes) associées à chacune des LPC
 \(P(X_{i}|\text{pa}(X_{i}))\)</li>
 
-</ul>
-
-<ul>
-<li class="fragment appear">La <b>complexité spatiale</b> du RB a pour expression :
+<li>La <b>complexité spatiale</b> du RB a pour expression :
 \[
   CS(RB) = \sum_{i = 1}^{n}
   CS(P(X_{i}|\text{pa}(X_{i}))) = \sum_{i = 1}^{n} |\mathcal{X}_{i}| \times
   \prod_{\mathcal{X} \in \text{pa}(\mathcal{X}_{i})} |\mathcal{X}|
   \]</li>
-<li class="fragment appear">La <b>complexité probabiliste</b> a pour expression :
+<li>La <b>complexité probabiliste</b> a pour expression :
 \[
   CP(RB) = \sum_{i = 1}^{n}
   CP(P(X_{i}|\text{pa}(X_{i}))) = \sum_{i = 1}^{n} (|\mathcal{X}_{i}| - 1) \times
@@ -535,14 +1114,13 @@ comme étant la somme des complexités spatiales (resp. probabilistes) associée
 </div>
 
 </section>
-<section id="slide-org45ee860">
-<h4 id="org45ee860">Complexité</h4>
+<section id="slide-org23fb26b">
+<h4 id="org23fb26b">Complexité d'un réseau bayésien</h4>
 <p>
 <div class="slidesubtitle">Conséquences pratiques</div>
 </p>
 
-
-<div class="block-definition" id="org3279c0a">
+<div class="block-definition" id="org788d096">
 <p>
 <h4>RB = Représentation parcimonieuse</h4>
 </p>
@@ -562,7 +1140,7 @@ comme étant la somme des complexités spatiales (resp. probabilistes) associée
 
 </div>
 
-<div class="block-example" id="org46f5fe6">
+<div class="block-example" id="org16edb1f">
 <p>
 <h4>Exercice</h4>
 </p>
@@ -574,35 +1152,53 @@ Calculer les complexités du modèle "Alarme" avec et sans RB
 </div>
 
 
+</section>
+</section>
+<section>
+<section id="slide-org535d5eb">
+<h2 id="org535d5eb">Méthode d'élimination des variables</h2>
+
+<div id="org265d6a3" class="figure">
+<p><img src="./fig/bucket_elimination.png" alt="Bucket elimination" width="70%" />
+</p>
+</div>
+
 
 </section>
 </section>
 <section>
-<section id="slide-orgf75fa70">
-<h2 id="orgf75fa70">Résumé de la séance</h2>
-<div class="block-definition" id="org8c9f201">
+<section id="slide-org33a8d43">
+<h3 id="org33a8d43">Méthode d'élimination des variables</h3>
 <p>
-<h4>Points clés</h4>
+<div class="slidesubtitle">Généralités</div>
 </p>
-<ul>
-<li>Un réseau bayésien permet de formaliser et réprésenter un phénomène aléatoire sous forme de
-graphe :  
-<ul>
-<li>Noeuds du graphe = Variables aléatoires</li>
-<li>Arcs entre noeuds = Relations de dépendance</li>
 
-</ul></li>
-<li>L'information apportée par la structure du graphe permet en général de simplifier la loi
-jointe du phénomène aléatoire étudié (notion de parcimonie)</li>
-<li>Si les LPC du RB sont connues, des algorithmes d'inférence probabiliste permettent de déduire
-de nouvelles connaissances sur le phénomène aléatoire étudié</li>
-<li>Les réseaux bayésiens sont intéressants pour les raisons suivantes :
-<ul>
-<li>Lisibilité et interprétabilité des modèles</li>
-<li>Rigueur mathématique</li>
-<li>Fort potentiel de modélisation</li>
+<div class="block-definition" id="orgee242bb">
+<p>
+<h4>Hypothèses d'utilisation</h4>
+</p>
 
-</ul></li>
+<ul>
+<li>Méthode adaptée pour les réseaux bayésiens à <b>variables discrètes et finies</b>,
+i.e. les LPC sont des potentiels discrets et finis</li>
+<li>Si le phénomène étudié implique des variables continues et/ou non finies, il faut les <b>discrétiser</b>
+au préalable</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org5a2644c">
+<p>
+<h4>Principe</h4>
+</p>
+
+<ul>
+<li>"Éliminer" par sommations successives toutes les variables de la loi jointe qui
+n'apparaissent pas dans le calcul à réaliser</li>
+<li>Simplifier le calcul à réaliser grâce à la propriété de factorisation des RB et choississant un
+"bon" ordre d'élimination des variables</li>
+<li>Algorithme de référence implémenté dans la plupart des outils de réseaux bayésiens</li>
 
 </ul>
 
@@ -611,15 +1207,683 @@ de nouvelles connaissances sur le phénomène aléatoire étudié</li>
 </section>
 </section>
 <section>
-<section id="slide-orgb2b1be6">
-<h3 id="orgb2b1be6">Merci pour votre attention !</h3>
+<section id="slide-org6ae5320">
+<h3 id="org6ae5320">Méthode d'élimination des variables</h3>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org2b28ba7" class="figure">
+<p><img src="./fig/rb_alarme_graphe.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="org846e438">
+<p>
+<h4>Inférence dans le réseau bayésien Alarme</h4>
+</p>
+
+<ul>
+<li>La problématique fait intervenir 4 variables aléatoires : Voleur (\(V\)), Alarme (\(A\)), Orage (\(O\)),
+Info météo (\(M\))</li>
+<li>Le RB qui modélise la problématique permet de factoriser la loi jointe des variables aléatoire comme suit :
+\[  
+  P(V,A,O,M) = P(V) \times P(A|V; O) \times P(O) \times P(M|O)
+  \]</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org47039f3">
+<h4 id="org47039f3">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+<div class="block-example" id="orge4de3a2">
+<p>
+<h4>Calcul de P(Voleur=oui|Alarme=oui)</h4>
+</p>
+<ul>
+<li>Par définition : \(\displaystyle P(V = \text{oui}|A = \text{oui}) = \frac{P(V = \text{oui}; A = \text{oui})}{P(A = \text{oui})}\)</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="org2f22788">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li>On instancie les variables de conditionnement à leur valeur demandée, ici \(A = \text{oui}\)</li>
+<li>Puis, on somme (élimine) les variables différentes de Voleur et Alarme :
+\[
+  P(V; A = \text{oui}) = \sum_{O \in \{\text{non},
+  \text{faible},\text{fort}\}} \sum_{M \in \{\text{non}, \text{oui}\}} P(V; A = \text{oui}, O,M) 
+  \]</li>
+<li>Pour simplifier les calculs, on utilisera la propriété de factorisation de la loi jointe dans le RB</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="orgd5f5889">
+<p>
+<h4>Calcul du dénominateur</h4>
+</p>
+
+<ul>
+<li>On utilise le calcul du numérateur en marginalisant sur la variable Alarme :
+\[
+  P(A = \text{oui}) = \sum_{V \in \set{\text{non}, \text{oui}}} P(V ; A = \text{oui}) 
+  \]</li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-org5c50a4c">
+<h4 id="org5c50a4c">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgc585c13" class="figure">
+<p><img src="./fig/rb_alarme.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="orge5ddf9c">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li><p>
+On cherche à calculer :
+</p>
+<div>
+\begin{equation*}
+P(V ; A) = \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} \sum_{M \in \{\text{non},
+\text{oui}\}} P(V ; A ; O ; M)
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgb6301e4">
+<h4 id="orgb6301e4">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org36a0868" class="figure">
+<p><img src="./fig/rb_alarme.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="orgbcf69b5">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li><p>
+D'après la propriété de factorisation de la jointe dans le RB :
+</p>
+<div>
+\begin{equation*}
+P(V ; A) = \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} \sum_{M \in \{\text{non},
+\text{oui}\}} P(V) \cdot P(A | V ; O) \cdot P(O) \cdot P(M|O)
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-orgf28337b">
+<h4 id="orgf28337b">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org9248c5a" class="figure">
+<p><img src="./fig/rb_alarme_inf_inst.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="org6abcda5">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li><p>
+On instancie les variables de conditionnement, ici \(A = \text{oui}\) :
+</p>
+<div>
+\begin{equation*}
+P(V ; A = \text{oui}) = \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} \sum_{M \in \{\text{non}, 
+\text{oui}\}} P(V) \cdot P(A = \text{oui} | V ; O) \cdot P(O) \cdot P(M|O)
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org68bffec">
+<h4 id="org68bffec">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgc3b6391" class="figure">
+<p><img src="./fig/rb_alarme_inf_inst.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="orgd585012">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li><p>
+On "élimine" successivement les variables \(M\) et \(O\) en distibuant les sommes dans la
+factorisation : 
+</p>
+<div>
+\begin{equation*}
+P(V ; A = \text{oui}) = P(V) \cdot \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} P(A = \text{oui} | V ; O) \cdot P(O) \cdot \sum_{M \in \{\text{non}, 
+\text{oui}\}} P(M|O)
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org8936ba0">
+<h4 id="org8936ba0">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org941f4bb" class="figure">
+<p><img src="./fig/rb_alarme_inf_sum_M.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="org8b8172c">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li><p>
+Sommation sur \(M\) :
+factorisation : 
+</p>
+<div>
+\begin{equation*}
+P(V ; A = \text{oui}) = P(V) \cdot \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} P(A = \text{oui} | V ; O) \cdot P(O) \cdot \underbrace{\sum_{M \in \{\text{non}, \text{oui}\}} P(M|O)}_{\text{potentiel composé de 1}}
+\end{equation*}
+
+</div></li>
+<li>Le potentiel obtenu ne contient que des 1, on peut donc le supprimer du produit</li>
+
+</ul>
+
+</div>
+
+
+
+
+
+</section>
+<section id="slide-org24d3e90">
+<h4 id="org24d3e90">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgd4e1280" class="figure">
+<p><img src="./fig/rb_alarme_inf_sum_O_prod_1.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="org41391cf">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li><p>
+On fait le produit des potentiels/LPC qui dépendent de \(O\) :
+factorisation : 
+</p>
+<div>
+\begin{equation*}
+P(V ; A = \text{oui}) = P(V) \cdot \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} \underbrace{P(A = \text{oui} | V ; O) \cdot P(O)}_{\Psi_{O}(A = \text{oui} ; V ; O)}
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+
+
+
+
+</section>
+<section id="slide-orgd31b828">
+<h4 id="orgd31b828">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgbaa1322" class="figure">
+<p><img src="./fig/rb_alarme_inf_sum_O_prod_2.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="orgbbdfd75">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li><p>
+On fait le produit des potentiels/LPC qui dépendent de \(O\) :
+factorisation : 
+</p>
+<div>
+\begin{equation*}
+P(V ; A = \text{oui}) = P(V) \cdot \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} \Psi_{O}(A = \text{oui} ; V ; O)
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-orgcbfdff9">
+<h4 id="orgcbfdff9">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org4cf96e6" class="figure">
+<p><img src="./fig/rb_alarme_inf_sum_O.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="orgbe83c36">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li><p>
+Puis on somme sur \(O\) pour "éliminer" cette variable :
+factorisation : 
+</p>
+<div>
+\begin{equation*}
+P(V ; A = \text{oui}) = P(V) \cdot \underbrace{\sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} \Psi_{O}(A = \text{oui} ; V ; O)}_{\Phi_{O}(A = \text{oui} ; V)}
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-orgc811c10">
+<h4 id="orgc811c10">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orge029fa4" class="figure">
+<p><img src="./fig/rb_alarme_inf_prod_end_1.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="orgeef8706">
+<p>
+<h4>Calcul du numérateur</h4>
+</p>
+<ul>
+<li><p>
+Il ne reste plus qu'à faire un dernier produit pour obtenir le numérateur
+</p>
+<div>
+\begin{equation*}
+P(V ; A = \text{oui}) = P(V) \cdot \Phi_{O}(A = \text{oui} ; V)
+\end{equation*}
+
+</div></li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgaecdb59">
+<h4 id="orgaecdb59">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org3ae4b2e" class="figure">
+<p><img src="./fig/rb_alarme_inf_prod_end_2.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="org09b4e6b">
+<p>
+<h4>Calcul final</h4>
+</p>
+<ul>
+<li>Numérateur : \(P(V = \text{oui}; A = \text{oui}) = 0.000999\)</li>
+<li>Dénominateur : \(P(A = \text{oui}) = P(V = \text{oui}; A = \text{oui}) + P(V = \text{non}; A =
+  \text{oui}) = 0.002346651\)</li>
+<li>On en déduit : \(P(V = \text{oui}|A = \text{oui}) = \frac{0.000999}{0.002346651} = 0.4257130694\)</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7521af1">
+<h3 id="org7521af1">Méthode d'élimination des variables</h3>
+<p>
+<div class="slidesubtitle">Formalisation</div>
+</p>
+
+<div class="block-definition" id="orga5424df">
+<p>
+<h4>Rappel de l'objectif</h4>
+</p>
+
+<ul>
+<li>Soit \(\mbf{X} = \lrpar{X_{1}, \ldots, X_{n}}\) une suite de v.a.</li>
+<li>Calculer \(\Prob\lrPar{\mbf{Q}|\mbf{E} = \mbf{e}}\) avec \(\mbf{Q} \subseteq \mbf{X}\), \(\mbf{E}
+  \subseteq \mbf{X}\) et \(\mbf{Q} \inter \mbf{E} = \varnothing\)</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org20a17c3">
+<p>
+<h4>Principe</h4>
+</p>
+<ul>
+<li>Par définition : \(\displaystyle \Prob\lrPar{\mbf{Q}|\mbf{E} = \mbf{e}} =
+  \frac{\Prob\lrPar{\mbf{Q}, \mbf{E} = \mbf{e}}}{\Prob\lrPar{\mbf{E} = \mbf{e}}}\)</li>
+<li>En posant \(\mbf{W} = \mbf{X} \sm (\mbf{Q},\mbf{E})\), on a
+\[
+  \Prob\lrPar{\mbf{Q}, \mbf{E} = \mbf{e}} = \sum_{W \in \mbf{W}}
+  \underbrace{\Prob\lrPar{X_{1},\ldots,X_{n}}}_{\text{loi jointe de la suite $\mbf{X}$}} = \sum_{W
+  \in \mbf{W}} \Prob\lrPar{\mbf{Q},\mbf{W},\mbf{E} = \mbf{e}}
+  \]</li>
+<li><b>Principe :</b> Simplifier le calcul de \(\Prob\lrPar{\mbf{Q}|\mbf{E} = \mbf{e}}\) grâce à la propriété
+de factorisation dans un RB</li>
+<li><b>En pratique :</b> Toutes les variables hors requête et évidence sont "éliminées" de l'expression de
+la loi jointe par sommation</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb5c35df">
+<h3 id="orgb5c35df">Méthode d'élimination des variables</h3>
+<p>
+<div class="slidesubtitle">Complexité</div>
+</p>
+
+<div class="block-definition" id="org825ff56">
+<p>
+<h4>Complexité de l'algorithme</h4>
+</p>
+<ul>
+<li>On note \(\sigma : \{1, \ldots, D\} \mapsto \{1, \ldots, D\}\) l'ordre des variables à éliminer</li>
+<li>Pire cas : \((n - 1)\) variables à éliminer</li>
+<li>Opérations coûteuses : calcul des potentiels \(\Phi_{\sigma(i)}\) et \(\Psi_{\sigma(i)}\)</li>
+<li><p>
+Complexité de l'algorithme :
+</p>
+<div>
+\begin{align*}
+\text{CA}\lrPar{\text{AEV}} & \simeq \sum_{i} \text{CS}\lrPar{\Phi_{\sigma(i)}} +
+\text{CS}\lrPar{\Psi_{\sigma(i)}} \\ & \simeq n v_{\star}^{D_{\star}}
+\end{align*}
+
+</div>
+<ul>
+<li>\(D_{\star}\) : Nombre de dimensions du plus gros potentiel \(\Phi_{\sigma(i)}\), noté \(\Phi_{\star}\)</li>
+<li>\(v_{\star}\) : Nombre de valeurs dans la plus grande dimension de \(\Phi_{\star}\)</li>
+
+</ul></li>
+<li>Risque d'explosion exponentielle</li>
+
+</ul>
+
+</div>
+
+<div class="block-alert" id="org80f0652">
+<p>
+<h4>Inférence exacte dans un RB</h4>
+</p>
+<ul>
+<li>Il n'existe pas d'algorithme polynomial d'inférence exacte pour un RB quelconque</li>
+<li>Le calcul de probabilité dans un RB est un problème NP-difficile</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orga9889b1">
+<h3 id="orga9889b1">Méthode d'élimination des variables</h3>
+<p>
+<div class="slidesubtitle">Remarques sur l'ordre d'élimination</div>
+</p>
+
+<div class="block-definition" id="orgde6eea4">
+<p>
+<h4>Propriétés</h4>
+</p>
+
+<ul>
+<li>L'ordre d'élimination des variables n'influe pas sur le résultat, i.e. tous les ordres aboutissent au même (bon) résultat</li>
+<li>En revanche, la rapidité des calculs est fortement liée à l'ordre d'élimination</li>
+
+</ul>
+
+</div>
+
+<div class="block-alert" id="org764db49">
+<p>
+<h4>Problématique</h4>
+</p>
+<ul>
+<li>Trouver un "bon" ordre consiste à rechercher un ordre qui limite la taille des \(\Phi_{\sigma(i)}\) à chaque élimination</li>
+<li>Malheureusement :
+<ul>
+<li>Trouver l'ordre optimal est un problème NP-complet</li>
+<li>Même l'ordre optimal peut dans certains cas aboutir à une explosion combinatoire</li>
+
+</ul></li>
+<li>En pratique, on utilise des heuristiques ou des connaissances sur le graphe pour déterminer
+l'ordre d'élimination</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orga1288e2">
+<h4 id="orga1288e2">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Stratégies pour déterminer l'ordre d'élimination</div>
+</p>
+
+<div class="block-definition" id="orgb5c1329">
+<p>
+<h4>Stratégie 1 : Application d'une heuristique</h4>
+</p>
+<ul>
+<li>Utilisation d'un algorithme glouton muni d'une fonction de coût donnée</li>
+<li>À chaque étape, on élimine la variable qui minimise le coût</li>
+<li>Exemples de fonctions de coût :
+<ul>
+<li>Nombre de voisins de la v.a. courante</li>
+<li>Complexité de \(\Phi_{\sigma(i)}\) engendré par l'élimination de la v.a. courante</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org2522cc3">
+<p>
+<h4>Stratégie 2 : Exploiter sa connaissance du graphe</h4>
+</p>
+<ul>
+<li>Exemples de cas où cela peut être profitable :
+<ul>
+<li>Graphes avec peu de variables mais avec des LPC de tailles très hétérogènes car cette situation
+peut piéger les méthodes gloutonnes</li>
+<li>Graphes très grands mais très structurés (e.g. modèle bayésien naïf)</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgb430be6">
+<h4 id="orgb430be6">Méthode d'élimination des variables</h4>
+<p>
+<div class="slidesubtitle">Illustration de l'influence de l'ordre d'élimination</div>
+</p>
+
+
+<div id="org00842cb" class="figure">
+<p><img src="./fig/rb_bayes_naif.png" alt="RB alarme definition" width="55%" />
+</p>
+</div>
+
+<div class="block-example" id="orge0c734d">
+<p>
+<h4>Quel ordre choisir ?</h4>
+</p>
+<ul>
+<li>Objectif : Calculer \(\Prob\lrPar{{\color{EMLogoOrange}X_{i}}}\)</li>
+<li>Option 1 : Élimination des \(X_{j}\), \(j \neq i\) et enfin élimination de \(Y\) ?</li>
+<li>Option 2 : Élimination de \(Y\), puis élimination des \(X_{j}\), \(j \neq i\) ?</li>
+
+</ul>
+
+</div>
+
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org43b28a1">
+<h2 id="org43b28a1">Résumé de la séance</h2>
+<div class="block-definition" id="org62759a4">
+<p>
+<h4>Points clés sur l'inférence</h4>
+</p>
+
+<ul>
+<li>Inférence dans un RB : Calculer des probabilités</li>
+<li>Inférence exacte : Problème NP-Difficile</li>
+<li>L'inférence dans RB discret et fini repose sur des sommes et des produits de potentiels</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="orgf1b1524">
+<p>
+<h4>Points clés sur l'algorithme d'élimination</h4>
+</p>
+<ul>
+<li>Méthode d'inférence exacte</li>
+<li>Méthode simple et intuitive ne reposant pas sur la théorie des graphes</li>
+<li>Principe :
+<ul>
+<li>Réduction de la loi jointe en propageant les évidences (ce que l'on sait)</li>
+<li>Élimination des variables hors requête et évidence par sommations successives</li>
+<li>Multiplication des potentiels restants à la fin de la procédure</li>
+<li>Normalisation du potentiel résultant afin d'obtenir la LPC recherchée</li>
+
+</ul></li>
+<li>Complexité de l'algorithme fortement dépendante de l'ordre d'élimination des variables</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3c94131">
+<h3 id="org3c94131">Merci pour votre attention !</h3>
 <p>
 <div class="slidesubtitle">Des questions ?</div>
 </p>
 
 
 
-<div id="orge89cd7f" class="figure">
+<div id="org18a248d" class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/commons/questions.png" alt="FAQ" width="60%" />
 </p>
 </div>
@@ -628,8 +1892,8 @@ de nouvelles connaissances sur le phénomène aléatoire étudié</li>
 </section>
 </section>
 <section>
-<section id="slide-org790f6d9">
-<h2 id="org790f6d9">Bibliographie</h2>
+<section id="slide-org5f8de4c">
+<h2 id="org5f8de4c">Bibliographie</h2>
 <p>
 Cozman, Fabio G. (2000). <i>Generalizing {Variable} {Elimination} in {Bayesian} {Networks}</i>, Editora Tec Art.</p>
 
@@ -647,6 +1911,45 @@ Murphy, K. P. and Weiss, Y. and Jordan, M. I. (1999). <i>Loopy {Belief} {Propaga
 
 <p>
 Pearl, J. (1988). <i>Probabilistic {Reasoning} in {Intelligent} {Systems}: {Networks} of {Plausible} {Inference}</i>, Morgan Kaufmann.</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orge990dd3">
+<h2 id="orge990dd3">Algorithme d'élimination</h2>
+<ul>
+<li><b>Entrées</b> :
+<ul>
+<li>LPC \(\set{\Prob\lrPar{X_{i}|\pa\lrpar{X_{i}}}}_{1\le i \le n}\) de la loi jointe factorisée des v.a. \(\mbf{X} = \lrpar{X_{1},\ldots,X_{n}}\)</li>
+<li>Une suite de v.a. de requête \(\mbf{Q} \subseteq \mbf{X}\)</li>
+<li>Une suite de v.a. \(\mbf{E} \subseteq \mbf{X}\), \(\mbf{Q} \inter \mbf{E} = \varnothing\)</li>
+<li>Une permutation \(\sigma\) des v.a. \(\lrpar{X_{1},\ldots,X_{n}}\) représentant l'ordre d'élimination des v.a}</li>
+
+</ul></li>
+<li><b>Sortie</b> : La loi \(\Prob\lrpar{\mbf{Q}|\mbf{E}}\)</li>
+
+<li><b>Initialisation</b> : Liste des potentiels à considérer \(\mathcal{P} \gets
+  \set{\Prob\lrPar{X_{1}|\pa\lrpar{X_{1}}}, \ldots, \Prob\lrPar{X_{n}|\pa\lrpar{X_{n}}}}\)</li>
+
+<li><b>Pour tout</b> \(i = 1, \ldots, n\) (Itération sur l'ordre d'élimination)
+<ul>
+<li><b>Si</b> \(X_{\sigma(i)} \in \mbf{W} = \mbf{X} \sm (\mbf{Q}, \mbf{E})\) (Vérification si la variable courante est à éliminer)
+<ul>
+<li>\(\mathcal{B}_{\sigma(i)} \gets \set{\psi \in \mathcal{P} | X_a{\sigma(i)} \in
+      \Dom\lrPar{\psi}}\) (Potentiels cibles dont le domaine contient la v.a. à éliminée)</li>
+<li>\(\mathcal{P} \gets \mathcal{P} \sm \mathcal{B}_{\sigma(d)}\) (Suppression des potentiels cibles de la liste de potentiels courante)</li>
+<li>\(\Phi_{\sigma(i)} \gets \prod_{\psi \in \mathcal{B}_{\sigma(i)}} \psi\) (Produit des potentiels
+cibles)</li>
+<li>\(\Psi_{\sigma(i)} \gets \sum_{X_{\sigma(i)}} \Phi_{\sigma(i)}\) (Élimination de la variable)</li>
+<li>\(\mathcal{P} \gets \mathcal{P} \union \set{\Psi_{\sigma(i)}}\) (Mise à jour de la liste des potentiels)</li>
+
+</ul></li>
+
+</ul></li>
+<li>\(\Prob\lrpar{\mbf{Q},\mbf{E}} \gets \prod_{\psi \in \mathcal{P}} \psi\)</li>
+<li>Déduction de \(\Prob\lrpar{\mbf{Q}|\mbf{E}}\) en normalisant \(\Prob\lrpar{\mbf{Q}|\mbf{E}}\) sur la suite de v.a. \(\mbf{Q}\)</li>
+
+</ul>
 </section>
 </section>
 </div>

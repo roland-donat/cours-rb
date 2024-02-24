@@ -307,7 +307,7 @@ ensembles $\mathcal{X}$ et $\mathcal{Y}$. $\phi$ est caractérisé par les valeu
 #  | $\boldsymbol{Q} = (X_{1}, X_{3})$        | $\boldsymbol{E} = ({X_{3} = x_{3}})$     |
 #  | $\boldsymbol{Q} = (X_{1}, X_{2}, X_{3})$ | $\boldsymbol{E} = \varnothing$           |
 
-** Correction
+** Correction                                                      :noexport:
 - $\mathcal{X} = \{x_{1},x_{2}\}$ et $\mathcal{Y} = \{y_{1},y_{2},y_{3}\}$.
 - $\text{Dom}(\phi) = \{\mathcal{X},\mathcal{Y}\}$, donc $\text{Dom}(\phi)^{*} = \mathcal{X} \times
    \mathcal{Y} = \{x_{1},x_{2}\} \times \{y_{1},y_{2},y_{3}\}$, et définition, $CS(\phi)
@@ -363,7 +363,8 @@ ensembles $\mathcal{X}$ et $\mathcal{Y}$. $\phi$ est caractérisé par les valeu
 
 
 * Exercice 1
-L'objectif est d'appliquer l'algorithme d'élimination des variables sur le RB présenté en Figure [[fig_rb_hector_simple]].
+L'objectif est d'appliquer l'algorithme d'élimination des variables sur le RB présenté en Figure
+[[fig_rb_hector_simple]]. 
 
 #+ATTR_HTML:
 #+ATTR_LATEX: :height 0.35\textheight
@@ -373,28 +374,56 @@ L'objectif est d'appliquer l'algorithme d'élimination des variables sur le RB p
 
 # TODO: Si on veut demander aux étudiants le calcul de P(L|B), il faut introduire explicitement dans le
 # cours la division de potentiel (ou l'inverse d'un potentiel)
-Appliquer la méthode d'élimination pour calculer :
-1. $P(A)$;
-2. $P(L|B = n)$;
-3. $P(A,B|L = o)$.
+1. Donner la factorisation de la loi jointe dans ce RB.
+1. Donner le nombre de paramètres pour définir la loi jointe représentée par le RB. 
+1. Même question sans utiliser la factorisation de la loi jointe associée au RB. 
+1. Reprendre les questions précédentes en calculant le nombre de paramètres probabilistes nécessaire
+   à la définition de la loi jointe factorisée dans le RB et de la loi jointe naturelle des variables.
+1. Appliquer la méthode d'élimination pour calculer :
+   - $P(A)$;
+   - $P(L|B = n)$;
+   - $P(A,B|L = o)$.
+     
+   Dans chaque cas, essayez de trouver un ordre d'élimination limitant au maximum la taille des
+   potentiels intermédiaires. 
 
-Dans chaque cas, essayer de trouver un ordre d'élimination limitant au maximum la taille des potentiels intermédiaires.
+** Correction                                                      :noexport:
 
-** Correction
-
-Commençons par écrire la factorisation de la loi jointe des variables $E$, $L$, $A$ et $B$ dans le
-RB de la Figure [[fig_rb_hector_simple]] :
-\begin{equation*}
-P(E,L,A,B) = P(E) \times P(L|E) \times P(A|L) \times P(B|L).
-\end{equation*}
-
+1. Commençons par écrire la factorisation de la loi jointe des variables $E$, $L$, $A$ et $B$ dans
+   le RB de la Figure [[fig_rb_hector_simple]] :
+   \begin{equation*}
+   P(E,L,A,B) = P(E) \times P(L|E) \times P(A|L) \times P(B|L).
+   \end{equation*}
+2. La complexité spatiale du RB correspond à la somme des complexités spatiales des LPC de chaque
+   variable :
+   \begin{equation*}
+   CS(RB) = CS(P(E)) + CS(P(L|E)) + CS(A|L) + CS(P(B|L))
+   \end{equation*}
+   Les v.a. $E, L, A, B$ étant binaires, nous obtenons :
+   - $CS(P(E)) = 2$ ;
+   - $CS(P(L|E)) = 4$ ;
+   - $CS(P(A|L)) = 4$ ;
+   - $CS(P(B|L)) = 4$ ;
+   D'où $CS(RB) = 14$.
+3. La complexité spatiale de la loi jointe non factorisée (ou loi jointe naturelle) des v.a. $E,
+   L, A, B$ est $CS(LJN) = 2^{4} = 16$
+4. Dans le cas du RB, la complexité probabiliste, notée CP correspondant au nombre de paramètres
+   probabilistes nécessaires pour définir le modèle, est :
+   - $CP(P(E)) = 1$ ;
+   - $CP(P(L|E)) = 2$ ;
+   - $CP(P(A|L)) = 2$ ;
+   - $CP(P(B|L)) = 2$ ;
+   D'où $CP(RB) = 7$.
+   Pour la loi jointe naturelle des v.a., $CP(LJN) = 16 - 1 = 15$.
+5. Calculs d'inférence :
+   
 *** Calcul de $P(A)$
 Par définition, $P(A)$ est donnée par :
 \begin{equation*}
 P(A) = \sum_{E,L,B} P(E,L,A,B) = \sum_{E} \sum_{L} \sum_{B} P(E) \times P(L|E) \times P(A|L) \times P(B|L).
 \end{equation*}
 En distribuant astucieusement les sommes, on obtient :
-\begin{equation*}
+\begin{equation*
 P(A) = \sum_{L} P(A|L) \sum_{E} P(L|E) \times P(E) \times \underbrace{\sum_{B} P(B|L)}_{= [1, \ldots, 1]}.
 \end{equation*}
 La variable $B$ a donc été éliminée. Passons à l'élimination de la variable E :

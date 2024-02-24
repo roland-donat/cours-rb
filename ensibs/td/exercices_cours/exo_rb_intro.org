@@ -455,10 +455,6 @@ Dans cet exercice, nous utiliserons la représentation graphique du RB présent�
 [[./rb_4_var.png]]
 
 1. Écrire l'expression de la loi jointe du modèle. 
-2. Donner le nombre de paramètres pour définir la loi jointe représentée par le RB. 
-3. Même question sans utiliser la factorisation de la loi jointe associée au RB. 
-4. Reprendre les questions 2 et 3 en calculant le nombre de paramètres probabilistes nécessaire à la
-   définition de la loi jointe factorisée dans le RB et de la loi jointe naturelle des variables.
 5. Déterminer si les relations d'indépendances suivantes sont vraies ou fausses : 
    - $X_{1} \perp\!\!\!\perp X_{4} \mid X_{2}, X_{3}$ ;
    - $X_{2} \perp\!\!\!\perp X_{3} \mid X_{1}$ ;
@@ -470,28 +466,7 @@ Dans cet exercice, nous utiliserons la représentation graphique du RB présent�
    \begin{equation*}
    P(X_{1}, X_{2}, X_{3}, X_{4}) = P(X_{1}) P(X_{2}|X_{1}) P(X_{3}|X_{1}) P(X_{4}|X_{2},X_{3}).
    \end{equation*}
-2. La complexité spatiale du RB correspond à la somme des complexités spatiales des LPC de chaque
-   variable :
-   \begin{equation*}
-   CS(RB) = CS(P(X_{1})) + CS(P(X_{2}|X_{1})) + CS(P(X_{3}|X_{1})) + CS(P(X_{4}|X_{2}, X_{3}))
-   \end{equation*}
-   Les v.a. $X_{1}, X_{2}, X_{3}, X_{4}$ étant binaires, nous obtenons :
-   - $CS(P(X_{1})) = 2$ ;
-   - $CS(P(X_{2}|X_{1})) = 4$ ;
-   - $CS(P(X_{3}|X_{1})) = 4$ ;
-   - $CS(P(X_{4}|X_{2}, X_{3})) = 8$.
-   D'où $CS(RB) = 18$.
-3. La complexité spatiale de la loi jointe non factorisée (ou loi jointe naturelle) des v.a. $X_{1},
-   X_{2}, X_{3}, X_{4}$ est $CS(LJN) = 2^{4} = 16$
-4. Dans le cas du RB, la complexité probabiliste,notée CP correspondant au nombre de paramètres probabilistes
-   nécessaires pour définir le modèle, est :
-   - $CP(P(X_{1})) = 1$ ;
-   - $CP(P(X_{2}|X_{1})) = 2$ ;
-   - $CP(P(X_{3}|X_{1})) = 2$ ;
-   - $CP(P(X_{4}|X_{2}, X_{3})) = 4$.
-   D'où $CP(RB) = 9$.
-   Pour la loi jointe naturelle des v.a., $CP(LJN) = 16 - 1 = 15$.
-5. La technique générale pour répondre aux questions d'indépendance conditionnelle est la suivante :
+4. La technique générale pour répondre aux questions d'indépendance conditionnelle est la suivante :
    - Écrire la définition probabiliste de la relation d'indépendance à vérifier.
    - À partir de l'expression de la factorisation de la loi jointe, éliminer les variables qui
      n'interviennent pas dans la relation d'indépendance à vérifier en effectuant une
