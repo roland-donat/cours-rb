@@ -285,81 +285,88 @@
 
 
 * Questions de cours
-Soit $\phi$ un potentiel défini sur les variables $X$ et $Y$ à valeurs respectivement dans les
-ensembles $\mathcal{X}$ et $\mathcal{Y}$. $\phi$ est caractérisé par les valeurs suivantes :
-|-------------+---------+---------+---------+---------+---------+---------|
-| $X$         | $x_{1}$ | $x_{2}$ | $x_{1}$ | $x_{2}$ | $x_{1}$ | $x_{2}$ |
-|-------------+---------+---------+---------+---------+---------+---------|
-| $Y$         | $y_{1}$ | $y_{1}$ | $y_{2}$ | $y_{2}$ | $y_{3}$ | $y_{3}$ |
-|-------------+---------+---------+---------+---------+---------+---------|
-| $\phi(X,Y)$ | $3/5$   | $1/4$   | $1/5$   | $1/2$   | $1/5$   | $1/4$   |
-|-------------+---------+---------+---------+---------+---------+---------|
-- Préciser les domaines $\mathcal{X}$ et $\mathcal{Y}$.
-- Donner la complexité spatiale de $\phi$.
-- Donner le résultat de l'instanciation de $\phi$ sur $x_{1}$.
-- Donner le résultat de l'instanciation de $\phi$ sur $x_{2}$.
-- Calculer $\psi = \sum_{X} \phi$.
-- Calculer $\omega = \psi \cdot \phi$.
-- Le potentiel $\phi$ est-il également une loi de probabilité conditionnelle ? Si oui donner son expression.
+1. Soit $\phi$ un potentiel défini sur les variables $X$ et $Y$ à valeurs respectivement dans les
+   ensembles $\mathcal{X}$ et $\mathcal{Y}$. $\phi$ est caractérisé par les valeurs suivantes : 
+   |-------------+---------+---------+---------+---------+---------+---------|
+   | $X$         | $x_{1}$ | $x_{2}$ | $x_{1}$ | $x_{2}$ | $x_{1}$ | $x_{2}$ |
+   |-------------+---------+---------+---------+---------+---------+---------|
+   | $Y$         | $y_{1}$ | $y_{1}$ | $y_{2}$ | $y_{2}$ | $y_{3}$ | $y_{3}$ |
+   |-------------+---------+---------+---------+---------+---------+---------|
+   | $\phi(X,Y)$ | $3/5$   | $1/4$   | $1/5$   | $1/2$   | $1/5$   | $1/4$   |
+   |-------------+---------+---------+---------+---------+---------+---------|
+   - Préciser les domaines $\mathcal{X}$ et $\mathcal{Y}$.
+   - Donner la complexité spatiale de $\phi$.
+   - Donner le résultat de l'instanciation de $\phi$ sur $x_{1}$.
+   - Donner le résultat de l'instanciation de $\phi$ sur $x_{2}$.
+   - Calculer $\psi = \sum_{X} \phi$.
+   - Calculer $\omega = \psi \cdot \phi$.
+   - Le potentiel $\phi$ est-il également une loi de probabilité conditionnelle ? Si oui donner son expression.
 # 2. Soit le réseau bayésien $X_{1} \rightarrow X_{2} \rightarrow X_{3}$, les requêtes d'inférence
 #   suivantes sont elles correctes :
 #  | $\boldsymbol{Q} = (X_{1})$               | $\boldsymbol{E} = \varnothing$           |
 #  | $\boldsymbol{Q} = (X_{1}, X_{3})$        | $\boldsymbol{E} = ({X_{3} = x_{3}})$     |
 #  | $\boldsymbol{Q} = (X_{1}, X_{2}, X_{3})$ | $\boldsymbol{E} = \varnothing$           |
+1. La complexité d'un réseau bayésien dépend-elle du nombre de liens entre les variables ?
 
 ** Correction                                                      :noexport:
-- $\mathcal{X} = \{x_{1},x_{2}\}$ et $\mathcal{Y} = \{y_{1},y_{2},y_{3}\}$.
-- $\text{Dom}(\phi) = \{\mathcal{X},\mathcal{Y}\}$, donc $\text{Dom}(\phi)^{*} = \mathcal{X} \times
-   \mathcal{Y} = \{x_{1},x_{2}\} \times \{y_{1},y_{2},y_{3}\}$, et définition, $CS(\phi)
-   = |\text{Dom}(\phi)^{*}| = |\mathcal{X}| \times |\mathcal{Y}| = 2 \times 3 = 6$.
-- $\phi(x_{1},Y) =$ 
-  |-----------------+---------+---------+---------|
-  | $X$             | $x_{1}$ | $x_{1}$ | $x_{1}$ |
-  |-----------------+---------+---------+---------|
-  | $Y$             | $y_{1}$ | $y_{2}$ | $y_{3}$ |
-  |-----------------+---------+---------+---------|
-  | $\phi(x_{1},Y)$ | $3/5$   | $1/5$   | $1/5$   |
-  |-----------------+---------+---------+---------|
-  $\phi(x_{2},Y) =$
-  |-------------+---------+---------+---------|
-  | $X$         | $x_{2}$ | $x_{2}$ | $x_{2}$ |
-  |-------------+---------+---------+---------|
-  | $Y$         | $y_{1}$ | $y_{2}$ | $y_{3}$ |
-  |-------------+---------+---------+---------|
-  | $\phi(X,Y)$ | $1/4$   | $1/2$   | $1/4$   |
-  |-------------+---------+---------+---------|
-- Par définition, on sait que $\text{Dom}(\psi) = \text{Dom}(\sum_{X} \phi) =
-  \text{Dom}(\phi)\setminus \{\mathcal{X}\} = \{\mathcal{Y}\}$. Le potentiel $\psi$ est défini par :
-  |-----------+----------------------------------------------------------+--------------------+--------------------|
-  | $Y$       | $y_{1}$                                                  | $y_{2}$            | $y_{3}$            |
-  |-----------+----------------------------------------------------------+--------------------+--------------------|
-  | $\psi(Y)$ | $\phi(x_{1},y{1}) + \phi(x_{2},y{1}) = 3/5 + 1/4 = 17/20$ | $1/5 + 1/2 = 7/10$ | $1/5 + 1/4 = 9/20$ |
-  |-----------+----------------------------------------------------------+--------------------+--------------------|
-- Par définition, on sait que $\text{Dom}(\omega) = \text{Dom}(\psi \cdot \phi) =
-  \text{Dom}(\psi) \cup \text{Dom}(\phi) = \{\mathcal{Y}\} \cup \{\mathcal{X}, \mathcal{Y}\} = \{\mathcal{X}, \mathcal{Y}\}$. Le potentiel $\omega$ est défini par :
-  |---------------+------------------------------------------------------------+------------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------|
-  | $X$           | $x_{1}$                                                    | $x_{2}$                                                    | $x_{1}$                                                   | $x_{2}$                                                   | $x_{1}$                                                   | $x_{2}$                                                   |
-  |---------------+------------------------------------------------------------+------------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------|
-  | $Y$           | $y_{1}$                                                    | $y_{1}$                                                    | $y_{2}$                                                   | $y_{2}$                                                   | $y_{3}$                                                   | $y_{3}$                                                   |
-  |---------------+------------------------------------------------------------+------------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------|
-  | $\omega(X,Y)$ | $\psi(y_{1}) \times \phi(x_{1},y_{1}) = 17/20 \times 3/5$  | $\psi(y_{1}) \times \phi(x_{2},y_{1}) = 17/20 \times 1/4$  | $\psi(y_{2}) \times \phi(x_{1},y_{2}) = 7/10 \times 1/5$  | $\psi(y_{2}) \times \phi(x_{2},y_{2}) = 7/10 \times 1/2$  | $\psi(y_{3}) \times \phi(x_{1},y_{3}) = 9/20 \times 1/5$  | $\psi(y_{3}) \times \phi(x_{2},y_{3}) = 9/20 \times 1/4$  |
-  |---------------+------------------------------------------------------------+------------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------|
-- Tout d'abord, on vérifie que pour tous $x \in \mathcal{X}$ et $y \in \mathcal{Y}$, $\phi(x,y) \in
-  [0,1]$. Ensuite, il faut trouver l'existence d'un sous ensemble de dimensions du domaine de
-  $\phi$ vérifiant la propriété de sommation à 1. $\phi$ étant de dimension 2, il y a trois 
-  sous ensembles de dimension possibles :
-  1. domaine normalisé : $\{\mathcal{X},\mathcal{Y}\}$ ; domaine de conditionnement :
-     $\varnothing$ 
-     $\implies \sum_{(x,y) \in \{\mathcal{X},\mathcal{Y}\}^{*}} \phi(x,y) = 2 \neq 1$;
-  2. domaine normalisé : $\{\mathcal{X}\}$ ; domaine de conditionnement :
-     $\{\mathcal{Y}\}$ ; 
-     $\implies \sum_{x \in \mathcal{X}} \phi(x,y_{1}) = 3/5 + 1/4 = 17/20 \neq 1$, inutile de
-     vérifier la sommation pour $y = y_{2}$ et $y = y_{3}$
-  3. domaine normalisé : $\{\mathcal{Y}\}$ ; domaine de conditionnement :
-     $\{\mathcal{X}\}$ 
-     $\implies \sum_{y \in \mathcal{Y}} \phi(x_{1},y) = \sum_{y \in \mathcal{Y}} \phi(x_{2},y) = 1$.
-     Le potentiel $\phi$ est donc une loi de probabilité sur le domaine $\mathcal{Y}$
-     conditionnellement au domaine $\mathcal{X}$.
+
+1. Réponses :
+   - $\mathcal{X} = \{x_{1},x_{2}\}$ et $\mathcal{Y} = \{y_{1},y_{2},y_{3}\}$.
+   - $\text{Dom}(\phi) = \{\mathcal{X},\mathcal{Y}\}$, donc $\text{Dom}(\phi)^{*} = \mathcal{X}
+     \times \mathcal{Y} = \{x_{1},x_{2}\} \times \{y_{1},y_{2},y_{3}\}$, et définition, $CS(\phi)
+     = |\text{Dom}(\phi)^{*}| = |\mathcal{X}| \times |\mathcal{Y}| = 2 \times 3 = 6$. 
+   - $\phi(x_{1},Y) =$ 
+   |-----------------+---------+---------+---------|
+   | $X$             | $x_{1}$ | $x_{1}$ | $x_{1}$ |
+   |-----------------+---------+---------+---------|
+   | $Y$             | $y_{1}$ | $y_{2}$ | $y_{3}$ |
+   |-----------------+---------+---------+---------|
+   | $\phi(x_{1},Y)$ | $3/5$   | $1/5$   | $1/5$   |
+   |-----------------+---------+---------+---------|
+   $\phi(x_{2},Y) =$
+   |-------------+---------+---------+---------|
+   | $X$         | $x_{2}$ | $x_{2}$ | $x_{2}$ |
+   |-------------+---------+---------+---------|
+   | $Y$         | $y_{1}$ | $y_{2}$ | $y_{3}$ |
+   |-------------+---------+---------+---------|
+   | $\phi(X,Y)$ | $1/4$   | $1/2$   | $1/4$   |
+   |-------------+---------+---------+---------|
+   - Par définition, on sait que $\text{Dom}(\psi) = \text{Dom}(\sum_{X} \phi) =
+     \text{Dom}(\phi)\setminus \{\mathcal{X}\} = \{\mathcal{Y}\}$. Le potentiel $\psi$ est défini
+     par : 
+   |-----------+----------------------------------------------------------+--------------------+--------------------|
+   | $Y$       | $y_{1}$                                                  | $y_{2}$            | $y_{3}$            |
+   |-----------+----------------------------------------------------------+--------------------+--------------------|
+   | $\psi(Y)$ | $\phi(x_{1},y{1}) + \phi(x_{2},y{1}) = 3/5 + 1/4 = 17/20$ | $1/5 + 1/2 = 7/10$ | $1/5 + 1/4 = 9/20$ |
+   |-----------+----------------------------------------------------------+--------------------+--------------------|
+   - Par définition, on sait que $\text{Dom}(\omega) = \text{Dom}(\psi \cdot \phi) =
+     \text{Dom}(\psi) \cup \text{Dom}(\phi) = \{\mathcal{Y}\} \cup \{\mathcal{X}, \mathcal{Y}\} =
+     \{\mathcal{X}, \mathcal{Y}\}$. Le potentiel $\omega$ est défini par : 
+   |---------------+-----------------------------------------------------------+-----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------|
+   | $X$           | $x_{1}$                                                   | $x_{2}$                                                   | $x_{1}$                                                  | $x_{2}$                                                  | $x_{1}$                                                  | $x_{2}$                                                  |
+   |---------------+-----------------------------------------------------------+-----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------|
+   | $Y$           | $y_{1}$                                                   | $y_{1}$                                                   | $y_{2}$                                                  | $y_{2}$                                                  | $y_{3}$                                                  | $y_{3}$                                                  |
+   |---------------+-----------------------------------------------------------+-----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------|
+   | $\omega(X,Y)$ | $\psi(y_{1}) \times \phi(x_{1},y_{1}) = 17/20 \times 3/5$ | $\psi(y_{1}) \times \phi(x_{2},y_{1}) = 17/20 \times 1/4$ | $\psi(y_{2}) \times \phi(x_{1},y_{2}) = 7/10 \times 1/5$ | $\psi(y_{2}) \times \phi(x_{2},y_{2}) = 7/10 \times 1/2$ | $\psi(y_{3}) \times \phi(x_{1},y_{3}) = 9/20 \times 1/5$ | $\psi(y_{3}) \times \phi(x_{2},y_{3}) = 9/20 \times 1/4$ |
+   |---------------+-----------------------------------------------------------+-----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------+----------------------------------------------------------|
+   - Tout d'abord, on vérifie que pour tous $x \in \mathcal{X}$ et $y \in \mathcal{Y}$, $\phi(x,y)
+     \in [0,1]$. Ensuite, il faut trouver l'existence d'un sous ensemble de dimensions du domaine de
+     $\phi$ vérifiant la propriété de sommation à 1. $\phi$ étant de dimension 2, il y a trois sous
+     ensembles de dimension possibles :
+     1. domaine normalisé : $\{\mathcal{X},\mathcal{Y}\}$ ; domaine de conditionnement :
+        $\varnothing$ $\implies \sum_{(x,y) \in \{\mathcal{X},\mathcal{Y}\}^{*}} \phi(x,y) = 2 \neq 1$;
+     2. domaine normalisé : $\{\mathcal{X}\}$ ; domaine de conditionnement : $\{\mathcal{Y}\}$ ;
+        $\implies \sum_{x \in \mathcal{X}} \phi(x,y_{1}) = 3/5 + 1/4 = 17/20 \neq 1$, inutile de
+        vérifier la sommation pour $y = y_{2}$ et $y = y_{3}$  
+     3. domaine normalisé : $\{\mathcal{Y}\}$ ; domaine de conditionnement : $\{\mathcal{X}\}$
+        $\implies \sum_{y \in \mathcal{Y}} \phi(x_{1},y) = \sum_{y \in \mathcal{Y}} \phi(x_{2},y) =
+        1$. 
+        Le potentiel $\phi$ est donc une loi de probabilité sur le domaine $\mathcal{Y}$
+        conditionnellement au domaine $\mathcal{X}$. 
+
+1. Oui, plus les variables sont connectées entre elles, plus les lois conditionnelles des variables
+   dans le RB nécessiteront un grand nombre de paramètres à définir, et donc des complexités
+   spatiales importantes.
 
 
 * Exercice 1

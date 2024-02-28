@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2024-02-24 sam. 23:25 -->
+<!-- 2024-02-28 mer. 21:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Inférence probabiliste</title>
@@ -45,19 +45,20 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org339d1bc">Questions de cours</a></li>
-<li><a href="#org92c0ccd">Exercice 1</a></li>
+<li><a href="#org0aedaf8">Questions de cours</a></li>
+<li><a href="#org6548c34">Exercice 1</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org339d1bc" class="outline-2">
-<h2 id="org339d1bc">Questions de cours</h2>
-<div class="outline-text-2" id="text-org339d1bc">
-<p>
+<div id="outline-container-org0aedaf8" class="outline-2">
+<h2 id="org0aedaf8">Questions de cours</h2>
+<div class="outline-text-2" id="text-org0aedaf8">
+<ol class="org-ol">
+<li><p>
 Soit \(\phi\) un potentiel défini sur les variables \(X\) et \(Y\) à valeurs respectivement dans les
-ensembles \(\mathcal{X}\) et \(\mathcal{Y}\). \(\phi\) est caractérisé par les valeurs suivantes :
+ensembles \(\mathcal{X}\) et \(\mathcal{Y}\). \(\phi\) est caractérisé par les valeurs suivantes : 
 </p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -119,27 +120,33 @@ ensembles \(\mathcal{X}\) et \(\mathcal{Y}\). \(\phi\) est caractérisé par les
 <li>Calculer \(\psi = \sum_{X} \phi\).</li>
 <li>Calculer \(\omega = \psi \cdot \phi\).</li>
 <li>Le potentiel \(\phi\) est-il également une loi de probabilité conditionnelle ? Si oui donner son expression.</li>
-</ul>
+</ul></li>
+</ol>
+
+<ol class="org-ol">
+<li>La complexité d'un réseau bayésien dépend-elle du nombre de liens entre les variables ?</li>
+</ol>
 </div>
 </div>
 
 
-<div id="outline-container-org92c0ccd" class="outline-2">
-<h2 id="org92c0ccd">Exercice 1</h2>
-<div class="outline-text-2" id="text-org92c0ccd">
+<div id="outline-container-org6548c34" class="outline-2">
+<h2 id="org6548c34">Exercice 1</h2>
+<div class="outline-text-2" id="text-org6548c34">
 <p>
 L'objectif est d'appliquer l'algorithme d'élimination des variables sur le RB présenté en Figure
-<a href="#org9fb8162">1</a>. 
+<a href="#org1082c07">1</a>. 
 </p>
 
 
-<div id="org9fb8162" class="figure">
+<div id="org1082c07" class="figure">
 <p><img src="./rb_hector_simple.png" alt="rb_hector_simple.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Modèle RB de l'exercice 1 sur l'inférence probabiliste.</p>
 </div>
 
 <ol class="org-ol">
+<li>Donner la factorisation de la loi jointe dans ce RB.</li>
 <li>Donner le nombre de paramètres pour définir la loi jointe représentée par le RB.</li>
 <li>Même question sans utiliser la factorisation de la loi jointe associée au RB.</li>
 <li>Reprendre les questions précédentes en calculant le nombre de paramètres probabilistes nécessaire

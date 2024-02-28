@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2024-02-24 sam. 23:26 -->
+<!-- 2024-02-28 mer. 21:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rappels de probabilité et introduction aux réseaux bayésiens</title>
@@ -45,17 +45,17 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org91ad84b">Questions de cours</a></li>
-<li><a href="#orgdcc275e">Exercice 1</a></li>
-<li><a href="#orgd9c052f">Exercice 2</a></li>
+<li><a href="#org4211bb7">Questions de cours</a></li>
+<li><a href="#org6539195">Exercice 1</a></li>
+<li><a href="#org42baf1c">Exercice 2</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org91ad84b" class="outline-2">
-<h2 id="org91ad84b">Questions de cours</h2>
-<div class="outline-text-2" id="text-org91ad84b">
+<div id="outline-container-org4211bb7" class="outline-2">
+<h2 id="org4211bb7">Questions de cours</h2>
+<div class="outline-text-2" id="text-org4211bb7">
 <ol class="org-ol">
 <li><p>
 Soit \(X_{1}, \ldots, X_{n}\) une suite de variables aléatoires (v.a.). En supposant que la loi
@@ -68,7 +68,6 @@ X_{1} \to X_{2} \to \dots \to X_{n-1} \to X_{n},
 la relation \(P(X_{1},\ldots,X_{n}) = P(X_{1}) \prod_{i=2}^{n} P(X_{i}|X_{i-1})\) est elle correcte
 ? 
 </p></li>
-<li>La complexité d'un réseau bayésien dépend-elle du nombre de liens entre les variables ?</li>
 <li>Soit le réseau bayésien \(X \rightarrow Y \leftarrow Z\). Montrer que les v.a. \(X\) et \(Z\) sont
 indépendantes.</li>
 </ol>
@@ -76,16 +75,16 @@ indépendantes.</li>
 </div>
 
 
-<div id="outline-container-orgdcc275e" class="outline-2">
-<h2 id="orgdcc275e">Exercice 1</h2>
-<div class="outline-text-2" id="text-orgdcc275e">
+<div id="outline-container-org6539195" class="outline-2">
+<h2 id="org6539195">Exercice 1</h2>
+<div class="outline-text-2" id="text-org6539195">
 <p>
 Dans cet exercice, nous utiliserons la représentation graphique du réseau  bayésien (RB) présentée
-en Figure <a href="#orge68fd2d">1</a>
+en Figure <a href="#orge5cde5f">1</a>
 </p>
 
 
-<div id="orge68fd2d" class="figure">
+<div id="orge5cde5f" class="figure">
 <p><img src="./rb_3_var.png" alt="rb_3_var.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Graphe d'un RB à trois variables.</p>
@@ -200,16 +199,16 @@ Les lois de probabilité conditionnelles (LPC) de ce RB sont les suivantes :
 </div>
 </div>
 
-<div id="outline-container-orgd9c052f" class="outline-2">
-<h2 id="orgd9c052f">Exercice 2</h2>
-<div class="outline-text-2" id="text-orgd9c052f">
+<div id="outline-container-org42baf1c" class="outline-2">
+<h2 id="org42baf1c">Exercice 2</h2>
+<div class="outline-text-2" id="text-org42baf1c">
 <p>
 Dans cet exercice, nous utiliserons la représentation graphique du RB présentée en Figure
-<a href="#orgba0b21d">2</a>. Toutes les v.a. du modèle sont supposées binaires. 
+<a href="#org6e77901">2</a>. Toutes les v.a. du modèle sont supposées binaires. 
 </p>
 
 
-<div id="orgba0b21d" class="figure">
+<div id="org6e77901" class="figure">
 <p><img src="./rb_4_var.png" alt="rb_4_var.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;2&nbsp;: </span>Graphe d'un RB à quatre variables.</p>

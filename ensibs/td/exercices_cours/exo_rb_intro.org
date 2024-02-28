@@ -293,7 +293,6 @@
    \end{equation*}
    la relation $P(X_{1},\ldots,X_{n}) = P(X_{1}) \prod_{i=2}^{n} P(X_{i}|X_{i-1})$ est elle correcte
    ? 
-2. La complexité d'un réseau bayésien dépend-elle du nombre de liens entre les variables ?
 3. Soit le réseau bayésien $X \rightarrow Y \leftarrow Z$. Montrer que les v.a. $X$ et $Z$ sont
    indépendantes. 
 
