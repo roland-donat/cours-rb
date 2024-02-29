@@ -37,14 +37,14 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#/slide-org2bee3b4">Objectifs de la séance</a></li>
-<li><a href="#/slide-org9701f47">Un peu d'Histoire</a></li>
-<li><a href="#/slide-orgf38c944">Le raisonnement bayésien</a></li>
-<li><a href="#/slide-org718cbcc">Les réseaux bayésiens</a></li>
-<li><a href="#/slide-orgebf12a3">Inférence</a></li>
-<li><a href="#/slide-orge97a272">Outils pour manipuler les RB</a></li>
-<li><a href="#/slide-org6a9b18b">Résumé de la séance</a></li>
-<li><a href="#/slide-org19124b0">Bibliographie</a></li>
+<li><a href="#/slide-orgca3e925">Objectifs de la séance</a></li>
+<li><a href="#/slide-org8588e00">Un peu d'Histoire</a></li>
+<li><a href="#/slide-orga137fea">Le raisonnement bayésien</a></li>
+<li><a href="#/slide-orge61bbb0">Les réseaux bayésiens</a></li>
+<li><a href="#/slide-org08380b7">Inférence</a></li>
+<li><a href="#/slide-orge6af0f2">Outils pour manipuler les RB</a></li>
+<li><a href="#/slide-org7cc78e3">Résumé de la séance</a></li>
+<li><a href="#/slide-org117de75">Bibliographie</a></li>
 </ul>
 </div>
 </div>
@@ -52,13 +52,13 @@
 
 
 <section>
-<section id="slide-org2bee3b4">
-<h2 id="org2bee3b4">Objectifs de la séance</h2>
+<section id="slide-orgca3e925">
+<h2 id="orgca3e925">Objectifs de la séance</h2>
 <div class="column" style="float:left; width: 50%">
 
 <ul>
-<li>Replacer le développement des techniques bayésiennes dans l'Histoire scientifique</li>
-<li>Comprendre le principe de raisonnement bayésien</li>
+<li>Replacer le développement de l'approche bayésienne dans l'Histoire scientifique</li>
+<li>Comprendre le principe du raisonnement bayésien</li>
 <li>Introduire le formalisme des réseaux bayésiens</li>
 <li>Savoir construire un réseau bayésien pour un problème donné</li>
 <li>Découvrir les outils de modélisation <code>GeNIe</code> et <code>PyAgrum</code></li>
@@ -70,7 +70,7 @@
 <div class="column" style="float:right; width: 50%">
 
 
-<div id="org8413049" class="figure">
+<div id="orgd8b3f23" class="figure">
 <p><img src="./fig/objectives.png" alt="Objectives" width="100%" />
 </p>
 </div>
@@ -81,10 +81,10 @@
 </section>
 </section>
 <section>
-<section id="slide-org9701f47">
-<h2 id="org9701f47">Un peu d'Histoire</h2>
+<section id="slide-org8588e00">
+<h2 id="org8588e00">Un peu d'Histoire</h2>
 
-<div id="orgc4fd2e2" class="figure">
+<div id="org9d2f9d7" class="figure">
 <p><img src="./fig/proba_to_ai.png" alt="Classification dinosaures" width="70%" />
 </p>
 </div>
@@ -92,9 +92,9 @@
 </section>
 </section>
 <section>
-<section id="slide-org4c17601">
-<h3 id="org4c17601">Une histoire de jeux</h3>
-<div class="block-example" id="orgbf7274c">
+<section id="slide-org92f6c7e">
+<h3 id="org92f6c7e">Une histoire de jeux</h3>
+<div class="block-example" id="org069b586">
 <p>
 <h4>Révérend Thomas Bayes (1702–1761)</h4>
 </p>
@@ -110,7 +110,7 @@
  <br>
 </p>
 
-<div id="orgd642172" class="figure">
+<div id="org61a3e29" class="figure">
 <p><img src="./fig/thomas_bayes.jpeg" alt="Thomas Bayes" width="30%" />
 </p>
 </div>
@@ -119,9 +119,9 @@
 </section>
 </section>
 <section>
-<section id="slide-org0c72f3d">
-<h3 id="org0c72f3d">Les travaux se poursuivent&#x2026;</h3>
-<div class="block-example" id="org7a84756">
+<section id="slide-orgdb9d77b">
+<h3 id="orgdb9d77b">Les travaux se poursuivent&#x2026;</h3>
+<div class="block-example" id="org9330294">
 <p>
 <h4>Pierre-Simon Laplace (1749–1827)</h4>
 </p>
@@ -136,7 +136,7 @@
  <br>
 </p>
 
-<div id="org6e21bfe" class="figure">
+<div id="orgcf8c1c9" class="figure">
 <p><img src="./fig/pierre-simon_laplace.jpg" alt="pierre-simon_laplace" width="30%" />
 </p>
 </div>
@@ -144,9 +144,9 @@
 </section>
 </section>
 <section>
-<section id="slide-orgab03660">
-<h3 id="orgab03660">deux siècles plus tard&#x2026;</h3>
-<div class="block-example" id="orgfab2acf">
+<section id="slide-org4c9ffd4">
+<h3 id="org4c9ffd4">deux siècles plus tard&#x2026;</h3>
+<div class="block-example" id="org701003a">
 <p>
 <h4>Fréquentistes vs Bayésiens (la guerre est toujours en cours)</h4>
 </p>
@@ -162,7 +162,7 @@
  <br>
 </p>
 
-<div id="orgae687ee" class="figure">
+<div id="orgd869446" class="figure">
 <p><img src="./fig/Bayes_vs_Frequentist.png" alt="Fréquentiste vs Bayésiens" width="66%" />
 </p>
 </div>
@@ -174,9 +174,9 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org1de311f">
-<h3 id="org1de311f">Les débuts de l'IA</h3>
-<div class="block-example" id="org6e897ad">
+<section id="slide-org94dad66">
+<h3 id="org94dad66">Les débuts de l'IA</h3>
+<div class="block-example" id="orgf6ca5c4">
 <p>
 <h4>L'ère des systèmes experts (1970-1990)</h4>
 </p>
@@ -193,7 +193,7 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
  <br>
 </p>
 
-<div id="orgb4fabea" class="figure">
+<div id="org9382acb" class="figure">
 <p><img src="./fig/systèmes_experts.png" alt="Systèmes experts" width="100%" />
 </p>
 </div>
@@ -203,11 +203,11 @@ Illustration de <a href="https://fr.wikipedia.org/wiki/Christophe_Michel">Christ
 </section>
 </section>
 <section>
-<section id="slide-org946f7df">
-<h3 id="org946f7df">Le machine learning ou la renaissance de l'IA</h3>
+<section id="slide-org9c35e38">
+<h3 id="org9c35e38">Le machine learning ou la renaissance de l'IA</h3>
 <div class="column" style="float:left; width: 55%">
 
-<div class="block-example" id="orge7c2f01">
+<div class="block-example" id="orgcc9c658">
 <p>
 <h4>Les réseaux de neurones artificiels</h4>
 </p>
@@ -230,7 +230,7 @@ l'entraînement efficace des réseaux de neurones multicouches ; début du <i>de
 <div class="column" style="float:right; width: 40%">
 
 
-<div id="org1760689" class="figure">
+<div id="orgd173a24" class="figure">
 <p><img src="./fig/deeplearning.png" alt="Deep learning" width="100%" />
 </p>
 </div>
@@ -240,11 +240,11 @@ l'entraînement efficace des réseaux de neurones multicouches ; début du <i>de
 
 
 </section>
-<section id="slide-org4d18e51">
-<h4 id="org4d18e51">Le machine learning ou la renaissance de l'IA</h4>
+<section id="slide-org9b57bd3">
+<h4 id="org9b57bd3">Le machine learning ou la renaissance de l'IA</h4>
 <div class="column" style="float:left; width: 55%">
 
-<div class="block-example" id="org681581d">
+<div class="block-example" id="orgc8d1eee">
 <p>
 <h4>Les réseaux bayésiens</h4>
 </p>
@@ -268,7 +268,7 @@ algorithme d'inférence adapté ces réseaux</li>
 <div class="column" style="float:right; width: 40%">
 
 
-<div id="org8b8dd82" class="figure">
+<div id="org95f3289" class="figure">
 <p><img src="./fig/judea_pearl.jpg" alt="Judea Pearl" width="100%" />
 </p>
 </div>
@@ -276,11 +276,11 @@ algorithme d'inférence adapté ces réseaux</li>
 </div>
 
 </section>
-<section id="slide-orgb0067d0">
-<h4 id="orgb0067d0">Le machine learning ou la renaissance de l'IA</h4>
+<section id="slide-org22253e1">
+<h4 id="org22253e1">Le machine learning ou la renaissance de l'IA</h4>
 <div class="column" style="float:left; width: 55%">
 
-<div class="block-example" id="org42ea0c5">
+<div class="block-example" id="org4366b43">
 <p>
 <h4>Les modèles de langages</h4>
 </p>
@@ -308,7 +308,7 @@ modèles de langage</li>
 <div class="column" style="float:right; width: 40%">
 
 
-<div id="orge5b48f5" class="figure">
+<div id="orgc21fc4b" class="figure">
 <p><img src="./fig/agi.png" alt="Judea Pearl" width="100%" />
 </p>
 </div>
@@ -319,10 +319,10 @@ modèles de langage</li>
 </section>
 </section>
 <section>
-<section id="slide-orgf38c944">
-<h2 id="orgf38c944">Le raisonnement bayésien</h2>
+<section id="slide-orga137fea">
+<h2 id="orga137fea">Le raisonnement bayésien</h2>
 
-<div id="org4c301e6" class="figure">
+<div id="orgf1bc573" class="figure">
 <p><img src="./fig/bayesian_reasoning.png" alt="Bayesian reasoning" width="70%" />
 </p>
 </div>
@@ -331,13 +331,13 @@ modèles de langage</li>
 </section>
 </section>
 <section>
-<section id="slide-org0dbeaf5">
-<h3 id="org0dbeaf5">Rappels de probabilités</h3>
+<section id="slide-orge8237c3">
+<h3 id="orge8237c3">Rappels de probabilités</h3>
 <p>
 <div class="slidesubtitle">Variable aléatoire</div>
 </p>
 
-<div class="block-definition" id="orgb2a616d">
+<div class="block-definition" id="org3892189">
 <p>
 <h4>Variable aléatoire discrète et finie</h4>
 </p>
@@ -353,7 +353,7 @@ finie</li>
 
 </div>
 
-<div class="block-example" id="orgc84b275">
+<div class="block-example" id="org6ace0fa">
 <p>
 <h4>Exemples</h4>
 </p>
@@ -366,13 +366,13 @@ finie</li>
 </div>
 
 </section>
-<section id="slide-org6ce6d91">
-<h4 id="org6ce6d91">Rappels sur les probabilités</h4>
+<section id="slide-org0fda3c3">
+<h4 id="org0fda3c3">Rappels sur les probabilités</h4>
 <p>
 <div class="slidesubtitle">Loi de probabilité</div>
 </p>
 
-<div class="block-definition" id="org2e15b16">
+<div class="block-definition" id="org36b0192">
 <p>
 <h4>Loi de probabilité discrète</h4>
 </p>
@@ -388,7 +388,7 @@ probabilité de la v.a. \(X\) si \(\displaystyle{\forall x_{i} \in \mathcal{X}, 
 
 </div>
 
-<div class="block-example" id="orgfb5b6b1">
+<div class="block-example" id="orgee7d10d">
 <p>
 <h4>Exemple de loi pour l'intensité d'un séisme</h4>
 </p>
@@ -426,7 +426,7 @@ probabilité de la v.a. \(X\) si \(\displaystyle{\forall x_{i} \in \mathcal{X}, 
 
 </div>
 
-<div class="block-definition" id="orge0dc20c">
+<div class="block-definition" id="orgd9d2a4c">
 <p>
 <h4>Interprétation</h4>
 </p>
@@ -440,13 +440,13 @@ v.a. (i.e. d'un phénomène aléatoire)</li>
 
 
 </section>
-<section id="slide-orgccf80a9">
-<h4 id="orgccf80a9">Rappels sur les probabilités</h4>
+<section id="slide-org1f021ab">
+<h4 id="org1f021ab">Rappels sur les probabilités</h4>
 <p>
 <div class="slidesubtitle">Loi jointe</div>
 </p>
 
-<div class="block-definition" id="org39f3fe6">
+<div class="block-definition" id="orgc49440a">
 <p>
 <h4>Définition</h4>
 </p>
@@ -463,7 +463,7 @@ pour tous \(x_{1} \in \mathcal{X}_{1}, \ldots, x_{N} \in \mathcal{X}_{N}\).</li>
 
 </div>
 
-<div class="block-example" id="orgd465b56">
+<div class="block-example" id="orgd989500">
 <p>
 <h4>Exemple de loi jointe entre Séisme et Alarme</h4>
 </p>
@@ -527,13 +527,13 @@ pour tous \(x_{1} \in \mathcal{X}_{1}, \ldots, x_{N} \in \mathcal{X}_{N}\).</li>
 </div>
 
 </section>
-<section id="slide-org1b7bdf1">
-<h4 id="org1b7bdf1">Rappels sur les probabilités</h4>
+<section id="slide-org55e14df">
+<h4 id="org55e14df">Rappels sur les probabilités</h4>
 <p>
 <div class="slidesubtitle">Loi jointe</div>
 </p>
 
-<div class="block-definition" id="orgc3c10ff">
+<div class="block-definition" id="orgd59840b">
 <p>
 <h4>Interprétation</h4>
 </p>
@@ -547,7 +547,7 @@ jointe, c'est pourquoi on préfère en général manipuler des probabilités con
 
 </div>
 
-<div class="block-alert" id="orgac882a6">
+<div class="block-alert" id="orgff06395">
 <p>
 <h4>Notations</h4>
 </p>
@@ -563,19 +563,19 @@ de tableau dans le cas où les v.a. \(X_{1}, \ldots, X_{N}\) sont discrètes et 
 
 
 </section>
-<section id="slide-org93fa3e6">
-<h4 id="org93fa3e6">Rappels sur les probabilités</h4>
+<section id="slide-org570cd1f">
+<h4 id="org570cd1f">Rappels sur les probabilités</h4>
 <p>
 <div class="slidesubtitle">Loi conditionnelle</div>
 </p>
 
-<div class="block-definition" id="org59031ff">
+<div class="block-definition" id="orgef6a1a7">
 <p>
 <h4>Définition</h4>
 </p>
 <ul>
 <li>La probabilité conditionnelle \(P(Y|X)\) représente l'impact de l'occurrence des événements liés à
-la v.a. \(X\) sur la probabilité d'occurrence des événements liés à la variable \(X\)</li>
+la v.a. \(X\) sur la probabilité d'occurrence des événements liés à la variable \(Y\)</li>
 <li>La loi de la v.a. \(Y\) conditionnellement à \(X\) est définie par
 \[
   P(Y|X) = \frac{P(X,Y)}{P(X)}
@@ -585,7 +585,7 @@ la v.a. \(X\) sur la probabilité d'occurrence des événements liés à la vari
 
 </div>
 
-<div class="block-example" id="org0132985">
+<div class="block-example" id="orgad1adc6">
 <p>
 <h4>Exemple : Loi d'une alarme conditionnellement à l'occurrence d'un séisme</h4>
 </p>
@@ -637,13 +637,13 @@ la v.a. \(X\) sur la probabilité d'occurrence des événements liés à la vari
 </div>
 
 </section>
-<section id="slide-org015f82f">
-<h4 id="org015f82f">Rappels sur les probabilités</h4>
+<section id="slide-org45e8291">
+<h4 id="org45e8291">Rappels sur les probabilités</h4>
 <p>
 <div class="slidesubtitle">Indépendance</div>
 </p>
 
-<div class="block-definition" id="org0d774b6">
+<div class="block-definition" id="org8bf40cf">
 <p>
 <h4>Définition</h4>
 </p>
@@ -658,7 +658,7 @@ la v.a. \(X\) sur la probabilité d'occurrence des événements liés à la vari
 
 </div>
 
-<div class="block-example" id="org2845b39">
+<div class="block-example" id="orge46ec5e">
 <p>
 <h4>Exemple d'indépendance entre alarme et séisme</h4>
 </p>
@@ -710,13 +710,13 @@ la v.a. \(X\) sur la probabilité d'occurrence des événements liés à la vari
 </div>
 
 </section>
-<section id="slide-org0878c69">
-<h4 id="org0878c69">Rappels sur les probabilités</h4>
+<section id="slide-org04cf844">
+<h4 id="org04cf844">Rappels sur les probabilités</h4>
 <p>
 <div class="slidesubtitle">Indépendance conditionnelle</div>
 </p>
 
-<div class="block-definition" id="org3af1166">
+<div class="block-definition" id="org654f4b2">
 <p>
 <h4>Définition</h4>
 </p>
@@ -737,7 +737,7 @@ Les v.a. \(X\) et \(Y\) sont indépendantes conditionnellement à \(Z\) si et se
 
 </div>
 
-<div class="block-example" id="orgc32e2bb">
+<div class="block-example" id="org3d90d84">
 <p>
 <h4>Exemple : Alarme indépendant de Séisme conditionnellement à Voleur</h4>
 </p>
@@ -817,13 +817,13 @@ Les v.a. \(X\) et \(Y\) sont indépendantes conditionnellement à \(Z\) si et se
 
 
 </section>
-<section id="slide-org450679f">
-<h4 id="org450679f">Rappels sur les probabilités</h4>
+<section id="slide-org73bd425">
+<h4 id="org73bd425">Rappels sur les probabilités</h4>
 <p>
 <div class="slidesubtitle">Marginalisation/Sommation</div>
 </p>
 
-<div class="block-definition" id="orgb13f199">
+<div class="block-definition" id="orge03ae6e">
 <p>
 <h4>Définition</h4>
 </p>
@@ -840,7 +840,7 @@ définie par :
 
 </div>
 
-<div class="block-example" id="orgc96820a">
+<div class="block-example" id="org15f0903">
 <p>
 <h4>Exemple</h4>
 </p>
@@ -938,11 +938,11 @@ dans \(\mathcal{Y} = \{y_{1},y_{2}\}\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org0d8f21a">
-<h3 id="org0d8f21a">Principe général</h3>
+<section id="slide-orge222593">
+<h3 id="orge222593">Principe général</h3>
 <div class="column" style="float:left; width: 50%">
 
-<div class="block-definition" id="org28d803b">
+<div class="block-definition" id="org042ce7f">
 <p>
 <h4>Principes de la philosophie bayésienne</h4>
 </p>
@@ -963,7 +963,7 @@ pour réaliser des raisonnements</li>
 <div class="column" style="float:right; width: 50%">
 
 
-<div id="org59c3b79" class="figure">
+<div id="orgb7304cc" class="figure">
 <p><img src="./fig/frequentists_vs_bayesians_2x.png" alt="Bayes vs Freq" width="80%" />
 </p>
 </div>
@@ -973,9 +973,9 @@ pour réaliser des raisonnements</li>
 </section>
 </section>
 <section>
-<section id="slide-org8bfecfb">
-<h3 id="org8bfecfb">Exemple de raisonnement</h3>
-<div class="block-example" id="orgf8f2c83">
+<section id="slide-org7c101e0">
+<h3 id="org7c101e0">Exemple de raisonnement</h3>
+<div class="block-example" id="orgbdd8de0">
 <p>
 <h4>Alarme et vol de voiture</h4>
 </p>
@@ -987,7 +987,7 @@ pour réaliser des raisonnements</li>
 
 </div>
 
-<div class="block-example" id="org3294196">
+<div class="block-example" id="org9b86f31">
 <p>
 <h4>Raisonnement de type bayésien</h4>
 </p>
@@ -1006,18 +1006,21 @@ donné, je me recouche, sinon j'appelle la police</li>
 </section>
 </section>
 <section>
-<section id="slide-org086aaed">
-<h3 id="org086aaed">Théorème de Bayes</h3>
-<div class="block-definition" id="orgbdd318b">
+<section id="slide-orgb69b451">
+<h3 id="orgb69b451">Théorème de Bayes</h3>
+<div class="block-definition" id="org431ed76">
 <p>
 <h4>Théorème de Bayes</h4>
 </p>
 
 <ul>
 <li>Le théorème (ou formule) de Bayes permet d'exprimer la loi d'un phénomène \(Y\) conditionnellement à
-un phénomène \(X\) en fonction de la loi du phénomène \(X\) 
-conditionnellement au phénomène \(Y\) et de la loi
-    marginale du phénomène \(X\).</li>
+un phénomène \(X\) en fonction de :
+<ul>
+<li>la loi du phénomène \(X\) conditionnellement au phénomène \(Y\)</li>
+<li>la loi marginale du phénomène \(Y\)</li>
+
+</ul></li>
 
 <li>Soient \(X\) et \(Y\) deux variables aléatoires (v.a.) représentant deux phénomènes aléatoires, on a :
 \[
@@ -1035,7 +1038,7 @@ autrement dit la "plausibilité" d'observer \(X\) alors que \(Y\) s'est produit<
 
 </div>
 
-<div class="fragment (appear) block-example" id="org08382ed">
+<div class="fragment (appear) block-example" id="org95f85cc">
 <p>
 <h4>Conséquence</h4>
 </p>
@@ -1052,13 +1055,13 @@ priori</i> et de conditionnement</li>
 </div>
 
 </section>
-<section id="slide-org74b36fe">
-<h4 id="org74b36fe">Théorème de Bayes</h4>
+<section id="slide-org0416754">
+<h4 id="org0416754">Théorème de Bayes</h4>
 <p>
 <div class="slidesubtitle">Retour sur l'exemple du vol de voiture</div>
 </p>
 
-<div class="block-example" id="org19a88bf">
+<div class="block-example" id="orge4432b9">
 <p>
 <h4>Modélisation</h4>
 </p>
@@ -1071,13 +1074,13 @@ priori</i> et de conditionnement</li>
 </div>
 
 </section>
-<section id="slide-org66f89e9">
-<h4 id="org66f89e9">Théorème de Bayes</h4>
+<section id="slide-orgba59fe6">
+<h4 id="orgba59fe6">Théorème de Bayes</h4>
 <p>
 <div class="slidesubtitle">Retour sur l'exemple du vol de voiture</div>
 </p>
 
-<div class="block-example" id="orgd5629d8">
+<div class="block-example" id="org0a94dbb">
 <p>
 <h4>Modélisation</h4>
 </p>
@@ -1089,7 +1092,7 @@ priori</i> et de conditionnement</li>
 
 </div>
 
-<div class="block-example" id="org2ba577a">
+<div class="block-example" id="org8bd4499">
 <p>
 <h4>L'alarme retentit 😨... Dois-je appeler la police ?</h4>
 </p>
@@ -1118,13 +1121,13 @@ d'une fausse alarme compte tenu de la fiabilité de mon alarme, je rejette l'hyp
 </div>
 
 </section>
-<section id="slide-org403afb7">
-<h4 id="org403afb7">Théorème de Bayes</h4>
+<section id="slide-org230e43e">
+<h4 id="org230e43e">Théorème de Bayes</h4>
 <p>
 <div class="slidesubtitle">Retour sur l'exemple du vol de voiture</div>
 </p>
 
-<div class="block-example" id="orgd001a29">
+<div class="block-example" id="orgc03a3fd">
 <p>
 <h4>Modélisation</h4>
 </p>
@@ -1136,7 +1139,7 @@ d'une fausse alarme compte tenu de la fiabilité de mon alarme, je rejette l'hyp
 
 </div>
 
-<div class="block-example" id="orgc551645">
+<div class="block-example" id="org263901d">
 <p>
 <h4>L'alarme retentit 😨... Dois-je appeler la police ?</h4>
 </p>
@@ -1163,9 +1166,9 @@ importante que si j'habite dans la Creuse</li>
 </section>
 </section>
 <section>
-<section id="slide-org80a658b">
-<h3 id="org80a658b">Exemple de bayésiens</h3>
-<div class="block-example" id="orgbcc9e8a">
+<section id="slide-orgd7d8ad1">
+<h3 id="orgd7d8ad1">Exemple de bayésiens</h3>
+<div class="block-example" id="org513de93">
 <p>
 <h4>Question</h4>
 </p>
@@ -1179,7 +1182,7 @@ Vous connaissez tous une industrie qui repose sur les raisonnements bayésiens, 
  <br>
 </p>
 
-<div id="org948ad04" class="figure">
+<div id="orgffacb97" class="figure">
 <p><img src="./fig/paris_sportifs.png" alt="Paris sportifs" class="fragment (appear)" width="70%" />
 </p>
 </div>
@@ -1188,10 +1191,10 @@ Vous connaissez tous une industrie qui repose sur les raisonnements bayésiens, 
 </section>
 </section>
 <section>
-<section id="slide-org718cbcc">
-<h2 id="org718cbcc">Les réseaux bayésiens</h2>
+<section id="slide-orge61bbb0">
+<h2 id="orge61bbb0">Les réseaux bayésiens</h2>
 
-<div id="orgd403775" class="figure">
+<div id="org0afd816" class="figure">
 <p><img src="./fig/bayesnets_illustration.png" alt="Bayesnet" width="70%" />
 </p>
 </div>
@@ -1199,9 +1202,9 @@ Vous connaissez tous une industrie qui repose sur les raisonnements bayésiens, 
 </section>
 </section>
 <section>
-<section id="slide-orgd3f5ac4">
-<h3 id="orgd3f5ac4">Les réseaux bayésiens en trois points</h3>
-<div class="block-example" id="org65b8063">
+<section id="slide-orgcab4278">
+<h3 id="orgcab4278">Les réseaux bayésiens en trois points</h3>
+<div class="block-example" id="org3ad6cac">
 <p>
 <h4>Qu'est ce que c'est?</h4>
 </p>
@@ -1215,7 +1218,7 @@ conditionnelles</li>
 
 </div>
 
-<div class="block-example" id="orge3cd30f">
+<div class="block-example" id="orgaf4c109">
 <p>
 <h4>Sur quoi ça repose?</h4>
 </p>
@@ -1228,7 +1231,7 @@ conditionnelles</li>
 
 </div>
 
-<div class="block-example" id="orgca7a3b9">
+<div class="block-example" id="org1639c19">
 <p>
 <h4>En quoi est-ce intéressant</h4>
 </p>
@@ -1245,9 +1248,9 @@ conditionnelles</li>
 </section>
 </section>
 <section>
-<section id="slide-orgc20b609">
-<h3 id="orgc20b609">Un exemple pour comprendre</h3>
-<div class="block-example" id="org0660602">
+<section id="slide-org8bc047a">
+<h3 id="org8bc047a">Un exemple pour comprendre</h3>
+<div class="block-example" id="org2169caa">
 <p>
 <h4>Vol ou pas vol ?</h4>
 </p>
@@ -1265,7 +1268,7 @@ orage et de son intensité (données constructeurs)</li>
 
 </div>
 
-<div class="fragment (appear) block-example" id="org775540e">
+<div class="fragment (appear) block-example" id="orgb96960e">
 <p>
 <h4>L'alarme retentit en pleine nuit... Dois-je appeler la police ?</h4>
 </p>
@@ -1281,85 +1284,85 @@ lieu pendant la nuit ?</li>
 </div>
 
 </section>
-<section id="slide-orgc72f276">
-<h4 id="orgc72f276">Un exemple pour comprendre</h4>
+<section id="slide-org229600f">
+<h4 id="org229600f">Un exemple pour comprendre</h4>
 
-<div id="org56d713c" class="figure">
+<div id="org672fa81" class="figure">
 <p><img src="./fig/rb_definition_alarme_1.png" alt="RB alarme definition" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org8b39473">
-<h4 id="org8b39473">Un exemple pour comprendre</h4>
+<section id="slide-org41ac81b">
+<h4 id="org41ac81b">Un exemple pour comprendre</h4>
 
-<div id="org77888cc" class="figure">
+<div id="orge85df0b" class="figure">
 <p><img src="./fig/rb_definition_alarme_2.png" alt="RB alarme definition" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgca80e43">
-<h4 id="orgca80e43">Un exemple pour comprendre</h4>
+<section id="slide-org5aeb1ba">
+<h4 id="org5aeb1ba">Un exemple pour comprendre</h4>
 
-<div id="orgb9d412c" class="figure">
+<div id="org271b9f1" class="figure">
 <p><img src="./fig/rb_definition_alarme_3.png" alt="RB alarme definition" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org154ead6">
-<h4 id="org154ead6">Un exemple pour comprendre</h4>
+<section id="slide-orgb7daab0">
+<h4 id="orgb7daab0">Un exemple pour comprendre</h4>
 
-<div id="org2b01a95" class="figure">
+<div id="orgf8fa5bc" class="figure">
 <p><img src="./fig/rb_definition_alarme_4.png" alt="RB alarme definition" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org429b129">
-<h4 id="org429b129">Un exemple pour comprendre</h4>
+<section id="slide-org30011c4">
+<h4 id="org30011c4">Un exemple pour comprendre</h4>
 
-<div id="org711f805" class="figure">
+<div id="orgf3d8626" class="figure">
 <p><img src="./fig/rb_definition_alarme_5.png" alt="RB alarme definition" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org7b3d2c3">
-<h4 id="org7b3d2c3">Un exemple pour comprendre</h4>
+<section id="slide-orgec8f113">
+<h4 id="orgec8f113">Un exemple pour comprendre</h4>
 
-<div id="orga4d368a" class="figure">
+<div id="org52b3c36" class="figure">
 <p><img src="./fig/rb_definition_alarme_6.png" alt="RB alarme definition" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-orgfceb814">
-<h4 id="orgfceb814">Un exemple pour comprendre</h4>
+<section id="slide-org429d8c1">
+<h4 id="org429d8c1">Un exemple pour comprendre</h4>
 
-<div id="orgc06246e" class="figure">
+<div id="org7f4de9c" class="figure">
 <p><img src="./fig/rb_definition_alarme_7.png" alt="RB alarme definition" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org4b966ae">
-<h4 id="org4b966ae">Un exemple pour comprendre</h4>
+<section id="slide-org11e4e29">
+<h4 id="org11e4e29">Un exemple pour comprendre</h4>
 
-<div id="org0045f77" class="figure">
+<div id="orgcd553fe" class="figure">
 <p><img src="./fig/rb_definition_alarme_8.png" alt="RB alarme definition" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org0fe10a6">
-<h4 id="org0fe10a6">Un exemple pour comprendre</h4>
+<section id="slide-orgbb54e16">
+<h4 id="orgbb54e16">Un exemple pour comprendre</h4>
 
-<div id="orgaeb7efe" class="figure">
+<div id="org6cbf649" class="figure">
 <p><img src="./fig/rb_definition_alarme_9.png" alt="RB alarme definition" width="100%" />
 </p>
 </div>
@@ -1367,9 +1370,9 @@ lieu pendant la nuit ?</li>
 </section>
 </section>
 <section>
-<section id="slide-orgc6cf2ba">
-<h3 id="orgc6cf2ba">Définition formelle</h3>
-<div class="block-definition" id="org924eae9">
+<section id="slide-org3312b97">
+<h3 id="org3312b97">Définition formelle</h3>
+<div class="block-definition" id="orgd3697bc">
 <p>
 <h4>Réseau bayésien (RB)</h4>
 </p>
@@ -1396,7 +1399,7 @@ variables aléatoires (v.a.) \(X_{1},\ldots,X_{n}\) par :
 </p>
 
 
-<div id="org3ed8f94" class="figure">
+<div id="orga948cc8" class="figure">
 <p><img src="./fig/rb_definition_alarme.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
@@ -1405,9 +1408,9 @@ variables aléatoires (v.a.) \(X_{1},\ldots,X_{n}\) par :
 </section>
 </section>
 <section>
-<section id="slide-org3605619">
-<h3 id="org3605619">Domaines d'application</h3>
-<div class="block-example" id="org7e01dbd">
+<section id="slide-org4a98275">
+<h3 id="org4a98275">Domaines d'application</h3>
+<div class="block-example" id="org9eec38b">
 <p>
 <h4>Quelques champs d'applications</h4>
 </p>
@@ -1425,7 +1428,7 @@ variables aléatoires (v.a.) \(X_{1},\ldots,X_{n}\) par :
 </div>
 
 
-<div class="block-example" id="org798f9ab">
+<div class="block-example" id="orgb170e06">
 <p>
 <h4>Types d'analyses possibles</h4>
 </p>
@@ -1443,9 +1446,9 @@ variables aléatoires (v.a.) \(X_{1},\ldots,X_{n}\) par :
 </section>
 </section>
 <section>
-<section id="slide-orge97d90e">
-<h3 id="orge97d90e">Factorisation de la loi jointe</h3>
-<div class="block-definition" id="org03625ae">
+<section id="slide-org937189a">
+<h3 id="org937189a">Factorisation de la loi jointe</h3>
+<div class="block-definition" id="org9d21e01">
 <p>
 <h4>Factorisation de la loi jointe</h4>
 </p>
@@ -1460,7 +1463,7 @@ P(X_{1}, \ldots,X_{n}) = \prod_{i=1}^{n} P(X_{i}| \text{pa}(X_{i}))
 
 </div>
 
-<div class="fragment (appear) block-definition" id="orge0b5591">
+<div class="fragment (appear) block-definition" id="org61d25ee">
 <p>
 <h4>Rappel</h4>
 </p>
@@ -1477,19 +1480,19 @@ P(X_{1}, \ldots,X_{n}) = \prod_{i=1}^{n} P(X_{i}| \text{pa}(X_{i}))
 </div>
 
 </section>
-<section id="slide-orged7e31a">
-<h4 id="orged7e31a">Factorisation de la loi jointe</h4>
+<section id="slide-org5f5a061">
+<h4 id="org5f5a061">Factorisation de la loi jointe</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgf186262" class="figure">
+<div id="org48f10ab" class="figure">
 <p><img src="./fig/rb_definition_alarme_graphe.png" alt="RB alarme definition" width="75%" />
 </p>
 </div>
 
-<div class="fragment (appear) block-example" id="orgd6029cf">
+<div class="fragment (appear) block-example" id="org65252a6">
 <p>
 <h4>Factorisation</h4>
 </p>
@@ -1513,9 +1516,9 @@ P(\text{Météo}|\text{Orage})
 </section>
 </section>
 <section>
-<section id="slide-org380aac1">
-<h3 id="org380aac1">Relations d'indépendances</h3>
-<div class="block-definition" id="org02a7197">
+<section id="slide-org96a948b">
+<h3 id="org96a948b">Relations d'indépendances</h3>
+<div class="block-definition" id="org2233fdd">
 <p>
 <h4>RB et indépendances conditionnelles</h4>
 </p>
@@ -1533,7 +1536,7 @@ P(\text{Météo}|\text{Orage})
 
 </div>
 
-<div class="fragment (appear) block-definition" id="org8299e11">
+<div class="fragment (appear) block-definition" id="org510c386">
 <p>
 <h4>Structures fondamentales</h4>
 </p>
@@ -1553,20 +1556,20 @@ suivantes :
 </div>
 
 </section>
-<section id="slide-org59a2d8b">
-<h4 id="org59a2d8b">Relations d'indépendances</h4>
+<section id="slide-org817155f">
+<h4 id="org817155f">Relations d'indépendances</h4>
 <p>
 <div class="slidesubtitle">Connexion série</div>
 </p>
 
 
-<div id="org283dc6b" class="figure">
+<div id="org312ac41" class="figure">
 <p><img src="./fig/RB_conn_serie.png" alt="Connexion serie" width="60%" />
 </p>
 </div>
 
 
-<div class="block-definition" id="org5ebe1dc">
+<div class="block-definition" id="org1dbbbee">
 <p>
 <h4>Propriétés</h4>
 </p>
@@ -1588,20 +1591,20 @@ suivantes :
 
 
 </section>
-<section id="slide-org19cbda9">
-<h4 id="org19cbda9">Relations d'indépendances</h4>
+<section id="slide-orga25be95">
+<h4 id="orga25be95">Relations d'indépendances</h4>
 <p>
 <div class="slidesubtitle">Connexion divergente</div>
 </p>
 
 
-<div id="org1ddb608" class="figure">
+<div id="org4b392a4" class="figure">
 <p><img src="./fig/RB_conn_div.png" alt="Connexion divergeante" width="60%" />
 </p>
 </div>
 
 
-<div class="block-definition" id="org1b05bd0">
+<div class="block-definition" id="orgafaf77e">
 <p>
 <h4>Propriétés</h4>
 </p>
@@ -1622,20 +1625,20 @@ suivantes :
 </div>
 
 </section>
-<section id="slide-org3e81a97">
-<h4 id="org3e81a97">Relations d'indépendances</h4>
+<section id="slide-org5df215e">
+<h4 id="org5df215e">Relations d'indépendances</h4>
 <p>
 <div class="slidesubtitle">Connexion convergente</div>
 </p>
 
 
-<div id="org614f581" class="figure">
+<div id="org076e9e4" class="figure">
 <p><img src="./fig/RB_conn_v.png" alt="Connexion convergente" width="60%" />
 </p>
 </div>
 
 
-<div class="block-definition" id="orgd4b1bb4">
+<div class="block-definition" id="orgfeb326c">
 <p>
 <h4>Propriétés</h4>
 </p>
@@ -1661,10 +1664,10 @@ suivantes :
 </section>
 </section>
 <section>
-<section id="slide-orgebf12a3">
-<h2 id="orgebf12a3">Inférence</h2>
+<section id="slide-org08380b7">
+<h2 id="org08380b7">Inférence</h2>
 
-<div id="orgb96cce8" class="figure">
+<div id="org4431c58" class="figure">
 <p><img src="./fig/proba_inf.png" alt="Probabilistic inference" width="70%" />
 </p>
 </div>
@@ -1672,28 +1675,28 @@ suivantes :
 </section>
 </section>
 <section>
-<section id="slide-org62339a0">
-<h3 id="org62339a0">Problématique</h3>
+<section id="slide-orgcdd7d97">
+<h3 id="orgcdd7d97">Problématique</h3>
 
-<div id="org4703a77" class="figure">
+<div id="org976bc84" class="figure">
 <p><img src="./fig/rb_inference_alarme_pb.png" alt="Inférence problématique" width="95%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orga92b524">
-<h4 id="orga92b524">Problématique</h4>
+<section id="slide-orgeb71c93">
+<h4 id="orgeb71c93">Problématique</h4>
 
-<div id="org77df9ba" class="figure">
+<div id="org2339124" class="figure">
 <p><img src="./fig/rb_inference_alarme_ex_1.png" alt="Inférence problématique" width="95%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org9ff0792">
-<h4 id="org9ff0792">Problématique</h4>
+<section id="slide-org0c75cda">
+<h4 id="org0c75cda">Problématique</h4>
 
-<div id="org6340d8b" class="figure">
+<div id="org45fd3e2" class="figure">
 <p><img src="./fig/rb_inference_alarme_ex_2.png" alt="Inférence problématique" width="95%" />
 </p>
 </div>
@@ -1701,13 +1704,13 @@ suivantes :
 </section>
 </section>
 <section>
-<section id="slide-org21a939e">
-<h3 id="org21a939e">Méthode d'élimination des variables</h3>
+<section id="slide-org4a5fe32">
+<h3 id="org4a5fe32">Méthode d'élimination des variables</h3>
 <p>
 <div class="slidesubtitle">Principe</div>
 </p>
 
-<div class="block-definition" id="org68da43c">
+<div class="block-definition" id="org2929dde">
 <p>
 <h4>Hypothèses d'utilisation</h4>
 </p>
@@ -1722,7 +1725,7 @@ au préalable</li>
 
 </div>
 
-<div class="block-definition" id="org34ba700">
+<div class="block-definition" id="orgc7b3240">
 <p>
 <h4>Principe</h4>
 </p>
@@ -1741,9 +1744,9 @@ n'apparaissent pas dans le calcul à réaliser</li>
 </section>
 </section>
 <section>
-<section id="slide-orge97a272">
-<h2 id="orge97a272">Outils pour manipuler les RB</h2>
-<div class="block-example" id="org2ef19c5">
+<section id="slide-orge6af0f2">
+<h2 id="orge6af0f2">Outils pour manipuler les RB</h2>
+<div class="block-example" id="org7571d86">
 <p>
 <h4>Outils graphiques</h4>
 </p>
@@ -1762,7 +1765,7 @@ n'apparaissent pas dans le calcul à réaliser</li>
 
 </div>
 
-<div class="block-example" id="org528b165">
+<div class="block-example" id="orgae19517">
 <p>
 <h4>Librairies informatiques</h4>
 </p>
@@ -1779,9 +1782,9 @@ n'apparaissent pas dans le calcul à réaliser</li>
 </section>
 </section>
 <section>
-<section id="slide-org6a9b18b">
-<h2 id="org6a9b18b">Résumé de la séance</h2>
-<div class="block-definition" id="org4facda0">
+<section id="slide-org7cc78e3">
+<h2 id="org7cc78e3">Résumé de la séance</h2>
+<div class="block-definition" id="org65cc641">
 <p>
 <h4>Points clés</h4>
 </p>
@@ -1812,15 +1815,15 @@ de nouvelles connaissances sur le phénomène aléatoire étudié</li>
 </section>
 </section>
 <section>
-<section id="slide-org68a6ab0">
-<h3 id="org68a6ab0">Merci pour votre attention !</h3>
+<section id="slide-orgcf5846a">
+<h3 id="orgcf5846a">Merci pour votre attention !</h3>
 <p>
 <div class="slidesubtitle">Des questions ?</div>
 </p>
 
 
 
-<div id="org7cd345c" class="figure">
+<div id="org05b13ba" class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/commons/questions.png" alt="FAQ" width="60%" />
 </p>
 </div>
@@ -1829,8 +1832,8 @@ de nouvelles connaissances sur le phénomène aléatoire étudié</li>
 </section>
 </section>
 <section>
-<section id="slide-org19124b0">
-<h2 id="org19124b0">Bibliographie</h2>
+<section id="slide-org117de75">
+<h2 id="org117de75">Bibliographie</h2>
 <p>
 Budzianowski, Paweł and Vulić, Ivan (2019). <i>Hello, {It}'s {GPT}-2 &#x2013; {How} {Can} {I} {Help} {You}? {Towards} the {Use} of {Pretrained} {Language} {Models} for {Task}-{Oriented} {Dialogue} {Systems}</i>, arXiv.</p>
 
