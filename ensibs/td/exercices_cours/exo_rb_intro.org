@@ -488,11 +488,11 @@ Dans cet exercice, nous utiliserons la représentation graphique du RB présent�
    $$
    On obtient donc :
    $$
-   P(X_{1}, X_{2} | X_{3}, X_{4}) = \frac{P(X_{1}, X_{2}, X_{3})}{P(X_{2}, X_{3})} P(X_{4}|X_{2},X_{3}),
+   P(X_{1}, X_{4} | X_{2}, X_{3}) = \frac{P(X_{1}, X_{2}, X_{3})}{P(X_{2}, X_{3})} P(X_{4}|X_{2},X_{3}),
    $$
    Puis le résultat :
    $$
-   P(X_{1}, X_{2} | X_{3}, X_{4}) = P(X_{1} | X_{2}, X_{3}) P(X_{4}|X_{2},X_{3}).
+   P(X_{1}, X_{4} | X_{2}, X_{3}) = P(X_{1} | X_{2}, X_{3}) P(X_{4}|X_{2},X_{3}).
    $$
 
 

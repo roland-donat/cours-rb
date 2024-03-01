@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2024-03-01 ven. 19:01 -->
+<!-- 2024-03-01 ven. 22:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rappels de probabilité et introduction aux réseaux bayésiens</title>
@@ -45,19 +45,19 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4577614">Questions de cours</a>
+<li><a href="#org0ad34e9">Questions de cours</a>
 <ul>
-<li><a href="#org933c041">Correction</a></li>
+<li><a href="#org4caf5bd">Correction</a></li>
 </ul>
 </li>
-<li><a href="#org9be6ce7">Exercice 1</a>
+<li><a href="#org9c5cc84">Exercice 1</a>
 <ul>
-<li><a href="#orgdd87826">Correction</a></li>
+<li><a href="#orgade1800">Correction</a></li>
 </ul>
 </li>
-<li><a href="#orgbf7f6a4">Exercice 2</a>
+<li><a href="#orgd433daf">Exercice 2</a>
 <ul>
-<li><a href="#org5468c43">Correction</a></li>
+<li><a href="#orgf431a53">Correction</a></li>
 </ul>
 </li>
 </ul>
@@ -65,9 +65,9 @@
 </div>
 
 
-<div id="outline-container-org4577614" class="outline-2">
-<h2 id="org4577614">Questions de cours</h2>
-<div class="outline-text-2" id="text-org4577614">
+<div id="outline-container-org0ad34e9" class="outline-2">
+<h2 id="org0ad34e9">Questions de cours</h2>
+<div class="outline-text-2" id="text-org0ad34e9">
 <ol class="org-ol">
 <li><p>
 Soit \(X_{1}, \ldots, X_{n}\) une suite de variables aléatoires (v.a.). En supposant que la loi
@@ -85,9 +85,9 @@ indépendantes.</li>
 </ol>
 </div>
 
-<div id="outline-container-org933c041" class="outline-3">
-<h3 id="org933c041">Correction</h3>
-<div class="outline-text-3" id="text-org933c041">
+<div id="outline-container-org4caf5bd" class="outline-3">
+<h3 id="org4caf5bd">Correction</h3>
+<div class="outline-text-3" id="text-org4caf5bd">
 <ol class="org-ol">
 <li><p>
 Oui. D'après les relations de dépendance décrivant le RB, la variable \(X_{1}\) n'a pas de variable
@@ -145,16 +145,16 @@ Sous les hypothèses du RB \(X \rightarrow Y \leftarrow Z\), \(X\) et \(Z\) sont
 </div>
 
 
-<div id="outline-container-org9be6ce7" class="outline-2">
-<h2 id="org9be6ce7">Exercice 1</h2>
-<div class="outline-text-2" id="text-org9be6ce7">
+<div id="outline-container-org9c5cc84" class="outline-2">
+<h2 id="org9c5cc84">Exercice 1</h2>
+<div class="outline-text-2" id="text-org9c5cc84">
 <p>
 Dans cet exercice, nous utiliserons la représentation graphique du réseau  bayésien (RB) présentée
-en Figure <a href="#orgffbadab">1</a>
+en Figure <a href="#org93893e6">1</a>
 </p>
 
 
-<div id="orgffbadab" class="figure">
+<div id="org93893e6" class="figure">
 <p><img src="./rb_3_var.png" alt="rb_3_var.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Graphe d'un RB à trois variables.</p>
@@ -268,12 +268,12 @@ Les lois de probabilité conditionnelles (LPC) de ce RB sont les suivantes :
 </ol>
 </div>
 
-<div id="outline-container-orgdd87826" class="outline-3">
-<h3 id="orgdd87826">Correction</h3>
-<div class="outline-text-3" id="text-orgdd87826">
+<div id="outline-container-orgade1800" class="outline-3">
+<h3 id="orgade1800">Correction</h3>
+<div class="outline-text-3" id="text-orgade1800">
 <ol class="org-ol">
 <li><p>
-La loi jointe des v.a. \(X, Y, Z\) dans le RB de la Figure <a href="#orgffbadab">1</a> est :
+La loi jointe des v.a. \(X, Y, Z\) dans le RB de la Figure <a href="#org93893e6">1</a> est :
 </p>
 \begin{equation*}
 P(X, Y, Z) = P(X) P(Y|X) P(Z|Y).
@@ -415,16 +415,16 @@ D'où \(P(X,Z|Y) = P(X|Y) \times P(Z|Y)\) et donc \(X \perp\!\!\!\perp Z \mid Y\
 </div>
 </div>
 
-<div id="outline-container-orgbf7f6a4" class="outline-2">
-<h2 id="orgbf7f6a4">Exercice 2</h2>
-<div class="outline-text-2" id="text-orgbf7f6a4">
+<div id="outline-container-orgd433daf" class="outline-2">
+<h2 id="orgd433daf">Exercice 2</h2>
+<div class="outline-text-2" id="text-orgd433daf">
 <p>
 Dans cet exercice, nous utiliserons la représentation graphique du RB présentée en Figure
-<a href="#orgc5b77a5">2</a>. Toutes les v.a. du modèle sont supposées binaires. 
+<a href="#orgbf89da7">2</a>. Toutes les v.a. du modèle sont supposées binaires. 
 </p>
 
 
-<div id="orgc5b77a5" class="figure">
+<div id="orgbf89da7" class="figure">
 <p><img src="./rb_4_var.png" alt="rb_4_var.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;2&nbsp;: </span>Graphe d'un RB à quatre variables.</p>
@@ -441,12 +441,12 @@ Dans cet exercice, nous utiliserons la représentation graphique du RB présent�
 </ol>
 </div>
 
-<div id="outline-container-org5468c43" class="outline-3">
-<h3 id="org5468c43">Correction</h3>
-<div class="outline-text-3" id="text-org5468c43">
+<div id="outline-container-orgf431a53" class="outline-3">
+<h3 id="orgf431a53">Correction</h3>
+<div class="outline-text-3" id="text-orgf431a53">
 <ol class="org-ol">
 <li><p>
-La loi jointe des v.a. \(X_{1}, X_{2}, X_{3}, X_{4}\) dans le RB de la Figure <a href="#orgc5b77a5">2</a> est :
+La loi jointe des v.a. \(X_{1}, X_{2}, X_{3}, X_{4}\) dans le RB de la Figure <a href="#orgbf89da7">2</a> est :
 </p>
 \begin{equation*}
 P(X_{1}, X_{2}, X_{3}, X_{4}) = P(X_{1}) P(X_{2}|X_{1}) P(X_{3}|X_{1}) P(X_{4}|X_{2},X_{3}).
@@ -484,11 +484,11 @@ On remarque également :
    \]
 On obtient donc :
 \[
-   P(X_{1}, X_{2} | X_{3}, X_{4}) = \frac{P(X_{1}, X_{2}, X_{3})}{P(X_{2}, X_{3})} P(X_{4}|X_{2},X_{3}),
+   P(X_{1}, X_{4} | X_{2}, X_{3}) = \frac{P(X_{1}, X_{2}, X_{3})}{P(X_{2}, X_{3})} P(X_{4}|X_{2},X_{3}),
    \]
 Puis le résultat :
 \[
-   P(X_{1}, X_{2} | X_{3}, X_{4}) = P(X_{1} | X_{2}, X_{3}) P(X_{4}|X_{2},X_{3}).
+   P(X_{1}, X_{4} | X_{2}, X_{3}) = P(X_{1} | X_{2}, X_{3}) P(X_{4}|X_{2},X_{3}).
    \]
 </p></li>
 </ol>
