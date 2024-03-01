@@ -296,7 +296,7 @@
 3. Soit le réseau bayésien $X \rightarrow Y \leftarrow Z$. Montrer que les v.a. $X$ et $Z$ sont
    indépendantes. 
 
-** Correction                                                      :noexport:
+** Correction
 1. Oui. D'après les relations de dépendance décrivant le RB, la variable $X_{1}$ n'a pas de variable
    parente, sa loi est donc déterminée par $P(X_{1})$. Chaque variable $X_{i}$, $i \ge 2$, est
    caractérisée par la loi conditionnelle $P(X_{i}|X_{i-1})$. Sous ces hypothèses de dépendance, la
@@ -305,9 +305,6 @@
    P(X_{1},\ldots,X_{n}) = P(X_{1}) \times P(X_{2}|X_{1}) \times \cdots \times P(X_{n}|X_{n-1}).
    \end{equation*}
    Il est à noter que ce réseau bayésien permet de représenter une chaîne de Markov.
-2. Oui, plus les variables sont connectées entre elles, plus les lois conditionnelles des variables
-   dans le RB nécessiteront un grand nombre de paramètres à définir, et donc des complexités
-   spatiales importantes.
 3. Dans ce RB, la factorisation de la loi jointe des variables $X, Y, Z$ s'écrit :
    \begin{equation*}
    P(X, Y, Z) = P(X) \times P(Y|X,Z) \times P(Z).
@@ -381,16 +378,16 @@ Les lois de probabilité conditionnelles (LPC) de ce RB sont les suivantes :
 
 
 1. Écrire l'expression de la loi jointe du modèle. 
-2. Calculer tous les paramètres de la loi jointe naturelle du modèle.
+2. Calculer tous les probabilités de la loi jointe naturelle du modèle.
 3. Que peut-on dire sur la relation d'indépendance $X \perp\!\!\!\perp Z \mid Y$ ?
 
-** Correction                                                      :noexport:
+** Correction
 1. La loi jointe des v.a. $X, Y, Z$ dans le RB de la Figure [[fig_rb_3_var]] est :
    \begin{equation*}
    P(X, Y, Z) = P(X) P(Y|X) P(Z|Y).
    \end{equation*}
 
-2. Calculer les paramètres de la loi jointe consiste à calculer les probabilités $P(X = x, Y = y, Z
+2. Calculer les probabilités de la loi jointe consiste à calculer les probabilités $P(X = x, Y = y, Z
    = z)$ pour tous $x \in \{x_{1}, x_{2}\}$, $y \in \{y_{1}, y_{2}\}$, $z \in \{z_{1},
    z_{2}\}$. Dans ce cas, la loi jointe est caractérisée par huit probabilités et peut se mettre
    sous la forme de la table suivante :
@@ -459,7 +456,7 @@ Dans cet exercice, nous utiliserons la représentation graphique du RB présent�
    - $X_{2} \perp\!\!\!\perp X_{3} \mid X_{1}$ ;
    - $X_{2} \perp\!\!\!\perp X_{3} \mid X_{1}, X_{4}$.
 
-** Correction                                                      :noexport:
+** Correction
 
 1. La loi jointe des v.a. $X_{1}, X_{2}, X_{3}, X_{4}$ dans le RB de la Figure [[fig_rb_4_var]] est :
    \begin{equation*}

@@ -205,7 +205,7 @@
 # ====================
 
 #+BEGIN_SRC emacs-lisp :results silent :tangle hector.py :exports results
-(setq td_corrige nil)
+(setq td_corrige t)
 #+END_SRC
 
 #+LATEX: \clearpage
