@@ -57,14 +57,14 @@ sm: ["\\setminus"],
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#/slide-orgeb45e21">Objectifs de la séance</a></li>
-<li><a href="#/slide-orge15fc52">Introduction à l'inférence probabiliste</a></li>
-<li><a href="#/slide-org9758ba3">Notion de potentiel</a></li>
-<li><a href="#/slide-orgdae4268">Complexité</a></li>
-<li><a href="#/slide-org535d5eb">Méthode d'élimination des variables</a></li>
-<li><a href="#/slide-org43b28a1">Résumé de la séance</a></li>
-<li><a href="#/slide-org5f8de4c">Bibliographie</a></li>
-<li><a href="#/slide-orge990dd3">Algorithme d'élimination</a></li>
+<li><a href="#/slide-org655df0f">Objectifs de la séance</a></li>
+<li><a href="#/slide-org4c99ce4">Introduction à l'inférence probabiliste</a></li>
+<li><a href="#/slide-org1549c36">Notion de potentiel</a></li>
+<li><a href="#/slide-org334619c">Complexité</a></li>
+<li><a href="#/slide-org496f7c9">Méthode d'élimination des variables</a></li>
+<li><a href="#/slide-orgbeb8495">Résumé de la séance</a></li>
+<li><a href="#/slide-orge4105b6">Bibliographie</a></li>
+<li><a href="#/slide-orgd6e21a8">Algorithme d'élimination</a></li>
 </ul>
 </div>
 </div>
@@ -72,8 +72,8 @@ sm: ["\\setminus"],
 
 
 <section>
-<section id="slide-orgeb45e21">
-<h2 id="orgeb45e21">Objectifs de la séance</h2>
+<section id="slide-org655df0f">
+<h2 id="org655df0f">Objectifs de la séance</h2>
 <div class="column" style="float:left; width: 50%">
 
 <ul>
@@ -89,7 +89,7 @@ sm: ["\\setminus"],
 <div class="column" style="float:right; width: 50%">
 
 
-<div id="orgb77d722" class="figure">
+<div id="org6a36416" class="figure">
 <p><img src="./fig/objectives.png" alt="Objectives" width="100%" />
 </p>
 </div>
@@ -99,10 +99,10 @@ sm: ["\\setminus"],
 </section>
 </section>
 <section>
-<section id="slide-orge15fc52">
-<h2 id="orge15fc52">Introduction à l'inférence probabiliste</h2>
+<section id="slide-org4c99ce4">
+<h2 id="org4c99ce4">Introduction à l'inférence probabiliste</h2>
 
-<div id="org4ee8cc8" class="figure">
+<div id="org4ba72d2" class="figure">
 <p><img src="./fig/inference.png" alt="Inférence" width="70%" />
 </p>
 </div>
@@ -110,40 +110,40 @@ sm: ["\\setminus"],
 </section>
 </section>
 <section>
-<section id="slide-org39cf36d">
-<h3 id="org39cf36d">Introduction à l'inférence probabiliste</h3>
+<section id="slide-org8726252">
+<h3 id="org8726252">Introduction à l'inférence probabiliste</h3>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org63f9eb6" class="figure">
+<div id="orgd3932a2" class="figure">
 <p><img src="./fig/rb_inference_alarme_pb.png" alt="Inférence problématique" width="95%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orga2ca6ef">
-<h4 id="orga2ca6ef">Introduction à l'inférence probabiliste</h4>
+<section id="slide-org61a4026">
+<h4 id="org61a4026">Introduction à l'inférence probabiliste</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgb2b7b33" class="figure">
+<div id="orge850361" class="figure">
 <p><img src="./fig/rb_inference_alarme_ex_1.png" alt="Inférence problématique" width="95%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org90803f9">
-<h4 id="org90803f9">Introduction à l'inférence probabiliste</h4>
+<section id="slide-org4c2c8b8">
+<h4 id="org4c2c8b8">Introduction à l'inférence probabiliste</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgcc7a2a3" class="figure">
+<div id="org8190ae0" class="figure">
 <p><img src="./fig/rb_inference_alarme_ex_2.png" alt="Inférence problématique" width="95%" />
 </p>
 </div>
@@ -151,13 +151,13 @@ sm: ["\\setminus"],
 </section>
 </section>
 <section>
-<section id="slide-org48a35cd">
-<h3 id="org48a35cd">Introduction à l'inférence probabiliste</h3>
+<section id="slide-orgdd0a67f">
+<h3 id="orgdd0a67f">Introduction à l'inférence probabiliste</h3>
 <p>
 <div class="slidesubtitle">Formalisation</div>
 </p>
 
-<div class="block-definition" id="org6b84c9e">
+<div class="block-definition" id="org5c62bc6">
 <p>
 <h4>Définition</h4>
 </p>
@@ -182,13 +182,13 @@ observées aux valeurs \(\boldsymbol{e} = \lrpar{e_{1},\ldots, e_{m}}\), appelé
 </section>
 </section>
 <section>
-<section id="slide-orgceb9055">
-<h3 id="orgceb9055">Introduction à l'inférence probabiliste</h3>
+<section id="slide-org6f3f0e2">
+<h3 id="org6f3f0e2">Introduction à l'inférence probabiliste</h3>
 <p>
 <div class="slidesubtitle">Algorithmes d'inférence</div>
 </p>
 
-<div class="block-definition" id="orgf931b29">
+<div class="block-definition" id="org12894db">
 <p>
 <h4>Inférence exacte</h4>
 </p>
@@ -202,7 +202,7 @@ d'arbres (ou polyarbres)</li>
 
 </div>
 
-<div class="block-definition" id="org6992ccc">
+<div class="block-definition" id="org5f3ef51">
 <p>
 <h4>Inférence approchée déterministe</h4>
 </p>
@@ -215,7 +215,7 @@ d'arbres (ou polyarbres)</li>
 
 </div>
 
-<div class="block-definition" id="org618f5ee">
+<div class="block-definition" id="org3564e73">
 <p>
 <h4>Inférence approchée stochastique</h4>
 </p>
@@ -230,10 +230,10 @@ d'arbres (ou polyarbres)</li>
 </section>
 </section>
 <section>
-<section id="slide-org9758ba3">
-<h2 id="org9758ba3">Notion de potentiel</h2>
+<section id="slide-org1549c36">
+<h2 id="org1549c36">Notion de potentiel</h2>
 
-<div id="orge23b6eb" class="figure">
+<div id="org4007147" class="figure">
 <p><img src="./fig/potential.png" alt="Inférence" width="70%" />
 </p>
 </div>
@@ -241,8 +241,8 @@ d'arbres (ou polyarbres)</li>
 </section>
 </section>
 <section>
-<section id="slide-org76057f9">
-<h3 id="org76057f9">Notion de potentiel</h3>
+<section id="slide-org5704fb8">
+<h3 id="org5704fb8">Notion de potentiel</h3>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -250,7 +250,7 @@ d'arbres (ou polyarbres)</li>
 <div class="column" style="float:left; width: 33%">
 
 
-<div id="orgcf4c61c" class="figure">
+<div id="org297caed" class="figure">
 <p><img src="./fig/dfpot_3_var.png" alt="dfpot 3 var" height="100%" />
 </p>
 </div>
@@ -259,7 +259,7 @@ d'arbres (ou polyarbres)</li>
 
 <div class="column" style="float:right; width: 66%">
 
-<div class="block-definition" id="org772cea9">
+<div class="block-definition" id="orgb08ddcf">
 <p>
 <h4>Caractéristiques d'un potentiel</h4>
 </p>
@@ -287,13 +287,13 @@ d'arbres (ou polyarbres)</li>
 </section>
 </section>
 <section>
-<section id="slide-org7b36ab1">
-<h3 id="org7b36ab1">Notion de potentiel</h3>
+<section id="slide-orgffcb23a">
+<h3 id="orgffcb23a">Notion de potentiel</h3>
 <p>
 <div class="slidesubtitle">Définition</div>
 </p>
 
-<div class="block-definition" id="orgf236cfe">
+<div class="block-definition" id="orgc50b858">
 <p>
 <h4>Concept général</h4>
 </p>
@@ -307,7 +307,7 @@ muni d'opérations particulières</li>
 
 </div>
 
-<div class="block-definition" id="orgdd32994">
+<div class="block-definition" id="org75ddadf">
 <p>
 <h4>Potentiel discret et fini réel</h4>
 </p>
@@ -335,14 +335,14 @@ est un potentiel réel sur le domaine \(\set{\mathcal{X}_{1}, \ldots, \mathcal{X
 
 </div>
 
-<div class="block-definition" id="org2d697d5">
+<div class="block-definition" id="org5e86c36">
 <p>
 <h4>Vocabulaire et notations</h4>
 </p>
 <ul>
 <li>Le domaine du potentiel \(\Phi\) est noté \(\Dom\lrPar{\Phi} = \set{\mathcal{X}_{1}, \ldots, \mathcal{X}_{D}}\)</li>
 <li>\(\Dom\lrPar{\Phi}^{*} = \prod_{d = 1}^{D} \mathcal{X}_{d} = \mathcal{X}_{1} \times \ldots \times
-  \mathcal{X}_{D}\)</li>
+  \mathcal{X}_{D}\)  (produit cartésien des ensembles \(\mathcal{X}_{d}\))</li>
 <li>Tout élément \(\lrpar{x_{1},\ldots,x_{D}} \in \Dom\lrPar{\Phi}^{*}\) est appelé configuration</li>
 <li>Si \(|\Dom\lrpar{\Phi}| = D\), on dit que \(\Phi\) est un potentiel à \(D\) dimensions</li>
 
@@ -354,156 +354,156 @@ est un potentiel réel sur le domaine \(\set{\mathcal{X}_{1}, \ldots, \mathcal{X
 </section>
 </section>
 <section>
-<section id="slide-org09662e9">
-<h3 id="org09662e9">Notion de potentiel</h3>
+<section id="slide-org3da0d50">
+<h3 id="org3da0d50">Notion de potentiel</h3>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="org3300690" class="figure">
+<div id="orgf6ea45a" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_0.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgc8f718a">
-<h4 id="orgc8f718a">Notion de potentiel</h4>
+<section id="slide-org0297fce">
+<h4 id="org0297fce">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="org3bd12fe" class="figure">
+<div id="org130f083" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_0_bis.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orge709a81">
-<h4 id="orge709a81">Notion de potentiel</h4>
+<section id="slide-org617084c">
+<h4 id="org617084c">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="orgff34454" class="figure">
+<div id="org78a967a" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_1.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgce39c75">
-<h4 id="orgce39c75">Notion de potentiel</h4>
+<section id="slide-org3e1d878">
+<h4 id="org3e1d878">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="org085ede9" class="figure">
+<div id="orgd2dc5eb" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_2.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org277ab6c">
-<h4 id="org277ab6c">Notion de potentiel</h4>
+<section id="slide-orgbec10db">
+<h4 id="orgbec10db">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="org63e21f8" class="figure">
+<div id="orgdb8860c" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_3.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgd6ce9fa">
-<h4 id="orgd6ce9fa">Notion de potentiel</h4>
+<section id="slide-org6ea5de8">
+<h4 id="org6ea5de8">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="org44b3c96" class="figure">
+<div id="orgadcd216" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_4.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org0be4682">
-<h4 id="org0be4682">Notion de potentiel</h4>
+<section id="slide-org145f7ec">
+<h4 id="org145f7ec">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="org6a971f3" class="figure">
+<div id="orgd7c65a8" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_5.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orge1321d0">
-<h4 id="orge1321d0">Notion de potentiel</h4>
+<section id="slide-org4f73e75">
+<h4 id="org4f73e75">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="orgfef12a9" class="figure">
+<div id="org759e05b" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_6.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org630863b">
-<h4 id="org630863b">Notion de potentiel</h4>
+<section id="slide-org948293a">
+<h4 id="org948293a">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="org4cf683f" class="figure">
+<div id="org5a38c1b" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_7.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org35ea642">
-<h4 id="org35ea642">Notion de potentiel</h4>
+<section id="slide-org9effbfd">
+<h4 id="org9effbfd">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="orgcedc07d" class="figure">
+<div id="org4007f84" class="figure">
 <p><img src="./fig/dfpot_prod_2_var_8.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org4508ce8">
-<h4 id="org4508ce8">Notion de potentiel</h4>
+<section id="slide-org03275ec">
+<h4 id="org03275ec">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Exemple</div>
 </p>
 
 
-<div id="org9aec3b2" class="figure">
+<div id="org5389a72" class="figure">
 <p><img src="./fig/dfpot_prod_2_var.png" alt="dfpot prod" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org992f9f6">
-<h4 id="org992f9f6">Notion de potentiel</h4>
+<section id="slide-org2e4f39b">
+<h4 id="org2e4f39b">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Produit de deux potentiels - Définition</div>
 </p>
 
-<div class="block-definition" id="org96f2e94">
+<div class="block-definition" id="orge47c76a">
 <p>
 <h4>Produit de deux potentiels discrets et finis</h4>
 </p>
@@ -537,130 +537,130 @@ configuration \((\mbf{x},\mbf{z},\mbf{y}) \in \mathbfcal{X}^{*} \times \mathbfca
 </section>
 </section>
 <section>
-<section id="slide-orgf3c59db">
-<h3 id="orgf3c59db">Notion de potentiel</h3>
+<section id="slide-org082e913">
+<h3 id="org082e913">Notion de potentiel</h3>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
 </p>
 
 
-<div id="org917e500" class="figure">
+<div id="org6202490" class="figure">
 <p><img src="./fig/dfpot_marg_3_var_0.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgf6045c2">
-<h4 id="orgf6045c2">Notion de potentiel</h4>
+<section id="slide-org57990a6">
+<h4 id="org57990a6">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
 </p>
 
 
-<div id="orgf1e6245" class="figure">
+<div id="org1d4ac64" class="figure">
 <p><img src="./fig/dfpot_marg_3_var_0_bis.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org4297b72">
-<h4 id="org4297b72">Notion de potentiel</h4>
+<section id="slide-org9aceca1">
+<h4 id="org9aceca1">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
 </p>
 
 
-<div id="orga8d72a6" class="figure">
+<div id="org0609e05" class="figure">
 <p><img src="./fig/dfpot_marg_3_var_0_ter.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgd3e9803">
-<h4 id="orgd3e9803">Notion de potentiel</h4>
+<section id="slide-orgf56f163">
+<h4 id="orgf56f163">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
 </p>
 
 
-<div id="orgc0a7e88" class="figure">
+<div id="org141870b" class="figure">
 <p><img src="./fig/dfpot_marg_3_var_0_ter2.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgd29bc39">
-<h4 id="orgd29bc39">Notion de potentiel</h4>
+<section id="slide-orgdcb8c79">
+<h4 id="orgdcb8c79">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
 </p>
 
 
-<div id="org50dd1e1" class="figure">
+<div id="orgfb87966" class="figure">
 <p><img src="./fig/dfpot_marg_3_var_1.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org8f70ccf">
-<h4 id="org8f70ccf">Notion de potentiel</h4>
+<section id="slide-org99f612c">
+<h4 id="org99f612c">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
 </p>
 
 
-<div id="orgc4854ff" class="figure">
+<div id="org7a6c650" class="figure">
 <p><img src="./fig/dfpot_marg_3_var_2.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org3b98e75">
-<h4 id="org3b98e75">Notion de potentiel</h4>
+<section id="slide-org12bb751">
+<h4 id="org12bb751">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
 </p>
 
 
-<div id="org4ddce3c" class="figure">
+<div id="orgcc2d35e" class="figure">
 <p><img src="./fig/dfpot_marg_3_var_3.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgd80ecc5">
-<h4 id="orgd80ecc5">Notion de potentiel</h4>
+<section id="slide-orga2d91dd">
+<h4 id="orga2d91dd">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
 </p>
 
 
-<div id="orgd53da16" class="figure">
+<div id="org0807fab" class="figure">
 <p><img src="./fig/dfpot_marg_3_var_4.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org03e347e">
-<h4 id="org03e347e">Notion de potentiel</h4>
+<section id="slide-org846a9bc">
+<h4 id="org846a9bc">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Exemple</div>
 </p>
 
 
-<div id="org2e8b6cf" class="figure">
+<div id="orga95cb1e" class="figure">
 <p><img src="./fig/dfpot_marg_3_var.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orga7fcdb5">
-<h4 id="orga7fcdb5">Notion de potentiel</h4>
+<section id="slide-org49a93e6">
+<h4 id="org49a93e6">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Sommation/Marginalisation - Définition</div>
 </p>
 
-<div class="block-definition" id="org2c00a38">
+<div class="block-definition" id="orgfedf804">
 <p>
 <h4>Sommation/Marginalisation d'un potentiel discret et fini</h4>
 </p>
@@ -685,78 +685,78 @@ Le résultat de la sommation de \(\Phi\) sur le domaine \(\mathbfcal{W}\) est un
 </section>
 </section>
 <section>
-<section id="slide-orga1dd7b9">
-<h3 id="orga1dd7b9">Notion de potentiel</h3>
+<section id="slide-org615b7c5">
+<h3 id="org615b7c5">Notion de potentiel</h3>
 <p>
 <div class="slidesubtitle">Instanciation - Exemple</div>
 </p>
 
 
-<div id="orgdd558f4" class="figure">
+<div id="org05db1fd" class="figure">
 <p><img src="./fig/dfpot_inst_3_var_0.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org278f5cc">
-<h4 id="org278f5cc">Notion de potentiel</h4>
+<section id="slide-orgcd72701">
+<h4 id="orgcd72701">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Instanciation - Exemple</div>
 </p>
 
 
-<div id="org40e3720" class="figure">
+<div id="org3e2f7a7" class="figure">
 <p><img src="./fig/dfpot_inst_3_var_1.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgafa370a">
-<h4 id="orgafa370a">Notion de potentiel</h4>
+<section id="slide-org8876145">
+<h4 id="org8876145">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Instanciation - Exemple</div>
 </p>
 
 
-<div id="orgb584657" class="figure">
+<div id="org47a70b6" class="figure">
 <p><img src="./fig/dfpot_inst_3_var_2.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org7727349">
-<h4 id="org7727349">Notion de potentiel</h4>
+<section id="slide-org93c2690">
+<h4 id="org93c2690">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Instanciation - Exemple</div>
 </p>
 
 
-<div id="org97a21a0" class="figure">
+<div id="org548a880" class="figure">
 <p><img src="./fig/dfpot_inst_3_var_3.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org8083035">
-<h4 id="org8083035">Notion de potentiel</h4>
+<section id="slide-orgac3cc6a">
+<h4 id="orgac3cc6a">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Instanciation - Exemple</div>
 </p>
 
 
-<div id="orgeadf17c" class="figure">
+<div id="org0010969" class="figure">
 <p><img src="./fig/dfpot_inst_3_var.png" alt="dfpot sum" width="85%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org1fd226a">
-<h4 id="org1fd226a">Notion de potentiel</h4>
+<section id="slide-org27a1853">
+<h4 id="org27a1853">Notion de potentiel</h4>
 <p>
 <div class="slidesubtitle">Instanciation - Définition</div>
 </p>
 
-<div class="block-definition" id="orgefb4813">
+<div class="block-definition" id="orgfab22f3">
 <p>
 <h4>Instanciation d'un potentiel discret et fini</h4>
 </p>
@@ -775,8 +775,8 @@ Le résultat de la sommation de \(\Phi\) sur le domaine \(\mathbfcal{W}\) est un
 </section>
 </section>
 <section>
-<section id="slide-org5cfb9c1">
-<h3 id="org5cfb9c1">Les LPC : des potentiels particuliers</h3>
+<section id="slide-org9a79dd5">
+<h3 id="org9a79dd5">Les LPC : des potentiels particuliers</h3>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -784,7 +784,7 @@ Le résultat de la sommation de \(\Phi\) sur le domaine \(\mathbfcal{W}\) est un
 <div class="column" style="float:left; width: 40%">
 
 
-<div id="org8428230" class="figure">
+<div id="org016bcd4" class="figure">
 <p><img src="./fig/dfcpd_3_var.png" alt="dfcpd 3 var" height="100%" />
 </p>
 </div>
@@ -793,7 +793,7 @@ Le résultat de la sommation de \(\Phi\) sur le domaine \(\mathbfcal{W}\) est un
 
 <div class="column" style="float:right; width: 55%">
 
-<div class="block-example" id="orgedbfc54">
+<div class="block-example" id="orgec859de">
 <p>
 <h4>Retour sur la LPC de la variable Alarme</h4>
 </p>
@@ -817,8 +817,8 @@ Le résultat de la sommation de \(\Phi\) sur le domaine \(\mathbfcal{W}\) est un
 </div>
 
 </section>
-<section id="slide-org46634d3">
-<h4 id="org46634d3">Les LPC : des potentiels particuliers</h4>
+<section id="slide-orgc9788c2">
+<h4 id="orgc9788c2">Les LPC : des potentiels particuliers</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
@@ -826,7 +826,7 @@ Le résultat de la sommation de \(\Phi\) sur le domaine \(\mathbfcal{W}\) est un
 <div class="column" style="float:left; width: 40%">
 
 
-<div id="org60a5efe" class="figure">
+<div id="orgaad0095" class="figure">
 <p><img src="./fig/dfcpd_3_var_pot_2.png" alt="dfcpd 3 var" height="100%" />
 </p>
 </div>
@@ -835,7 +835,7 @@ Le résultat de la sommation de \(\Phi\) sur le domaine \(\mathbfcal{W}\) est un
 
 <div class="column" style="float:right; width: 55%">
 
-<div class="block-example" id="org841224f">
+<div class="block-example" id="org52bccf9">
 <p>
 <h4>Retour sur la LPC de la variable Alarme</h4>
 </p>
@@ -859,13 +859,13 @@ Le résultat de la sommation de \(\Phi\) sur le domaine \(\mathbfcal{W}\) est un
 </div>
 
 </section>
-<section id="slide-org605c973">
-<h4 id="org605c973">Les LPC : des potentiels particuliers</h4>
+<section id="slide-orgb7587af">
+<h4 id="orgb7587af">Les LPC : des potentiels particuliers</h4>
 <p>
 <div class="slidesubtitle">Définition</div>
 </p>
 
-<div class="block-definition" id="orge61fbc5">
+<div class="block-definition" id="org0c3b8af">
 <p>
 <h4>Potentiel et LPC</h4>
 </p>
@@ -883,14 +883,12 @@ S'il existe deux sous-domaines disjoints \(\mathbfcal{X}\) et \(\mathbfcal{Y}\) 
 </div></li>
 <li>Le potentiel \(p\) est une Loi de Probabilité Conditionnelle (LPC) sur \(\mathbfcal{X}\)
 conditionnellement à \(\mathbfcal{Y}\)</li>
-<li>Les domaines \(\mathbfcal{X}\) et \(\mathbfcal{Y}\) étant discrets et finis, la LPC \(p\) peut se
-représenter sous la forme d'une Table de Probabilité Conditionnelle (TPC)</li>
 
 </ul>
 
 </div>
 
-<div class="block-definition" id="org37890e6">
+<div class="block-definition" id="org4304c2a">
 <p>
 <h4>Vocabulaire</h4>
 </p>
@@ -906,10 +904,10 @@ représenter sous la forme d'une Table de Probabilité Conditionnelle (TPC)</li>
 </section>
 </section>
 <section>
-<section id="slide-orgdae4268">
-<h2 id="orgdae4268">Complexité</h2>
+<section id="slide-org334619c">
+<h2 id="org334619c">Complexité</h2>
 
-<div id="orgf4e404a" class="figure">
+<div id="orgc4db80a" class="figure">
 <p><img src="./fig/complexity.png" alt="Complexité" width="70%" />
 </p>
 </div>
@@ -918,9 +916,9 @@ représenter sous la forme d'une Table de Probabilité Conditionnelle (TPC)</li>
 </section>
 </section>
 <section>
-<section id="slide-org18f7026">
-<h3 id="org18f7026">Complexité d'un potentiel</h3>
-<div class="block-definition" id="org9091e4c">
+<section id="slide-orgbf5e219">
+<h3 id="orgbf5e219">Complexité d'un potentiel</h3>
+<div class="block-definition" id="org916c9a6">
 <p>
 <h4>Complexité spatiale</h4>
 </p>
@@ -937,30 +935,36 @@ configurations du domaine de \(\Phi\) :
 
 </div>
 
-<div class="block-definition" id="org8cdb0ba">
+<div class="block-definition" id="orgcc8348d">
 <p>
 <h4>Conséquence</h4>
 </p>
 <ul>
-<li>\(\text{CS}\lrpar{\Phi} \simeq v^{D}\) quand \(v\) et/ou \(D\) sont grands avec :</li>
+<li>\(\text{CS}\lrpar{\Phi} \simeq v^{D}\) quand \(v\) et/ou \(D\) sont grands avec :
+<ul>
 <li>\(D\) : nombre de variables représenté dans le domaine du potentiel</li>
-<li>\(v = \max \set{|\mathcal{X}_{1}|, \ldots, |\mathcal{X}_{D}|}\) : Plus grand nombre de valeurs prises
-par une v.a.</li>
+<li>\(v = \max \set{|\mathcal{X}_{1}|, \ldots, |\mathcal{X}_{D}|}\) : Plus grand nombre de valeurs
+prises par une v.a.</li>
+
+</ul></li>
 
 </ul>
 
 </div>
 
-<div class="block-definition" id="org77204b1">
+<div class="block-definition" id="orgb427b17">
 <p>
 <h4>Complexité algorithmique</h4>
 </p>
 
 <ul>
-<li>Soient deux potentiels réels discrets et finis \(\Phi_{1}\) et \(\Phi_{2}\)</li>
-<li>\(\text{CA}\lrpar{\Phi_{1} \cdot \Phi_{2}} = \text{CA}\lrpar{\Phi_{1} + \Phi_{2}}
-  \simeq |\lrpar{\Dom\lrpar{\Phi_{1}} \union \Dom\lrpar{\Phi_{2}}}^{*}|\)</li>
-<li>\(\text{CA}\lrpar{\sum_{\mathbfcal{W}}\Phi_{1}} \simeq |\lrpar{\Dom\lrpar{\Phi_{1}} \sm
+<li>Soient deux potentiels réels discrets et finis \(\Phi_{1}\) et \(\Phi_{2}\), et \(\mathcal{T}\) un
+traitement à réaliser</li>
+<li>On note \(\text{CA}(\mathcal{T})\), la complexité algorithmique du traitement \(\mathcal{T}\)</li>
+<li>\(\text{CA}\lrpar{\Phi_{1} \cdot \Phi_{2}} \simeq \text{CS}\lrpar{\Phi_{1} \cdot \Phi_{2}}
+  = |\lrpar{\Dom\lrpar{\Phi_{1}} \union \Dom\lrpar{\Phi_{2}}}^{*}|\)</li>
+<li>\(\text{CA}\lrpar{\sum_{\mathbfcal{W}}\Phi_{1}} \simeq
+  \text{CS}\lrpar{\sum_{\mathbfcal{W}}\Phi_{1}} = |\lrpar{\Dom\lrpar{\Phi_{1}} \sm
   \mathbfcal{W}}^{*}|\)</li>
 <li>Les complexités algorithmiques et spatiales sont du même ordre</li>
 
@@ -972,13 +976,13 @@ par une v.a.</li>
 </section>
 </section>
 <section>
-<section id="slide-org559dd24">
-<h3 id="org559dd24">Complexité d'une LPC</h3>
+<section id="slide-orgf64afa0">
+<h3 id="orgf64afa0">Complexité d'une LPC</h3>
 <p>
 <div class="slidesubtitle">Complexité spatiale</div>
 </p>
 
-<div class="block-definition" id="orga978989">
+<div class="block-definition" id="org68d8eb5">
 <p>
 <h4>Complexité spatiale d'une LPC discrète et finie</h4>
 </p>
@@ -1004,19 +1008,19 @@ où \(|\mathcal{X}_{i}|\) est le nombre d'éléments dans l'ensemble \(\mathcal{
 </div>
 
 </section>
-<section id="slide-org35c17e9">
-<h4 id="org35c17e9">Complexité d'une LPC</h4>
+<section id="slide-org5143724">
+<h4 id="org5143724">Complexité d'une LPC</h4>
 <p>
 <div class="slidesubtitle">Complexité spatiale</div>
 </p>
 
 
-<div id="org185bcf8" class="figure">
+<div id="orgbdb50c0" class="figure">
 <p><img src="./fig/rb_definition_alarme.png" alt="RB alarme definition" width="80%" />
 </p>
 </div>
 
-<div class="block-example" id="orgfd4d130">
+<div class="block-example" id="org5a98145">
 <p>
 <h4>Exercice</h4>
 </p>
@@ -1028,13 +1032,13 @@ où \(|\mathcal{X}_{i}|\) est le nombre d'éléments dans l'ensemble \(\mathcal{
 </div>
 
 </section>
-<section id="slide-org83be017">
-<h4 id="org83be017">Complexité d'une LPC</h4>
+<section id="slide-orgd0296d5">
+<h4 id="orgd0296d5">Complexité d'une LPC</h4>
 <p>
 <div class="slidesubtitle">Complexité probabiliste</div>
 </p>
 
-<div class="block-definition" id="orgec3d3f7">
+<div class="block-definition" id="org4b14600">
 <p>
 <h4>Complexité probabiliste d'une LPC discrète et finie</h4>
 </p>
@@ -1062,7 +1066,7 @@ variables de conditionnement</li>
 
 </div>
 
-<div class="block-example" id="org33702b9">
+<div class="block-example" id="org1961e16">
 <p>
 <h4>Exercice</h4>
 </p>
@@ -1078,13 +1082,13 @@ variables de conditionnement</li>
 </section>
 </section>
 <section>
-<section id="slide-orga17035d">
-<h3 id="orga17035d">Complexité d'un réseau bayésien</h3>
+<section id="slide-orgf3e6d73">
+<h3 id="orgf3e6d73">Complexité d'un réseau bayésien</h3>
 <p>
 <div class="slidesubtitle">Définition</div>
 </p>
 
-<div class="block-definition" id="org950144e">
+<div class="block-definition" id="org33326a2">
 <p>
 <h4>Complexité d'une loi jointe représentée par un RB</h4>
 </p>
@@ -1114,13 +1118,13 @@ comme étant la somme des complexités spatiales (resp. probabilistes) associée
 </div>
 
 </section>
-<section id="slide-org23fb26b">
-<h4 id="org23fb26b">Complexité d'un réseau bayésien</h4>
+<section id="slide-org11048c0">
+<h4 id="org11048c0">Complexité d'un réseau bayésien</h4>
 <p>
 <div class="slidesubtitle">Conséquences pratiques</div>
 </p>
 
-<div class="block-definition" id="org788d096">
+<div class="block-definition" id="org7e34f3b">
 <p>
 <h4>RB = Représentation parcimonieuse</h4>
 </p>
@@ -1140,7 +1144,7 @@ comme étant la somme des complexités spatiales (resp. probabilistes) associée
 
 </div>
 
-<div class="block-example" id="org16edb1f">
+<div class="block-example" id="org8d7e8d7">
 <p>
 <h4>Exercice</h4>
 </p>
@@ -1155,10 +1159,10 @@ Calculer les complexités du modèle "Alarme" avec et sans RB
 </section>
 </section>
 <section>
-<section id="slide-org535d5eb">
-<h2 id="org535d5eb">Méthode d'élimination des variables</h2>
+<section id="slide-org496f7c9">
+<h2 id="org496f7c9">Méthode d'élimination des variables</h2>
 
-<div id="org265d6a3" class="figure">
+<div id="org0a89cba" class="figure">
 <p><img src="./fig/bucket_elimination.png" alt="Bucket elimination" width="70%" />
 </p>
 </div>
@@ -1167,13 +1171,13 @@ Calculer les complexités du modèle "Alarme" avec et sans RB
 </section>
 </section>
 <section>
-<section id="slide-org33a8d43">
-<h3 id="org33a8d43">Méthode d'élimination des variables</h3>
+<section id="slide-orgf8581d4">
+<h3 id="orgf8581d4">Méthode d'élimination des variables</h3>
 <p>
 <div class="slidesubtitle">Généralités</div>
 </p>
 
-<div class="block-definition" id="orgee242bb">
+<div class="block-definition" id="org2a7bb49">
 <p>
 <h4>Hypothèses d'utilisation</h4>
 </p>
@@ -1188,7 +1192,7 @@ au préalable</li>
 
 </div>
 
-<div class="block-definition" id="org5a2644c">
+<div class="block-definition" id="orgbc905c4">
 <p>
 <h4>Principe</h4>
 </p>
@@ -1207,19 +1211,19 @@ n'apparaissent pas dans le calcul à réaliser</li>
 </section>
 </section>
 <section>
-<section id="slide-org6ae5320">
-<h3 id="org6ae5320">Méthode d'élimination des variables</h3>
+<section id="slide-org11ecce4">
+<h3 id="org11ecce4">Méthode d'élimination des variables</h3>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org2b28ba7" class="figure">
+<div id="org82cda33" class="figure">
 <p><img src="./fig/rb_alarme_graphe.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="org846e438">
+<div class="block-example" id="org7e1ef18">
 <p>
 <h4>Inférence dans le réseau bayésien Alarme</h4>
 </p>
@@ -1229,7 +1233,7 @@ n'apparaissent pas dans le calcul à réaliser</li>
 Info météo (\(M\))</li>
 <li>Le RB qui modélise la problématique permet de factoriser la loi jointe des variables aléatoire comme suit :
 \[  
-  P(V,A,O,M) = P(V) \times P(A|V; O) \times P(O) \times P(M|O)
+  P(V,A,O,M) = P(V) \times P(A|V, O) \times P(O) \times P(M|O)
   \]</li>
 
 </ul>
@@ -1237,13 +1241,13 @@ Info météo (\(M\))</li>
 </div>
 
 </section>
-<section id="slide-org47039f3">
-<h4 id="org47039f3">Méthode d'élimination des variables</h4>
+<section id="slide-orgb781b25">
+<h4 id="orgb781b25">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
-<div class="block-example" id="orge4de3a2">
+<div class="block-example" id="org846bb73">
 <p>
 <h4>Calcul de P(Voleur=oui|Alarme=oui)</h4>
 </p>
@@ -1254,7 +1258,7 @@ Info météo (\(M\))</li>
 
 </div>
 
-<div class="block-example" id="org2f22788">
+<div class="block-example" id="orgdf020da">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1263,7 +1267,7 @@ Info météo (\(M\))</li>
 <li>Puis, on somme (élimine) les variables différentes de Voleur et Alarme :
 \[
   P(V; A = \text{oui}) = \sum_{O \in \{\text{non},
-  \text{faible},\text{fort}\}} \sum_{M \in \{\text{non}, \text{oui}\}} P(V; A = \text{oui}, O,M) 
+  \text{faible},\text{fort}\}} \sum_{M \in \{\text{non}, \text{oui}\}} P(V; A = \text{oui}; O;M) 
   \]</li>
 <li>Pour simplifier les calculs, on utilisera la propriété de factorisation de la loi jointe dans le RB</li>
 
@@ -1271,7 +1275,7 @@ Info météo (\(M\))</li>
 
 </div>
 
-<div class="block-example" id="orgd5f5889">
+<div class="block-example" id="org2426f65">
 <p>
 <h4>Calcul du dénominateur</h4>
 </p>
@@ -1279,7 +1283,7 @@ Info météo (\(M\))</li>
 <ul>
 <li>On utilise le calcul du numérateur en marginalisant sur la variable Alarme :
 \[
-  P(A = \text{oui}) = \sum_{V \in \set{\text{non}, \text{oui}}} P(V ; A = \text{oui}) 
+  P(A = \text{oui}) = \sum_{V \in \set{\text{non}; \text{oui}}} P(V; A = \text{oui}) 
   \]</li>
 
 </ul>
@@ -1288,19 +1292,19 @@ Info météo (\(M\))</li>
 
 
 </section>
-<section id="slide-org5c50a4c">
-<h4 id="org5c50a4c">Méthode d'élimination des variables</h4>
+<section id="slide-org8cb8e4e">
+<h4 id="org8cb8e4e">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgc585c13" class="figure">
+<div id="orgff6ffaf" class="figure">
 <p><img src="./fig/rb_alarme.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="orge5ddf9c">
+<div class="block-example" id="orga820f33">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1321,19 +1325,19 @@ P(V ; A) = \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} \sum_{M \in \{
 </div>
 
 </section>
-<section id="slide-orgb6301e4">
-<h4 id="orgb6301e4">Méthode d'élimination des variables</h4>
+<section id="slide-org53025c6">
+<h4 id="org53025c6">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org36a0868" class="figure">
+<div id="org9265a12" class="figure">
 <p><img src="./fig/rb_alarme.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="orgbcf69b5">
+<div class="block-example" id="org0eb3fea">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1355,19 +1359,19 @@ P(V ; A) = \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} \sum_{M \in \{
 
 
 </section>
-<section id="slide-orgf28337b">
-<h4 id="orgf28337b">Méthode d'élimination des variables</h4>
+<section id="slide-org7399855">
+<h4 id="org7399855">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org9248c5a" class="figure">
+<div id="org8fa75c2" class="figure">
 <p><img src="./fig/rb_alarme_inf_inst.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="org6abcda5">
+<div class="block-example" id="org6520b0a">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1388,19 +1392,19 @@ P(V ; A = \text{oui}) = \sum_{O \in \{\text{non}, \text{faible},\text{fort}\}} \
 </div>
 
 </section>
-<section id="slide-org68bffec">
-<h4 id="org68bffec">Méthode d'élimination des variables</h4>
+<section id="slide-orgd62f8f1">
+<h4 id="orgd62f8f1">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgc3b6391" class="figure">
+<div id="org55236c4" class="figure">
 <p><img src="./fig/rb_alarme_inf_inst.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="orgd585012">
+<div class="block-example" id="org66524f9">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1422,19 +1426,19 @@ P(V ; A = \text{oui}) = P(V) \cdot \sum_{O \in \{\text{non}, \text{faible},\text
 </div>
 
 </section>
-<section id="slide-org8936ba0">
-<h4 id="org8936ba0">Méthode d'élimination des variables</h4>
+<section id="slide-orgad37599">
+<h4 id="orgad37599">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org941f4bb" class="figure">
+<div id="org61fe798" class="figure">
 <p><img src="./fig/rb_alarme_inf_sum_M.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="org8b8172c">
+<div class="block-example" id="org5ef0ad5">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1460,19 +1464,19 @@ P(V ; A = \text{oui}) = P(V) \cdot \sum_{O \in \{\text{non}, \text{faible},\text
 
 
 </section>
-<section id="slide-org24d3e90">
-<h4 id="org24d3e90">Méthode d'élimination des variables</h4>
+<section id="slide-org2287156">
+<h4 id="org2287156">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgd4e1280" class="figure">
+<div id="org077bb29" class="figure">
 <p><img src="./fig/rb_alarme_inf_sum_O_prod_1.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="org41391cf">
+<div class="block-example" id="orga832c78">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1497,19 +1501,19 @@ P(V ; A = \text{oui}) = P(V) \cdot \sum_{O \in \{\text{non}, \text{faible},\text
 
 
 </section>
-<section id="slide-orgd31b828">
-<h4 id="orgd31b828">Méthode d'élimination des variables</h4>
+<section id="slide-orgdae46c6">
+<h4 id="orgdae46c6">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgbaa1322" class="figure">
+<div id="orgb42b101" class="figure">
 <p><img src="./fig/rb_alarme_inf_sum_O_prod_2.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="orgbbdfd75">
+<div class="block-example" id="org1b2e783">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1531,19 +1535,19 @@ P(V ; A = \text{oui}) = P(V) \cdot \sum_{O \in \{\text{non}, \text{faible},\text
 
 
 </section>
-<section id="slide-orgcbfdff9">
-<h4 id="orgcbfdff9">Méthode d'élimination des variables</h4>
+<section id="slide-orge888ecf">
+<h4 id="orge888ecf">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org4cf96e6" class="figure">
+<div id="org3fd06ef" class="figure">
 <p><img src="./fig/rb_alarme_inf_sum_O.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="orgbe83c36">
+<div class="block-example" id="orgf517929">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1565,19 +1569,19 @@ P(V ; A = \text{oui}) = P(V) \cdot \underbrace{\sum_{O \in \{\text{non}, \text{f
 
 
 </section>
-<section id="slide-orgc811c10">
-<h4 id="orgc811c10">Méthode d'élimination des variables</h4>
+<section id="slide-orgdd7a7b0">
+<h4 id="orgdd7a7b0">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orge029fa4" class="figure">
+<div id="org59a72dc" class="figure">
 <p><img src="./fig/rb_alarme_inf_prod_end_1.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="orgeef8706">
+<div class="block-example" id="orgbb11921">
 <p>
 <h4>Calcul du numérateur</h4>
 </p>
@@ -1597,19 +1601,19 @@ P(V ; A = \text{oui}) = P(V) \cdot \Phi_{O}(A = \text{oui} ; V)
 </div>
 
 </section>
-<section id="slide-orgaecdb59">
-<h4 id="orgaecdb59">Méthode d'élimination des variables</h4>
+<section id="slide-org8f7ec9f">
+<h4 id="org8f7ec9f">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org3ae4b2e" class="figure">
+<div id="orgddbe829" class="figure">
 <p><img src="./fig/rb_alarme_inf_prod_end_2.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="org09b4e6b">
+<div class="block-example" id="orgf41b54c">
 <p>
 <h4>Calcul final</h4>
 </p>
@@ -1627,13 +1631,13 @@ P(V ; A = \text{oui}) = P(V) \cdot \Phi_{O}(A = \text{oui} ; V)
 </section>
 </section>
 <section>
-<section id="slide-org7521af1">
-<h3 id="org7521af1">Méthode d'élimination des variables</h3>
+<section id="slide-orgd903356">
+<h3 id="orgd903356">Méthode d'élimination des variables</h3>
 <p>
 <div class="slidesubtitle">Formalisation</div>
 </p>
 
-<div class="block-definition" id="orga5424df">
+<div class="block-definition" id="org2cefb7c">
 <p>
 <h4>Rappel de l'objectif</h4>
 </p>
@@ -1647,7 +1651,7 @@ P(V ; A = \text{oui}) = P(V) \cdot \Phi_{O}(A = \text{oui} ; V)
 
 </div>
 
-<div class="block-definition" id="org20a17c3">
+<div class="block-definition" id="org2e4ddce">
 <p>
 <h4>Principe</h4>
 </p>
@@ -1672,13 +1676,13 @@ la loi jointe par sommation</li>
 </section>
 </section>
 <section>
-<section id="slide-orgb5c35df">
-<h3 id="orgb5c35df">Méthode d'élimination des variables</h3>
+<section id="slide-org3e81863">
+<h3 id="org3e81863">Méthode d'élimination des variables</h3>
 <p>
 <div class="slidesubtitle">Complexité</div>
 </p>
 
-<div class="block-definition" id="org825ff56">
+<div class="block-definition" id="org15df557">
 <p>
 <h4>Complexité de l'algorithme</h4>
 </p>
@@ -1707,7 +1711,7 @@ Complexité de l'algorithme :
 
 </div>
 
-<div class="block-alert" id="org80f0652">
+<div class="block-alert" id="org5293be6">
 <p>
 <h4>Inférence exacte dans un RB</h4>
 </p>
@@ -1722,13 +1726,13 @@ Complexité de l'algorithme :
 </section>
 </section>
 <section>
-<section id="slide-orga9889b1">
-<h3 id="orga9889b1">Méthode d'élimination des variables</h3>
+<section id="slide-org411d629">
+<h3 id="org411d629">Méthode d'élimination des variables</h3>
 <p>
 <div class="slidesubtitle">Remarques sur l'ordre d'élimination</div>
 </p>
 
-<div class="block-definition" id="orgde6eea4">
+<div class="block-definition" id="orgd65a7cc">
 <p>
 <h4>Propriétés</h4>
 </p>
@@ -1741,7 +1745,7 @@ Complexité de l'algorithme :
 
 </div>
 
-<div class="block-alert" id="org764db49">
+<div class="block-alert" id="org2ebb2f4">
 <p>
 <h4>Problématique</h4>
 </p>
@@ -1761,13 +1765,13 @@ l'ordre d'élimination</li>
 </div>
 
 </section>
-<section id="slide-orga1288e2">
-<h4 id="orga1288e2">Méthode d'élimination des variables</h4>
+<section id="slide-org8087d5e">
+<h4 id="org8087d5e">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Stratégies pour déterminer l'ordre d'élimination</div>
 </p>
 
-<div class="block-definition" id="orgb5c1329">
+<div class="block-definition" id="orgd139f25">
 <p>
 <h4>Stratégie 1 : Application d'une heuristique</h4>
 </p>
@@ -1785,7 +1789,7 @@ l'ordre d'élimination</li>
 
 </div>
 
-<div class="block-definition" id="org2522cc3">
+<div class="block-definition" id="org6c9a4af">
 <p>
 <h4>Stratégie 2 : Exploiter sa connaissance du graphe</h4>
 </p>
@@ -1803,19 +1807,19 @@ peut piéger les méthodes gloutonnes</li>
 </div>
 
 </section>
-<section id="slide-orgb430be6">
-<h4 id="orgb430be6">Méthode d'élimination des variables</h4>
+<section id="slide-org9c19d46">
+<h4 id="org9c19d46">Méthode d'élimination des variables</h4>
 <p>
 <div class="slidesubtitle">Illustration de l'influence de l'ordre d'élimination</div>
 </p>
 
 
-<div id="org00842cb" class="figure">
+<div id="org82f28d5" class="figure">
 <p><img src="./fig/rb_bayes_naif.png" alt="RB alarme definition" width="55%" />
 </p>
 </div>
 
-<div class="block-example" id="orge0c734d">
+<div class="block-example" id="org2d34d6f">
 <p>
 <h4>Quel ordre choisir ?</h4>
 </p>
@@ -1835,9 +1839,9 @@ peut piéger les méthodes gloutonnes</li>
 </section>
 </section>
 <section>
-<section id="slide-org43b28a1">
-<h2 id="org43b28a1">Résumé de la séance</h2>
-<div class="block-definition" id="org62759a4">
+<section id="slide-orgbeb8495">
+<h2 id="orgbeb8495">Résumé de la séance</h2>
+<div class="block-definition" id="orga0b7e41">
 <p>
 <h4>Points clés sur l'inférence</h4>
 </p>
@@ -1851,7 +1855,7 @@ peut piéger les méthodes gloutonnes</li>
 
 </div>
 
-<div class="block-definition" id="orgf1b1524">
+<div class="block-definition" id="orga44d66e">
 <p>
 <h4>Points clés sur l'algorithme d'élimination</h4>
 </p>
@@ -1875,15 +1879,15 @@ peut piéger les méthodes gloutonnes</li>
 </section>
 </section>
 <section>
-<section id="slide-org3c94131">
-<h3 id="org3c94131">Merci pour votre attention !</h3>
+<section id="slide-orgc9cfb9a">
+<h3 id="orgc9cfb9a">Merci pour votre attention !</h3>
 <p>
 <div class="slidesubtitle">Des questions ?</div>
 </p>
 
 
 
-<div id="org18a248d" class="figure">
+<div id="orgaf6b0ab" class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/commons/questions.png" alt="FAQ" width="60%" />
 </p>
 </div>
@@ -1892,8 +1896,8 @@ peut piéger les méthodes gloutonnes</li>
 </section>
 </section>
 <section>
-<section id="slide-org5f8de4c">
-<h2 id="org5f8de4c">Bibliographie</h2>
+<section id="slide-orge4105b6">
+<h2 id="orge4105b6">Bibliographie</h2>
 <p>
 Cozman, Fabio G. (2000). <i>Generalizing {Variable} {Elimination} in {Bayesian} {Networks}</i>, Editora Tec Art.</p>
 
@@ -1915,8 +1919,8 @@ Pearl, J. (1988). <i>Probabilistic {Reasoning} in {Intelligent} {Systems}: {Netw
 </section>
 </section>
 <section>
-<section id="slide-orge990dd3">
-<h2 id="orge990dd3">Algorithme d'élimination</h2>
+<section id="slide-orgd6e21a8">
+<h2 id="orgd6e21a8">Algorithme d'élimination</h2>
 <ul>
 <li><b>Entrées</b> :
 <ul>

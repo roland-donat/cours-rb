@@ -382,10 +382,10 @@ L'objectif est d'appliquer l'algorithme d'élimination des variables sur le RB p
 # TODO: Si on veut demander aux étudiants le calcul de P(L|B), il faut introduire explicitement dans le
 # cours la division de potentiel (ou l'inverse d'un potentiel)
 1. Donner la factorisation de la loi jointe dans ce RB.
-1. Donner le nombre de paramètres pour définir la loi jointe représentée par le RB. 
-1. Même question sans utiliser la factorisation de la loi jointe associée au RB. 
-1. Reprendre les questions précédentes en calculant le nombre de paramètres probabilistes nécessaire
-   à la définition de la loi jointe factorisée dans le RB et de la loi jointe naturelle des variables.
+1. Donner la complexité spatiale du RB. 
+1. Donner la complexité spatiale de la loi jointe naturelle des variables des variables $E$, $L$,
+   $A$, $B$.
+1. Reprendre les questions précédentes en calculant la complexité probabiliste du RB et de la loi jointe naturelle des variables.
 1. Appliquer la méthode d'élimination pour calculer :
    - $P(A)$;
    - $P(L|B = n)$;
