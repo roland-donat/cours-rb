@@ -44,17 +44,17 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org576a1b7">1. Problématique</a></li>
-<li><a href="#org83ddd02">2. Modélisation</a></li>
-<li><a href="#orgf26db65">3. Indépendances conditionnelles</a></li>
-<li><a href="#orgc75a5b3">4. Implémentation du modèle avec <code>GeNIe</code></a></li>
-<li><a href="#orgdd708b0">5. Inférence</a></li>
-<li><a href="#org7333979">6. Implémentation du modèle avec <code>pyAgrum</code></a></li>
+<li><a href="#orge474d9e">1. Problématique</a></li>
+<li><a href="#orgd13113e">2. Modélisation</a></li>
+<li><a href="#orge1252a0">3. Indépendances conditionnelles</a></li>
+<li><a href="#org1fc59a1">4. Implémentation du modèle avec <code>GeNIe</code></a></li>
+<li><a href="#org732fae3">5. Inférence</a></li>
+<li><a href="#org2791130">6. Implémentation du modèle avec <code>pyAgrum</code></a></li>
 </ul>
 </div>
 </div>
 
-<div id="orgac17139" class="figure">
+<div id="orgafa25c1" class="figure">
 <p><img src="./fraude_cb.png" alt="fraude_cb.png" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
@@ -62,8 +62,8 @@
 
 
 
-<div id="outline-container-org576a1b7" class="outline-2">
-<h2 id="org576a1b7"><span class="section-number-2">1.</span> Problématique</h2>
+<div id="outline-container-orge474d9e" class="outline-2">
+<h2 id="orge474d9e"><span class="section-number-2">1.</span> Problématique</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Chaque année, les banques perdent d'importantes sommes d'argents suite
@@ -105,8 +105,8 @@ l'informatique dernièrement contre \(0.1\%\) pour ceux ne possédant pas d'ordi
 </div>
 </div>
 
-<div id="outline-container-org83ddd02" class="outline-2">
-<h2 id="org83ddd02"><span class="section-number-2">2.</span> Modélisation</h2>
+<div id="outline-container-orgd13113e" class="outline-2">
+<h2 id="orgd13113e"><span class="section-number-2">2.</span> Modélisation</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>Construire un RB (graphe et LPC) visant à détecter des transactions frauduleuses. Le RB sera
@@ -126,8 +126,8 @@ représentation par RB.</li>
 </div>
 </div>
 
-<div id="outline-container-orgf26db65" class="outline-2">
-<h2 id="orgf26db65"><span class="section-number-2">3.</span> Indépendances conditionnelles</h2>
+<div id="outline-container-orge1252a0" class="outline-2">
+<h2 id="orge1252a0"><span class="section-number-2">3.</span> Indépendances conditionnelles</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
@@ -144,8 +144,8 @@ Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
 </div>
 
 
-<div id="outline-container-orgc75a5b3" class="outline-2">
-<h2 id="orgc75a5b3"><span class="section-number-2">4.</span> Implémentation du modèle avec <code>GeNIe</code></h2>
+<div id="outline-container-org1fc59a1" class="outline-2">
+<h2 id="org1fc59a1"><span class="section-number-2">4.</span> Implémentation du modèle avec <code>GeNIe</code></h2>
 <div class="outline-text-2" id="text-4">
 <ol class="org-ol">
 <li>Utiliser le logiciel <code>GeNIe</code> pour construire le modèle sur la détection de fraude.</li>
@@ -153,8 +153,8 @@ Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
 </div>
 </div>
 
-<div id="outline-container-orgdd708b0" class="outline-2">
-<h2 id="orgdd708b0"><span class="section-number-2">5.</span> Inférence</h2>
+<div id="outline-container-org732fae3" class="outline-2">
+<h2 id="org732fae3"><span class="section-number-2">5.</span> Inférence</h2>
 <div class="outline-text-2" id="text-5">
 <ol class="org-ol">
 <li>Quelle est la probabilité <i>a priori</i> qu'une transaction donnée quelconque soit frauduleuse ?</li>
@@ -171,161 +171,13 @@ soit considérée comme frauduleuse ?</li>
 </div>
 </div>
 
-<div id="outline-container-org7333979" class="outline-2">
-<h2 id="org7333979"><span class="section-number-2">6.</span> Implémentation du modèle avec <code>pyAgrum</code></h2>
+<div id="outline-container-org2791130" class="outline-2">
+<h2 id="org2791130"><span class="section-number-2">6.</span> Implémentation du modèle avec <code>pyAgrum</code></h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Implémenter le modèle de détection de fraude avec la librairie <code>pyAgrum</code>, puis vérifier les calculs
 d'inférence réalisés précédemment avec <code>GeNIe</code>.
 </p>
-
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pyAgrum <span style="color: #F0DFAF; font-weight: bold;">as</span> gum
-</pre>
-</div>
-
-<p>
-Création du réseau bayésien en instanciant un objet <code>BayesNet</code> : 
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">rb_fraude_cb</span> = gum.BayesNet(<span style="color: #CC9393;">"R&#233;seau bay&#233;sien fraude CB"</span>)
-</pre>
-</div>
-
-<p>
-Création des variables aléatoires associées au problème en utilisant des objets de type
-<code>LabelizedVariable</code> :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">va_FR</span> = gum.LabelizedVariable(<span style="color: #CC9393;">"FR"</span>, <span style="color: #CC9393;">"Transaction courante frauduleuse ?"</span>, 2)
-<span style="color: #DFAF8F;">va_VE</span> = gum.LabelizedVariable(<span style="color: #CC9393;">"VE"</span>, <span style="color: #CC9393;">"Propri&#233;taire CB &#224; l'&#233;tranger ?"</span>, 2)
-<span style="color: #DFAF8F;">va_AE</span> = gum.LabelizedVariable(<span style="color: #CC9393;">"AE"</span>, <span style="color: #CC9393;">"Transaction courante concerne un achat &#224; l'&#233;tranger ?"</span>, 2)
-<span style="color: #DFAF8F;">va_AI</span> = gum.LabelizedVariable(<span style="color: #CC9393;">"AI"</span>, <span style="color: #CC9393;">"Transaction courante concerne un achat sur internet ?"</span>, 2)
-<span style="color: #DFAF8F;">va_PO</span> = gum.LabelizedVariable(<span style="color: #CC9393;">"PO"</span>, <span style="color: #CC9393;">"Propri&#233;taire CB poss&#232;de un PC ?"</span>, 2)
-<span style="color: #DFAF8F;">va_AOD</span> = gum.LabelizedVariable(<span style="color: #CC9393;">"AOD"</span>, <span style="color: #CC9393;">"Achat informatique r&#233;cent ?"</span>, 2)
-</pre>
-</div>
-<p>
-Toutes les variables sont binaires ce qui explique le troisième argument de la méthode
-<code>LabelizedVariable</code> fixé à la valeur 2. Par défaut les variables sont alors à valeurs dans
-l'ensemble \(\set{0,1}\) ce qui n'est pas forcément très intuitif. Nous pouvons améliorer cela en
-changeant la valeur <code>0</code> par le label <code>non</code> et la valeur <code>1</code> par le label <code>oui</code> <i>via</i> la méthode
-<code>changeLabel</code> de la façon suivante :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">for</span> va <span style="color: #F0DFAF; font-weight: bold;">in</span> [va_FR, va_VE, va_AE, va_AI, va_PO, va_AOD]:
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> va.changeLabel(0, <span style="color: #CC9393;">"non"</span>)
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> va.changeLabel(1, <span style="color: #CC9393;">"oui"</span>)
-</pre>
-</div>
-
-<p>
-Ajout des variables aléatoires dans le RB avec la méthode <code>add</code> :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">for</span> va <span style="color: #F0DFAF; font-weight: bold;">in</span> [va_FR, va_VE, va_AE, va_AI, va_PO, va_AOD]:
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> rb_fraude_cb.add(va)
-</pre>
-</div>
-
-<p>
-Spécification des liens de dépendances entre variables aléatoires dans le RB avec la méthode
-<code>addArc</code> comme suit :
-</p>
-<div class="org-src-container">
-<pre class="src src-python">rb_fraude_cb.addArc(<span style="color: #CC9393;">"VE"</span>, <span style="color: #CC9393;">"AE"</span>)
-rb_fraude_cb.addArc(<span style="color: #CC9393;">"VE"</span>, <span style="color: #CC9393;">"FR"</span>)
-rb_fraude_cb.addArc(<span style="color: #CC9393;">"FR"</span>, <span style="color: #CC9393;">"AE"</span>)
-rb_fraude_cb.addArc(<span style="color: #CC9393;">"FR"</span>, <span style="color: #CC9393;">"AI"</span>)
-rb_fraude_cb.addArc(<span style="color: #CC9393;">"PO"</span>, <span style="color: #CC9393;">"AI"</span>)
-rb_fraude_cb.addArc(<span style="color: #CC9393;">"PO"</span>, <span style="color: #CC9393;">"AOD"</span>)
-</pre>
-</div>
-
-<p>
-Définition des lois de probabilité conditionnelle (LPC) de chaque variable. 
-</p>
-<div class="org-src-container">
-<pre class="src src-python">rb_fraude_cb.cpt(<span style="color: #CC9393;">"VE"</span>)[:] = [0.95, 0.05]
-
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"FR"</span>)[{<span style="color: #CC9393;">"VE"</span>:<span style="color: #CC9393;">"non"</span>}] = [0.998, 0.002]
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"FR"</span>)[{<span style="color: #CC9393;">"VE"</span>:<span style="color: #CC9393;">"oui"</span>}] = [0.99, 0.01]
-
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AE"</span>)[{<span style="color: #CC9393;">"VE"</span>:<span style="color: #CC9393;">"non"</span>, <span style="color: #CC9393;">"FR"</span>:<span style="color: #CC9393;">"non"</span>}] = [0.99, 0.01]
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AE"</span>)[{<span style="color: #CC9393;">"VE"</span>:<span style="color: #CC9393;">"non"</span>, <span style="color: #CC9393;">"FR"</span>:<span style="color: #CC9393;">"oui"</span>}] = [0.9, 0.1]
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AE"</span>)[{<span style="color: #CC9393;">"VE"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"FR"</span>:<span style="color: #CC9393;">"non"</span>}] = [0.1, 0.9]
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AE"</span>)[{<span style="color: #CC9393;">"VE"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"FR"</span>:<span style="color: #CC9393;">"oui"</span>}] = [0.1, 0.9]
-
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AI"</span>)[{<span style="color: #CC9393;">"FR"</span>:<span style="color: #CC9393;">"non"</span>, <span style="color: #CC9393;">"PO"</span>:<span style="color: #CC9393;">"non"</span>}] = [0.99, 0.01]
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AI"</span>)[{<span style="color: #CC9393;">"FR"</span>:<span style="color: #CC9393;">"non"</span>, <span style="color: #CC9393;">"PO"</span>:<span style="color: #CC9393;">"oui"</span>}] = [0.9, 0.1]
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AI"</span>)[{<span style="color: #CC9393;">"FR"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"PO"</span>:<span style="color: #CC9393;">"non"</span>}] = [0.89, 0.11]
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AI"</span>)[{<span style="color: #CC9393;">"FR"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"PO"</span>:<span style="color: #CC9393;">"oui"</span>}] = [0.8, 0.2]
-
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"PO"</span>)[:] = [0.25, 0.75]
-
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AOD"</span>)[{<span style="color: #CC9393;">"PO"</span>:<span style="color: #CC9393;">"non"</span>}] = [0.99, 0.01]
-rb_fraude_cb.cpt(<span style="color: #CC9393;">"AOD"</span>)[{<span style="color: #CC9393;">"PO"</span>:<span style="color: #CC9393;">"oui"</span>}] = [0.9, 0.1]
-</pre>
-</div>
-
-<p>
-Initialisation d'un moteur d'inférence probabiliste adapté à notre RB. Nous utilisons dans cet
-exemple la méthode appelée <i>lazy propagation</i> qui est une technique de calculs probabilistes exacts
-partageant des concepts communs avec la méthode d'élimination des variables que nous étudirons en
-détails dans le cours sur l'inférence.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">inf_rb_fraude_cb</span> = gum.LazyPropagation(rb_fraude_cb)
-</pre>
-</div>
-<p>
-L'objet <code>inf_rb_fraude_cb</code> peut être vu comme une machine à calculer des probabilités dans le
-RB <code>rb_fraude_cb</code> et va donc nous servir à répondre aux questions de la section suivante.
-</p>
-
-<p>
-Calculons les lois marginales de chacune des variables à l'aide de la méthode <code>makeInference</code> et
-affichons la loi de la v.a. <code>FR</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-python" id="orgfc5174d">inf_rb_fraude_cb.makeInference() 
-<span style="color: #DCDCCC; font-weight: bold;">print</span>(inf_rb_fraude_cb.posterior(<span style="color: #CC9393;">"FR"</span>))
-</pre>
-</div>
-<p>
-Nous obtenons :
-</p>
-<div class="org-src-container">
-<pre class="src src-python">
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> FR               |
-non      |oui      |
----------|---------|
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>0.9976  | 0.0024  |
-</pre>
-</div>
-
-<p>
-Nous cherchons à présent la probabilité d'une transaction frauduleuse sachant un certain nombre
-d'observations. Nous allons donc renseigner ces <i>évidences</i> dans le moteur d'inférence et refaire
-le calcul de la loi marginal de la v.a. <code>FR</code>.  
-</p>
-<div class="org-src-container">
-<pre class="src src-python" id="org244b824">inf_rb_fraude_cb.setEvidence({<span style="color: #CC9393;">"AE"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"AI"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"PO"</span>:<span style="color: #CC9393;">"non"</span>})
-inf_rb_fraude_cb.makeInference() 
-<span style="color: #DCDCCC; font-weight: bold;">print</span>(inf_rb_fraude_cb.posterior(<span style="color: #CC9393;">"FR"</span>))
-</pre>
-</div>
-<p>
-Ces observations se traduisent naturellement par une augmentation de la probabilité de fraude :
-</p>
-<div class="org-src-container">
-<pre class="src src-python">
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> FR               |
-non      |oui      |
----------|---------|
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>0.8847  | 0.1153  |
-</pre>
-</div>
 </div>
 </div>
 </div>
