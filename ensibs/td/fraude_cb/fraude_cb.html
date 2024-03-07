@@ -44,17 +44,17 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7942feb">1. Problématique</a></li>
-<li><a href="#org5bccc4f">2. Modélisation</a></li>
-<li><a href="#org4fe5576">3. Indépendances conditionnelles</a></li>
-<li><a href="#org5c7e92a">4. Implémentation du modèle avec <code>GeNIe</code></a></li>
-<li><a href="#orgba37bd3">5. Inférence</a></li>
-<li><a href="#orgb69aea0">6. Implémentation du modèle avec <code>pyAgrum</code></a></li>
+<li><a href="#org576a1b7">1. Problématique</a></li>
+<li><a href="#org83ddd02">2. Modélisation</a></li>
+<li><a href="#orgf26db65">3. Indépendances conditionnelles</a></li>
+<li><a href="#orgc75a5b3">4. Implémentation du modèle avec <code>GeNIe</code></a></li>
+<li><a href="#orgdd708b0">5. Inférence</a></li>
+<li><a href="#org7333979">6. Implémentation du modèle avec <code>pyAgrum</code></a></li>
 </ul>
 </div>
 </div>
 
-<div id="org602bea4" class="figure">
+<div id="orgac17139" class="figure">
 <p><img src="./fraude_cb.png" alt="fraude_cb.png" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
@@ -62,8 +62,8 @@
 
 
 
-<div id="outline-container-org7942feb" class="outline-2">
-<h2 id="org7942feb"><span class="section-number-2">1.</span> Problématique</h2>
+<div id="outline-container-org576a1b7" class="outline-2">
+<h2 id="org576a1b7"><span class="section-number-2">1.</span> Problématique</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Chaque année, les banques perdent d'importantes sommes d'argents suite
@@ -105,8 +105,8 @@ l'informatique dernièrement contre \(0.1\%\) pour ceux ne possédant pas d'ordi
 </div>
 </div>
 
-<div id="outline-container-org5bccc4f" class="outline-2">
-<h2 id="org5bccc4f"><span class="section-number-2">2.</span> Modélisation</h2>
+<div id="outline-container-org83ddd02" class="outline-2">
+<h2 id="org83ddd02"><span class="section-number-2">2.</span> Modélisation</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>Construire un RB (graphe et LPC) visant à détecter des transactions frauduleuses. Le RB sera
@@ -126,8 +126,8 @@ représentation par RB.</li>
 </div>
 </div>
 
-<div id="outline-container-org4fe5576" class="outline-2">
-<h2 id="org4fe5576"><span class="section-number-2">3.</span> Indépendances conditionnelles</h2>
+<div id="outline-container-orgf26db65" class="outline-2">
+<h2 id="orgf26db65"><span class="section-number-2">3.</span> Indépendances conditionnelles</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
@@ -144,8 +144,8 @@ Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
 </div>
 
 
-<div id="outline-container-org5c7e92a" class="outline-2">
-<h2 id="org5c7e92a"><span class="section-number-2">4.</span> Implémentation du modèle avec <code>GeNIe</code></h2>
+<div id="outline-container-orgc75a5b3" class="outline-2">
+<h2 id="orgc75a5b3"><span class="section-number-2">4.</span> Implémentation du modèle avec <code>GeNIe</code></h2>
 <div class="outline-text-2" id="text-4">
 <ol class="org-ol">
 <li>Utiliser le logiciel <code>GeNIe</code> pour construire le modèle sur la détection de fraude.</li>
@@ -153,8 +153,8 @@ Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
 </div>
 </div>
 
-<div id="outline-container-orgba37bd3" class="outline-2">
-<h2 id="orgba37bd3"><span class="section-number-2">5.</span> Inférence</h2>
+<div id="outline-container-orgdd708b0" class="outline-2">
+<h2 id="orgdd708b0"><span class="section-number-2">5.</span> Inférence</h2>
 <div class="outline-text-2" id="text-5">
 <ol class="org-ol">
 <li>Quelle est la probabilité <i>a priori</i> qu'une transaction donnée quelconque soit frauduleuse ?</li>
@@ -171,8 +171,8 @@ soit considérée comme frauduleuse ?</li>
 </div>
 </div>
 
-<div id="outline-container-orgb69aea0" class="outline-2">
-<h2 id="orgb69aea0"><span class="section-number-2">6.</span> Implémentation du modèle avec <code>pyAgrum</code></h2>
+<div id="outline-container-org7333979" class="outline-2">
+<h2 id="org7333979"><span class="section-number-2">6.</span> Implémentation du modèle avec <code>pyAgrum</code></h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Implémenter le modèle de détection de fraude avec la librairie <code>pyAgrum</code>, puis vérifier les calculs
@@ -288,8 +288,8 @@ Calculons les lois marginales de chacune des variables à l'aide de la méthode 
 affichons la loi de la v.a. <code>FR</code>.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org2e088a3">inf_rb_fraude_cb.makeInference() 
-<span style="color: #F0DFAF; font-weight: bold;">print</span>(inf_rb_fraude_cb.posterior(<span style="color: #CC9393;">"FR"</span>))
+<pre class="src src-python" id="orgfc5174d">inf_rb_fraude_cb.makeInference() 
+<span style="color: #DCDCCC; font-weight: bold;">print</span>(inf_rb_fraude_cb.posterior(<span style="color: #CC9393;">"FR"</span>))
 </pre>
 </div>
 <p>
@@ -310,9 +310,9 @@ d'observations. Nous allons donc renseigner ces <i>évidences</i> dans le moteur
 le calcul de la loi marginal de la v.a. <code>FR</code>.  
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgbe4262d">inf_rb_fraude_cb.setEvidence({<span style="color: #CC9393;">"AE"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"AI"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"PO"</span>:<span style="color: #CC9393;">"non"</span>})
+<pre class="src src-python" id="org244b824">inf_rb_fraude_cb.setEvidence({<span style="color: #CC9393;">"AE"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"AI"</span>:<span style="color: #CC9393;">"oui"</span>, <span style="color: #CC9393;">"PO"</span>:<span style="color: #CC9393;">"non"</span>})
 inf_rb_fraude_cb.makeInference() 
-<span style="color: #F0DFAF; font-weight: bold;">print</span>(inf_rb_fraude_cb.posterior(<span style="color: #CC9393;">"FR"</span>))
+<span style="color: #DCDCCC; font-weight: bold;">print</span>(inf_rb_fraude_cb.posterior(<span style="color: #CC9393;">"FR"</span>))
 </pre>
 </div>
 <p>
