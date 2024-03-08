@@ -308,7 +308,7 @@
 #  | $\boldsymbol{Q} = (X_{1}, X_{2}, X_{3})$ | $\boldsymbol{E} = \varnothing$           |
 1. La complexité d'un réseau bayésien dépend-elle du nombre de liens entre les variables ?
 
-** Correction                                                      :noexport:
+** Correction
 
 1. Réponses :
    - $\mathcal{X} = \{x_{1},x_{2}\}$ et $\mathcal{Y} = \{y_{1},y_{2},y_{3}\}$.
@@ -394,7 +394,7 @@ L'objectif est d'appliquer l'algorithme d'élimination des variables sur le RB p
    Dans chaque cas, essayez de trouver un ordre d'élimination limitant au maximum la taille des
    potentiels intermédiaires. 
 
-** Correction                                                      :noexport:
+** Correction
 
 1. Commençons par écrire la factorisation de la loi jointe des variables $E$, $L$, $A$ et $B$ dans
    le RB de la Figure [[fig_rb_hector_simple]] :
