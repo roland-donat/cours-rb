@@ -300,6 +300,8 @@ Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
 Implémenter le modèle de détection de fraude avec la librairie =pyAgrum=, puis vérifier les calculs
 d'inférence réalisés précédemment avec =GeNIe=.
 
+** Correction                                                      :noexport:
+
 #+BEGIN_SRC python :results output silent :tangle ./ex_fraude.py :session ex_fraude :exports both :padline no :comments org
 import pyAgrum as gum
 #+END_SRC

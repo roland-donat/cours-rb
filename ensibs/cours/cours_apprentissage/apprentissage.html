@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Modélisation stochastique et approche bayésienne  <br> <br> <br> <font size="10">Apprentissage automatique des lois de probabilité conditionnelles</font></title>
+<meta name="author" content="Roland Donat"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="https://roland-donat.github.io/ubs/Charte_graphique/ensibs/ensibs_reveal.css"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: {
+Macros: {
+pa: ["\\text{pa}"],
+Pa: ["\\text{Pa}"],
+lrpar: ["\\left( #1 \\right)", 1],
+lrPar: ["\\left( #1 \\right)", 1],
+lrbrack: ["[ #1 ]", 1],
+lrBrack: ["\\left[ #1 \\right]", 1],
+set: ["\\left\\lbrace #1 \\right\\rbrace", 1],
+Prob: ["P"],
+inter: ["\\cap"],
+union: ["\\cup"],
+Dom: ["\\text{Dom}"],
+mbf: ["\\boldsymbol{#1}", 1],
+argmin: ["\\underset{#1}{\arg\min}~", 1],
+argmax: ["\\underset{#1}{\arg\max}~", 1],
+mathbfcal: ["\\boldsymbol{\\mathcal{#1}}", 1],
+sm: ["\\setminus"],
+}
+}
+});
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="https://roland-donat.github.io/ubs/Charte_graphique/ensibs/ensibs-ppt-couv.jpg"><h1 class="title">Modélisation stochastique et approche bayésienne  <br> <br> <br> <font size="10">Apprentissage automatique des lois de probabilité conditionnelles</font></h1><p class="subtitle"></p>
+<h2 class="author">Roland Donat</h2><h2 class="date"> <br>Spécialité Cyber Data</h2>
+</section>
+<section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-orgc1839e4">Objectifs de la séance</a></li>
+<li><a href="#/slide-orge1de11e">Introduction</a></li>
+<li><a href="#/slide-org683450b">Rappels statistiques</a></li>
+<li><a href="#/slide-orgb4d95d2">Apprentissage des LPC - Données complètes</a></li>
+<li><a href="#/slide-org7f57e32">Résumé de la séance</a></li>
+<li><a href="#/slide-org88546da">Apprentissage des LPC - Données incomplètes</a></li>
+<li><a href="#/slide-orga1a9c76">Bibliographie</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<section>
+<section id="slide-orgc1839e4">
+<h2 id="orgc1839e4">Objectifs de la séance</h2>
+<div class="column" style="float:left; width: 50%">
+
+<ul>
+<li>Comprendre les problématiques liées à la construction pratique d'un réseau bayésien</li>
+<li>Estimer automatiquement les lois de probabilité conditionnelles (LPC) à partir de données
+observées sur le phénomène étudié</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width: 50%">
+
+
+<div id="org421a791" class="figure">
+<p><img src="./fig/objectives.png" alt="Objectives" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orge1de11e">
+<h2 id="orge1de11e">Introduction</h2>
+
+<div id="org5af63fc" class="figure">
+<p><img src="./fig/machine_learning.png" alt="Inférence" width="70%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org6b17c2f">
+<h3 id="org6b17c2f">Problématique</h3>
+<div class="block-definition" id="orgace58e1">
+<p>
+<h4>Objectif</h4>
+</p>
+
+<ul>
+<li>Modéliser un phénomène aléatoire impliquant différentes variables \(X_{1}, \ldots, X_{D}\)</li>
+<li>Utiliser un réseau bayésien afin de représenter au mieux les relations entre les variables</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org968b9ec">
+<p>
+<h4>Problèmes</h4>
+</p>
+
+<ul>
+<li>Comment déterminer la structure du réseau bayésien (i.e. le graphe)?</li>
+<li>Comment estimer les lois de probabilité conditionnelles (LPC) \(P(X_{d}|\text{pa}(X_{d})),~ d = 1,
+  \ldots, D\) ?</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="org27ad374">
+<p>
+<h4>Approches envisageables</h4>
+</p>
+
+<ul>
+<li>Approche par expertise : utilisation d'avis d'experts et connaissances métiers</li>
+<li>Approche statistique : utilisation de bases de données (contenant éventuellement des
+informations incomplètes)</li>
+<li>Approche mixte : expertise + bases de données</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orge41920d">
+<h4 id="orge41920d">Problématique</h4>
+<p>
+<div class="slidesubtitle">Exemple : Vente d'un livret</div>
+</p>
+
+
+<div id="org7d4ae90" class="figure">
+<p><img src="./fig/rb_vente_var.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org72ebcd0">
+<h4 id="org72ebcd0">Problématique</h4>
+<p>
+<div class="slidesubtitle">Apprentissage de la structure</div>
+</p>
+
+
+<div id="orge56e96a" class="figure">
+<p><img src="./fig/rb_vente_graphe_app.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org65cc5de">
+<h4 id="org65cc5de">Problématique</h4>
+<p>
+<div class="slidesubtitle">Apprentissage des LPC (structure fixée)</div>
+</p>
+
+
+<div id="org3053dcf" class="figure">
+<p><img src="./fig/rb_vente_lpc_app.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org08ac12a">
+<h4 id="org08ac12a">Problématique</h4>
+<p>
+<div class="slidesubtitle">Apprentissage complet du réseau bayésien</div>
+</p>
+
+
+<div id="org9c3de94" class="figure">
+<p><img src="./fig/rb_vente_graphe_lpc_app.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orga2933b1">
+<h3 id="orga2933b1">Construction par expertise</h3>
+<p>
+<div class="slidesubtitle">Acquisition de l'information</div>
+</p>
+
+<div class="block-definition" id="org1ab622b">
+<p>
+<h4>Acquisition de l'information</h4>
+</p>
+
+<ul>
+<li>Trouver des personnes expertes fiables et coopératives</li>
+<li>Familiariser ces personnes à la notion de probabilité</li>
+<li>Tenir compte de leurs biais éventuels (souvent inconscients)</li>
+<li>Utiliser un outil pour faciliter le recueil des informations</li>
+<li>Exemple : échelle de probabilité :</li>
+
+</ul>
+
+
+<div id="org4f5a790" class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/echelle_prob.png" alt="Echelle prob" width="90%" />
+</p>
+</div>
+
+<p>
+ <br>
+</p>
+
+</div>
+
+
+
+</section>
+<section id="slide-org79e21c2">
+<h4 id="org79e21c2">Construction par expertise</h4>
+<p>
+<div class="slidesubtitle">Attention au connexions convergentes (V-structures)</div>
+</p>
+
+<div class="block-alert" id="orgc3a06c5">
+<p>
+<h4>Problème</h4>
+</p>
+
+<ul>
+<li>L'expertise métier permet en général de construire des RB fidèles à la réalité opérationnelle</li>
+<li>En revanche, l'humain a intuitivement tendance à introduire des connexions convergentes
+<ul>
+<li>Exemple : Soit \(Y\) un phénomène à expliquer et \(X_{1}, \ldots, X_{D}\), \(D\) facteurs explicatifs possibles</li>
+<li>Structure naturelle : \(X_{1} \to Y, \ldots, X_{D} \to Y\)</li>
+<li>Risque d'explosion combinatoire : Définir \(P(Y|X_{1},\ldots,X_{D})\) nécessite \(2^{D}\) valeurs
+dans le cas où les variables sont binaires</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="org8e27cb0">
+<p>
+<h4>Solutions possibles</h4>
+</p>
+
+<ul>
+<li>Inverser les flèches et utiliser une structure naïve : \(Y \to X_{1}, \ldots, Y \to X_{D}\) en
+assumant les simplifications induites</li>
+<li>Introduction d'un modèle de LPC particulier, e.g. modèle OU-bruité</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org683450b">
+<h2 id="org683450b">Rappels statistiques</h2>
+
+<div id="org43f3128" class="figure">
+<p><img src="./fig/stats.png" alt="Inférence" width="70%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orge5f73ee">
+<h3 id="orge5f73ee">Rappels statistiques</h3>
+<p>
+<div class="slidesubtitle">Tableau de données</div>
+</p>
+
+<div class="block-definition" id="orgcd32944">
+<p>
+<h4>Caractéristiques des données</h4>
+</p>
+
+<ul>
+<li>Un tableau de données, notée \(\mathcal{D}\), est un ensemble de \(N\)
+observations/individus/exemples caractérisés par \(D\) variables</li>
+<li><p>
+Formellement, un tableau de données peut se mettre sous la forme d'une matrice :
+</p>
+<div>
+\begin{equation*}
+\mathcal{D} =
+\lrBrack{
+\begin{array}{ccccc}
+x_{1,1} & \ldots & x_{1,d} & \ldots & x_{1,D} \\
+\vdots  &        & \vdots  &        & \vdots \\
+x_{n,1} & \ldots & x_{n,d} & \ldots & x_{n,D} \\
+\vdots  &        & \vdots  &        & \vdots \\
+x_{N,1} & \ldots & x_{N,d} & \ldots & x_{N,D} \\
+\end{array}
+}
+\end{equation*}
+
+</div>
+<ul>
+<li>Le vecteur colonne \(\mbf{x}_{\cdot, d} = \lrPar{x_{1,d}, \ldots, x_{n,d}, \ldots, x_{N,d}}\)
+représente toutes les observations de la variable \(d\)</li>
+<li>Le vecteur ligne \(\mbf{x}_{n, \cdot} = \lrPar{x_{n,1}, \ldots, x_{n,d}, \ldots, x_{n,D}}\)
+représente la $n$-ème observation de la BdD</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+
+</section>
+<section id="slide-org1a68903">
+<h4 id="org1a68903">Rappels statistiques</h4>
+<p>
+<div class="slidesubtitle">Tableau de données</div>
+</p>
+
+<div class="column" style="float:left; width: 45%">
+
+
+<div id="org8444547" class="figure">
+<p><img src="./fig/data_ventes_ex.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+
+</div>
+
+<div class="column" style="float:right; width: 50%">
+
+<div class="block-example" id="orgc31c1a8">
+<p>
+<h4>Caractéristiques des données</h4>
+</p>
+
+<ul>
+<li>Nombre de variables : 3</li>
+<li>Nombre d'individus : 14</li>
+<li>Variable Âge à valeurs dans \(\set{[18,25] ; [26, 59] ; 60+}\)</li>
+<li>Variable Épargne à valeurs dans \(\set{\text{non}, \text{oui}}\)</li>
+<li>Variable Vente livret à valeurs dans \(\set{\text{échec}, \text{succès}}\)</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd5fafe8">
+<h3 id="orgd5fafe8">Rappels statistiques</h3>
+<p>
+<div class="slidesubtitle">Modélisation statistique : objectifs et démarche</div>
+</p>
+
+<div class="block-definition" id="org34f2df9">
+<p>
+<h4>Objectifs</h4>
+</p>
+
+<ol>
+<li>Résumer quantitativement l'information contenue dans une BdD en utilisant un modèle probabiliste</li>
+<li>Exploiter le modèle pour déduire de nouvelles connaissances</li>
+
+</ol>
+
+</div>
+
+<div class="block-definition" id="org5f633ec">
+<p>
+<h4>Démarche</h4>
+</p>
+
+<ul>
+<li>Considérer les données comme des réalisations de variables aléatoires (v.a.) associées à une
+certaine loi jointe</li>
+<li>Formellement, cela signifie que chaque observation \(\mbf{x}_{n, \cdot} = \lrPar{x_{n,1}, \ldots,
+  x_{n,D}}\) est supposée être une réalisation d'une suite de v.a. \(\mbf{X} =
+  \lrPar{X_{1},\ldots,X_{D}}\) de loi jointe \(\mathcal{L}\lrPar{\mbf{\theta}}\) où \(\mbf{\theta}\)
+représente les paramètres de la loi</li>
+<li>Notation : \(\mbf{X} = \lrPar{X_{1},\ldots,X_{D}} \sim \mathcal{L}\lrPar{\mbf{\theta}}\)</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org9859572">
+<h3 id="org9859572">Rappels statistiques</h3>
+<p>
+<div class="slidesubtitle">Modélisation statistique : remarques et exemple</div>
+</p>
+
+<div class="block-example" id="org6baf2d9">
+<p>
+<h4>Remarques</h4>
+</p>
+
+<ul>
+<li>Si les observations dans les données sont indépendants, on parle de données i.i.d. (Indépendantes
+et Identiquement Distribuées)</li>
+<li>Si les caractéristiques (variables) des observations sont indépendantes, alors chaque variable \(X_{d}\) suit une loi \(\mathcal{L}_{d}\lrpar{\mbf{\theta}_{d}}\) (Notation : \(X_{d} \sim \mathcal{L}_{d}\lrpar{\mbf{\theta}_{d}}\))</li>
+
+</ul>
+
+</div>
+
+
+<div class="block-example" id="orgb6db76c">
+<p>
+<h4>Modèle gaussien</h4>
+</p>
+
+<ul>
+<li>Données unidimensionnelles (\(D = 1\))
+<ul>
+<li>\(\mbf{X} = X_{1} \sim \mathcal{N}\lrPar{\mu, \sigma}\)</li>
+<li>\(\mbf{\theta} = (\mu,\sigma)\) : moyenne et écart-type</li>
+
+</ul></li>
+<li>Données multidimensionnelles (\(D \ge 1\))
+<ul>
+<li>\(\mbf{X} = \lrPar{X_{1},\ldots,X_{D}} \sim \mathcal{N}\lrPar{\mbf{\mu}, \mbf{\Sigma}}\)</li>
+<li>\(\mbf{\theta} = (\mbf{\mu},\mbf{\Sigma})\) : vecteur des moyennes et matrice de
+variance-covariance</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org3b94ebb">
+<h3 id="org3b94ebb">Rappels statistiques</h3>
+<p>
+<div class="slidesubtitle">Estimation des paramètres d'un modèle</div>
+</p>
+
+<div class="block-definition" id="org747fda1">
+<p>
+<h4>Contexte</h4>
+</p>
+
+<ul>
+<li>Données : On dispose d'un jeu de données \(\mathcal{D} = \lrpar{\mbf{x}_{1,\cdot}, \ldots,
+  \mbf{x}_{N,\cdot}}\) où chaque observation \(\mbf{x}_{n,\cdot}\) est caractérisée par \(D\) variables \(\lrPar{x_{n,1},\ldots,x_{n,D}}\)</li>
+<li>Modélisation : On suppose que \(\mathcal{D}\) est une suite de \(N\) réalisations i.i.d. du vecteur
+aléatoire \(\mbf{X} = \lrpar{X_{1}, \ldots, X_{D}}\) distribué selon la loi \(\mathcal{L}\lrPar{\mbf{\theta}}\)</li>
+<li><b>Problématique :</b> Comment estimer les paramètres \(\mbf{\theta}\) à partir des données \(\mathcal{D}\)?</li>
+
+</ul>
+
+</div>
+
+
+<div class="block-definition" id="org1cac6ba">
+<p>
+<h4>Solution</h4>
+</p>
+
+<ul>
+<li>Construire un estimateur de \(\mbf{\theta}\)</li>
+<li>Approche classique : Déterminer l'estimateur du maximum de vraisemblance de \(\mbf{\theta}\),
+souvent noté \(\mbf{\theta}^{\text{MV}}\)</li>
+
+</ul>
+
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org344d4dd">
+<h3 id="org344d4dd">Rappels statistiques</h3>
+<p>
+<div class="slidesubtitle">Notion de vraisemblance</div>
+</p>
+
+<div class="block-definition" id="orge30ed9e">
+<p>
+<h4>Vraisemblance d'un modèle par rapport à une observation</h4>
+</p>
+
+<ul>
+<li>Soit \(\mathcal{D} = \lrpar{\mbf{x}_{1,\cdot}, \ldots, \mbf{x}_{N,\cdot}}\) un ensemble de données
+i.i.d. modélisées par les v.a. \(\mbf{X} = \lrpar{X_{1}, \ldots, X_{D}} \sim \mathcal{L}\lrPar{\mbf{\theta}}\)</li>
+<li>La vraisemblance mesure la plausibilité d'un modèle probabiliste (caractérisé par des paramètres
+\(\mbf{\theta}\)) par rapport à l'observation \(\mbf{x}_{n,\cdot} \in \mathcal{D}\)
+<ul>
+<li>La vraisemblance est notée \(L\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}}\)</li>
+
+</ul></li>
+<li>En pratique le logarithme de la vraisemblance est souvent utilisé, on parle alors de
+log-vraisemblance \(\ell\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}} = \ln
+  L\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}}\)</li>
+
+</ul>
+
+</div>
+
+
+<div class="block-example" id="orgcfd17b0">
+<p>
+<h4>Interprétation</h4>
+</p>
+
+<ul>
+<li>une vraisemblance <b>élevée</b> signifie que le modèle choisi est <b>crédible</b> par rapport
+à la donnée observée</li>
+<li>une vraisemblance <b>faible</b> signifie que le modèle choisi est <b>peu crédible</b> par
+rapport à la donnée observée</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org6d41ccb">
+<h4 id="org6d41ccb">Rappels statistiques</h4>
+<p>
+<div class="slidesubtitle">Notion de vraisemblance</div>
+</p>
+
+<div class="block-definition" id="org0dca50d">
+<p>
+<h4>Vraisemblance d'un modèle discret et fini par rapport à une observation</h4>
+</p>
+
+<ul>
+<li>Si les v.a. \(\mbf{X} = \lrpar{X_{1}, \ldots, X_{D}}\) sont discrètes et finies, alors la
+vraisemblance du modèle \(\Prob\lrPar{X_{1},\ldots, X_{D}}\) sachant l'observation
+\(\mbf{x}_{n,\cdot}\) est donnée par :
+\[
+  L\lrPar{\Prob;\mbf{x}_{n,\cdot}} = \Prob\lrPar{X_{1} = x_{n,1},\ldots, X_{D} = x_{n,D}}, \quad
+  \text{(ici } \mbf{\theta} = \Prob \text{)}
+  \]</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:left; width: 60%">
+
+<div class="block-example" id="orgb8e4ca3">
+<p>
+<h4>Exemple : vraisemblance d'une observation</h4>
+</p>
+
+<ul>
+<li>Considérons la loi jointe ci-contre pour représenter le processus de vente d'un livret A :</li>
+
+<li>Observation :
+<ul>
+<li>Âge : [26,59]</li>
+<li>Épargne : non</li>
+<li>Vente livret A : échec</li>
+
+</ul></li>
+
+<li>Vraisemblance = 0.12</li>
+<li>Log-vraisemblance \(\simeq\) -2.12</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="column" style="float:right; width: 40%">
+
+
+<div id="org856dad9" class="figure">
+<p><img src="./fig/lj_vente_ex_hi_indiv.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+<section id="slide-org5f4f7fc">
+<h4 id="org5f4f7fc">Rappels statistiques</h4>
+<p>
+<div class="slidesubtitle">Notion de vraisemblance</div>
+</p>
+
+<div class="block-definition" id="org9c51bf1">
+<p>
+<h4>Vraisemblance d'un modèle par rapport à un jeu de données</h4>
+</p>
+
+<ul>
+<li>La vraisemblance d'un modèle (paramétré par \(\mbf{\theta}\)) par rapport à un jeu de données
+\(\mathcal{D}\), notée \(L\lrPar{\mbf{\theta};\mathcal{D}}\), correspond à la plausibilité du modèle
+\(\mbf{\theta}\) par rapport à l'observation des données \(\mathcal{D}\)</li>
+<li>Lorsque les données sont supposées i.i.d., la vraisemblance est définie par
+\[
+  L\lrPar{\mbf{\theta};\mathcal{D}} = \prod_{n = 1}^{N} L\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}}
+  \]</li>
+<li>Lorsque l'on s'intéresse à un jeu de données, on utilise souvent la log-vraisemblance qui est
+définie par : 
+\[
+  \ell\lrPar{\mbf{\theta};\mathcal{D}} = \ln L\lrPar{\mbf{\theta};\mathcal{D}} = \sum_{n = 1}^{N}
+  \ell\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}}
+  \]</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org0e1337d">
+<h4 id="org0e1337d">Rappels statistiques</h4>
+<p>
+<div class="slidesubtitle">Notion de vraisemblance</div>
+</p>
+
+<div class="block-example" id="orgeb129fe">
+<p>
+<h4>Interprétation de la vraisemblance</h4>
+</p>
+<ul>
+<li>La vraisemblance est un indicateur permettant de comparer la pertinence de différents modèles
+probabilistes en les confrontant aux données observées</li>
+<li>La vraisemblance ne peut être utilisée pour évaluer un modèle de manière isolée</li>
+<li>Dans l'absolu plus la log-vraisemblance d'un modèle par rapport à des \(\mathcal{D}\) est élevée,
+plus le modèle probabiliste considéré est adapté pour représenter le phénomène sous-jacent</li>
+
+</ul>
+
+</div>
+
+<div class="block-alert" id="org89c1b34">
+<p>
+<h4>Attention !</h4>
+</p>
+<ul>
+<li>La vraisemblance décroît avec le nombre de données observées, donc :
+<ul>
+<li>Il n'est pas pertinent de comparer des vraisemblances obtenues à partir de jeux de données de
+taille différente</li>
+<li>En revanche, il peut être intéressant de comparer des vraisemblances moyennes par donnée
+observée</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org9995152">
+<h4 id="org9995152">Rappels statistiques</h4>
+<p>
+<div class="slidesubtitle">Notion de vraisemblance</div>
+</p>
+
+<div class="block-example" id="org08cb060">
+<p>
+<h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
+</p>
+<ul>
+<li>Données : 3 individus définis par 3 variables</li>
+<li>Modèle : une loi jointe sur les variables caractérisant les individus</li>
+
+</ul>
+
+</div>
+
+
+<div class="column" style="float:left; width: 40%">
+<p>
+<b>Modèle probabiliste</b>
+</p>
+
+<div id="org8a36735" class="figure">
+<p><img src="./fig/lj_vente_ex.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+<div class="column" style="float:right; width: 50%">
+<p>
+<b>Données</b>
+</p>
+
+<div id="orgbc7116a" class="figure">
+<p><img src="./fig/vente_3var_ex_like.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-orgb8d5f8c">
+<h4 id="orgb8d5f8c">Rappels statistiques</h4>
+<p>
+<div class="slidesubtitle">Notion de vraisemblance</div>
+</p>
+
+<div class="block-example" id="orgd26e1b7">
+<p>
+<h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
+</p>
+<ul>
+<li>Données : 3 individus définis par 3 variables</li>
+<li>Modèle : une loi jointe sur les variables caractérisant les individus</li>
+
+</ul>
+
+</div>
+
+
+<div class="column" style="float:left; width: 40%">
+<p>
+<b>Modèle probabiliste</b>
+</p>
+
+<div id="org00fd65d" class="figure">
+<p><img src="./fig/lj_vente_ex_like_hi_1.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+<div class="column" style="float:right; width: 50%">
+<p>
+<b>Données</b>
+</p>
+
+<div id="org48dedde" class="figure">
+<p><img src="./fig/vente_3var_ex_like_hi1.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-org91afe28">
+<h4 id="org91afe28">Rappels statistiques</h4>
+<p>
+<div class="slidesubtitle">Notion de vraisemblance</div>
+</p>
+
+<div class="block-example" id="org0672034">
+<p>
+<h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
+</p>
+<ul>
+<li>Données : 3 individus définis par 3 variables</li>
+<li>Modèle : une loi jointe sur les variables caractérisant les individus</li>
+
+</ul>
+
+</div>
+
+
+<div class="column" style="float:left; width: 40%">
+<p>
+<b>Modèle probabiliste</b>
+</p>
+
+<div id="orgc6932dd" class="figure">
+<p><img src="./fig/lj_vente_ex_like_hi_2.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+<div class="column" style="float:right; width: 50%">
+<p>
+<b>Données</b>
+</p>
+
+<div id="orgd71bad1" class="figure">
+<p><img src="./fig/vente_3var_ex_like_hi2.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-org94632c5">
+<h4 id="org94632c5">Rappels statistiques</h4>
+<p>
+<div class="slidesubtitle">Notion de vraisemblance</div>
+</p>
+
+<div class="block-example" id="orgc382286">
+<p>
+<h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
+</p>
+<ul>
+<li>Données : 3 individus définis par 3 variables</li>
+<li>Modèle : une loi jointe sur les variables caractérisant les individus</li>
+
+</ul>
+
+</div>
+
+
+<div class="column" style="float:left; width: 40%">
+<p>
+<b>Modèle probabiliste</b>
+</p>
+
+<div id="orga9dc523" class="figure">
+<p><img src="./fig/lj_vente_ex_like_hi_3.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+<div class="column" style="float:right; width: 50%">
+<p>
+<b>Données</b>
+</p>
+
+<div id="orge4f8fbb" class="figure">
+<p><img src="./fig/vente_3var_ex_like_hi3.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-org68337e3">
+<h4 id="org68337e3">Rappels statistiques</h4>
+<p>
+<div class="slidesubtitle">Notion de vraisemblance</div>
+</p>
+
+<div class="block-example" id="orge5b0a26">
+<p>
+<h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
+</p>
+<ul>
+<li>Données : 3 individus définis par 3 variables</li>
+<li>Modèle : une loi jointe sur les variables caractérisant les individus</li>
+
+</ul>
+
+</div>
+
+
+<div class="column" style="float:left; width: 40%">
+<p>
+<b>Modèle probabiliste</b>
+</p>
+
+<div id="org3581420" class="figure">
+<p><img src="./fig/lj_vente_ex.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+<div class="column" style="float:right; width: 50%">
+<p>
+<b>Données</b>
+</p>
+
+<div id="org50561ac" class="figure">
+<p><img src="./fig/vente_3var_ex_like_value.png" alt="Data ventes ex" height="100%" />
+</p>
+</div>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf378753">
+<h3 id="orgf378753">Rappels statistiques</h3>
+<p>
+<div class="slidesubtitle">Estimateur du maximum de vraisemblance</div>
+</p>
+
+<div class="block-definition" id="org5c26054">
+<p>
+<h4>Estimateur du maximum de vraisemblance</h4>
+</p>
+<ul>
+<li>Soit \(\mathcal{D} = \lrpar{\mbf{x}_{1,\cdot}, \ldots, \mbf{x}_{N,\cdot}}\) un ensemble de données
+supposées i.i.d. modélisées par les v.a. \(\mbf{X} = \lrpar{X_{1}, \ldots, X_{D}} \sim
+  \mathcal{L}\lrPar{\mbf{\theta}}\)</li>
+<li>On dit que \(\mbf{\theta}^{\text{MV}}\) est un estimateur du maximum de vraisemblance (EMV) de
+\(\mbf{\theta}\) si \(\mbf{\theta}^{\text{MV}}\) maximise la vraisemblance, c-à-d.  
+\[
+  \mbf{\theta}^{\text{MV}} = \argmax{\mbf{\theta}} L\lrPar{\mbf{\theta};\mathcal{D}}
+  \]</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org5a955a7">
+<p>
+<h4>Propriétés des estimateurs du maximum de vraisemblance</h4>
+</p>
+<ul>
+<li><b>Convergents en probabilité</b> vers les paramètres à estimer</li>
+<li><b>Efficaces</b>, c'est-à-dire qu'ils convergent rapidement</li>
+<li><b>Asymptotiquement normaux</b>, c'est-à-dire qu'il est facile de construire des intervalles de confiance
+sur les estimations obtenues</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb4d95d2">
+<h2 id="orgb4d95d2">Apprentissage des LPC - Données complètes</h2>
+
+<div id="org154acee" class="figure">
+<p><img src="./fig/learning_data_complete.png" alt="Inférence" width="70%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org4f5dc6b">
+<h3 id="org4f5dc6b">Apprentissage des LPC - Données complètes</h3>
+<p>
+<div class="slidesubtitle">Hypothèses</div>
+</p>
+
+<div class="block-definition" id="org1c33514">
+<p>
+<h4>Hypothèses</h4>
+</p>
+<ul>
+<li>On modélise un phénomène aléatoire caractérisé par des variables aléatoires \(X_{1}, \ldots, X_{D}\)
+dont la loi est représentée par un RB</li>
+<li>Les variables aléatoires \(X_{1}, \ldots, X_{D}\) sont discrètes et finies</li>
+<li>Le graphe du RB est supposé connu</li>
+<li>On dispose d'un jeu de données \(\boldsymbol{D} = (\boldsymbol{x}_{1}, \ldots, \boldsymbol{x}_{N})\)
+où chaque observation \(\boldsymbol{x}_{n}\) est caractérisée par \(D\) variables \((x_{n,1},\ldots,x_{n,D})\)</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org76a8747">
+<p>
+<h4>Objectif</h4>
+</p>
+
+<ul>
+<li>On suppose que \(\mathcal{D}\) est une suite de \(N\) réalisations i.i.d. du
+vecteur aléatoire discret et fini \(\mbf{X} = \lrpar{X_{1}, \ldots, X_{D}}\) dont la loi est représentée par un RB \(\mathcal{M}\)
+défini par ses LPC</li>
+<li>On cherche à estimer les LPC de ce RB (car la structure est supposée connue),
+autrement dit :
+\[
+  \mbf{\theta} = \lrPar{\Prob\lrPar{X_{1}|\pa\lrPar{X_{1}}}, \ldots,
+  \Prob\lrPar{X_{D}|\pa\lrPar{X_{D}}}}
+  \]</li>
+<li>Notation alternative : \(\mbf{\theta} = \lrPar{\theta_{1}, \ldots, \theta_{d}, \ldots, \theta_{D}}\)
+avec \(\theta_{d} = \Prob\lrPar{X_{d}|\pa\lrPar{X_{d}}}\)</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org00792fd">
+<h3 id="org00792fd">Apprentissage des LPC - Données complètes</h3>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org0c2d5a4" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_mod.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org71e7ff1">
+<h4 id="org71e7ff1">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org66b6661" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex1.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orga56a73b">
+<h4 id="orga56a73b">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgfc378cd" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex2.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org747aebd">
+<h4 id="org747aebd">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgdde303c" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex3.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org563b882">
+<h4 id="org563b882">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org3f879a7" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex4.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orge1dcb21">
+<h4 id="orge1dcb21">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org7de336d" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex5.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgc2a434a">
+<h4 id="orgc2a434a">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgfa2b561" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex6.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org656e137">
+<h4 id="org656e137">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org383f51b" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex7.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orga0ef322">
+<h4 id="orga0ef322">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org9f21ccf" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex8.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org087f8de">
+<h3 id="org087f8de">Apprentissage des LPC - Données complètes</h3>
+<p>
+<div class="slidesubtitle">Méthode du maximum de vraisemblance dans un RB</div>
+</p>
+
+<div class="block-definition" id="org61dcb0f">
+<p>
+<h4>Méthode du maximum de vraisemblance</h4>
+</p>
+<ul>
+<li><p>
+La vraisemblance d'un RB \(\mathcal{M}\lrPar{\theta_{1},\ldots,\theta_{D}}\) par rapport aux données
+\(\mathcal{D} = (\boldsymbol{x}_{1}, \ldots, \boldsymbol{x}_{N})\) i.i.d. est définie par 
+</p>
+<div>
+\begin{align*}
+  L\lrPar{\theta_{1},\ldots,\theta_{D};\mathcal{D}} & = \prod_{n = 1}^{N} \prod_{d = 1}^{D} L\lrPar{\theta_{1},\ldots,\theta_{D};\mbf{x}_{n,\cdot}} \\
+  & = \prod_{n = 1}^{N} \prod_{d = 1}^{D} \Prob\lrPar{X_{d}
+    = x_{n,d}|\pa\lrPar{X_{d}} = \pa\lrPar{x_{n,d}}}
+\end{align*}
+
+</div></li>
+<li>D'où la log-vraisemblance :
+\[
+  \ell\lrPar{\theta_{1},\ldots,\theta_{D};\mathcal{D}} = \sum_{n =
+  1}^{N} \sum_{d = 1}^{D} \ln \Prob\lrPar{X_{d} = x_{n,d}|\pa\lrPar{X_{d}} = \pa\lrPar{x_{n,d}}}
+  \]</li>
+<li><b>Objectif :</b> Trouver \(\theta_{1},\ldots,\theta_{D}\) tels que
+\(\ell\lrPar{\theta_{1},\ldots,\theta_{D};\mathcal{D}}\) soit maximum, c-à-d, résoudre le problème
+d'optimisation :
+\[
+  \theta_{1}^{\text{MV}} ,\ldots,\theta_{D}^{\text{MV}} = \argmax{\theta_{1},\ldots,\theta_{D}} \ell\lrPar{\theta_{1},\ldots,\theta_{D};\mathcal{D}}  
+  \]</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc862563">
+<h3 id="orgc862563">Apprentissage des LPC - Données complètes</h3>
+<p>
+<div class="slidesubtitle">Estimateur du maximum de vraisemblance dans un RB</div>
+</p>
+
+<div class="block-definition" id="org0069ecb">
+<p>
+<h4>Estimateur du maximum de vraisemblance</h4>
+</p>
+
+<ul>
+<li>L'estimation du maximum de vraisemblance de chaque LPC d'un RB a pour expression :
+\[
+  \hat{P}^{\text{MV}}(X_{d} = x_{d,k}|\text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}) =
+  \frac{\# \{X_{d} = x_{d,k}~ \text{et}~
+      \text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}\}}{\# \{\text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}\}}
+  \]
+<ul>
+<li>\(x_{d,k}\) : \(k\) -ème valeur possible pour la v.a. \(X_{d}\)</li>
+<li>\(\boldsymbol{x}^{\prime}_{d,j}\) : \(j\) -ème configuration de valeurs possibles pour les parents de la
+v.a. \(X_{d}\)</li>
+
+</ul></li>
+
+<li><b>Interprétation :</b>
+<ul>
+<li>Chaque probabilité \(\hat{P}^{\text{MV}}(X_{d} = x_{d,k}|\text{pa}(X_{d}) =
+    \boldsymbol{x}^{\prime}_{d,j})\) est estimée par le rapport entre : 
+<ul>
+<li>le nombre d'événements \(\{X_{d} = x_{d,k}~ \text{et}~
+      \text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}\}\) observés dans les données</li>
+<li>et le nombre d'événements \(\{\text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}\}\) observés dans les données</li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7f57e32">
+<h2 id="org7f57e32">Résumé de la séance</h2>
+<div class="block-definition" id="org7de7898">
+<p>
+<h4>Points clés sur l'apprentissage des LPC</h4>
+</p>
+
+<ul>
+<li>Rappels généraux sur l'apprentissage statistique</li>
+<li>Formalisation du problème d'apprentissage des LPC du point de vue statistique</li>
+<li>Mise en oeuvre de la méthode du maximum de vraisemblance pour estimer les LPC d'un RB</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org5f08bf7">
+<p>
+<h4>Pour aller plus loin</h4>
+</p>
+<ul>
+<li>Apprentissage des LPC dans le cas de données incomplètes</li>
+<li>Apprentissage automatique de la structure d'un RB</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org1474cbb">
+<h3 id="org1474cbb">Merci pour votre attention !</h3>
+<p>
+<div class="slidesubtitle">Des questions ?</div>
+</p>
+
+
+
+<div id="org1cd563e" class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/commons/questions.png" alt="FAQ" width="60%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org88546da">
+<h2 id="org88546da">Apprentissage des LPC - Données incomplètes</h2>
+
+<div id="org3e9040f" class="figure">
+<p><img src="./fig/learning_data_missing.png" alt="Learning" width="70%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf0f53c6">
+<h3 id="orgf0f53c6">Apprentissage des LPC - Données incomplètes</h3>
+<p>
+<div class="slidesubtitle">Représentation des données</div>
+</p>
+
+
+<div id="orga85a31e" class="figure">
+<p><img src="./fig/vente_livret_ex.png" alt="Data ventes" width="75%" />
+</p>
+</div>
+
+<div class="block-definition" id="orge2fa003">
+<p>
+<h4>Représentation classique</h4>
+</p>
+<ul>
+<li>Les observations de chaque variable sont données explicitement</li>
+<li>Représentation intuitive mais peu adaptée aux traitements des données incomplète</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org3f43438">
+<h4 id="org3f43438">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Représentation des données</div>
+</p>
+
+
+<div id="orga0c1597" class="figure">
+<p><img src="./fig/vente_livret_disj_ex.png" alt="Data ventes disjonctive" width="75%" />
+</p>
+</div>
+
+<div class="block-definition" id="orgeff59c0">
+<p>
+<h4>Représentation disjonctive (one-hot encoding)</h4>
+</p>
+<ul>
+<li>Chaque variable \(X\) possédant \(K\) modalités est décomposée en \(K\) sous-variables binaires où la
+modalité prise est associée à la valeur 1</li>
+<li>Représentation plus complexe mais adaptée aux traitements des différents types de données incomplètes</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org1ccfae4">
+<h3 id="org1ccfae4">Apprentissage des LPC - Données incomplètes</h3>
+<p>
+<div class="slidesubtitle">Données manquantes</div>
+</p>
+
+
+<div id="org03060e7" class="figure">
+<p><img src="./fig/vente_livret_ex_missing_data_classic.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org6549c14">
+<h4 id="org6549c14">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Données manquantes (forme disjonctive)</div>
+</p>
+
+
+<div id="org802ae31" class="figure">
+<p><img src="./fig/vente_livret_ex_missing_data_classic_disj.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org72f678b">
+<h4 id="org72f678b">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Données partiellement observées</div>
+</p>
+
+
+<div id="orgb434aa4" class="figure">
+<p><img src="./fig/vente_livret_ex_missing_data_partial_disj.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org430bea1">
+<h4 id="org430bea1">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Données pondérées</div>
+</p>
+
+
+<div id="org6cba37e" class="figure">
+<p><img src="./fig/vente_livret_ex_missing_data_weighted_disj.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org340d837">
+<h3 id="org340d837">Apprentissage des LPC - Données incomplètes</h3>
+<p>
+<div class="slidesubtitle">Algorithme Expectation-Maximisation (EM)</div>
+</p>
+
+<div class="block-definition" id="orgb9468c3">
+<p>
+<h4>Principes de l'algorithme EM</h4>
+</p>
+<ul>
+<li>Algorithme initialement développé par (Dempster, A. and Laird, N. and Rubin, D. B., 1977)</li>
+<li>Ensemble d'algorithmes d'optimisation itératifs</li>
+<li>Décomposition d'un problème d'optimisation complexe en deux sous problèmes d'optimisation
+alternés plus simples</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="orgfbb6385">
+<p>
+<h4>Application en statistiques</h4>
+</p>
+<ul>
+<li>Calculer les estimations des paramètres d'un modèle probabiliste par la méthode du maximum de
+vraisemblance en présence de données incomplètes</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org057ed4b">
+<p>
+<h4>Propriété</h4>
+</p>
+<ul>
+<li>Méthode d'optimisation locale</li>
+<li>La convergence vers l'optimum global n'est pas garantie</li>
+<li>La qualité de la solution calculée dépend de l'initialisation de l'algorithme</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org97b02b4">
+<h3 id="org97b02b4">Apprentissage des LPC - Données incomplètes</h3>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+<div class="block-definition" id="org198986e">
+<p>
+<h4>Contexte</h4>
+</p>
+
+<ul>
+<li>Données disponibles \(\mathcal{D} = \mathcal{D}_{\text{C}} \union \mathcal{D}_{\text{I}}\) :
+<ul>
+<li>\(\mathcal{D}_{\text{C}}\) : Observations complètement observées</li>
+<li>\(\mathcal{D}_{\text{I}}\) : Observations partiellement observées</li>
+
+</ul></li>
+<li>Modélisation : \(\mathcal{D} =\) réalisations i.i.d. de la suite de v.a. \(\mbf{X} =
+  \lrpar{X_{1}, \ldots, X_{D}}\) représenté par un RB \(\mathcal{M}\) de structure supposée connue</li>
+
+</ul>
+
+</div>
+
+
+<div id="org07d9bae" class="figure">
+<p><img src="./fig/em_rb_vente_livret_contexte.png" alt="Data ventes disjonctive" width="70%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgfce738b">
+<h4 id="orgfce738b">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="org31a70fb" class="figure">
+<p><img src="./fig/em_rb_vente_livret_contexte.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org9e569be">
+<h4 id="org9e569be">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="org8da5bc8" class="figure">
+<p><img src="./fig/em_rb_vente_livret_setup.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org0621688">
+<h4 id="org0621688">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="org83946ee" class="figure">
+<p><img src="./fig/em_rb_vente_livret_0.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgef06188">
+<h4 id="orgef06188">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="org84f42df" class="figure">
+<p><img src="./fig/em_rb_vente_livret_1_E.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgac57c2b">
+<h4 id="orgac57c2b">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="org06aecbc" class="figure">
+<p><img src="./fig/em_rb_vente_livret_1_M.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org24009b1">
+<h4 id="org24009b1">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="orge1ce230" class="figure">
+<p><img src="./fig/em_rb_vente_livret_1_M_bis.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org03672cf">
+<h4 id="org03672cf">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="orgdee740b" class="figure">
+<p><img src="./fig/em_rb_vente_livret_2_E.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgf217a26">
+<h4 id="orgf217a26">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="orge95ccf3" class="figure">
+<p><img src="./fig/em_rb_vente_livret_2_M.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgf3f2592">
+<h4 id="orgf3f2592">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="org05fcaa6" class="figure">
+<p><img src="./fig/em_rb_vente_livret_3_E.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org8be01b8">
+<h4 id="org8be01b8">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
+</p>
+
+
+<div id="orga69faed" class="figure">
+<p><img src="./fig/em_rb_vente_livret_3_E_bis.png" alt="Data ventes disjonctive" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org77e6028">
+<h4 id="org77e6028">Apprentissage des LPC - Données incomplètes</h4>
+<p>
+<div class="slidesubtitle">Algorithme EM dans les RB</div>
+</p>
+
+<div class="block-definition" id="org1385b39">
+<p>
+<h4>Algorithme EM dans les RB (structure connue)</h4>
+</p>
+
+<ul>
+<li>Initialisation du modèle RB \(\mathcal{M}^{(0)}\) caractérisé par ses LPC</li>
+<li><b>Étape E</b> : Estimer la loi des données manquantes à partir du RB courant, noté \(\mathcal{M}^{(t)}\)
+<ul>
+<li>Pour chaque donnée incomplète \(\mbf{x} = \lrpar{\mbf{x}_{\text{obs}},\mbf{x}_{\text{mqt}}} \in \mathcal{D}_{\text{I}}\)
+<ul>
+<li>Calculer la distribution de ses variables manquantes \(\mbf{X}_{\text{mqt}}\) conditionnellement à ses variables observées \(\mbf{X}_{\text{obs}}\)</li>
+<li>Calculer \(\Prob\lrPar{\mbf{X}_{\text{obs}}|\mbf{X}_{\text{mqt}}}\) en utilisant un algorithme
+d'inférence dans \(\mathcal{M}^{(t)}\)</li>
+
+</ul></li>
+<li>"Nouvelles" données courante \(\mathcal{D}^{(t+1)} = \mathcal{D}_{\text{C}} \union
+    \mathcal{D}_{\text{I}}^{(t+1)}\) complétées par les distributions des variables manquantes</li>
+
+</ul></li>
+<li><b>Étape M</b> : Estimer les LPC du modèle \(\mathcal{M}^{(t+1)}\) à partir des données complétées
+\(\mathcal{D}^{(t)}\) 
+<ul>
+<li>Utilisation de la méthode du maximum de vraisemblance</li>
+
+</ul></li>
+<li>Répéter les étapes E et M tant que \(\mathcal{M}^{(t)}\) et \(\mathcal{M}^{(t+1)}\) sont
+significativement différents</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orga1a9c76">
+<h2 id="orga1a9c76">Bibliographie</h2>
+<p>
+Dempster, A. and Laird, N. and Rubin, D. B. (1977). <i>Maximum {Likelihood} from {Incomplete} {Data} {Via} the {EM} {Algorithm}</i>, Journal of the Royal Statistical Society.</p>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+controlsLayout: 'edges', slideNumber:"c/t", center: false, transition: 'fade',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>
