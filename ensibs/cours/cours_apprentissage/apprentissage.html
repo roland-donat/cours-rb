@@ -61,13 +61,13 @@ sm: ["\\setminus"],
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#/slide-orgc1839e4">Objectifs de la séance</a></li>
-<li><a href="#/slide-orge1de11e">Introduction</a></li>
-<li><a href="#/slide-org683450b">Rappels statistiques</a></li>
-<li><a href="#/slide-orgb4d95d2">Apprentissage des LPC - Données complètes</a></li>
-<li><a href="#/slide-org7f57e32">Résumé de la séance</a></li>
-<li><a href="#/slide-org88546da">Apprentissage des LPC - Données incomplètes</a></li>
-<li><a href="#/slide-orga1a9c76">Bibliographie</a></li>
+<li><a href="#/slide-org6577ad6">Objectifs de la séance</a></li>
+<li><a href="#/slide-org1df10f7">Introduction</a></li>
+<li><a href="#/slide-orge5ebf15">Rappels statistiques</a></li>
+<li><a href="#/slide-orgd25ebe1">Apprentissage des LPC - Données complètes</a></li>
+<li><a href="#/slide-org8a0bd0a">Apprentissage des LPC - Données incomplètes</a></li>
+<li><a href="#/slide-org28c43be">Résumé de la séance</a></li>
+<li><a href="#/slide-orgb2b4606">Bibliographie</a></li>
 </ul>
 </div>
 </div>
@@ -75,8 +75,8 @@ sm: ["\\setminus"],
 
 
 <section>
-<section id="slide-orgc1839e4">
-<h2 id="orgc1839e4">Objectifs de la séance</h2>
+<section id="slide-org6577ad6">
+<h2 id="org6577ad6">Objectifs de la séance</h2>
 <div class="column" style="float:left; width: 50%">
 
 <ul>
@@ -91,7 +91,7 @@ observées sur le phénomène étudié</li>
 <div class="column" style="float:right; width: 50%">
 
 
-<div id="org421a791" class="figure">
+<div id="orgba615ce" class="figure">
 <p><img src="./fig/objectives.png" alt="Objectives" width="100%" />
 </p>
 </div>
@@ -101,10 +101,10 @@ observées sur le phénomène étudié</li>
 </section>
 </section>
 <section>
-<section id="slide-orge1de11e">
-<h2 id="orge1de11e">Introduction</h2>
+<section id="slide-org1df10f7">
+<h2 id="org1df10f7">Introduction</h2>
 
-<div id="org5af63fc" class="figure">
+<div id="org475a4cc" class="figure">
 <p><img src="./fig/machine_learning.png" alt="Inférence" width="70%" />
 </p>
 </div>
@@ -113,9 +113,9 @@ observées sur le phénomène étudié</li>
 </section>
 </section>
 <section>
-<section id="slide-org6b17c2f">
-<h3 id="org6b17c2f">Problématique</h3>
-<div class="block-definition" id="orgace58e1">
+<section id="slide-org9947334">
+<h3 id="org9947334">Problématique</h3>
+<div class="block-definition" id="orgd188ad9">
 <p>
 <h4>Objectif</h4>
 </p>
@@ -128,7 +128,7 @@ observées sur le phénomène étudié</li>
 
 </div>
 
-<div class="block-definition" id="org968b9ec">
+<div class="block-definition" id="org85bf90e">
 <p>
 <h4>Problèmes</h4>
 </p>
@@ -142,7 +142,7 @@ observées sur le phénomène étudié</li>
 
 </div>
 
-<div class="block-example" id="org27ad374">
+<div class="block-example" id="org9d38687">
 <p>
 <h4>Approches envisageables</h4>
 </p>
@@ -158,55 +158,55 @@ informations incomplètes)</li>
 </div>
 
 </section>
-<section id="slide-orge41920d">
-<h4 id="orge41920d">Problématique</h4>
+<section id="slide-org205756d">
+<h4 id="org205756d">Problématique</h4>
 <p>
 <div class="slidesubtitle">Exemple : Vente d'un livret</div>
 </p>
 
 
-<div id="org7d4ae90" class="figure">
+<div id="org8f3a5cd" class="figure">
 <p><img src="./fig/rb_vente_var.png" alt="RB vente" width="95%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org72ebcd0">
-<h4 id="org72ebcd0">Problématique</h4>
+<section id="slide-org25812aa">
+<h4 id="org25812aa">Problématique</h4>
 <p>
 <div class="slidesubtitle">Apprentissage de la structure</div>
 </p>
 
 
-<div id="orge56e96a" class="figure">
+<div id="org4234793" class="figure">
 <p><img src="./fig/rb_vente_graphe_app.png" alt="RB vente" width="95%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org65cc5de">
-<h4 id="org65cc5de">Problématique</h4>
+<section id="slide-org5fd86ba">
+<h4 id="org5fd86ba">Problématique</h4>
 <p>
 <div class="slidesubtitle">Apprentissage des LPC (structure fixée)</div>
 </p>
 
 
-<div id="org3053dcf" class="figure">
+<div id="org1a554fc" class="figure">
 <p><img src="./fig/rb_vente_lpc_app.png" alt="RB vente" width="95%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org08ac12a">
-<h4 id="org08ac12a">Problématique</h4>
+<section id="slide-org67f839a">
+<h4 id="org67f839a">Problématique</h4>
 <p>
 <div class="slidesubtitle">Apprentissage complet du réseau bayésien</div>
 </p>
 
 
-<div id="org9c3de94" class="figure">
+<div id="org3c237f5" class="figure">
 <p><img src="./fig/rb_vente_graphe_lpc_app.png" alt="RB vente" width="95%" />
 </p>
 </div>
@@ -215,13 +215,13 @@ informations incomplètes)</li>
 </section>
 </section>
 <section>
-<section id="slide-orga2933b1">
-<h3 id="orga2933b1">Construction par expertise</h3>
+<section id="slide-orge14dde7">
+<h3 id="orge14dde7">Construction par expertise</h3>
 <p>
 <div class="slidesubtitle">Acquisition de l'information</div>
 </p>
 
-<div class="block-definition" id="org1ab622b">
+<div class="block-definition" id="orga03a216">
 <p>
 <h4>Acquisition de l'information</h4>
 </p>
@@ -236,7 +236,7 @@ informations incomplètes)</li>
 </ul>
 
 
-<div id="org4f5a790" class="figure">
+<div id="org1087694" class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/echelle_prob.png" alt="Echelle prob" width="90%" />
 </p>
 </div>
@@ -250,13 +250,13 @@ informations incomplètes)</li>
 
 
 </section>
-<section id="slide-org79e21c2">
-<h4 id="org79e21c2">Construction par expertise</h4>
+<section id="slide-org4bda0fd">
+<h4 id="org4bda0fd">Construction par expertise</h4>
 <p>
 <div class="slidesubtitle">Attention au connexions convergentes (V-structures)</div>
 </p>
 
-<div class="block-alert" id="orgc3a06c5">
+<div class="block-alert" id="orgc50764f">
 <p>
 <h4>Problème</h4>
 </p>
@@ -276,7 +276,7 @@ dans le cas où les variables sont binaires</li>
 
 </div>
 
-<div class="fragment (appear) block-example" id="org8e27cb0">
+<div class="fragment (appear) block-example" id="org4250ed5">
 <p>
 <h4>Solutions possibles</h4>
 </p>
@@ -293,10 +293,10 @@ assumant les simplifications induites</li>
 </section>
 </section>
 <section>
-<section id="slide-org683450b">
-<h2 id="org683450b">Rappels statistiques</h2>
+<section id="slide-orge5ebf15">
+<h2 id="orge5ebf15">Rappels statistiques</h2>
 
-<div id="org43f3128" class="figure">
+<div id="org500a190" class="figure">
 <p><img src="./fig/stats.png" alt="Inférence" width="70%" />
 </p>
 </div>
@@ -304,13 +304,13 @@ assumant les simplifications induites</li>
 </section>
 </section>
 <section>
-<section id="slide-orge5f73ee">
-<h3 id="orge5f73ee">Rappels statistiques</h3>
+<section id="slide-org562cea3">
+<h3 id="org562cea3">Rappels statistiques</h3>
 <p>
 <div class="slidesubtitle">Tableau de données</div>
 </p>
 
-<div class="block-definition" id="orgcd32944">
+<div class="block-definition" id="org2dbce17">
 <p>
 <h4>Caractéristiques des données</h4>
 </p>
@@ -350,8 +350,8 @@ représente la $n$-ème observation de la BdD</li>
 
 
 </section>
-<section id="slide-org1a68903">
-<h4 id="org1a68903">Rappels statistiques</h4>
+<section id="slide-org860f3ac">
+<h4 id="org860f3ac">Rappels statistiques</h4>
 <p>
 <div class="slidesubtitle">Tableau de données</div>
 </p>
@@ -359,7 +359,7 @@ représente la $n$-ème observation de la BdD</li>
 <div class="column" style="float:left; width: 45%">
 
 
-<div id="org8444547" class="figure">
+<div id="org4b35a60" class="figure">
 <p><img src="./fig/data_ventes_ex.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
@@ -368,7 +368,7 @@ représente la $n$-ème observation de la BdD</li>
 
 <div class="column" style="float:right; width: 50%">
 
-<div class="block-example" id="orgc31c1a8">
+<div class="block-example" id="orgafc282f">
 <p>
 <h4>Caractéristiques des données</h4>
 </p>
@@ -389,26 +389,26 @@ représente la $n$-ème observation de la BdD</li>
 </section>
 </section>
 <section>
-<section id="slide-orgd5fafe8">
-<h3 id="orgd5fafe8">Rappels statistiques</h3>
+<section id="slide-orgf3c356e">
+<h3 id="orgf3c356e">Rappels statistiques</h3>
 <p>
 <div class="slidesubtitle">Modélisation statistique : objectifs et démarche</div>
 </p>
 
-<div class="block-definition" id="org34f2df9">
+<div class="block-definition" id="orgab0fb5c">
 <p>
 <h4>Objectifs</h4>
 </p>
 
 <ol>
-<li>Résumer quantitativement l'information contenue dans une BdD en utilisant un modèle probabiliste</li>
+<li>Résumer quantitativement l'information contenue dans des données en utilisant un modèle probabiliste</li>
 <li>Exploiter le modèle pour déduire de nouvelles connaissances</li>
 
 </ol>
 
 </div>
 
-<div class="block-definition" id="org5f633ec">
+<div class="block-definition" id="orge1b2c5a">
 <p>
 <h4>Démarche</h4>
 </p>
@@ -429,19 +429,19 @@ représente les paramètres de la loi</li>
 </section>
 </section>
 <section>
-<section id="slide-org9859572">
-<h3 id="org9859572">Rappels statistiques</h3>
+<section id="slide-org3e83ad3">
+<h3 id="org3e83ad3">Rappels statistiques</h3>
 <p>
 <div class="slidesubtitle">Modélisation statistique : remarques et exemple</div>
 </p>
 
-<div class="block-example" id="org6baf2d9">
+<div class="block-example" id="org6f4cd5d">
 <p>
 <h4>Remarques</h4>
 </p>
 
 <ul>
-<li>Si les observations dans les données sont indépendants, on parle de données i.i.d. (Indépendantes
+<li>Si les observations dans les données sont indépendantes, on parle de données i.i.d. (Indépendantes
 et Identiquement Distribuées)</li>
 <li>Si les caractéristiques (variables) des observations sont indépendantes, alors chaque variable \(X_{d}\) suit une loi \(\mathcal{L}_{d}\lrpar{\mbf{\theta}_{d}}\) (Notation : \(X_{d} \sim \mathcal{L}_{d}\lrpar{\mbf{\theta}_{d}}\))</li>
 
@@ -450,7 +450,7 @@ et Identiquement Distribuées)</li>
 </div>
 
 
-<div class="block-example" id="orgb6db76c">
+<div class="block-example" id="orgae7c9b7">
 <p>
 <h4>Modèle gaussien</h4>
 </p>
@@ -478,19 +478,19 @@ variance-covariance</li>
 </section>
 </section>
 <section>
-<section id="slide-org3b94ebb">
-<h3 id="org3b94ebb">Rappels statistiques</h3>
+<section id="slide-org1b3364e">
+<h3 id="org1b3364e">Rappels statistiques</h3>
 <p>
 <div class="slidesubtitle">Estimation des paramètres d'un modèle</div>
 </p>
 
-<div class="block-definition" id="org747fda1">
+<div class="block-definition" id="org3e084df">
 <p>
 <h4>Contexte</h4>
 </p>
 
 <ul>
-<li>Données : On dispose d'un jeu de données \(\mathcal{D} = \lrpar{\mbf{x}_{1,\cdot}, \ldots,
+<li>Données : On dispose de données \(\mathcal{D} = \lrpar{\mbf{x}_{1,\cdot}, \ldots,
   \mbf{x}_{N,\cdot}}\) où chaque observation \(\mbf{x}_{n,\cdot}\) est caractérisée par \(D\) variables \(\lrPar{x_{n,1},\ldots,x_{n,D}}\)</li>
 <li>Modélisation : On suppose que \(\mathcal{D}\) est une suite de \(N\) réalisations i.i.d. du vecteur
 aléatoire \(\mbf{X} = \lrpar{X_{1}, \ldots, X_{D}}\) distribué selon la loi \(\mathcal{L}\lrPar{\mbf{\theta}}\)</li>
@@ -501,14 +501,14 @@ aléatoire \(\mbf{X} = \lrpar{X_{1}, \ldots, X_{D}}\) distribué selon la loi \(
 </div>
 
 
-<div class="block-definition" id="org1cac6ba">
+<div class="block-definition" id="orgc93d452">
 <p>
 <h4>Solution</h4>
 </p>
 
 <ul>
 <li>Construire un estimateur de \(\mbf{\theta}\)</li>
-<li>Approche classique : Déterminer l'estimateur du maximum de vraisemblance de \(\mbf{\theta}\),
+<li>Approche classique : Déterminer l'estimateur du maximum de <b>vraisemblance</b> de \(\mbf{\theta}\),
 souvent noté \(\mbf{\theta}^{\text{MV}}\)</li>
 
 </ul>
@@ -520,13 +520,13 @@ souvent noté \(\mbf{\theta}^{\text{MV}}\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org344d4dd">
-<h3 id="org344d4dd">Rappels statistiques</h3>
+<section id="slide-org7ec13e5">
+<h3 id="org7ec13e5">Rappels statistiques</h3>
 <p>
 <div class="slidesubtitle">Notion de vraisemblance</div>
 </p>
 
-<div class="block-definition" id="orge30ed9e">
+<div class="block-definition" id="org9ef675f">
 <p>
 <h4>Vraisemblance d'un modèle par rapport à une observation</h4>
 </p>
@@ -534,7 +534,7 @@ souvent noté \(\mbf{\theta}^{\text{MV}}\)</li>
 <ul>
 <li>Soit \(\mathcal{D} = \lrpar{\mbf{x}_{1,\cdot}, \ldots, \mbf{x}_{N,\cdot}}\) un ensemble de données
 i.i.d. modélisées par les v.a. \(\mbf{X} = \lrpar{X_{1}, \ldots, X_{D}} \sim \mathcal{L}\lrPar{\mbf{\theta}}\)</li>
-<li>La vraisemblance mesure la plausibilité d'un modèle probabiliste (caractérisé par des paramètres
+<li>La vraisemblance mesure la plausibilité d'un modèle probabiliste (caractérisé par un ensemble de paramètres
 \(\mbf{\theta}\)) par rapport à l'observation \(\mbf{x}_{n,\cdot} \in \mathcal{D}\)
 <ul>
 <li>La vraisemblance est notée \(L\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}}\)</li>
@@ -549,7 +549,7 @@ log-vraisemblance \(\ell\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}} = \ln
 </div>
 
 
-<div class="block-example" id="orgcfd17b0">
+<div class="block-example" id="org686b7d3">
 <p>
 <h4>Interprétation</h4>
 </p>
@@ -565,13 +565,13 @@ rapport à la donnée observée</li>
 </div>
 
 </section>
-<section id="slide-org6d41ccb">
-<h4 id="org6d41ccb">Rappels statistiques</h4>
+<section id="slide-orgd26a6d1">
+<h4 id="orgd26a6d1">Rappels statistiques</h4>
 <p>
 <div class="slidesubtitle">Notion de vraisemblance</div>
 </p>
 
-<div class="block-definition" id="org0dca50d">
+<div class="block-definition" id="org08ce558">
 <p>
 <h4>Vraisemblance d'un modèle discret et fini par rapport à une observation</h4>
 </p>
@@ -591,7 +591,7 @@ vraisemblance du modèle \(\Prob\lrPar{X_{1},\ldots, X_{D}}\) sachant l'observat
 
 <div class="column" style="float:left; width: 60%">
 
-<div class="block-example" id="orgb8e4ca3">
+<div class="block-example" id="orga34e3b7">
 <p>
 <h4>Exemple : vraisemblance d'une observation</h4>
 </p>
@@ -619,7 +619,7 @@ vraisemblance du modèle \(\Prob\lrPar{X_{1},\ldots, X_{D}}\) sachant l'observat
 <div class="column" style="float:right; width: 40%">
 
 
-<div id="org856dad9" class="figure">
+<div id="orga675295" class="figure">
 <p><img src="./fig/lj_vente_ex_hi_indiv.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
@@ -627,44 +627,52 @@ vraisemblance du modèle \(\Prob\lrPar{X_{1},\ldots, X_{D}}\) sachant l'observat
 </div>
 
 </section>
-<section id="slide-org5f4f7fc">
-<h4 id="org5f4f7fc">Rappels statistiques</h4>
+<section id="slide-orgb16e62a">
+<h4 id="orgb16e62a">Rappels statistiques</h4>
 <p>
 <div class="slidesubtitle">Notion de vraisemblance</div>
 </p>
 
-<div class="block-definition" id="org9c51bf1">
+<div class="block-definition" id="org2aa3c48">
 <p>
-<h4>Vraisemblance d'un modèle par rapport à un jeu de données</h4>
+<h4>Vraisemblance d'un modèle par rapport à des données</h4>
 </p>
 
 <ul>
-<li>La vraisemblance d'un modèle (paramétré par \(\mbf{\theta}\)) par rapport à un jeu de données
+<li>La vraisemblance d'un modèle (paramétré par \(\mbf{\theta}\)) par rapport à des données
 \(\mathcal{D}\), notée \(L\lrPar{\mbf{\theta};\mathcal{D}}\), correspond à la plausibilité du modèle
 \(\mbf{\theta}\) par rapport à l'observation des données \(\mathcal{D}\)</li>
 <li>Lorsque les données sont supposées i.i.d., la vraisemblance est définie par
 \[
   L\lrPar{\mbf{\theta};\mathcal{D}} = \prod_{n = 1}^{N} L\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}}
   \]</li>
-<li>Lorsque l'on s'intéresse à un jeu de données, on utilise souvent la log-vraisemblance qui est
+<li><p>
+Lorsque l'on s'intéresse à des données, on utilise souvent la log-vraisemblance qui est
 définie par : 
-\[
-  \ell\lrPar{\mbf{\theta};\mathcal{D}} = \ln L\lrPar{\mbf{\theta};\mathcal{D}} = \sum_{n = 1}^{N}
-  \ell\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}}
-  \]</li>
+</p>
+<div>
+\begin{align*}
+\ell\lrPar{\mbf{\theta};\mathcal{D}} & = \ln L\lrPar{\mbf{\theta};\mathcal{D}} \\
+& = \sum_{n = 1}^{N}
+\ln L\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}} \\
+& = \sum_{n = 1}^{N}
+\ell\lrPar{\mbf{\theta};\mbf{x}_{n,\cdot}}
+\end{align*}
+
+</div></li>
 
 </ul>
 
 </div>
 
 </section>
-<section id="slide-org0e1337d">
-<h4 id="org0e1337d">Rappels statistiques</h4>
+<section id="slide-orgdc874d4">
+<h4 id="orgdc874d4">Rappels statistiques</h4>
 <p>
 <div class="slidesubtitle">Notion de vraisemblance</div>
 </p>
 
-<div class="block-example" id="orgeb129fe">
+<div class="block-example" id="orgf439fa2">
 <p>
 <h4>Interprétation de la vraisemblance</h4>
 </p>
@@ -679,7 +687,7 @@ plus le modèle probabiliste considéré est adapté pour représenter le phéno
 
 </div>
 
-<div class="block-alert" id="org89c1b34">
+<div class="block-alert" id="org8be2790">
 <p>
 <h4>Attention !</h4>
 </p>
@@ -698,13 +706,13 @@ observée</li>
 </div>
 
 </section>
-<section id="slide-org9995152">
-<h4 id="org9995152">Rappels statistiques</h4>
+<section id="slide-orgf17fbdf">
+<h4 id="orgf17fbdf">Rappels statistiques</h4>
 <p>
 <div class="slidesubtitle">Notion de vraisemblance</div>
 </p>
 
-<div class="block-example" id="org08cb060">
+<div class="block-example" id="org28fba2b">
 <p>
 <h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
 </p>
@@ -722,7 +730,7 @@ observée</li>
 <b>Modèle probabiliste</b>
 </p>
 
-<div id="org8a36735" class="figure">
+<div id="orga857586" class="figure">
 <p><img src="./fig/lj_vente_ex.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
@@ -733,20 +741,20 @@ observée</li>
 <b>Données</b>
 </p>
 
-<div id="orgbc7116a" class="figure">
+<div id="org842f7ba" class="figure">
 <p><img src="./fig/vente_3var_ex_like.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
 </div>
 
 </section>
-<section id="slide-orgb8d5f8c">
-<h4 id="orgb8d5f8c">Rappels statistiques</h4>
+<section id="slide-orgd465ccf">
+<h4 id="orgd465ccf">Rappels statistiques</h4>
 <p>
 <div class="slidesubtitle">Notion de vraisemblance</div>
 </p>
 
-<div class="block-example" id="orgd26e1b7">
+<div class="block-example" id="org5c3659d">
 <p>
 <h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
 </p>
@@ -764,7 +772,7 @@ observée</li>
 <b>Modèle probabiliste</b>
 </p>
 
-<div id="org00fd65d" class="figure">
+<div id="org25cc4a4" class="figure">
 <p><img src="./fig/lj_vente_ex_like_hi_1.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
@@ -775,20 +783,20 @@ observée</li>
 <b>Données</b>
 </p>
 
-<div id="org48dedde" class="figure">
+<div id="org0f07ad6" class="figure">
 <p><img src="./fig/vente_3var_ex_like_hi1.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
 </div>
 
 </section>
-<section id="slide-org91afe28">
-<h4 id="org91afe28">Rappels statistiques</h4>
+<section id="slide-org1fd6682">
+<h4 id="org1fd6682">Rappels statistiques</h4>
 <p>
 <div class="slidesubtitle">Notion de vraisemblance</div>
 </p>
 
-<div class="block-example" id="org0672034">
+<div class="block-example" id="org3ea1a22">
 <p>
 <h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
 </p>
@@ -806,7 +814,7 @@ observée</li>
 <b>Modèle probabiliste</b>
 </p>
 
-<div id="orgc6932dd" class="figure">
+<div id="orgdd519eb" class="figure">
 <p><img src="./fig/lj_vente_ex_like_hi_2.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
@@ -817,20 +825,20 @@ observée</li>
 <b>Données</b>
 </p>
 
-<div id="orgd71bad1" class="figure">
+<div id="org921ccda" class="figure">
 <p><img src="./fig/vente_3var_ex_like_hi2.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
 </div>
 
 </section>
-<section id="slide-org94632c5">
-<h4 id="org94632c5">Rappels statistiques</h4>
+<section id="slide-orgbbd4603">
+<h4 id="orgbbd4603">Rappels statistiques</h4>
 <p>
 <div class="slidesubtitle">Notion de vraisemblance</div>
 </p>
 
-<div class="block-example" id="orgc382286">
+<div class="block-example" id="org89b26a5">
 <p>
 <h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
 </p>
@@ -848,7 +856,7 @@ observée</li>
 <b>Modèle probabiliste</b>
 </p>
 
-<div id="orga9dc523" class="figure">
+<div id="org8256feb" class="figure">
 <p><img src="./fig/lj_vente_ex_like_hi_3.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
@@ -859,20 +867,20 @@ observée</li>
 <b>Données</b>
 </p>
 
-<div id="orge4f8fbb" class="figure">
+<div id="orgb19592e" class="figure">
 <p><img src="./fig/vente_3var_ex_like_hi3.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
 </div>
 
 </section>
-<section id="slide-org68337e3">
-<h4 id="org68337e3">Rappels statistiques</h4>
+<section id="slide-org91c235f">
+<h4 id="org91c235f">Rappels statistiques</h4>
 <p>
 <div class="slidesubtitle">Notion de vraisemblance</div>
 </p>
 
-<div class="block-example" id="orge5b0a26">
+<div class="block-example" id="org2fa7875">
 <p>
 <h4>Exemple : vraisemblance d'un modèle par rapport à des données</h4>
 </p>
@@ -890,7 +898,7 @@ observée</li>
 <b>Modèle probabiliste</b>
 </p>
 
-<div id="org3581420" class="figure">
+<div id="org9e89a84" class="figure">
 <p><img src="./fig/lj_vente_ex.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
@@ -901,7 +909,7 @@ observée</li>
 <b>Données</b>
 </p>
 
-<div id="org50561ac" class="figure">
+<div id="org51e7821" class="figure">
 <p><img src="./fig/vente_3var_ex_like_value.png" alt="Data ventes ex" height="100%" />
 </p>
 </div>
@@ -910,13 +918,13 @@ observée</li>
 </section>
 </section>
 <section>
-<section id="slide-orgf378753">
-<h3 id="orgf378753">Rappels statistiques</h3>
+<section id="slide-org22af786">
+<h3 id="org22af786">Rappels statistiques</h3>
 <p>
 <div class="slidesubtitle">Estimateur du maximum de vraisemblance</div>
 </p>
 
-<div class="block-definition" id="org5c26054">
+<div class="block-definition" id="org6a66736">
 <p>
 <h4>Estimateur du maximum de vraisemblance</h4>
 </p>
@@ -934,7 +942,7 @@ supposées i.i.d. modélisées par les v.a. \(\mbf{X} = \lrpar{X_{1}, \ldots, X_
 
 </div>
 
-<div class="block-definition" id="org5a955a7">
+<div class="block-definition" id="orgb4e7cd5">
 <p>
 <h4>Propriétés des estimateurs du maximum de vraisemblance</h4>
 </p>
@@ -951,24 +959,24 @@ sur les estimations obtenues</li>
 </section>
 </section>
 <section>
-<section id="slide-orgb4d95d2">
-<h2 id="orgb4d95d2">Apprentissage des LPC - Données complètes</h2>
+<section id="slide-orgd25ebe1">
+<h2 id="orgd25ebe1">Apprentissage des LPC - Données complètes</h2>
 
-<div id="org154acee" class="figure">
-<p><img src="./fig/learning_data_complete.png" alt="Inférence" width="70%" />
+<div id="orgb31247f" class="figure">
+<p><img src="./fig/learning_data_complete.png" alt="Inférence" width="60%" />
 </p>
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-org4f5dc6b">
-<h3 id="org4f5dc6b">Apprentissage des LPC - Données complètes</h3>
+<section id="slide-org7cbd841">
+<h3 id="org7cbd841">Apprentissage des LPC - Données complètes</h3>
 <p>
 <div class="slidesubtitle">Hypothèses</div>
 </p>
 
-<div class="block-definition" id="org1c33514">
+<div class="block-definition" id="orgadc1f07">
 <p>
 <h4>Hypothèses</h4>
 </p>
@@ -984,7 +992,7 @@ où chaque observation \(\boldsymbol{x}_{n}\) est caractérisée par \(D\) varia
 
 </div>
 
-<div class="block-definition" id="org76a8747">
+<div class="block-definition" id="orgd41fc0e">
 <p>
 <h4>Objectif</h4>
 </p>
@@ -1010,118 +1018,118 @@ avec \(\theta_{d} = \Prob\lrPar{X_{d}|\pa\lrPar{X_{d}}}\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org00792fd">
-<h3 id="org00792fd">Apprentissage des LPC - Données complètes</h3>
+<section id="slide-org67569de">
+<h3 id="org67569de">Apprentissage des LPC - Données complètes</h3>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org0c2d5a4" class="figure">
+<div id="org198d478" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_mod.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org71e7ff1">
-<h4 id="org71e7ff1">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-orgc06f303">
+<h4 id="orgc06f303">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org66b6661" class="figure">
+<div id="org6839dbe" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex1.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orga56a73b">
-<h4 id="orga56a73b">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org0e4b557">
+<h4 id="org0e4b557">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgfc378cd" class="figure">
+<div id="org104e9d7" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex2.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org747aebd">
-<h4 id="org747aebd">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-orgb4cc40e">
+<h4 id="orgb4cc40e">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgdde303c" class="figure">
+<div id="orgd40ee50" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex3.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org563b882">
-<h4 id="org563b882">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-orgaccd46e">
+<h4 id="orgaccd46e">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org3f879a7" class="figure">
+<div id="org32b12e0" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex4.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orge1dcb21">
-<h4 id="orge1dcb21">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org3f0b5fe">
+<h4 id="org3f0b5fe">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org7de336d" class="figure">
+<div id="org9fcda2d" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex5.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgc2a434a">
-<h4 id="orgc2a434a">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org78da403">
+<h4 id="org78da403">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgfa2b561" class="figure">
+<div id="orgfdf00ef" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex6.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org656e137">
-<h4 id="org656e137">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org23a03af">
+<h4 id="org23a03af">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org383f51b" class="figure">
+<div id="orge9ac82b" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex7.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orga0ef322">
-<h4 id="orga0ef322">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org51c28a5">
+<h4 id="org51c28a5">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org9f21ccf" class="figure">
+<div id="org8cbf7b5" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex8.png" alt="LPC app" width="100%" />
 </p>
 </div>
@@ -1130,13 +1138,13 @@ avec \(\theta_{d} = \Prob\lrPar{X_{d}|\pa\lrPar{X_{d}}}\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org087f8de">
-<h3 id="org087f8de">Apprentissage des LPC - Données complètes</h3>
+<section id="slide-org0b17ea9">
+<h3 id="org0b17ea9">Apprentissage des LPC - Données complètes</h3>
 <p>
 <div class="slidesubtitle">Méthode du maximum de vraisemblance dans un RB</div>
 </p>
 
-<div class="block-definition" id="org61dcb0f">
+<div class="block-definition" id="org2311f73">
 <p>
 <h4>Méthode du maximum de vraisemblance</h4>
 </p>
@@ -1147,7 +1155,7 @@ La vraisemblance d'un RB \(\mathcal{M}\lrPar{\theta_{1},\ldots,\theta_{D}}\) par
 </p>
 <div>
 \begin{align*}
-  L\lrPar{\theta_{1},\ldots,\theta_{D};\mathcal{D}} & = \prod_{n = 1}^{N} \prod_{d = 1}^{D} L\lrPar{\theta_{1},\ldots,\theta_{D};\mbf{x}_{n,\cdot}} \\
+  L\lrPar{\theta_{1},\ldots,\theta_{D};\mathcal{D}} & = \prod_{n = 1}^{N} L\lrPar{\theta_{1},\ldots,\theta_{D};\mbf{x}_{n,\cdot}} \\
   & = \prod_{n = 1}^{N} \prod_{d = 1}^{D} \Prob\lrPar{X_{d}
     = x_{n,d}|\pa\lrPar{X_{d}} = \pa\lrPar{x_{n,d}}}
 \end{align*}
@@ -1172,13 +1180,13 @@ d'optimisation :
 </section>
 </section>
 <section>
-<section id="slide-orgc862563">
-<h3 id="orgc862563">Apprentissage des LPC - Données complètes</h3>
+<section id="slide-org5d7b50e">
+<h3 id="org5d7b50e">Apprentissage des LPC - Données complètes</h3>
 <p>
 <div class="slidesubtitle">Estimateur du maximum de vraisemblance dans un RB</div>
 </p>
 
-<div class="block-definition" id="org0069ecb">
+<div class="block-definition" id="orge7978d4">
 <p>
 <h4>Estimateur du maximum de vraisemblance</h4>
 </p>
@@ -1218,78 +1226,30 @@ v.a. \(X_{d}\)</li>
 </section>
 </section>
 <section>
-<section id="slide-org7f57e32">
-<h2 id="org7f57e32">Résumé de la séance</h2>
-<div class="block-definition" id="org7de7898">
-<p>
-<h4>Points clés sur l'apprentissage des LPC</h4>
-</p>
+<section id="slide-org8a0bd0a">
+<h2 id="org8a0bd0a">Apprentissage des LPC - Données incomplètes</h2>
 
-<ul>
-<li>Rappels généraux sur l'apprentissage statistique</li>
-<li>Formalisation du problème d'apprentissage des LPC du point de vue statistique</li>
-<li>Mise en oeuvre de la méthode du maximum de vraisemblance pour estimer les LPC d'un RB</li>
-
-</ul>
-
-</div>
-
-<div class="block-definition" id="org5f08bf7">
-<p>
-<h4>Pour aller plus loin</h4>
-</p>
-<ul>
-<li>Apprentissage des LPC dans le cas de données incomplètes</li>
-<li>Apprentissage automatique de la structure d'un RB</li>
-
-</ul>
-
-</div>
-
-</section>
-</section>
-<section>
-<section id="slide-org1474cbb">
-<h3 id="org1474cbb">Merci pour votre attention !</h3>
-<p>
-<div class="slidesubtitle">Des questions ?</div>
-</p>
-
-
-
-<div id="org1cd563e" class="figure">
-<p><img src="https://roland-donat.github.io/cours-rb/commons/questions.png" alt="FAQ" width="60%" />
-</p>
-</div>
-
-
-</section>
-</section>
-<section>
-<section id="slide-org88546da">
-<h2 id="org88546da">Apprentissage des LPC - Données incomplètes</h2>
-
-<div id="org3e9040f" class="figure">
-<p><img src="./fig/learning_data_missing.png" alt="Learning" width="70%" />
+<div id="org852ecda" class="figure">
+<p><img src="./fig/learning_data_missing.png" alt="Learning" width="60%" />
 </p>
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgf0f53c6">
-<h3 id="orgf0f53c6">Apprentissage des LPC - Données incomplètes</h3>
+<section id="slide-org2b15b06">
+<h3 id="org2b15b06">Apprentissage des LPC - Données incomplètes</h3>
 <p>
 <div class="slidesubtitle">Représentation des données</div>
 </p>
 
 
-<div id="orga85a31e" class="figure">
+<div id="org87cd0a4" class="figure">
 <p><img src="./fig/vente_livret_ex.png" alt="Data ventes" width="75%" />
 </p>
 </div>
 
-<div class="block-definition" id="orge2fa003">
+<div class="block-definition" id="org8241312">
 <p>
 <h4>Représentation classique</h4>
 </p>
@@ -1302,19 +1262,19 @@ v.a. \(X_{d}\)</li>
 </div>
 
 </section>
-<section id="slide-org3f43438">
-<h4 id="org3f43438">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org06d2b60">
+<h4 id="org06d2b60">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Représentation des données</div>
 </p>
 
 
-<div id="orga0c1597" class="figure">
+<div id="orgfadddb3" class="figure">
 <p><img src="./fig/vente_livret_disj_ex.png" alt="Data ventes disjonctive" width="75%" />
 </p>
 </div>
 
-<div class="block-definition" id="orgeff59c0">
+<div class="block-definition" id="org4f10e8c">
 <p>
 <h4>Représentation disjonctive (one-hot encoding)</h4>
 </p>
@@ -1331,54 +1291,54 @@ modalité prise est associée à la valeur 1</li>
 </section>
 </section>
 <section>
-<section id="slide-org1ccfae4">
-<h3 id="org1ccfae4">Apprentissage des LPC - Données incomplètes</h3>
+<section id="slide-org891549e">
+<h3 id="org891549e">Apprentissage des LPC - Données incomplètes</h3>
 <p>
 <div class="slidesubtitle">Données manquantes</div>
 </p>
 
 
-<div id="org03060e7" class="figure">
+<div id="orgda803cb" class="figure">
 <p><img src="./fig/vente_livret_ex_missing_data_classic.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org6549c14">
-<h4 id="org6549c14">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-orgb62aac9">
+<h4 id="orgb62aac9">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Données manquantes (forme disjonctive)</div>
 </p>
 
 
-<div id="org802ae31" class="figure">
+<div id="org4a32b64" class="figure">
 <p><img src="./fig/vente_livret_ex_missing_data_classic_disj.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org72f678b">
-<h4 id="org72f678b">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org6c580a2">
+<h4 id="org6c580a2">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Données partiellement observées</div>
 </p>
 
 
-<div id="orgb434aa4" class="figure">
+<div id="orgec07d7c" class="figure">
 <p><img src="./fig/vente_livret_ex_missing_data_partial_disj.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org430bea1">
-<h4 id="org430bea1">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-orga2cb70f">
+<h4 id="orga2cb70f">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Données pondérées</div>
 </p>
 
 
-<div id="org6cba37e" class="figure">
+<div id="org7247237" class="figure">
 <p><img src="./fig/vente_livret_ex_missing_data_weighted_disj.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
@@ -1387,13 +1347,13 @@ modalité prise est associée à la valeur 1</li>
 </section>
 </section>
 <section>
-<section id="slide-org340d837">
-<h3 id="org340d837">Apprentissage des LPC - Données incomplètes</h3>
+<section id="slide-orgfeb675f">
+<h3 id="orgfeb675f">Apprentissage des LPC - Données incomplètes</h3>
 <p>
 <div class="slidesubtitle">Algorithme Expectation-Maximisation (EM)</div>
 </p>
 
-<div class="block-definition" id="orgb9468c3">
+<div class="block-definition" id="org23d7374">
 <p>
 <h4>Principes de l'algorithme EM</h4>
 </p>
@@ -1407,7 +1367,7 @@ alternés plus simples</li>
 
 </div>
 
-<div class="block-example" id="orgfbb6385">
+<div class="block-example" id="org88a66fd">
 <p>
 <h4>Application en statistiques</h4>
 </p>
@@ -1419,7 +1379,7 @@ vraisemblance en présence de données incomplètes</li>
 
 </div>
 
-<div class="block-definition" id="org057ed4b">
+<div class="block-definition" id="orgaff74a2">
 <p>
 <h4>Propriété</h4>
 </p>
@@ -1435,13 +1395,13 @@ vraisemblance en présence de données incomplètes</li>
 </section>
 </section>
 <section>
-<section id="slide-org97b02b4">
-<h3 id="org97b02b4">Apprentissage des LPC - Données incomplètes</h3>
+<section id="slide-org07d9abc">
+<h3 id="org07d9abc">Apprentissage des LPC - Données incomplètes</h3>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
-<div class="block-definition" id="org198986e">
+<div class="block-definition" id="org8c21d84">
 <p>
 <h4>Contexte</h4>
 </p>
@@ -1461,156 +1421,156 @@ vraisemblance en présence de données incomplètes</li>
 </div>
 
 
-<div id="org07d9bae" class="figure">
+<div id="orgceba2b7" class="figure">
 <p><img src="./fig/em_rb_vente_livret_contexte.png" alt="Data ventes disjonctive" width="70%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-orgfce738b">
-<h4 id="orgfce738b">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org2982897">
+<h4 id="org2982897">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="org31a70fb" class="figure">
+<div id="orgeddfc86" class="figure">
 <p><img src="./fig/em_rb_vente_livret_contexte.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org9e569be">
-<h4 id="org9e569be">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-orgb2d6056">
+<h4 id="orgb2d6056">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="org8da5bc8" class="figure">
+<div id="org2e34a13" class="figure">
 <p><img src="./fig/em_rb_vente_livret_setup.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org0621688">
-<h4 id="org0621688">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org7fb9718">
+<h4 id="org7fb9718">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="org83946ee" class="figure">
+<div id="org0720545" class="figure">
 <p><img src="./fig/em_rb_vente_livret_0.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgef06188">
-<h4 id="orgef06188">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-orgce34766">
+<h4 id="orgce34766">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="org84f42df" class="figure">
+<div id="orga41beec" class="figure">
 <p><img src="./fig/em_rb_vente_livret_1_E.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-orgac57c2b">
-<h4 id="orgac57c2b">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org5d9842d">
+<h4 id="org5d9842d">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="org06aecbc" class="figure">
+<div id="orga9ca2b3" class="figure">
 <p><img src="./fig/em_rb_vente_livret_1_M.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org24009b1">
-<h4 id="org24009b1">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org52512db">
+<h4 id="org52512db">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="orge1ce230" class="figure">
+<div id="org71e1588" class="figure">
 <p><img src="./fig/em_rb_vente_livret_1_M_bis.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org03672cf">
-<h4 id="org03672cf">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org67316c7">
+<h4 id="org67316c7">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="orgdee740b" class="figure">
+<div id="org9a2d25a" class="figure">
 <p><img src="./fig/em_rb_vente_livret_2_E.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-orgf217a26">
-<h4 id="orgf217a26">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org502265e">
+<h4 id="org502265e">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="orge95ccf3" class="figure">
+<div id="org2b2ee39" class="figure">
 <p><img src="./fig/em_rb_vente_livret_2_M.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-orgf3f2592">
-<h4 id="orgf3f2592">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org72b210d">
+<h4 id="org72b210d">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="org05fcaa6" class="figure">
+<div id="org88d0797" class="figure">
 <p><img src="./fig/em_rb_vente_livret_3_E.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org8be01b8">
-<h4 id="org8be01b8">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-org79d9b21">
+<h4 id="org79d9b21">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB - Exemple</div>
 </p>
 
 
-<div id="orga69faed" class="figure">
+<div id="org81b04f9" class="figure">
 <p><img src="./fig/em_rb_vente_livret_3_E_bis.png" alt="Data ventes disjonctive" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org77e6028">
-<h4 id="org77e6028">Apprentissage des LPC - Données incomplètes</h4>
+<section id="slide-orgec0a6be">
+<h4 id="orgec0a6be">Apprentissage des LPC - Données incomplètes</h4>
 <p>
 <div class="slidesubtitle">Algorithme EM dans les RB</div>
 </p>
 
-<div class="block-definition" id="org1385b39">
+<div class="block-definition" id="org6e34a0b">
 <p>
 <h4>Algorithme EM dans les RB (structure connue)</h4>
 </p>
@@ -1646,8 +1606,56 @@ significativement différents</li>
 </section>
 </section>
 <section>
-<section id="slide-orga1a9c76">
-<h2 id="orga1a9c76">Bibliographie</h2>
+<section id="slide-org28c43be">
+<h2 id="org28c43be">Résumé de la séance</h2>
+<div class="block-definition" id="orge4b01a0">
+<p>
+<h4>Points clés sur l'apprentissage des LPC</h4>
+</p>
+
+<ul>
+<li>Rappels généraux sur l'apprentissage statistique</li>
+<li>Formalisation du problème d'apprentissage des LPC du point de vue statistique</li>
+<li>Mise en oeuvre de la méthode du maximum de vraisemblance pour estimer les LPC d'un RB</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org8ab197f">
+<p>
+<h4>Pour aller plus loin</h4>
+</p>
+<ul>
+<li>Apprentissage des LPC dans le cas de données incomplètes</li>
+<li>Apprentissage automatique de la structure d'un RB</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf11a2e0">
+<h3 id="orgf11a2e0">Merci pour votre attention !</h3>
+<p>
+<div class="slidesubtitle">Des questions ?</div>
+</p>
+
+
+
+<div id="orge82ac35" class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/commons/questions.png" alt="FAQ" width="60%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgb2b4606">
+<h2 id="orgb2b4606">Bibliographie</h2>
 <p>
 Dempster, A. and Laird, N. and Rubin, D. B. (1977). <i>Maximum {Likelihood} from {Incomplete} {Data} {Via} the {EM} {Algorithm}</i>, Journal of the Royal Statistical Society.</p>
 </section>
