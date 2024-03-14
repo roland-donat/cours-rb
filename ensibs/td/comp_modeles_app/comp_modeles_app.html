@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Comparaison de modèles, apprentissage des LPC et vraisemblance</title>
+<meta name="author" content="Travaux dirigés" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://edgemind-sas.github.io/visual-identity/official_docs/css/edgemind.css" />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Comparaison de modèles, apprentissage des LPC et vraisemblance</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org61355fa">1. Objectif</a></li>
+<li><a href="#org2ab87c8">2. Apprentissage avec <code>pyAGRuM</code></a>
+<ul>
+<li><a href="#org4f09779">2.1. Modèle 1 : \(A \rightarrow V \leftarrow E\)</a></li>
+<li><a href="#org94c9cde">2.2. Autres modèles</a></li>
+</ul>
+</li>
+<li><a href="#org36f70ef">3. Évaluation des modèles avec <code>pyAGRuM</code></a></li>
+</ul>
+</div>
+</div>
+
+<div id="org115f67b" class="figure">
+<p><img src="./bank_ml.png" alt="bank_ml.png" width="50%" />
+</p>
+<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Dall-E 3: machine learning digital marketing bank loan ; white background ; colorful</p>
+</div>
+
+
+
+<div id="outline-container-org61355fa" class="outline-2">
+<h2 id="org61355fa"><span class="section-number-2">1.</span> Objectif</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+L'objectif de cet exercice est de comparer l'influence du choix de la structure d'un RB sur la
+représentativité de données observées. Autrement dit, il s'agit d'un problème
+de sélection de modèles. 
+</p>
+
+<p>
+Pour ce faire, nous nous intéresserons à des données de retour marketing (fictives) sur la vente de livret
+A. Dans ces données, les individus sont décrits par les variables suivantes :
+</p>
+<dl class="org-dl">
+<dt>Age :</dt><dd>classe d'âges de l'individu - valeurs possibles : [18,25], [26,59], 60+;</dd>
+<dt>Epargne :</dt><dd>l'individu a t-il de l'épargne - valeurs possibles : non, oui;</dd>
+<dt>Vente_livret_A :</dt><dd>vente d'un livret A à l'individu - valeurs possibles : échec, succès. <br /></dd>
+</dl>
+
+<p>
+Une des applications classiques de ce type de modèles est le ciblage client. Pour un
+produit donné, l'idée est de trouver les caractéristiques de la population qui maximisent les
+chances de vente.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2ab87c8" class="outline-2">
+<h2 id="org2ab87c8"><span class="section-number-2">2.</span> Apprentissage avec <code>pyAGRuM</code></h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org4f09779" class="outline-3">
+<h3 id="org4f09779"><span class="section-number-3">2.1.</span> Modèle 1 : \(A \rightarrow V \leftarrow E\)</h3>
+<div class="outline-text-3" id="text-2-1">
+<ol class="org-ol">
+<li><p>
+Importez le module <code>pyagrum</code> dans votre environnement <code>Python</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pyAgrum <span style="color: #F0DFAF; font-weight: bold;">as</span> gum <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">La librairie pyAgrum</span>
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">V&#233;rification des versions</span>
+{
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"pyagrum"</span>: gum.__version__, 
+}
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">pyagrum</td>
+<td class="org-left">:</td>
+<td class="org-right">1.12.1</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>
+Construire la structure du modèle 1.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Cr&#233;ation du RB   </span>
+<span style="color: #DFAF8F;">bn1</span> = gum.BayesNet(<span style="color: #CC9393;">"Vente livret"</span>)
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Cr&#233;ation de la variable Vente</span>
+<span style="color: #DFAF8F;">va_V</span> = gum.LabelizedVariable(<span style="color: #CC9393;">"Vente_livret_A"</span>, <span style="color: #CC9393;">"Vente livret"</span>, 2)
+va_V.changeLabel(0, <span style="color: #CC9393;">"echec"</span>)
+va_V.changeLabel(1, <span style="color: #CC9393;">"succes"</span>)
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Cr&#233;ation de la variable &#194;ge</span>
+<span style="color: #DFAF8F;">va_A</span> = gum.LabelizedVariable(<span style="color: #CC9393;">"Age"</span>, <span style="color: #CC9393;">"&#194;ge"</span>, 3)
+va_A.changeLabel(0, <span style="color: #CC9393;">"c18_25"</span>)
+va_A.changeLabel(1, <span style="color: #CC9393;">"c26_59"</span>)
+va_A.changeLabel(2, <span style="color: #CC9393;">"c60"</span>)
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Cr&#233;ation de la variable &#201;pargne</span>
+<span style="color: #DFAF8F;">va_E</span> = gum.LabelizedVariable(<span style="color: #CC9393;">"Epargne"</span>, <span style="color: #CC9393;">"&#201;pargne"</span>, 2)
+va_E.changeLabel(0, <span style="color: #CC9393;">"non"</span>)
+va_E.changeLabel(1, <span style="color: #CC9393;">"oui"</span>)
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">TODO : ajout des variable dans le RB (m&#233;thode .add)</span>
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">TODO : ajout des arcs (m&#233;thode .addArc)</span>
+
+</pre>
+</div></li>
+
+<li><p>
+Téléchargez le fichier de données <a href="vente_livret_A_donnees_10000.csv">vente_livret_A_donnees_10000.csv</a> et lisez ces données dans
+un <code>DataFrame</code> <code>Pandas</code> avec la fonction <code>read_csv</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Lecture des donn&#233;es</span>
+<span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+
+<span style="color: #DFAF8F;">data_df</span> = pd.read_csv(<span style="color: #CC9393;">"vente_livret_A_donnees_10000.csv"</span>)
+</pre>
+</div></li>
+<li><p>
+Utilisez la classe <code>gum.BNLearner</code> et en particulier la méthode <code>fitParameters</code> pour réaliser l'apprentissage des LPC de votre modèle.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">learner</span> = gum.BNLearner(data_df)
+
+learner.fitParameters(bn1)
+
+<span style="color: #DCDCCC; font-weight: bold;">print</span>(bn1.cpt(<span style="color: #CC9393;">"Vente_livret_A"</span>))
+<span style="color: #DCDCCC; font-weight: bold;">print</span>(bn1.cpt(<span style="color: #CC9393;">"Age"</span>))
+<span style="color: #DCDCCC; font-weight: bold;">print</span>(bn1.cpt(<span style="color: #CC9393;">"Epargne"</span>))
+</pre>
+</div></li>
+
+<li><p>
+Créez une fonction <code>loglikelihood</code> prenant en entrées un RB et un <code>DataFrame</code> représentant les
+mêmes variables et retournant la vraisemblance du RB par rapport au données. Il vous faudra
+utiliser un moteur d'inférence (ex: <code>gum.LazyPropagation</code>) et ses méthodes <code>.setEvidence</code> et
+<code>.evidenceProbability</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> math <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Pour utiliser math.log</span>
+
+<span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">loglikelihood</span>(bn, data_df):
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">TODO: Code &#224; &#233;crire ;)</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> loglike
+</pre>
+</div></li>
+<li><p>
+Utilisez votre fonction pour calculer la vraisemble du modèle 1 par rapport aux données.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">loglike</span> = loglikelihood(bn1, data_df)
+<span style="color: #DCDCCC; font-weight: bold;">print</span>(loglike)
+</pre>
+</div>
+
+<pre class="example">
+-22879.905249672032
+</pre></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org94c9cde" class="outline-3">
+<h3 id="org94c9cde"><span class="section-number-3">2.2.</span> Autres modèles</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Reprendre les étapes précédentes sur les modèles suivants :
+</p>
+<ul class="org-ul">
+<li>Modèle 2 : \(A \leftarrow V \rightarrow E\).</li>
+<li>Modèle 3 : \(A \leftarrow V \rightarrow E\) et \(A \rightarrow E\).</li>
+<li>Modèle 4 : \(A \leftarrow V \rightarrow E\) et \(A \leftarrow E\).</li>
+<li>Modèle 5 : \(A\), \(V\), \(E\) indépendantes. <br /></li>
+</ul>
+
+<p>
+Comparer les log-vraisemblance obtenues et expliquer les résultats.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org36f70ef" class="outline-2">
+<h2 id="org36f70ef"><span class="section-number-2">3.</span> Évaluation des modèles avec <code>pyAGRuM</code></h2>
+<div class="outline-text-2" id="text-3">
+<p>
+L'objectif est à présent de tester les performances de nos modèles pour effectuer des ciblages de
+clientèle. Les clients à cibler se trouvent dans le fichier
+<a href="vente_livret_A_donnees_100_test.csv">vente_livret_A_donnees_100_test.csv</a> contenant ce que nous appellerons dans la suite les données
+de test. Ces données contiennent à la fois les caractéristiques des clients à cibler (âge, épargne)
+mais aussi le résultat réel de la vente. La performance d'un modèle correspondra donc au taux de bonnes
+prédictions du modèle sur l'issue des ventes. 
+</p>
+
+<p>
+Pour ce faire, vous pouvez utiliser la fonction <code>predict</code> suivante permettant de calculer les
+probabilités <i>a posteriori</i> d'une variable à partir de l'observation d'autres variables.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> numpy <span style="color: #F0DFAF; font-weight: bold;">as</span> np
+<span style="color: #F0DFAF; font-weight: bold;">import</span> sys
+
+<span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">predict</span>(bn, data, var_target, show_progress=<span style="color: #BFEBBF;">False</span>):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #9FC59F;">"""</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   This function is used to predict the posterior probability of a target variable from observations  </span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   using a bayesian network model. </span>
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   Inputs:</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   - =bn=: the predictive model given as a =pyAgrum.BayesNet= object</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   - =data=: the data containing the observations used to predict the target variable </span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   as a =pandas.DataFrame= object</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   - =var_target=: the name of the target variable as a =str= object</span>
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   Returns:</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   - a =DataFrame= containing the posterior probability distribution of the target </span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   variable given each observation in =data=.</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #9FC59F;">   """</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Initialize the inference engine</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   inf_bn = gum.LazyPropagation(bn)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   inf_bn.setTargets({var_target})
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   nb_data = <span style="color: #DCDCCC; font-weight: bold;">len</span>(data)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   target_size = bn.variable(var_target).domainSize()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   target_dom = np.array([bn.variable(var_target).label(i)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #F0DFAF; font-weight: bold;">for</span> i <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DCDCCC; font-weight: bold;">range</span>(target_size)])
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   data_records = data.to_dict(<span style="color: #CC9393;">"records"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   post_prob = np.zeros((nb_data, target_size))
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">for</span> i <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DCDCCC; font-weight: bold;">range</span>(nb_data):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Set the evidence</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   inf_bn.setEvidence(data_records[i])
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Run inference</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   inf_bn.makeInference()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Compute posterior probability of target variable</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   post_prob[i, :] = inf_bn.posterior(var_target).toarray()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Erase evidence</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   inf_bn.eraseAllEvidence()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">if</span> show_progress:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   sys.stdout.write(<span style="color: #CC9393;">"predict progress: {0:3.0%}\r"</span>.<span style="color: #DCDCCC; font-weight: bold;">format</span>(i/nb_data))
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   post_prob_df = pd.DataFrame(post_prob,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   index=data.index,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   columns=bn.variable(var_target).labels())
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   post_prob_df.columns.name = var_target
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> post_prob_df
+</pre>
+</div>
+
+<p>
+Réaliser les étapes suivantes pour chacun des modèles construits à la phase précédente :
+</p>
+<ol class="org-ol">
+<li>Chargez le fichier de données de test <a href="vente_livret_A_donnees_100_test.csv">vente_livret_A_donnees_100_test.csv</a> dans un
+<code>DataFrame</code> nommé <code>data_test_df</code>.</li>
+<li><p>
+Utilisez la fonction <code>predict</code> avec le modèle 1 de manière à prédire les lois <code>a posteriori</code> de la variable
+<code>Vente_livret_A</code> conditionnellement à chaque observation des variables <code>Age</code> et <code>Epargne</code> dans
+les données de test.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">m1_prob_test</span> = predict(bn1, data=data_test_df[[<span style="color: #CC9393;">"Age"</span>, <span style="color: #CC9393;">"Epargne"</span>]], var_target=<span style="color: #CC9393;">"Vente_livret_A"</span>)
+</pre>
+</div></li>
+<li><p>
+Calculez, pour chaque prédiction, la modalité (<code>echec</code> ou <code>succes</code>) qui maximise la probabilité
+<i>a posteriori</i>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">m1_pred_test</span> = m1_prob_test.idxmax(axis=1)
+</pre>
+</div></li>
+<li>Calculez le taux de bonnes prédictions du modèle 1 sur les données de test.</li>
+<li>Comparer les performances observées de ce chaque modèle et expliquer les résultats.</li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>
