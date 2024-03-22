@@ -44,19 +44,19 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org61355fa">1. Objectif</a></li>
-<li><a href="#org2ab87c8">2. Apprentissage avec <code>pyAGRuM</code></a>
+<li><a href="#orgd143b55">1. Objectif</a></li>
+<li><a href="#org3d1eb1a">2. Apprentissage avec <code>pyAGRuM</code></a>
 <ul>
-<li><a href="#org4f09779">2.1. Modèle 1 : \(A \rightarrow V \leftarrow E\)</a></li>
-<li><a href="#org94c9cde">2.2. Autres modèles</a></li>
+<li><a href="#org9259870">2.1. Modèle 1 : \(A \rightarrow V \leftarrow E\)</a></li>
+<li><a href="#org49537e6">2.2. Autres modèles</a></li>
 </ul>
 </li>
-<li><a href="#org36f70ef">3. Évaluation des modèles avec <code>pyAGRuM</code></a></li>
+<li><a href="#org14a1849">3. Évaluation des modèles avec <code>pyAGRuM</code></a></li>
 </ul>
 </div>
 </div>
 
-<div id="org115f67b" class="figure">
+<div id="orgb9f6e81" class="figure">
 <p><img src="./bank_ml.png" alt="bank_ml.png" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Dall-E 3: machine learning digital marketing bank loan ; white background ; colorful</p>
@@ -64,8 +64,8 @@
 
 
 
-<div id="outline-container-org61355fa" class="outline-2">
-<h2 id="org61355fa"><span class="section-number-2">1.</span> Objectif</h2>
+<div id="outline-container-orgd143b55" class="outline-2">
+<h2 id="orgd143b55"><span class="section-number-2">1.</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 L'objectif de cet exercice est de comparer l'influence du choix de la structure d'un RB sur la
@@ -91,12 +91,12 @@ chances de vente.
 </div>
 </div>
 
-<div id="outline-container-org2ab87c8" class="outline-2">
-<h2 id="org2ab87c8"><span class="section-number-2">2.</span> Apprentissage avec <code>pyAGRuM</code></h2>
+<div id="outline-container-org3d1eb1a" class="outline-2">
+<h2 id="org3d1eb1a"><span class="section-number-2">2.</span> Apprentissage avec <code>pyAGRuM</code></h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org4f09779" class="outline-3">
-<h3 id="org4f09779"><span class="section-number-3">2.1.</span> Modèle 1 : \(A \rightarrow V \leftarrow E\)</h3>
+<div id="outline-container-org9259870" class="outline-3">
+<h3 id="org9259870"><span class="section-number-3">2.1.</span> Modèle 1 : \(A \rightarrow V \leftarrow E\)</h3>
 <div class="outline-text-3" id="text-2-1">
 <ol class="org-ol">
 <li><p>
@@ -159,8 +159,21 @@ va_E.changeLabel(1, <span style="color: #CC9393;">"oui"</span>)
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">TODO : ajout des arcs (m&#233;thode .addArc)</span>
 
 </pre>
-</div></li>
+</div>
 
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Ajout des variables dans le RB</span>
+bn1.add(va_V)
+bn1.add(va_A)
+bn1.add(va_E)
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Ajout des arcs</span>
+bn1.addArc(<span style="color: #CC9393;">"Age"</span>, <span style="color: #CC9393;">"Vente_livret_A"</span>)
+bn1.addArc(<span style="color: #CC9393;">"Epargne"</span>, <span style="color: #CC9393;">"Vente_livret_A"</span>)
+</pre>
+</div></li>
 <li><p>
 Téléchargez le fichier de données <a href="vente_livret_A_donnees_10000.csv">vente_livret_A_donnees_10000.csv</a> et lisez ces données dans
 un <code>DataFrame</code> <code>Pandas</code> avec la fonction <code>read_csv</code>.
@@ -201,6 +214,30 @@ utiliser un moteur d'inférence (ex: <code>gum.LazyPropagation</code>) et ses m�
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> loglike
 </pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">import</span> math <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Pour utiliser math.log</span>
+
+<span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">loglikelihood</span>(bn, data_df):
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">loglike</span> = 0
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Cr&#233;ation d'un moteur d'inf&#233;rence</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">inf_engine</span> = gum.LazyPropagation(bn)
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">for</span> idx, obs <span style="color: #F0DFAF; font-weight: bold;">in</span> data_df.iterrows():
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Projection de la donn&#233;es courante dans le RB</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   inf_engine.setEvidence(obs.to_dict())
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Calcul de la probabilit&#233; (vraisemblance) de la donn&#233;es dans le RB</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">data_loglike</span> = inf_engine.evidenceProbability()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Passage au log pour obtenir la log-vraisemblance de la donn&#233;es</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">et somme pour calculer la vraisemblance sur toutes les donn&#233;es</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">loglike</span> += math.log(data_loglike)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> loglike
+</pre>
 </div></li>
 <li><p>
 Utilisez votre fonction pour calculer la vraisemble du modèle 1 par rapport aux données.
@@ -218,8 +255,8 @@ Utilisez votre fonction pour calculer la vraisemble du modèle 1 par rapport aux
 </div>
 </div>
 
-<div id="outline-container-org94c9cde" class="outline-3">
-<h3 id="org94c9cde"><span class="section-number-3">2.2.</span> Autres modèles</h3>
+<div id="outline-container-org49537e6" class="outline-3">
+<h3 id="org49537e6"><span class="section-number-3">2.2.</span> Autres modèles</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Reprendre les étapes précédentes sur les modèles suivants :
@@ -234,12 +271,53 @@ Reprendre les étapes précédentes sur les modèles suivants :
 <p>
 Comparer les log-vraisemblance obtenues et expliquer les résultats.
 </p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Sp&#233;cification des structures de chaque mod&#232;le</span>
+<span style="color: #DFAF8F;">bn_struct_specs</span> = {
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"M1"</span>: [(<span style="color: #CC9393;">"Age"</span>, <span style="color: #CC9393;">"Vente_livret_A"</span>), (<span style="color: #CC9393;">"Epargne"</span>, <span style="color: #CC9393;">"Vente_livret_A"</span>)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"M2"</span>: [(<span style="color: #CC9393;">"Vente_livret_A"</span>, <span style="color: #CC9393;">"Age"</span>), (<span style="color: #CC9393;">"Vente_livret_A"</span>, <span style="color: #CC9393;">"Epargne"</span>)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"M3"</span>: [(<span style="color: #CC9393;">"Vente_livret_A"</span>, <span style="color: #CC9393;">"Age"</span>), (<span style="color: #CC9393;">"Vente_livret_A"</span>, <span style="color: #CC9393;">"Epargne"</span>), (<span style="color: #CC9393;">"Age"</span>, <span style="color: #CC9393;">"Epargne"</span>)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"M4"</span>: [(<span style="color: #CC9393;">"Vente_livret_A"</span>, <span style="color: #CC9393;">"Age"</span>), (<span style="color: #CC9393;">"Vente_livret_A"</span>, <span style="color: #CC9393;">"Epargne"</span>), (<span style="color: #CC9393;">"Epargne"</span>, <span style="color: #CC9393;">"Age"</span>)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"M5"</span>: [],
+}
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Boucle de construction de chaque mod&#232;le</span>
+<span style="color: #DFAF8F;">bn_models</span> = {}
+<span style="color: #F0DFAF; font-weight: bold;">for</span> bn_name, struct <span style="color: #F0DFAF; font-weight: bold;">in</span> bn_struct_specs.items():
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Construction du RB courant</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">bn</span> = gum.BayesNet(bn_name)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bn.add(va_V)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bn.add(va_A)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bn.add(va_E)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   [bn.addArc(*arc) <span style="color: #F0DFAF; font-weight: bold;">for</span> arc <span style="color: #F0DFAF; font-weight: bold;">in</span> struct]
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Apprentissage des LPC</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   learner.fitParameters(bn)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">bn_models</span>[<span style="color: #DFAF8F;">bn_name</span>] = bn
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Boucle de calcul des vraisemblances de chaque mod&#232;le</span>
+<span style="color: #DFAF8F;">bn_loglike</span> = {}
+<span style="color: #F0DFAF; font-weight: bold;">for</span> bn_name, bn <span style="color: #F0DFAF; font-weight: bold;">in</span> bn_models.items():
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">bn_loglike</span>[<span style="color: #DFAF8F;">bn_name</span>] = loglikelihood(bn, data_df)
+
+<span style="color: #DCDCCC; font-weight: bold;">print</span>(bn_loglike)
+</pre>
+</div>
+
+<pre class="example">
+{'M1': -22879.905249672032, 'M2': -23296.642978057353, 'M3': -21958.960794571823, 'M4': -21958.960794571823, 'M5': -24196.13497634752}
+</pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org36f70ef" class="outline-2">
-<h2 id="org36f70ef"><span class="section-number-2">3.</span> Évaluation des modèles avec <code>pyAGRuM</code></h2>
+
+<div id="outline-container-org14a1849" class="outline-2">
+<h2 id="org14a1849"><span class="section-number-2">3.</span> Évaluation des modèles avec <code>pyAGRuM</code></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 L'objectif est à présent de tester les performances de nos modèles pour effectuer des ciblages de
@@ -306,8 +384,16 @@ probabilités <i>a posteriori</i> d'une variable à partir de l'observation d'au
 Réaliser les étapes suivantes pour chacun des modèles construits à la phase précédente :
 </p>
 <ol class="org-ol">
-<li>Chargez le fichier de données de test <a href="vente_livret_A_donnees_100_test.csv">vente_livret_A_donnees_100_test.csv</a> dans un
-<code>DataFrame</code> nommé <code>data_test_df</code>.</li>
+<li><p>
+Chargez le fichier de données de test <a href="vente_livret_A_donnees_100_test.csv">vente_livret_A_donnees_100_test.csv</a> dans un
+<code>DataFrame</code> nommé <code>data_test_df</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">data_test_df</span> = pd.read_csv(<span style="color: #CC9393;">"vente_livret_A_donnees_100_test.csv"</span>)
+</pre>
+</div></li>
 <li><p>
 Utilisez la fonction <code>predict</code> avec le modèle 1 de manière à prédire les lois <code>a posteriori</code> de la variable
 <code>Vente_livret_A</code> conditionnellement à chaque observation des variables <code>Age</code> et <code>Epargne</code> dans
@@ -325,9 +411,37 @@ Calculez, pour chaque prédiction, la modalité (<code>echec</code> ou <code>suc
 <pre class="src src-python"><span style="color: #DFAF8F;">m1_pred_test</span> = m1_prob_test.idxmax(axis=1)
 </pre>
 </div></li>
-<li>Calculez le taux de bonnes prédictions du modèle 1 sur les données de test.</li>
+<li><p>
+Calculez le taux de bonnes prédictions du modèle 1 sur les données de test.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">m1_accuracy_test</span> = (data_test_df[<span style="color: #CC9393;">"Vente_livret_A"</span>] == m1_pred_test).mean()
+</pre>
+</div></li>
 <li>Comparer les performances observées de ce chaque modèle et expliquer les résultats.</li>
 </ol>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Boucle de calcul des pr&#233;dictions et des performances</span>
+<span style="color: #DFAF8F;">bn_accuracy</span> = {}
+<span style="color: #F0DFAF; font-weight: bold;">for</span> bn_name, bn <span style="color: #F0DFAF; font-weight: bold;">in</span> bn_models.items():
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">prob_test</span> = predict(bn, data=data_test_df[[<span style="color: #CC9393;">"Age"</span>, <span style="color: #CC9393;">"Epargne"</span>]],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   var_target=<span style="color: #CC9393;">"Vente_livret_A"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   pred_test = prob_test.idxmax(axis=1)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   accuracy_test = (data_test_df[<span style="color: #CC9393;">"Vente_livret_A"</span>] == pred_test).mean()
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bn_accuracy[<span style="color: #DFAF8F;">bn_name</span>] = accuracy_test
+
+<span style="color: #DCDCCC; font-weight: bold;">print</span>(bn_accuracy)
+</pre>
+</div>
+
+<pre class="example">
+{'M1': 0.74, 'M2': 0.67, 'M3': 0.74, 'M4': 0.74, 'M5': 0.53}
+</pre>
 </div>
 </div>
 </div>
