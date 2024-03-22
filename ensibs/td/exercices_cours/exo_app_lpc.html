@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-23 mar. 21:58 -->
+<!-- 2024-03-22 ven. 18:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Apprentissage des LPC</title>
@@ -45,14 +45,18 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc9348c7">Exercice 1</a></li>
+<li><a href="#org06e67fe">Exercice 1</a>
+<ul>
+<li><a href="#orgd6c38e9">Correction</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc9348c7" class="outline-2">
-<h2 id="orgc9348c7">Exercice 1</h2>
-<div class="outline-text-2" id="text-orgc9348c7">
+<div id="outline-container-org06e67fe" class="outline-2">
+<h2 id="org06e67fe">Exercice 1</h2>
+<div class="outline-text-2" id="text-org06e67fe">
 <p>
 Dans cet exercice, nous étudions la loi d'un couple de v.a. binaires \(\left(X, Y\right)\) à valeurs dans
 l'ensemble \({\text{F},\text{V}}\). Pour ce
@@ -157,6 +161,128 @@ dans ce modèle ?</li>
 dans ce modèle ?</li>
 <li>Donner l'estimation du maximum de vraisemblance de la loi jointe.</li>
 </ol>
+</div>
+
+<div id="outline-container-orgd6c38e9" class="outline-3">
+<h3 id="orgd6c38e9">Correction</h3>
+<div class="outline-text-3" id="text-orgd6c38e9">
+<p>
+<span class="underline">Modèle 1</span> : \(X\) et \(Y\) sont supposées indépendantes.
+</p>
+
+<ol class="org-ol">
+<li>Le modèle 1 se représente graphiquement par deux noeuds sans aucun lien. La loi jointe s'écrit
+\(P_{1}(X, Y) = P_{1}(X) \times P_{1}(Y)\).</li>
+<li>\(CS(\text{Modèle 1}) = CS(P_{1}(X)) + CS(P_{1}(Y)) = 2 + 2 = 4\).</li>
+<li>\(CP(\text{Modèle 1}) = CP(P_{1}(X)) + CP(P_{1}(Y)) = 1 + 1 = 2\).</li>
+<li><p>
+Par définition, 
+\[
+   P_{1}^{MV}(X = V) = \frac{\text{Nombre de données $\{X = V\}$}}{\text{Nombre total de données}} =
+   4/8 = 1/2
+   \]
+Et donc, \(P_{1}^{MV}(X = F) = 1 - P_{1}^{MV}(X = V) = 1/2\).
+</p>
+
+<p>
+De même, 
+\[
+   P_{1}^{MV}(Y = V) = \frac{\text{Nombre de données $\{Y = V\}$}}{\text{Nombre total de données}} =
+   6/8 = 3/4,
+   \]
+et \(P_{1}^{MV}(X = F) = 1 - P_{1}^{MV}(Y = V) = 1/4\).
+</p></li>
+<li><p>
+Par définition, la vraisemblance du modèle 1 par rapport aux données a pour expression :
+</p>
+\begin{align*}
+L_{1}(\mathcal{D}) & = \prod_{i=1}^{8} P^{MV}_{1}(X = x_{i}, Y = y_{i}) \\
+                   & = \prod_{i=1}^{8} P^{MV}_{1}(X = x_{i}) \times P^{MV}_{1}(Y = y_{i}) \\
+                   & = P^{MV}_{1}(X = V)^{4} \times P^{MV}_{1}(X = F)^{4} \times P^{MV}_{1}(Y = V)^{6} \times P^{MV}_{1}(Y = F)^{2} \\
+                   & = \frac{1}{2^4} \times \frac{1}{2^4} \times \frac{3^6}{4^6} \times \frac{1}{4^2} \\
+L_{1}(\mathcal{D}) & = \frac{3^6}{2^{24}} \approx 4.345 \times 10^{-5}.
+\end{align*}</li>
+<li>On en déduit la log-vraisemblance :
+\[
+   \ell_{1}(\mathcal{D}) = \ln{L_{1}(\mathcal{D})} = 6 \ln{3} - 24 \ln{2} \approx -10.043.
+   \]</li>
+</ol>
+
+
+<p>
+<span class="underline">Modèle 2</span> : \(X \to Y\).
+</p>
+
+<ol class="org-ol">
+<li>La loi jointe s'écrit
+\(P_{2}(X, Y) = P_{2}(X) \times P_{2}(Y | X)\).</li>
+<li>\(CS(\text{Modèle 2}) = CS(P_{2}(X)) + CS(P_{2}(Y|X)) = 2 + 4 = 6\).</li>
+<li>\(CP(\text{Modèle 2}) = CP(P_{2}(X)) + CP(P_{2}(Y|X)) = 1 + 1\times2 = 3\).</li>
+<li>Comme dans le modèle 1, nous avons \(P_{2}^{MV}(X = V) = 1/2\).
+De plus, 
+\[
+   P_{2}^{MV}(Y = V|X = V) = \frac{\text{Nombre de données $\{Y = V; X = V\}$}}{\text{Nombre de
+   données $\{X = V\}$}} = \frac{3}{4}, 
+   \] 
+\[
+   P_{2}^{MV}(Y = V|X = F) = \frac{\text{Nombre de données $\{Y = V; X = F\}$}}{\text{Nombre de
+   données $\{X = F\}$}} = \frac{3}{4}.
+   \]</li>
+<li><p>
+On remarque tout d'abord que pour tout \(x = V, F\), \(P_{2}^{MV}(Y|X=x) = P_{2}^{MV}(Y)\). Cela
+signifie que les variables \(X\) et \(Y\) sont numériquement indépendantes malgré le lien entre ces deux
+variables dans le graphe du modèle 2 (modèle non fidèle). Dans le contexte des données
+\(\mathcal{D}\), les estimateurs du maximum de
+vraisemblance des LPC entraînent une équivalence probabiliste des modèles 1 et 2. On peut donc en
+déduire sans calcul que \(L_{1}(\mathcal{D}) = L_{2}(\mathcal{D})\). <br />
+</p>
+
+<p>
+Pour s'en convaincre par le calcul, la vraisemblance du modèle 2 par rapport aux données a pour expression :
+</p>
+\begin{align*}
+L_{2}(\mathcal{D}) = & \prod_{i=1}^{8} P^{MV}_{2}(X = x_{i}, Y = y_{i}) \\
+                   = & \prod_{i=1}^{8} P^{MV}_{2}(X = x_{i}) \times P^{MV}_{2}(Y = y_{i} | X = x_{i}) \\
+                   = & P^{MV}_{2}(X = V)^{4} \times P^{MV}_{2}(X = F)^{4} \times 
+                       P^{MV}_{2}(Y = V|X = V)^{3} \times 
+                       P^{MV}_{2}(Y = V|X = F)^{3} \times 
+                       P^{MV}_{2}(Y = F|X = V) \times
+                       P^{MV}_{2}(Y = F|X = F) \\
+                   = & \frac{1}{2^4} \times \frac{1}{2^4} \times \frac{3^3}{4^3} \times \frac{3^3}{4^3} \times \frac{1}{4} \times \frac{1}{4} \\
+L_{2}(\mathcal{D}) = & \frac{3^6}{2^{24}}.
+\end{align*}</li>
+</ol>
+
+<p>
+<span class="underline">Modèle 3</span> : Loi jointe naturelle.
+</p>
+
+<ol class="org-ol">
+<li>\(CS(\text{Modèle 3}) = CS(P_{3}(X, Y)) = 2 \times 2 = 4\).</li>
+<li>\(CP(\text{Modèle 3}) = CP(P_{3}(X, Y)) = CS(P_{3}(X, Y)) - 1 = 3\).</li>
+<li>L'estimateur du maximum de vraisemblance de la loi jointe naturelle par rapport aux données
+\(\mathcal{D}\) est caractérisé par : 
+\[
+   P_{3}^{MV}(X = V, Y = V) = \frac{\text{Nombre de données $\{X = V; Y = V\}$}}{\text{Nombre total de
+   données}} = \frac{3}{8},
+   \] 
+\[
+   P_{3}^{MV}(X = V, Y = F) = \frac{\text{Nombre de données $\{X = V; Y = F\}$}}{\text{Nombre total de
+   données}} = \frac{1}{8},
+   \] 
+\[
+   P_{3}^{MV}(X = F, Y = V) = \frac{\text{Nombre de données $\{X = F; Y = V\}$}}{\text{Nombre total de
+   données}} = \frac{3}{8}.
+   \]
+Remarquons que :
+<ul class="org-ul">
+<li>le modèle 3 étant équivalent au modèle 2 (RB totalement connecté), on a par conséquent \(L_{3}(\cdot) =
+     L_{2}(\cdot)\), i.e. quelque soit le jeu de données considérées pour l'apprentissage des LPC ;</li>
+<li>\(L_{1}(\mathcal{D}) = L_{2}(\mathcal{D}) = L_{3}(\mathcal{D})\) du fait de l'équivalence des
+modèles 1 et 2 dans le contexte des données \(\mathcal{D}\) de l'exercice.</li>
+</ul></li>
+</ol>
+</div>
 </div>
 </div>
 </div>

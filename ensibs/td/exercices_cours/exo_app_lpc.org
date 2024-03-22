@@ -331,7 +331,7 @@ _Modèle 3_ : Loi jointe naturelle.
    dans ce modèle ?
 3. Donner l'estimation du maximum de vraisemblance de la loi jointe. 
 
-** Correction                                                      :noexport:
+** Correction
 
 _Modèle 1_ : $X$ et $Y$ sont supposées indépendantes.
 
