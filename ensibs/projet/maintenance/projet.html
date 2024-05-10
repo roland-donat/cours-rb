@@ -23,42 +23,37 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2444aef">Contexte et objectifs du projet</a></li>
-<li><a href="#orge98fa46">Problématique métier</a></li>
-<li><a href="#sec-sujets">Travaux à réaliser</a>
+<li><a href="#org3d27b3e">Contexte et objectifs du projet</a></li>
+<li><a href="#org267b520">Problématique métier</a></li>
+<li><a href="#sec-sujets">Travaux à réaliser</a></li>
+<li><a href="#org01662f3">Présentation des données</a>
 <ul>
-<li><a href="#org38f94c7">Développement d'une IA de diagnostic</a></li>
-<li><a href="#orgce05d1e">Développement d'un applicatif métier</a></li>
+<li><a href="#org009dde6">Données <code>OT-ODR</code></a></li>
+<li><a href="#org3e5e97c">Données <code>EQUIPEMENTS</code></a></li>
 </ul>
 </li>
-<li><a href="#orgae29890">Présentation des données</a>
+<li><a href="#orgdf568f1">Pour se lancer en douceur</a>
 <ul>
-<li><a href="#orgffdc49c">Données <code>OT-ODR</code></a></li>
-<li><a href="#org2154d34">Données <code>EQUIPEMENTS</code></a></li>
-</ul>
-</li>
-<li><a href="#orgbcd2c1e">Pour se lancer en douceur</a>
-<ul>
-<li><a href="#orge7b3627">Chargement et brève analyse descriptive</a></li>
-<li><a href="#org8335c6f">Préparation des données</a></li>
-<li><a href="#org115f001">Création d'un premier modèle</a></li>
-<li><a href="#org9c7a517">Apprentissage des LPC</a></li>
-<li><a href="#orge28857f">Prédictions</a></li>
+<li><a href="#org1a11beb">Chargement et brève analyse descriptive</a></li>
+<li><a href="#orgd28a3c8">Préparation des données</a></li>
+<li><a href="#orgd3eeaf6">Création d'un premier modèle</a></li>
+<li><a href="#orgb1a6ab1">Apprentissage des LPC</a></li>
+<li><a href="#org7a890db">Prédictions</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="org48e9845" class="figure">
+<div id="org6e761f7" class="figure">
 <p><img src="./bus_maintenance.png" alt="bus maintenance city 2d isometric cartoon white background" width="50%" />
 </p>
 </div>
 
 
-<div id="outline-container-org2444aef" class="outline-2">
-<h2 id="org2444aef">Contexte et objectifs du projet</h2>
-<div class="outline-text-2" id="text-org2444aef">
+<div id="outline-container-org3d27b3e" class="outline-2">
+<h2 id="org3d27b3e">Contexte et objectifs du projet</h2>
+<div class="outline-text-2" id="text-org3d27b3e">
 <p>
 Une entreprise de transport collectif cherche à améliorer l'efficacité des opérations de
 maintenance réalisées sur ses véhicules. Un axe d'amélioration porte sur l'élaboration de
@@ -87,9 +82,9 @@ projet.*
 </div>
 </div>
 
-<div id="outline-container-orge98fa46" class="outline-2">
-<h2 id="orge98fa46">Problématique métier</h2>
-<div class="outline-text-2" id="text-orge98fa46">
+<div id="outline-container-org267b520" class="outline-2">
+<h2 id="org267b520">Problématique métier</h2>
+<div class="outline-text-2" id="text-org267b520">
 <p>
 L'entreprise de transport exploite une flotte de véhicules qui circule pendant les horaires de
 service. Lorsqu'un problème survient sur un véhicule, le conducteur est chargé de faire un
@@ -127,11 +122,6 @@ du véhicule (kilométrage, type de moteur, marque, etc.).
 <div id="outline-container-sec-sujets" class="outline-2">
 <h2 id="sec-sujets">Travaux à réaliser</h2>
 <div class="outline-text-2" id="text-sec-sujets">
-</div>
-
-<div id="outline-container-org38f94c7" class="outline-3">
-<h3 id="org38f94c7">Développement d'une IA de diagnostic</h3>
-<div class="outline-text-3" id="text-org38f94c7">
 <p>
 Ce travail correspond au développement d'un moteur d'aide au diagnostic et à la recommandation de
 maintenance. Il s'agit donc en 
@@ -140,55 +130,12 @@ caractéristiques d'un véhicule en maintenance, la localisation de la panne
 (SYSTEM_N1, SYSTEM_N2, SYSTEM_N3) et l'action de maintenance à réaliser (ODR) permettant de remettre 
 le véhicule en service. 
 </p>
-
-<p>
-Les principaux travaux demandés sont les suivants :
-</p>
-<ol class="org-ol">
-<li>Proposer un réseau bayésien pertinent afin de répondre à la
-problématique en argumentant vos choix.</li>
-<li>Utiliser les données à disposition pour réaliser un apprentissage des lois du modèle retenu.</li>
-<li>Évaluer la performance prédictive de votre modèle à partir d'une approche apprentissage/test classique.</li>
-<li>(Option) Proposer un second modèle et comparer ses performances avec votre premier modèle.</li>
-</ol>
-
-<p>
-Le travail est à réaliser sous Python en utilisant la <a href="https://agrum.gitlab.io/pages/pyagrum.html">librairie <code>PyAgrum</code></a>.
-</p>
 </div>
 </div>
 
-<div id="outline-container-orgce05d1e" class="outline-3">
-<h3 id="orgce05d1e">Développement d'un applicatif métier</h3>
-<div class="outline-text-3" id="text-orgce05d1e">
-<p>
-L'objectif de ce travail est de développer une application permettant d'interagir avec le
-   moteur de recommandations de la section précédente de manière transparente pour 
-   l'utilisateur final.
-</p>
-
-<p>
-L'application devra donc proposer une interface web permettant de :
-</p>
-<ul class="org-ul">
-<li>saisir les informations nécessaires à la production d'un diagnostic (e.g. signalements,
-caractéristiques d'un véhicule, etc) ;</li>
-<li>réaliser les calculs d'inférence afin de d'estimer les diagnostics ;</li>
-<li>mettre en forme les diagnostics dans l'interface développée.</li>
-</ul>
-
-<p>
-L'application est à développer avec la librairie <a href="https://dash.plotly.com/"><code>Plotly Dash</code></a>. N'hésitez pas à consulter des
-ressources sur internet afin de monter en compétences (e.g. <a href="https://dash.plotly.com/tutorial">https://dash.plotly.com/tutorial</a>).
-</p>
-</div>
-</div>
-</div>
-
-
-<div id="outline-container-orgae29890" class="outline-2">
-<h2 id="orgae29890">Présentation des données</h2>
-<div class="outline-text-2" id="text-orgae29890">
+<div id="outline-container-org01662f3" class="outline-2">
+<h2 id="org01662f3">Présentation des données</h2>
+<div class="outline-text-2" id="text-org01662f3">
 <p>
 Deux sources de données sont mises à disposition dans ce projet :
 </p>
@@ -214,14 +161,14 @@ equipements_df = pd.read_csv(equipements_filename,
 </div>
 </div>
 
-<div id="outline-container-orgffdc49c" class="outline-3">
-<h3 id="orgffdc49c">Données <code>OT-ODR</code></h3>
-<div class="outline-text-3" id="text-orgffdc49c">
+<div id="outline-container-org009dde6" class="outline-3">
+<h3 id="org009dde6">Données <code>OT-ODR</code></h3>
+<div class="outline-text-3" id="text-org009dde6">
 <p>
-Le Tableau <a href="#org64e829f">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
+Le Tableau <a href="#org65514f0">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
 </p>
 
-<table id="org64e829f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org65514f0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>OT-ODR</code>.</caption>
 
 <colgroup>
@@ -316,14 +263,14 @@ Le Tableau <a href="#org64e829f">1</a> donne une description des variables du je
 </div>
 
 
-<div id="outline-container-org2154d34" class="outline-3">
-<h3 id="org2154d34">Données <code>EQUIPEMENTS</code></h3>
-<div class="outline-text-3" id="text-org2154d34">
+<div id="outline-container-org3e5e97c" class="outline-3">
+<h3 id="org3e5e97c">Données <code>EQUIPEMENTS</code></h3>
+<div class="outline-text-3" id="text-org3e5e97c">
 <p>
-Le Tableau <a href="#org7c31bd8">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
+Le Tableau <a href="#org75f53c9">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
 </p>
 
-<table id="org7c31bd8" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org75f53c9" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 2 :</span> Définition des variables du jeu de données <code>EQUIPEMENTS</code>.</caption>
 
 <colgroup>
@@ -366,13 +313,13 @@ Le Tableau <a href="#org7c31bd8">2</a> donne une description des variables du je
 
 
 
-<div id="outline-container-orgbcd2c1e" class="outline-2">
-<h2 id="orgbcd2c1e">Pour se lancer en douceur</h2>
-<div class="outline-text-2" id="text-orgbcd2c1e">
+<div id="outline-container-orgdf568f1" class="outline-2">
+<h2 id="orgdf568f1">Pour se lancer en douceur</h2>
+<div class="outline-text-2" id="text-orgdf568f1">
 </div>
-<div id="outline-container-orge7b3627" class="outline-3">
-<h3 id="orge7b3627">Chargement et brève analyse descriptive</h3>
-<div class="outline-text-3" id="text-orge7b3627">
+<div id="outline-container-org1a11beb" class="outline-3">
+<h3 id="org1a11beb">Chargement et brève analyse descriptive</h3>
+<div class="outline-text-3" id="text-org1a11beb">
 <p>
 Chargement des données :
 </p>
@@ -446,9 +393,9 @@ freq         258129                                     40302
 </div>
 </div>
 
-<div id="outline-container-org8335c6f" class="outline-3">
-<h3 id="org8335c6f">Préparation des données</h3>
-<div class="outline-text-3" id="text-org8335c6f">
+<div id="outline-container-orgd28a3c8" class="outline-3">
+<h3 id="orgd28a3c8">Préparation des données</h3>
+<div class="outline-text-3" id="text-orgd28a3c8">
 <p>
 On change le type des variables catégorielles avec la méthode <code>.astype('category')</code> :
 </p>
@@ -469,9 +416,9 @@ ot_odr_df.info()
 </div>
 </div>
 
-<div id="outline-container-org115f001" class="outline-3">
-<h3 id="org115f001">Création d'un premier modèle</h3>
-<div class="outline-text-3" id="text-org115f001">
+<div id="outline-container-orgd3eeaf6" class="outline-3">
+<h3 id="orgd3eeaf6">Création d'un premier modèle</h3>
+<div class="outline-text-3" id="text-orgd3eeaf6">
 <p>
 Nous proposons de créer un modèle permettant d'expliquer la variable <code>SYSTEM_N1</code> à partir de
 <code>SIG_OBS</code>.
@@ -735,9 +682,9 @@ On remarque naturellement que les LPC ne contiennent pour l'instant que des zér
 </div>
 
 
-<div id="outline-container-org9c7a517" class="outline-3">
-<h3 id="org9c7a517">Apprentissage des LPC</h3>
-<div class="outline-text-3" id="text-org9c7a517">
+<div id="outline-container-orgb1a6ab1" class="outline-3">
+<h3 id="orgb1a6ab1">Apprentissage des LPC</h3>
+<div class="outline-text-3" id="text-orgb1a6ab1">
 <p>
 Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la classe
 <code>gum.BNLearner</code> et en particulier la méthode <code>fitParameters</code>: 
@@ -750,7 +697,7 @@ learner.fitParameters(bn)
 </div>
 
 <pre class="example">
-Filename       : /tmp/tmpyy2rs23m.csv
+Filename       : /tmp/tmpi4x0mm49.csv
 Size           : (506558,2)
 Variables      : SYSTEM_N1[10], SIG_OBS[59]
 Induced types  : True
@@ -921,9 +868,9 @@ Loi de probabilité de <code>SYSTEM_N1</code> | <code>SIG_OBS</code> :
 </div>
 </div>
 
-<div id="outline-container-orge28857f" class="outline-3">
-<h3 id="orge28857f">Prédictions</h3>
-<div class="outline-text-3" id="text-orge28857f">
+<div id="outline-container-org7a890db" class="outline-3">
+<h3 id="org7a890db">Prédictions</h3>
+<div class="outline-text-3" id="text-org7a890db">
 <p>
 À ce stade, vous pouvez reprendre la fonction <code>predict</code> que nous avons utilisée dans <a href="../../td/comp_modeles_app/comp_modeles_app.html">ce TD</a> pour réaliser des prédictions d'une variable cible à
 partir de données. Chaque ligne des données fournies est utilisée comme évidence (conditionnement)

@@ -89,39 +89,12 @@ du véhicule (kilométrage, type de moteur, marque, etc.).
   :CUSTOM_ID: sec-sujets
   :END:
 
-** Développement d'une IA de diagnostic 
-
 Ce travail correspond au développement d'un moteur d'aide au diagnostic et à la recommandation de
 maintenance. Il s'agit donc en 
 pratique d'élaborer un modèle permettant de déduire d'un signalement de panne et des
 caractéristiques d'un véhicule en maintenance, la localisation de la panne
 (SYSTEM_N1, SYSTEM_N2, SYSTEM_N3) et l'action de maintenance à réaliser (ODR) permettant de remettre 
 le véhicule en service. 
-
-Les principaux travaux demandés sont les suivants :
-1. Proposer un réseau bayésien pertinent afin de répondre à la
-   problématique en argumentant vos choix. 
-2. Utiliser les données à disposition pour réaliser un apprentissage des lois du modèle retenu.
-3. Évaluer la performance prédictive de votre modèle à partir d'une approche apprentissage/test classique.
-4. (Option) Proposer un second modèle et comparer ses performances avec votre premier modèle.
-
-Le travail est à réaliser sous Python en utilisant la [[https://agrum.gitlab.io/pages/pyagrum.html][librairie =PyAgrum=]].
-   
-** Développement d'un applicatif métier
-
-L'objectif de ce travail est de développer une application permettant d'interagir avec le
-   moteur de recommandations de la section précédente de manière transparente pour 
-   l'utilisateur final.
-
-L'application devra donc proposer une interface web permettant de :
-- saisir les informations nécessaires à la production d'un diagnostic (e.g. signalements,
-  caractéristiques d'un véhicule, etc) ;
-- réaliser les calculs d'inférence afin de d'estimer les diagnostics ;
-- mettre en forme les diagnostics dans l'interface développée.
-
-L'application est à développer avec la librairie [[https://dash.plotly.com/][=Plotly Dash=]]. N'hésitez pas à consulter des
-ressources sur internet afin de monter en compétences (e.g. https://dash.plotly.com/tutorial).
-
 
 * Présentation des données
 
