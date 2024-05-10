@@ -1,0 +1,1043 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Projet de modélisation stochastique</title>
+<meta name="author" content="Roland Donat" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://edgemind-sas.github.io/visual-identity/official_docs/css/edgemind.css" />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Projet de modélisation stochastique</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org36f2909">Démarchage téléphonique en <i>call center</i></a></li>
+<li><a href="#org93795c1">Objectifs</a></li>
+<li><a href="#org01f3f60">Présentation des données</a></li>
+<li><a href="#org5350fe1">Pour se lancer en douceur</a>
+<ul>
+<li><a href="#org03e0604">Brève analyse descriptive</a></li>
+<li><a href="#orgd1824f1">Préparation des données</a></li>
+<li><a href="#orgbf4d4d9">Création d'un premier modèle</a></li>
+<li><a href="#orgd69d173">Apprentissage des LPC</a></li>
+<li><a href="#org26a695a">Prédictions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="org553d4c3" class="figure">
+<p><img src="./callcenter.png" alt="call center employees waiting for algorithms to deliver good phone numbers, illustration, white background, colorful" width="50%" />
+</p>
+</div>
+
+
+<div id="outline-container-org36f2909" class="outline-2">
+<h2 id="org36f2909">Démarchage téléphonique en <i>call center</i></h2>
+<div class="outline-text-2" id="text-org36f2909">
+<p>
+Les centres d'appels, ou <i>call centers</i>, sont des services spécialisés dans la communication
+téléphonique à grande échelle. Les employés de ces centres - souvent appelés téléopérateurs ou
+agents de centre d’appels - sont chargés de contacter une liste de prospects ou de clients pour
+diverses raisons, allant du support client au démarchage commercial. Le démarchage téléphonique
+implique la promotion de produits ou de services directement auprès de clients potentiels à travers
+des appels sortants. 
+</p>
+
+<p>
+En France, le démarchage téléphonique est régi par des règles strictes afin de protéger la vie
+privée des individus et éviter les nuisances. Selon la réglementation, les appels de démarchage sont 
+limités à certaines plages horaires : ils ne peuvent être passés que de 10h à 13h et de 14h à 20h en
+semaine. De plus, les appels le week-end et les jours fériés sont prohibés. Les entreprises doivent
+également respecter le droit des consommateurs à ne pas être démarchés en s'assurant de ne pas
+contacter les numéros inscrits sur les listes d'opposition au démarchage téléphonique.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org93795c1" class="outline-2">
+<h2 id="org93795c1">Objectifs</h2>
+<div class="outline-text-2" id="text-org93795c1">
+<p>
+Le présent projet a pour but de s'attaquer à un des principaux défis du démarchage
+téléphonique : l'optimisation de la joignabilité des prospects. Pour ce faire, vous réaliserez les
+travaux suivants :
+</p>
+
+<ol class="org-ol">
+<li><b>Analyse de Données Historiques</b> : Examiner les motifs de joignabilité en se basant sur un
+ensemble de données d'appels. Ces données compilées comportent des informations telles que les
+horaires et les jours auxquels les appels ont été passés, ainsi que le résultat de l'appel
+(réussite ou échec de la mise en contact avec le prospect).</li>
+
+<li><b>Entraînement d'un Algorithme Prédictif</b> : Mettre au point un modèle de machine learning capable
+de prévoir l'issue d'un appel, c'est-à-dire prédire la probabilité qu'une personne au bout du fil
+décroche.</li>
+
+<li><b>Établissement d'une Stratégie d'Appels</b> : Développer une stratégie basée sur les données pour
+maximiser les chances d'une joignabilité effective lors d'une seconde tentative d'appel à un
+numéro dont la première s'est soldée par un échec. Cette stratégie devra tenir compte
+des horaires et jours les plus propices pour réessayer de contacter le prospect, en s’appuyant
+sur les caractéristiques de la première tentative d'appel.</li>
+</ol>
+
+<p>
+Ce projet permettrait d'améliorer l'efficacité des campagnes de démarchage
+téléphonique en optimisant les ressources et le temps alloués à cette activité, tout en restant en
+conformité avec la réglementation française sur le démarchage téléphonique. 
+</p>
+
+<p>
+*Note importante : les données mises à disposition sont anonymisées, mais demeurent néanmoins
+confidentielles. Il est donc interdit de diffuser et partager ces données en dehors du cadre du
+projet.*  
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org01f3f60" class="outline-2">
+<h2 id="org01f3f60">Présentation des données</h2>
+<div class="outline-text-2" id="text-org01f3f60">
+<p>
+Les quatre jeux de données suivants sont mis à disposition dans ce projet :
+</p>
+<ul class="org-ul">
+<li><a href="calls_a1.csv.bz2">calls_a1.csv.bz2</a>.</li>
+<li><a href="calls_a2.csv.bz2">calls_a2.csv.bz2</a>.</li>
+<li><a href="calls_a3.csv.bz2">calls_a3.csv.bz2</a>.</li>
+<li><a href="calls_a4.csv.bz2">calls_a4.csv.bz2</a>.</li>
+</ul>
+
+<p>
+Chaque fichier <code>data_asr_a&lt;k&gt;.csv.bz2</code> correspond aux résultats de joignabilité pour une liste de
+numéros appelés lors de la \(k\) ième tentative. Voici un code permettant de charger tous les fichiers
+de données et de les stocker dans un dictionnaire <code>calls_dfd</code> (veillez à mettre les données dans le
+même répertoire que votre script Python).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+
+<span style="color: #DFAF8F;">calls_dfd</span> = {}
+<span style="color: #F0DFAF; font-weight: bold;">for</span> k <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DCDCCC; font-weight: bold;">range</span>(1, 5):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">data_filename</span> = f<span style="color: #CC9393;">"calls_a</span>{k}<span style="color: #CC9393;">.csv.bz2"</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; font-weight: bold;">print</span>(f<span style="color: #CC9393;">"Chargement du fichier </span>{data_filename}<span style="color: #CC9393;">"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">calls_dfd</span>[f<span style="color: #CC9393;">"a</span>{k}<span style="color: #CC9393;">"</span>] = pd.read_csv(
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   data_filename,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   parse_dates=[f<span style="color: #CC9393;">"date_a</span>{k_bis}<span style="color: #CC9393;">"</span> <span style="color: #F0DFAF; font-weight: bold;">for</span> k_bis <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DCDCCC; font-weight: bold;">range</span>(1, k + 1)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   )
+</pre>
+</div>
+
+<p>
+Le Tableau <a href="#org89079fa">1</a> donne une description des variables des données de joignabilité.
+</p>
+
+<table id="org89079fa" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données.</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Colonne</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">lead_id</td>
+<td class="org-left">ID du numéro appelé (le prospect)</td>
+</tr>
+
+<tr>
+<td class="org-left">date_a{k}</td>
+<td class="org-left">Date à laquelle le prospect (lead_id) a été contacté lors de la tentative k</td>
+</tr>
+
+<tr>
+<td class="org-left">duration_a{k}</td>
+<td class="org-left">Durée de l'appel lors de la tentative k</td>
+</tr>
+
+<tr>
+<td class="org-left">caller_id_a{k}</td>
+<td class="org-left">ID du numéro utilisé pour appeler le prospect (lead_id) lors de la tentative k</td>
+</tr>
+
+<tr>
+<td class="org-left">lead_answered_a{k}</td>
+<td class="org-left">Indique si le prospect (lead_id) a répondu lors de la tentative k</td>
+</tr>
+
+<tr>
+<td class="org-left">caller_has_changed_a{k}</td>
+<td class="org-left">Indique si le numéro appelant (caller_id) a changé entre la tentative k-1 et k</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org5350fe1" class="outline-2">
+<h2 id="org5350fe1">Pour se lancer en douceur</h2>
+<div class="outline-text-2" id="text-org5350fe1">
+</div>
+<div id="outline-container-org03e0604" class="outline-3">
+<h3 id="org03e0604">Brève analyse descriptive</h3>
+<div class="outline-text-3" id="text-org03e0604">
+<p>
+Affichage des premiers numéros ayant été contactés lors de la 2ème tentative :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tabulate.tabulate(calls_dfd[<span style="color: #CC9393;">"a2"</span>].head(5), tablefmt=<span style="color: #CC9393;">"orgtbl"</span>, headers=<span style="color: #CC9393;">"keys"</span>, showindex=<span style="color: #BFEBBF;">False</span>)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">lead_id</th>
+<th scope="col" class="org-left">date_a1</th>
+<th scope="col" class="org-left">weekday_a1</th>
+<th scope="col" class="org-left">hour_a1</th>
+<th scope="col" class="org-right">duration_a1</th>
+<th scope="col" class="org-left">caller_id_a1</th>
+<th scope="col" class="org-left">lead_answered_a1</th>
+<th scope="col" class="org-left">date_a2</th>
+<th scope="col" class="org-left">weekday_a2</th>
+<th scope="col" class="org-left">hour_a2</th>
+<th scope="col" class="org-right">duration_a2</th>
+<th scope="col" class="org-left">caller_id_a2</th>
+<th scope="col" class="org-left">lead_answered_a2</th>
+<th scope="col" class="org-left">caller_has_changed_a2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">fdeae76d3fef</td>
+<td class="org-left">2020-04-03 10:05:49</td>
+<td class="org-left">0Monday</td>
+<td class="org-left">h10</td>
+<td class="org-right">2</td>
+<td class="org-left">1e540d0ac463</td>
+<td class="org-left">no</td>
+<td class="org-left">2020-04-06 18:28:15</td>
+<td class="org-left">3Thursday</td>
+<td class="org-left">h18</td>
+<td class="org-right">2</td>
+<td class="org-left">08fcb33240a2</td>
+<td class="org-left">no</td>
+<td class="org-left">yes</td>
+</tr>
+
+<tr>
+<td class="org-left">73c015525161</td>
+<td class="org-left">2020-04-03 10:05:50</td>
+<td class="org-left">0Monday</td>
+<td class="org-left">h10</td>
+<td class="org-right">2</td>
+<td class="org-left">159e9c0a04f6</td>
+<td class="org-left">no</td>
+<td class="org-left">2020-04-06 18:28:15</td>
+<td class="org-left">3Thursday</td>
+<td class="org-left">h18</td>
+<td class="org-right">2</td>
+<td class="org-left">f986b4d3e9dd</td>
+<td class="org-left">no</td>
+<td class="org-left">yes</td>
+</tr>
+
+<tr>
+<td class="org-left">c718221df1be</td>
+<td class="org-left">2020-04-03 10:06:01</td>
+<td class="org-left">0Monday</td>
+<td class="org-left">h10</td>
+<td class="org-right">3</td>
+<td class="org-left">da44d3138279</td>
+<td class="org-left">no</td>
+<td class="org-left">2020-04-06 18:28:16</td>
+<td class="org-left">3Thursday</td>
+<td class="org-left">h18</td>
+<td class="org-right">3</td>
+<td class="org-left">b7824c80c481</td>
+<td class="org-left">no</td>
+<td class="org-left">yes</td>
+</tr>
+
+<tr>
+<td class="org-left">912712707f41</td>
+<td class="org-left">2020-04-03 10:07:54</td>
+<td class="org-left">0Monday</td>
+<td class="org-left">h10</td>
+<td class="org-right">2</td>
+<td class="org-left">1a3960780bb2</td>
+<td class="org-left">no</td>
+<td class="org-left">2020-04-06 18:28:16</td>
+<td class="org-left">3Thursday</td>
+<td class="org-left">h18</td>
+<td class="org-right">2</td>
+<td class="org-left">385232287fc4</td>
+<td class="org-left">no</td>
+<td class="org-left">yes</td>
+</tr>
+
+<tr>
+<td class="org-left">6b6797b56ae7</td>
+<td class="org-left">2020-04-03 10:08:05</td>
+<td class="org-left">0Monday</td>
+<td class="org-left">h10</td>
+<td class="org-right">3</td>
+<td class="org-left">1a3960780bb2</td>
+<td class="org-left">no</td>
+<td class="org-left">2020-04-06 18:28:16</td>
+<td class="org-left">3Thursday</td>
+<td class="org-left">h18</td>
+<td class="org-right">23</td>
+<td class="org-left">385232287fc4</td>
+<td class="org-left">yes</td>
+<td class="org-left">yes</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Analyse des variables catégorielles pour les données de la 2ème tentative.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tabulate.tabulate(calls_dfd[<span style="color: #CC9393;">"a2"</span>].describe(include=<span style="color: #CC9393;">"O"</span>), tablefmt=<span style="color: #CC9393;">"orgtbl"</span>, headers=<span style="color: #CC9393;">"keys"</span>)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">lead_id</th>
+<th scope="col" class="org-right">weekday_a1</th>
+<th scope="col" class="org-right">hour_a1</th>
+<th scope="col" class="org-right">caller_id_a1</th>
+<th scope="col" class="org-right">lead_answered_a1</th>
+<th scope="col" class="org-right">weekday_a2</th>
+<th scope="col" class="org-right">hour_a2</th>
+<th scope="col" class="org-right">caller_id_a2</th>
+<th scope="col" class="org-right">lead_answered_a2</th>
+<th scope="col" class="org-right">caller_has_changed_a2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">count</td>
+<td class="org-right">2824096</td>
+<td class="org-right">2824096</td>
+<td class="org-right">2824096</td>
+<td class="org-right">2824096</td>
+<td class="org-right">2824096</td>
+<td class="org-right">2824096</td>
+<td class="org-right">2824096</td>
+<td class="org-right">2824096</td>
+<td class="org-right">2824096</td>
+<td class="org-right">2824096</td>
+</tr>
+
+<tr>
+<td class="org-left">unique</td>
+<td class="org-right">2761053</td>
+<td class="org-right">5</td>
+<td class="org-right">9</td>
+<td class="org-right">900</td>
+<td class="org-right">1</td>
+<td class="org-right">5</td>
+<td class="org-right">9</td>
+<td class="org-right">987</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-left">top</td>
+<td class="org-right">40f09fe86afe</td>
+<td class="org-right">2Wednesday</td>
+<td class="org-right">h11</td>
+<td class="org-right">094fd601829a</td>
+<td class="org-right">no</td>
+<td class="org-right">3Thursday</td>
+<td class="org-right">h11</td>
+<td class="org-right">094fd601829a</td>
+<td class="org-right">no</td>
+<td class="org-right">yes</td>
+</tr>
+
+<tr>
+<td class="org-left">freq</td>
+<td class="org-right">3</td>
+<td class="org-right">620362</td>
+<td class="org-right">371260</td>
+<td class="org-right">56839</td>
+<td class="org-right">2824096</td>
+<td class="org-right">711154</td>
+<td class="org-right">387335</td>
+<td class="org-right">56846</td>
+<td class="org-right">2378305</td>
+<td class="org-right">2750376</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Analyse des numéros qui ont décroché à la première tentative.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">calls_dfd[<span style="color: #CC9393;">"a1"</span>][<span style="color: #CC9393;">"lead_answered_a1"</span>].value_counts()
+</pre>
+</div>
+
+<pre class="example">
+lead_answered_a1
+no     4847340
+yes    1465250
+Name: count, dtype: int64
+</pre>
+
+
+<p>
+Récupération du nombre de numéros appelés lors de la deuxième tentative :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DCDCCC; font-weight: bold;">len</span>(calls_dfd[<span style="color: #CC9393;">"a2"</span>])
+</pre>
+</div>
+
+<pre class="example">
+2824096
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgd1824f1" class="outline-3">
+<h3 id="orgd1824f1">Préparation des données</h3>
+<div class="outline-text-3" id="text-orgd1824f1">
+<p>
+Dans cette partie, nous travaillerons sur les données de la 2ème tentative.
+</p>
+
+<p>
+On change le type des variables catégorielles avec la méthode <code>.astype('category')</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">var_cat</span> = [<span style="color: #CC9393;">"weekday_a1"</span>, <span style="color: #CC9393;">"hour_a1"</span>, <span style="color: #CC9393;">"weekday_a2"</span>, <span style="color: #CC9393;">"hour_a2"</span>, <span style="color: #CC9393;">"caller_has_changed_a2"</span>, <span style="color: #CC9393;">"lead_answered_a2"</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DFAF8F;">var_cat</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   calls_dfd[<span style="color: #CC9393;">"a2"</span>][<span style="color: #DFAF8F;">var</span>] = calls_dfd[<span style="color: #CC9393;">"a2"</span>][var].astype(<span style="color: #CC9393;">'category'</span>)
+
+calls_dfd[<span style="color: #CC9393;">"a2"</span>].info()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbf4d4d9" class="outline-3">
+<h3 id="orgbf4d4d9">Création d'un premier modèle</h3>
+<div class="outline-text-3" id="text-orgbf4d4d9">
+<p>
+Nous proposons de créer un modèle permettant d'expliquer la variable <code>lead_answered_a2</code> à partir de
+<code>hour_a1</code> et <code>hour_a2</code>.
+</p>
+
+<p>
+On commence par créer les variables du réseau.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pyAgrum <span style="color: #F0DFAF; font-weight: bold;">as</span> gum
+
+<span style="color: #DFAF8F;">var_to_model</span> = [<span style="color: #CC9393;">"hour_a1"</span>, <span style="color: #CC9393;">"hour_a2"</span>, <span style="color: #CC9393;">"lead_answered_a2"</span>]
+
+<span style="color: #DFAF8F;">var_bn</span> = {}
+<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DFAF8F;">var_to_model</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   nb_values = <span style="color: #DCDCCC; font-weight: bold;">len</span>(calls_dfd[<span style="color: #CC9393;">"a2"</span>][var].cat.categories)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">var_bn</span>[<span style="color: #DFAF8F;">var</span>] = gum.LabelizedVariable(var, var, nb_values)
+</pre>
+</div>
+
+<p>
+On renseigne les modalités des variables pour être fidèle à celles des données.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> var_bn:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">for</span> i, modalite <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DCDCCC; font-weight: bold;">enumerate</span>(calls_dfd[<span style="color: #CC9393;">"a2"</span>][var].cat.categories):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   var_bn[var].changeLabel(i, modalite)
+</pre>
+</div>
+
+<p>
+Ensuite, on crée le réseau bayésien et on ajoute les variables sélectionnées.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">bn</span> = gum.BayesNet(<span style="color: #CC9393;">"mod&#232;le simple"</span>)
+
+<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> var_bn.values():
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bn.add(var)
+</pre>
+</div>
+
+<p>
+Pour finir, on fixe la structure.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.addArc(<span style="color: #CC9393;">"hour_a1"</span>, <span style="color: #CC9393;">"lead_answered_a2"</span>)
+bn.addArc(<span style="color: #CC9393;">"hour_a2"</span>, <span style="color: #CC9393;">"lead_answered_a2"</span>)
+</pre>
+</div>
+
+<p>
+Le RB obtenu possède donc la structure suivante :
+</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="218pt" height="116pt" viewBox="0.00 0.00 218.19 116.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<title>G</title>
+<!-- hour_a1 -->
+<g id="node1" class="node">
+<title>hour_a1</title>
+<g id="a_node1"><a xlink:title="(0) hour_a1">
+<ellipse fill="#404040" stroke="black" cx="48.1" cy="-90" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="48.1" y="-86.3" font-family="Times,serif" font-size="14.00" fill="white">hour_a1</text>
+</a>
+</g>
+</g>
+<!-- lead_answered_a2 -->
+<g id="node3" class="node">
+<title>lead_answered_a2</title>
+<g id="a_node3"><a xlink:title="(2) lead_answered_a2">
+<ellipse fill="#404040" stroke="black" cx="105.1" cy="-18" rx="94.78" ry="18"/>
+<text text-anchor="middle" x="105.1" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">lead_answered_a2</text>
+</a>
+</g>
+</g>
+<!-- hour_a1&#45;&gt;lead_answered_a2 -->
+<g id="edge1" class="edge">
+<title>hour_a1-&gt;lead_answered_a2</title>
+<g id="a_edge1"><a xlink:title="0 → 2">
+<path fill="none" stroke="#4a4a4a" d="M61.6,-72.41C68.53,-63.91 77.11,-53.37 84.81,-43.91"/>
+<polygon fill="#4a4a4a" stroke="#4a4a4a" points="87.69,-45.92 91.29,-35.96 82.26,-41.5 87.69,-45.92"/>
+</a>
+</g>
+</g>
+<!-- hour_a2 -->
+<g id="node2" class="node">
+<title>hour_a2</title>
+<g id="a_node2"><a xlink:title="(1) hour_a2">
+<ellipse fill="#404040" stroke="black" cx="162.1" cy="-90" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="162.1" y="-86.3" font-family="Times,serif" font-size="14.00" fill="white">hour_a2</text>
+</a>
+</g>
+</g>
+<!-- hour_a2&#45;&gt;lead_answered_a2 -->
+<g id="edge2" class="edge">
+<title>hour_a2-&gt;lead_answered_a2</title>
+<g id="a_edge2"><a xlink:title="1 → 2">
+<path fill="none" stroke="#4a4a4a" d="M148.59,-72.41C141.66,-63.91 133.08,-53.37 125.38,-43.91"/>
+<polygon fill="#4a4a4a" stroke="#4a4a4a" points="127.93,-41.5 118.9,-35.96 122.5,-45.92 127.93,-41.5"/>
+</a>
+</g>
+</g>
+</g>
+</svg>
+
+<p>
+LPC de <code>hour_a1</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"hour_a1"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr style='border:1px solid black;color:black;background-color:#808080'>
+      <th colspan='9'><center>hour_a1</center></th></tr>
+<tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h10</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h11</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h12</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h14</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h15</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h16</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h17</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h18</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h19</center></th></tr>
+<tr><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+</table>
+
+<p>
+LPC de <code>hour_a2</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"hour_a2"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr style='border:1px solid black;color:black;background-color:#808080'>
+      <th colspan='9'><center>hour_a2</center></th></tr>
+<tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h10</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h11</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h12</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h14</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h15</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h16</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h17</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h18</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h19</center></th></tr>
+<tr><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+</table>
+
+<p>
+LPC de probabilité de <code>lead_answered_a2</code> | <code>hour_a1</code>, <code>hour_a2</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"lead_answered_a2"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr><th colspan='2'></th>
+      <th colspan='2' style='border:1px solid black;color:black;background-color:#808080;'><center>lead_answered_a2</center>
+      </th></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#808080'><center>hour_a2</center></th><th style='border:1px solid black;color:black;background-color:#808080'><center>hour_a1</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>no</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>yes</center></th></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h10</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h11</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h12</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h14</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h15</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h16</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h17</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h18</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h19</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='text-align:right;'>0.0000</td><td style='text-align:right;'>0.0000</td></tr>
+</table>
+
+<p>
+On remarque naturellement que les LPC ne contiennent pour l'instant que des zéros&#x2026;
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd69d173" class="outline-3">
+<h3 id="orgd69d173">Apprentissage des LPC</h3>
+<div class="outline-text-3" id="text-orgd69d173">
+<p>
+Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la classe
+<code>gum.BNLearner</code> et en particulier la méthode <code>fitParameters</code>: 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">learner</span> = gum.BNLearner(calls_dfd[<span style="color: #CC9393;">"a2"</span>][var_to_model])
+
+learner.fitParameters(bn)
+</pre>
+</div>
+
+<pre class="example">
+Filename       : /tmp/tmprq5dlndr.csv
+Size           : (2824096,3)
+Variables      : hour_a1[9], hour_a2[9], lead_answered_a2[2]
+Induced types  : True
+Missing values : False
+Algorithm      : MIIC
+Score          : BDeu  (Not used for constraint-based algorithms)
+Correction     : MDL  (Not used for score-based algorithms)
+Prior          : -
+</pre>
+
+
+<p>
+Après apprentissage, nous obtenons les LPC suivantes.
+LPC de <code>hour_a1</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"hour_a1"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr style='border:1px solid black;color:black;background-color:#808080'>
+      <th colspan='9'><center>hour_a1</center></th></tr>
+<tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h10</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h11</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h12</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h14</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h15</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h16</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h17</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h18</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h19</center></th></tr>
+<tr><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1176</td><td style='color:black;background-color:#ee8f64;text-align:right;'>0.1315</td><td style='color:black;background-color:#ee8f64;text-align:right;'>0.1298</td><td style='color:black;background-color:#f38a64;text-align:right;'>0.0880</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1178</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1182</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0844</td><td style='color:black;background-color:#f18c64;text-align:right;'>0.1067</td><td style='color:black;background-color:#f18c64;text-align:right;'>0.1059</td></tr>
+</table>
+
+<p>
+LPC de <code>hour_a2</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"hour_a2"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr style='border:1px solid black;color:black;background-color:#808080'>
+      <th colspan='9'><center>hour_a2</center></th></tr>
+<tr><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h10</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h11</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h12</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h14</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h15</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h16</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h17</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h18</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>h19</center></th></tr>
+<tr><td style='color:black;background-color:#f18c64;text-align:right;'>0.1027</td><td style='color:black;background-color:#ed9064;text-align:right;'>0.1372</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1226</td><td style='color:black;background-color:#f38a64;text-align:right;'>0.0868</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1194</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1194</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0800</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1136</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1184</td></tr>
+</table>
+
+<p>
+LPC de probabilité de <code>lead_answered_a2</code> | <code>hour_a1</code>, <code>hour_a2</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">bn.cpt(<span style="color: #CC9393;">"lead_answered_a2"</span>)
+</pre>
+</div>
+<table style="border:1px solid black;">
+<tr><th colspan='2'></th>
+      <th colspan='2' style='border:1px solid black;color:black;background-color:#808080;'><center>lead_answered_a2</center>
+      </th></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#808080'><center>hour_a2</center></th><th style='border:1px solid black;color:black;background-color:#808080'><center>hour_a1</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>no</center></th><th style='border:1px solid black;border-bottom-style: double;color:black;background-color:#BBBBBB'>
+      <center>yes</center></th></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h10</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='color:black;background-color:#90ed64;text-align:right;'>0.8598</td><td style='color:black;background-color:#ed9064;text-align:right;'>0.1402</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8508</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1492</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='color:black;background-color:#91ec64;text-align:right;'>0.8558</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1442</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8429</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1571</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8485</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1515</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8486</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1514</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='color:black;background-color:#8fee64;text-align:right;'>0.8677</td><td style='color:black;background-color:#ee8f64;text-align:right;'>0.1323</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8407</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1593</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8434</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1566</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h11</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8380</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1620</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8457</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1543</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='color:black;background-color:#91ec64;text-align:right;'>0.8524</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1476</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8471</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1529</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8473</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1527</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8443</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1557</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8477</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1523</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8454</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1546</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8328</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1672</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h12</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8390</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1610</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8436</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1564</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='color:black;background-color:#90ed64;text-align:right;'>0.8644</td><td style='color:black;background-color:#ed9064;text-align:right;'>0.1356</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8411</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1589</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='color:black;background-color:#95e864;text-align:right;'>0.8279</td><td style='color:black;background-color:#e89564;text-align:right;'>0.1721</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8321</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1679</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8316</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1684</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8417</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1583</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8443</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1557</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h14</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8403</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1597</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8337</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1663</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8460</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1540</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8448</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1552</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='color:black;background-color:#91ec64;text-align:right;'>0.8527</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1473</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8422</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1578</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8382</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1618</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8413</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1587</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8472</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1528</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h15</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8415</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1585</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8426</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1574</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8442</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1558</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8498</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1502</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8455</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1545</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8417</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1583</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8434</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1566</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8460</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1540</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8344</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1656</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h16</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8377</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1623</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8399</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1601</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8451</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1549</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8371</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1629</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8447</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1553</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8438</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1562</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8426</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1574</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8484</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1516</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8385</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1615</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h17</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8420</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1580</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8356</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1644</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8320</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1680</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='color:black;background-color:#95e864;text-align:right;'>0.8245</td><td style='color:black;background-color:#e89564;text-align:right;'>0.1755</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8298</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1702</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8460</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1540</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8414</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1586</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8390</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1610</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8392</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1608</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h18</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8282</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1718</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8306</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1694</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8465</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1535</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8443</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1557</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8338</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1662</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8467</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1533</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8470</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1530</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='color:black;background-color:#92eb64;text-align:right;'>0.8482</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1518</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8423</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1577</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB;' rowspan = '9'>
+            <center>h19</center></th><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h10</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8319</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1681</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h11</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8305</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1695</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h12</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8377</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1623</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h14</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8367</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1633</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h15</center></th><td style='color:black;background-color:#94e964;text-align:right;'>0.8342</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1658</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h16</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8396</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1604</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h17</center></th><td style='color:black;background-color:#93ea64;text-align:right;'>0.8367</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1633</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h18</center></th><td style='color:black;background-color:#91ec64;text-align:right;'>0.8521</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1479</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>h19</center></th><td style='color:black;background-color:#91ec64;text-align:right;'>0.8548</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1452</td></tr>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org26a695a" class="outline-3">
+<h3 id="org26a695a">Prédictions</h3>
+<div class="outline-text-3" id="text-org26a695a">
+<p>
+À ce stade, vous pouvez reprendre la fonction <code>predict</code> que nous avons utilisée dans <a href="../../td/comp_modeles_app/comp_modeles_app.html">ce TD</a> pour réaliser des prédictions d'une variable cible à
+partir de données. Chaque ligne des données fournies est utilisée comme évidence (conditionnement)
+pour calculer la loi de la variable cible sachant les données observées.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">pred_prob</span> = predict(bn, data=calls_dfd[<span style="color: #CC9393;">"a2"</span>].loc[:10000, [<span style="color: #CC9393;">"hour_a1"</span>, <span style="color: #CC9393;">"hour_a2"</span>]],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   var_target=<span style="color: #CC9393;">"lead_answered_a2"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   show_progress=<span style="color: #BFEBBF;">True</span>)
+
+pred_var = pred_prob.idxmax(axis=1).rename(<span style="color: #CC9393;">"pred"</span>)
+</pre>
+</div>
+
+<p>
+On finit par évaluer le taux de prédictions du modèle par rapport aux données observées.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">(calls_dfd[<span style="color: #CC9393;">"a2"</span>].loc[:10000, <span style="color: #CC9393;">"lead_answered_a2"</span>] == pred_var).mean()
+</pre>
+</div>
+
+<pre class="example">
+0.7949205079492051
+</pre>
+
+
+<p>
+Et la matrice de confusion associée :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">pd.crosstab(calls_dfd[<span style="color: #CC9393;">"a2"</span>].loc[:10000, <span style="color: #CC9393;">"lead_answered_a2"</span>], pred_var)
+</pre>
+</div>
+
+<pre class="example">
+pred                no
+lead_answered_a2      
+no                7950
+yes               2051
+</pre>
+
+
+<p>
+Que constatez-vous sur les prédictions réalisées ? Pourquoi ne prédit-on jamais de <code>"yes"</code> ?
+</p>
+
+<p>
+<b>Attention :</b> On notera que dans cet exemple, nous n'avons pas mis en place un schéma d'évaluation
+faisant intervenir des données d'apprentissage et des données de test.
+</p>
+
+<p>
+<b>À vous de jouer à présent !</b>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

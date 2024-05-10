@@ -23,47 +23,42 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc2ef44a">Contexte et objectifs du projet</a></li>
-<li><a href="#org8b8a20f">Problématique métier</a></li>
-<li><a href="#orgc5aa1f5">Présentation des données</a>
-<ul>
-<li><a href="#org9841c6b">Données <code>OT-ODR</code></a></li>
-<li><a href="#org4465d05">Données <code>EQUIPEMENTS</code></a></li>
-</ul>
-</li>
+<li><a href="#org2444aef">Contexte et objectifs du projet</a></li>
+<li><a href="#orge98fa46">Problématique métier</a></li>
 <li><a href="#sec-sujets">Travaux à réaliser</a>
 <ul>
-<li><a href="#org9fb3e88">Développement d'une IA de diagnostic</a></li>
-<li><a href="#orga7b3c82">Développement d'un applicatif métier</a></li>
+<li><a href="#org38f94c7">Développement d'une IA de diagnostic</a></li>
+<li><a href="#orgce05d1e">Développement d'un applicatif métier</a></li>
 </ul>
 </li>
-<li><a href="#org29032df">Déroulement pratique et livrables</a></li>
-<li><a href="#orgd78a3e6">Critères d'évaluation</a></li>
-<li><a href="#org05f7d71">Pour se lancer en douceur</a>
+<li><a href="#orgae29890">Présentation des données</a>
 <ul>
-<li><a href="#orgdc4d73e">Préambule</a></li>
-<li><a href="#org210dac7">Chargement et brève analyse descriptive</a></li>
-<li><a href="#org8d52fdb">Préparation des données</a></li>
-<li><a href="#org2dd17cb">Création d'un premier modèle</a></li>
-<li><a href="#orgca6cf5a">Apprentissage des LPC</a></li>
-<li><a href="#org50b4d83">Prédictions</a></li>
-<li><a href="#org9edbed0">Application</a></li>
+<li><a href="#orgffdc49c">Données <code>OT-ODR</code></a></li>
+<li><a href="#org2154d34">Données <code>EQUIPEMENTS</code></a></li>
+</ul>
+</li>
+<li><a href="#orgbcd2c1e">Pour se lancer en douceur</a>
+<ul>
+<li><a href="#orge7b3627">Chargement et brève analyse descriptive</a></li>
+<li><a href="#org8335c6f">Préparation des données</a></li>
+<li><a href="#org115f001">Création d'un premier modèle</a></li>
+<li><a href="#org9c7a517">Apprentissage des LPC</a></li>
+<li><a href="#orge28857f">Prédictions</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="org07b5a86" class="figure">
+<div id="org48e9845" class="figure">
 <p><img src="./bus_maintenance.png" alt="bus maintenance city 2d isometric cartoon white background" width="50%" />
 </p>
-<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
 </div>
 
 
-<div id="outline-container-orgc2ef44a" class="outline-2">
-<h2 id="orgc2ef44a">Contexte et objectifs du projet</h2>
-<div class="outline-text-2" id="text-orgc2ef44a">
+<div id="outline-container-org2444aef" class="outline-2">
+<h2 id="org2444aef">Contexte et objectifs du projet</h2>
+<div class="outline-text-2" id="text-org2444aef">
 <p>
 Une entreprise de transport collectif cherche à améliorer l'efficacité des opérations de
 maintenance réalisées sur ses véhicules. Un axe d'amélioration porte sur l'élaboration de
@@ -92,9 +87,9 @@ projet.*
 </div>
 </div>
 
-<div id="outline-container-org8b8a20f" class="outline-2">
-<h2 id="org8b8a20f">Problématique métier</h2>
-<div class="outline-text-2" id="text-org8b8a20f">
+<div id="outline-container-orge98fa46" class="outline-2">
+<h2 id="orge98fa46">Problématique métier</h2>
+<div class="outline-text-2" id="text-orge98fa46">
 <p>
 L'entreprise de transport exploite une flotte de véhicules qui circule pendant les horaires de
 service. Lorsqu'un problème survient sur un véhicule, le conducteur est chargé de faire un
@@ -129,10 +124,71 @@ du véhicule (kilométrage, type de moteur, marque, etc.).
 </div>
 
 
+<div id="outline-container-sec-sujets" class="outline-2">
+<h2 id="sec-sujets">Travaux à réaliser</h2>
+<div class="outline-text-2" id="text-sec-sujets">
+</div>
 
-<div id="outline-container-orgc5aa1f5" class="outline-2">
-<h2 id="orgc5aa1f5">Présentation des données</h2>
-<div class="outline-text-2" id="text-orgc5aa1f5">
+<div id="outline-container-org38f94c7" class="outline-3">
+<h3 id="org38f94c7">Développement d'une IA de diagnostic</h3>
+<div class="outline-text-3" id="text-org38f94c7">
+<p>
+Ce travail correspond au développement d'un moteur d'aide au diagnostic et à la recommandation de
+maintenance. Il s'agit donc en 
+pratique d'élaborer un modèle permettant de déduire d'un signalement de panne et des
+caractéristiques d'un véhicule en maintenance, la localisation de la panne
+(SYSTEM_N1, SYSTEM_N2, SYSTEM_N3) et l'action de maintenance à réaliser (ODR) permettant de remettre 
+le véhicule en service. 
+</p>
+
+<p>
+Les principaux travaux demandés sont les suivants :
+</p>
+<ol class="org-ol">
+<li>Proposer un réseau bayésien pertinent afin de répondre à la
+problématique en argumentant vos choix.</li>
+<li>Utiliser les données à disposition pour réaliser un apprentissage des lois du modèle retenu.</li>
+<li>Évaluer la performance prédictive de votre modèle à partir d'une approche apprentissage/test classique.</li>
+<li>(Option) Proposer un second modèle et comparer ses performances avec votre premier modèle.</li>
+</ol>
+
+<p>
+Le travail est à réaliser sous Python en utilisant la <a href="https://agrum.gitlab.io/pages/pyagrum.html">librairie <code>PyAgrum</code></a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgce05d1e" class="outline-3">
+<h3 id="orgce05d1e">Développement d'un applicatif métier</h3>
+<div class="outline-text-3" id="text-orgce05d1e">
+<p>
+L'objectif de ce travail est de développer une application permettant d'interagir avec le
+   moteur de recommandations de la section précédente de manière transparente pour 
+   l'utilisateur final.
+</p>
+
+<p>
+L'application devra donc proposer une interface web permettant de :
+</p>
+<ul class="org-ul">
+<li>saisir les informations nécessaires à la production d'un diagnostic (e.g. signalements,
+caractéristiques d'un véhicule, etc) ;</li>
+<li>réaliser les calculs d'inférence afin de d'estimer les diagnostics ;</li>
+<li>mettre en forme les diagnostics dans l'interface développée.</li>
+</ul>
+
+<p>
+L'application est à développer avec la librairie <a href="https://dash.plotly.com/"><code>Plotly Dash</code></a>. N'hésitez pas à consulter des
+ressources sur internet afin de monter en compétences (e.g. <a href="https://dash.plotly.com/tutorial">https://dash.plotly.com/tutorial</a>).
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgae29890" class="outline-2">
+<h2 id="orgae29890">Présentation des données</h2>
+<div class="outline-text-2" id="text-orgae29890">
 <p>
 Deux sources de données sont mises à disposition dans ce projet :
 </p>
@@ -151,21 +207,21 @@ et 2019.</li>
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   compression=<span style="color: #CC9393;">"bz2"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   sep=<span style="color: #CC9393;">";"</span>)
 
-<span style="color: #DFAF8F;">equipements_filename</span> = os.path.join(<span style="color: #CC9393;">"."</span>, <span style="color: #CC9393;">'EQUIPEMENTS.csv'</span>)
-<span style="color: #DFAF8F;">equipements_df</span> = pd.read_csv(equipements_filename,
+equipements_filename = os.path.join(<span style="color: #CC9393;">"."</span>, <span style="color: #CC9393;">'EQUIPEMENTS.csv'</span>)
+equipements_df = pd.read_csv(equipements_filename,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>sep=<span style="color: #CC9393;">";"</span>)
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org9841c6b" class="outline-3">
-<h3 id="org9841c6b">Données <code>OT-ODR</code></h3>
-<div class="outline-text-3" id="text-org9841c6b">
+<div id="outline-container-orgffdc49c" class="outline-3">
+<h3 id="orgffdc49c">Données <code>OT-ODR</code></h3>
+<div class="outline-text-3" id="text-orgffdc49c">
 <p>
-Le Tableau <a href="#org4f76b09">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
+Le Tableau <a href="#org64e829f">1</a> donne une description des variables du jeu de données <code>OT-ODR</code>.
 </p>
 
-<table id="org4f76b09" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org64e829f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>OT-ODR</code>.</caption>
 
 <colgroup>
@@ -260,14 +316,14 @@ Le Tableau <a href="#org4f76b09">1</a> donne une description des variables du je
 </div>
 
 
-<div id="outline-container-org4465d05" class="outline-3">
-<h3 id="org4465d05">Données <code>EQUIPEMENTS</code></h3>
-<div class="outline-text-3" id="text-org4465d05">
+<div id="outline-container-org2154d34" class="outline-3">
+<h3 id="org2154d34">Données <code>EQUIPEMENTS</code></h3>
+<div class="outline-text-3" id="text-org2154d34">
 <p>
-Le Tableau <a href="#orgd50ae4a">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
+Le Tableau <a href="#org7c31bd8">2</a> donne une description des variables du jeu de données <code>EQUIPEMENTS</code>.
 </p>
 
-<table id="orgd50ae4a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org7c31bd8" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 2 :</span> Définition des variables du jeu de données <code>EQUIPEMENTS</code>.</caption>
 
 <colgroup>
@@ -310,201 +366,13 @@ Le Tableau <a href="#orgd50ae4a">2</a> donne une description des variables du je
 
 
 
-<div id="outline-container-sec-sujets" class="outline-2">
-<h2 id="sec-sujets">Travaux à réaliser</h2>
-<div class="outline-text-2" id="text-sec-sujets">
+<div id="outline-container-orgbcd2c1e" class="outline-2">
+<h2 id="orgbcd2c1e">Pour se lancer en douceur</h2>
+<div class="outline-text-2" id="text-orgbcd2c1e">
 </div>
-
-<div id="outline-container-org9fb3e88" class="outline-3">
-<h3 id="org9fb3e88">Développement d'une IA de diagnostic</h3>
-<div class="outline-text-3" id="text-org9fb3e88">
-<p>
-Ce travail correspond au développement d'un moteur d'aide au diagnostic et à la recommandation de
-maintenance. Il s'agit donc en 
-pratique d'élaborer un modèle permettant de déduire d'un signalement de panne et des
-caractéristiques d'un véhicule en maintenance, la localisation de la panne
-(SYSTEM_N1, SYSTEM_N2, SYSTEM_N3) et l'action de maintenance à réaliser (ODR) permettant de remettre 
-le véhicule en service. 
-</p>
-
-<p>
-Les principaux travaux demandés sont les suivants :
-</p>
-<ol class="org-ol">
-<li>Proposer un réseau bayésien pertinent afin de répondre à la
-problématique en argumentant vos choix.</li>
-<li>Utiliser les données à disposition pour réaliser un apprentissage des lois du modèle retenu.</li>
-<li>Évaluer la performance prédictive de votre modèle à partir d'une approche apprentissage/test classique.</li>
-<li>(Option) Proposer un second modèle et comparer ses performances avec votre premier modèle.</li>
-</ol>
-
-<p>
-Le travail est à réaliser sous Python en utilisant la <a href="https://agrum.gitlab.io/pages/pyagrum.html">librairie <code>PyAgrum</code></a>.
-</p>
-</div>
-</div>
-
-<div id="outline-container-orga7b3c82" class="outline-3">
-<h3 id="orga7b3c82">Développement d'un applicatif métier</h3>
-<div class="outline-text-3" id="text-orga7b3c82">
-<p>
-L'objectif de ce travail est de développer une application permettant d'interagir avec le
-   moteur de recommandations de la section précédente de manière transparente pour 
-   l'utilisateur final.
-</p>
-
-<p>
-L'application devra donc proposer une interface web permettant de :
-</p>
-<ul class="org-ul">
-<li>saisir les informations nécessaires à la production d'un diagnostic (e.g. signalements,
-caractéristiques d'un véhicule, etc) ;</li>
-<li>réaliser les calculs d'inférence afin de d'estimer les diagnostics ;</li>
-<li>mettre en forme les diagnostics dans l'interface développée.</li>
-</ul>
-
-<p>
-L'application est à développer avec la librairie <a href="https://dash.plotly.com/"><code>Plotly Dash</code></a>. N'hésitez pas à consulter des
-ressources sur internet afin de monter en compétences (e.g. <a href="https://dash.plotly.com/tutorial">https://dash.plotly.com/tutorial</a>).
-</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org29032df" class="outline-2">
-<h2 id="org29032df">Déroulement pratique et livrables</h2>
-<div class="outline-text-2" id="text-org29032df">
-<p>
-Le projet est à réaliser par groupe de trois étudiant·es.
-</p>
-
-<p>
-Les deux livrables attendus sont :
-</p>
-<ol class="org-ol">
-<li>Le lien vers le dépôt github de votre projet.
-<ul class="org-ul">
-<li>La page principale de votre dépôt doit présenter au minimum une procédure d'installation de
-votre application.</li>
-<li>Votre application doit fonctionner sur un système Linux standard (e.g. Ubuntu, Débian, etc.).</li>
-<li>Tous les membres de votre groupe doivent "commiter" sur le projet.</li>
-<li><b>Deadline : 9 juin 2023 14h00</b></li>
-</ul></li>
-
-<li>Une restitution orale de votre travail lors de la séance du 9 juin 2023 structurée de la manière
-suivante :
-<ul class="org-ul">
-<li>5 min de présentation (4-6 slides), expliquant brièvement l'objectif du projet, les modèles
-réalisés, les performances obtenues et une conclusion.</li>
-<li>5 min de démonstration de votre application.</li>
-<li>5 min de questions.</li>
-</ul></li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-orgd78a3e6" class="outline-2">
-<h2 id="orgd78a3e6">Critères d'évaluation</h2>
-<div class="outline-text-2" id="text-orgd78a3e6">
-<p>
-Vous serez principalement évalué·es sur les critères suivants :
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-right" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Item</th>
-<th scope="col" class="org-right">Points</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">Qualité de la documentation de votre dépôt github</td>
-<td class="org-right">2</td>
-</tr>
-
-<tr>
-<td class="org-left">Fonctionnement de la procédure d'installation de votre application</td>
-<td class="org-right">2</td>
-</tr>
-
-<tr>
-<td class="org-left">Pertinence des modélisations réalisées pour répondre à la problématique</td>
-<td class="org-right">3</td>
-</tr>
-
-<tr>
-<td class="org-left">Mise en oeuvre d'une démarche d'évaluation des performances</td>
-<td class="org-right">3</td>
-</tr>
-
-<tr>
-<td class="org-left">Design de l'application réalisée</td>
-<td class="org-right">2</td>
-</tr>
-
-<tr>
-<td class="org-left">Clarté de la présentation orale</td>
-<td class="org-right">3</td>
-</tr>
-
-<tr>
-<td class="org-left">Qualité de la démonstration de l'outil</td>
-<td class="org-right">1</td>
-</tr>
-
-<tr>
-<td class="org-left">Pertinence des réponses aux questions</td>
-<td class="org-right">2</td>
-</tr>
-
-<tr>
-<td class="org-left">Respect de la contrainte temporelle lors de la soutenance.</td>
-<td class="org-right">2</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-
-<div id="outline-container-org05f7d71" class="outline-2">
-<h2 id="org05f7d71">Pour se lancer en douceur</h2>
-<div class="outline-text-2" id="text-org05f7d71">
-</div>
-<div id="outline-container-orgdc4d73e" class="outline-3">
-<h3 id="orgdc4d73e">Préambule</h3>
-<div class="outline-text-3" id="text-orgdc4d73e">
-<p>
-Pour réaliser l'apprentissage des LPC, nous allons utiliser la librairie utilitaire <code>pyagrum_extra</code>
-à télécharger ici :
-<a href="https://github.com/roland-donat/pyagrum-extra/blob/master/pyagrum-extra/pyagrum_extra.py">https://github.com/roland-donat/pyagrum-extra/blob/master/pyagrum-extra/pyagrum_extra.py</a>.
-</p>
-
-<p>
-Une fois téléchargé, placez ce fichier à la racine de votre projet.
-</p>
-
-<p>
-Cette librairie ajoute des fonctions <code>fit</code> et <code>predict</code> à <code>pyAgrum</code> permettant de faciliter l'apprentissage et
-l'exploitation d'un RB. Vous pourrez ainsi importer <code>pyAgrum</code> de la façon suivante :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">from</span> pyagrum_extra <span style="color: #F0DFAF; font-weight: bold;">import</span> gum
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org210dac7" class="outline-3">
-<h3 id="org210dac7">Chargement et brève analyse descriptive</h3>
-<div class="outline-text-3" id="text-org210dac7">
+<div id="outline-container-orge7b3627" class="outline-3">
+<h3 id="orge7b3627">Chargement et brève analyse descriptive</h3>
+<div class="outline-text-3" id="text-orge7b3627">
 <p>
 Chargement des données :
 </p>
@@ -517,8 +385,8 @@ Chargement des données :
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   compression=<span style="color: #CC9393;">"bz2"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   sep=<span style="color: #CC9393;">";"</span>)
 
-<span style="color: #DFAF8F;">equipements_filename</span> = os.path.join(<span style="color: #CC9393;">"."</span>, <span style="color: #CC9393;">'EQUIPEMENTS.csv'</span>)
-<span style="color: #DFAF8F;">equipements_df</span> = pd.read_csv(equipements_filename,
+equipements_filename = os.path.join(<span style="color: #CC9393;">"."</span>, <span style="color: #CC9393;">'EQUIPEMENTS.csv'</span>)
+equipements_df = pd.read_csv(equipements_filename,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>sep=<span style="color: #CC9393;">";"</span>)
 </pre>
 </div>
@@ -578,9 +446,9 @@ freq         258129                                     40302
 </div>
 </div>
 
-<div id="outline-container-org8d52fdb" class="outline-3">
-<h3 id="org8d52fdb">Préparation des données</h3>
-<div class="outline-text-3" id="text-org8d52fdb">
+<div id="outline-container-org8335c6f" class="outline-3">
+<h3 id="org8335c6f">Préparation des données</h3>
+<div class="outline-text-3" id="text-org8335c6f">
 <p>
 On change le type des variables catégorielles avec la méthode <code>.astype('category')</code> :
 </p>
@@ -588,8 +456,8 @@ On change le type des variables catégorielles avec la méthode <code>.astype('c
 <pre class="src src-python"><span style="color: #DFAF8F;">var_cat</span> = [<span style="color: #CC9393;">'ODR_LIBELLE'</span>, <span style="color: #CC9393;">'TYPE_TRAVAIL'</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">'SYSTEM_N1'</span>, <span style="color: #CC9393;">'SYSTEM_N2'</span>, <span style="color: #CC9393;">'SYSTEM_N3'</span>, 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">'SIG_ORGANE'</span>, <span style="color: #CC9393;">'SIG_CONTEXTE'</span>, <span style="color: #CC9393;">'SIG_OBS'</span>, <span style="color: #CC9393;">'LIGNE'</span>]
-<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> var_cat:
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">ot_odr_df</span>[var] = ot_odr_df[var].astype(<span style="color: #CC9393;">'category'</span>)
+<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DFAF8F;">var_cat</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   ot_odr_df[<span style="color: #DFAF8F;">var</span>] = ot_odr_df[var].astype(<span style="color: #CC9393;">'category'</span>)
 
 ot_odr_df.info()
 </pre>
@@ -601,9 +469,9 @@ ot_odr_df.info()
 </div>
 </div>
 
-<div id="outline-container-org2dd17cb" class="outline-3">
-<h3 id="org2dd17cb">Création d'un premier modèle</h3>
-<div class="outline-text-3" id="text-org2dd17cb">
+<div id="outline-container-org115f001" class="outline-3">
+<h3 id="org115f001">Création d'un premier modèle</h3>
+<div class="outline-text-3" id="text-org115f001">
 <p>
 Nous proposons de créer un modèle permettant d'expliquer la variable <code>SYSTEM_N1</code> à partir de
 <code>SIG_OBS</code>.
@@ -613,12 +481,14 @@ Nous proposons de créer un modèle permettant d'expliquer la variable <code>SYS
 On commence par créer les variables du réseau.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">var_to_model</span> = [<span style="color: #CC9393;">"SYSTEM_N1"</span>, <span style="color: #CC9393;">"SIG_OBS"</span>]
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pyAgrum <span style="color: #F0DFAF; font-weight: bold;">as</span> gum
+
+<span style="color: #DFAF8F;">var_to_model</span> = [<span style="color: #CC9393;">"SYSTEM_N1"</span>, <span style="color: #CC9393;">"SIG_OBS"</span>]
 
 <span style="color: #DFAF8F;">var_bn</span> = {}
-<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> var_to_model:
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_values</span> = <span style="color: #DCDCCC; font-weight: bold;">len</span>(ot_odr_df[var].cat.categories)
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">var_bn</span>[var] = gum.LabelizedVariable(var, var, nb_values)
+<span style="color: #F0DFAF; font-weight: bold;">for</span> var <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DFAF8F;">var_to_model</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   nb_values = <span style="color: #DCDCCC; font-weight: bold;">len</span>(ot_odr_df[var].cat.categories)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">var_bn</span>[<span style="color: #DFAF8F;">var</span>] = gum.LabelizedVariable(var, var, nb_values)
 </pre>
 </div>
 
@@ -865,20 +735,30 @@ On remarque naturellement que les LPC ne contiennent pour l'instant que des zér
 </div>
 
 
-<div id="outline-container-orgca6cf5a" class="outline-3">
-<h3 id="orgca6cf5a">Apprentissage des LPC</h3>
-<div class="outline-text-3" id="text-orgca6cf5a">
+<div id="outline-container-org9c7a517" class="outline-3">
+<h3 id="org9c7a517">Apprentissage des LPC</h3>
+<div class="outline-text-3" id="text-org9c7a517">
 <p>
-Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la méthode <code>.fit</code>
-de la librairie <code>pyagrum_extra</code> :
+Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la classe
+<code>gum.BNLearner</code> et en particulier la méthode <code>fitParameters</code>: 
 </p>
 <div class="org-src-container">
-<pre class="src src-python">bn.fit_bis(ot_odr_df, verbose_mode=<span style="color: #BFEBBF;">True</span>)
+<pre class="src src-python"><span style="color: #DFAF8F;">learner</span> = gum.BNLearner(ot_odr_df[var_to_model])
+
+learner.fitParameters(bn)
 </pre>
 </div>
 
 <pre class="example">
-None
+Filename       : /tmp/tmpyy2rs23m.csv
+Size           : (506558,2)
+Variables      : SYSTEM_N1[10], SIG_OBS[59]
+Induced types  : True
+Missing values : False
+Algorithm      : MIIC
+Score          : BDeu  (Not used for constraint-based algorithms)
+Correction     : MDL  (Not used for score-based algorithms)
+Prior          : -
 </pre>
 
 
@@ -980,13 +860,13 @@ Loi de probabilité de <code>SYSTEM_N1</code> | <code>SIG_OBS</code> :
       <center>EQUIPEMENT PNEUMATIQUE</center></th></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>A-COUPS</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td><td style='color:black;background-color:#cfae64;text-align:right;'>0.3728</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0075</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0752</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0827</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1548</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1529</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1222</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0013</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0301</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ABSENT</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0009</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0362</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0704</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0070</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#93ea64;text-align:right;'>0.8435</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0399</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td></tr>
-<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ALLUME</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1110</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#c6b764;text-align:right;'>0.4402</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#c6b764;text-align:right;'>0.4402</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ALLUME</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1111</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#c6b764;text-align:right;'>0.4444</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#c6b764;text-align:right;'>0.4444</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ARRACHE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0253</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td><td style='color:black;background-color:#a2db64;text-align:right;'>0.7252</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0103</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#e09d64;text-align:right;'>0.2348</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0007</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0026</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>ASPIRER</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#82fb64;text-align:right;'>0.9744</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0256</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BALANCE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#a7d664;text-align:right;'>0.6828</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0050</td><td style='color:black;background-color:#e59864;text-align:right;'>0.2020</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0211</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0136</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0310</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0434</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BLESSE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#92eb64;text-align:right;'>0.8507</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0498</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0100</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f38a64;text-align:right;'>0.0896</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BLOQUE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0001</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0852</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0370</td><td style='color:black;background-color:#bbc264;text-align:right;'>0.5294</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0302</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0138</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0072</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1701</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1112</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0159</td></tr>
-<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BROUTE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1246</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#b0cd64;text-align:right;'>0.6169</td><td style='color:black;background-color:#df9e64;text-align:right;'>0.2477</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0015</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BROUTE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ef8f64;text-align:right;'>0.1250</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#afcf64;text-align:right;'>0.6250</td><td style='color:black;background-color:#df9f64;text-align:right;'>0.2500</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BRUTAL</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#8af364;text-align:right;'>0.9091</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0303</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0303</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0303</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>BRUYANT</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0018</td><td style='color:black;background-color:#d8a564;text-align:right;'>0.2973</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0788</td><td style='color:black;background-color:#e69764;text-align:right;'>0.1895</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1209</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1692</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0102</td><td style='color:black;background-color:#f68764;text-align:right;'>0.0666</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0181</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0477</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CALE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0335</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0037</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0372</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0297</td><td style='color:black;background-color:#aad364;text-align:right;'>0.6580</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0335</td><td style='color:black;background-color:#e79664;text-align:right;'>0.1859</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0186</td></tr>
@@ -995,7 +875,7 @@ Loi de probabilité de <code>SYSTEM_N1</code> | <code>SIG_OBS</code> :
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CLIGNOTE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0529</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0063</td><td style='color:black;background-color:#f28b64;text-align:right;'>0.0944</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0364</td><td style='color:black;background-color:#eb9264;text-align:right;'>0.1562</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0169</td><td style='color:black;background-color:#b3ca64;text-align:right;'>0.5887</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0326</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0157</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>CREVE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#96e764;text-align:right;'>0.8165</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0036</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0396</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0468</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0216</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f68764;text-align:right;'>0.0683</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0036</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DEBOITE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0139</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0047</td><td style='color:black;background-color:#add064;text-align:right;'>0.6333</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0076</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0073</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0010</td><td style='color:black;background-color:#d5a864;text-align:right;'>0.3261</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0051</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0007</td></tr>
-<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DECLENCHEMENT</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0528</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#a7d664;text-align:right;'>0.6826</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1577</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0528</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0528</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DECLENCHEMENT</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0526</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#a7d664;text-align:right;'>0.6842</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1579</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0526</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0526</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DEGONFLE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0003</td><td style='color:black;background-color:#abd264;text-align:right;'>0.6489</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0019</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0709</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0803</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0244</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0034</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0269</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1425</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DELOCALISE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0038</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0460</td><td style='color:black;background-color:#85f864;text-align:right;'>0.9502</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>DEREGLE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#e79664;text-align:right;'>0.1849</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#b0cd64;text-align:right;'>0.6096</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0137</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0068</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1438</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0342</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0068</td></tr>
@@ -1012,11 +892,11 @@ Loi de probabilité de <code>SYSTEM_N1</code> | <code>SIG_OBS</code> :
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INSUFFISANT</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0024</td><td style='color:black;background-color:#de9f64;text-align:right;'>0.2501</td><td style='color:black;background-color:#ea9364;text-align:right;'>0.1608</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0161</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0424</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0011</td><td style='color:black;background-color:#bdc064;text-align:right;'>0.5083</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0151</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0037</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INTERMITTENT</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0520</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0268</td><td style='color:black;background-color:#ee8f64;text-align:right;'>0.1304</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0575</td><td style='color:black;background-color:#e19c64;text-align:right;'>0.2316</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0161</td><td style='color:black;background-color:#d1ac64;text-align:right;'>0.3588</td><td style='color:black;background-color:#f48964;text-align:right;'>0.0835</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0433</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>INTERRUPTEUR H.S</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0051</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0590</td><td style='color:black;background-color:#cdb064;text-align:right;'>0.3833</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0053</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0121</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0051</td><td style='color:black;background-color:#c8b564;text-align:right;'>0.4279</td><td style='color:black;background-color:#f28b64;text-align:right;'>0.1014</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0009</td></tr>
-<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>JEU</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#d4a964;text-align:right;'>0.3305</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#b8c564;text-align:right;'>0.5500</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1110</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>JEU</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#d4a964;text-align:right;'>0.3333</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#b7c664;text-align:right;'>0.5556</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1111</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>LACERE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0157</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0010</td><td style='color:black;background-color:#94e964;text-align:right;'>0.8354</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0008</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0028</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ec9164;text-align:right;'>0.1432</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0005</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>MANQUE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0061</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0128</td><td style='color:black;background-color:#dba264;text-align:right;'>0.2809</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0078</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0552</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0009</td><td style='color:black;background-color:#b0cd64;text-align:right;'>0.6167</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0169</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td></tr>
-<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>MAUVAIS</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#aad364;text-align:right;'>0.6598</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td><td style='color:black;background-color:#e29b64;text-align:right;'>0.2207</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1110</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0012</td></tr>
-<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>N'EMET PAS</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td><td style='color:black;background-color:#82fb64;text-align:right;'>0.9757</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0027</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>MAUVAIS</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#a9d464;text-align:right;'>0.6667</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#e29b64;text-align:right;'>0.2222</td><td style='color:black;background-color:#f08d64;text-align:right;'>0.1111</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>N'EMET PAS</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#7fff64;text-align:right;'>1.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>N'ENCRE PAS</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0172</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0345</td><td style='color:black;background-color:#85f864;text-align:right;'>0.9483</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>NE FONCTIONNE PAS</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0078</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0218</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0351</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0009</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0024</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#90ed64;text-align:right;'>0.8636</td><td style='color:black;background-color:#f68764;text-align:right;'>0.0672</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0007</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>NE TIRE PAS</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0098</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0036</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0134</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0134</td><td style='color:black;background-color:#92eb64;text-align:right;'>0.8481</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0241</td><td style='color:black;background-color:#f88564;text-align:right;'>0.0536</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0018</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0322</td></tr>
@@ -1026,9 +906,9 @@ Loi de probabilité de <code>SYSTEM_N1</code> | <code>SIG_OBS</code> :
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>RAYE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0114</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0010</td><td style='color:black;background-color:#9de064;text-align:right;'>0.7627</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0004</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0056</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0002</td><td style='color:black;background-color:#e39a64;text-align:right;'>0.2173</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0008</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0006</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>REFUSE TITRE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0025</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0051</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#7ffe64;text-align:right;'>0.9924</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>SALE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f58864;text-align:right;'>0.0755</td><td style='color:black;background-color:#9edf64;text-align:right;'>0.7547</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0377</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f28b64;text-align:right;'>0.0943</td><td style='color:black;background-color:#fa8364;text-align:right;'>0.0314</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0063</td></tr>
-<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>SECOUSSE</center></th><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#c9b464;text-align:right;'>0.4200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#c9b464;text-align:right;'>0.4200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0200</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>SECOUSSE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#bfbf64;text-align:right;'>0.5000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#bfbf64;text-align:right;'>0.5000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TAGUE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#e09d64;text-align:right;'>0.2418</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#a4d964;text-align:right;'>0.7059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0065</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fb8264;text-align:right;'>0.0261</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0131</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0065</td></tr>
-<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TANGUE</center></th><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#85f864;text-align:right;'>0.9471</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0059</td></tr>
+<tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TANGUE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#7fff64;text-align:right;'>1.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TEMOIN OUVERTURE H.S</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0181</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0040</td><td style='color:black;background-color:#e29b64;text-align:right;'>0.2254</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0040</td><td style='color:black;background-color:#fd8064;text-align:right;'>0.0101</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#a1dc64;text-align:right;'>0.7324</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0060</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TIRE A DROITE</center></th><td style='color:black;background-color:#fc8164;text-align:right;'>0.0168</td><td style='color:black;background-color:#daa364;text-align:right;'>0.2849</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0056</td><td style='color:black;background-color:#f98464;text-align:right;'>0.0447</td><td style='color:black;background-color:#c6b764;text-align:right;'>0.4413</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0615</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0056</td><td style='color:black;background-color:#ef8e64;text-align:right;'>0.1229</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0168</td></tr>
 <tr><th style='border:1px solid black;color:black;background-color:#BBBBBB'><center>TIRE A GAUCHE</center></th><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#e99464;text-align:right;'>0.1707</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0061</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0061</td><td style='color:black;background-color:#a0dd64;text-align:right;'>0.7378</td><td style='color:black;background-color:#fc8164;text-align:right;'>0.0183</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#f78664;text-align:right;'>0.0549</td><td style='color:black;background-color:#ff7f64;text-align:right;'>0.0000</td><td style='color:black;background-color:#fe7f64;text-align:right;'>0.0061</td></tr>
@@ -1041,47 +921,186 @@ Loi de probabilité de <code>SYSTEM_N1</code> | <code>SIG_OBS</code> :
 </div>
 </div>
 
-<div id="outline-container-org50b4d83" class="outline-3">
-<h3 id="org50b4d83">Prédictions</h3>
-<div class="outline-text-3" id="text-org50b4d83">
+<div id="outline-container-orge28857f" class="outline-3">
+<h3 id="orge28857f">Prédictions</h3>
+<div class="outline-text-3" id="text-orge28857f">
 <p>
-Les fonctions <code>predict_proba=/=predict</code> permettent de réaliser des prédictions d'une variable cible du modèle à
+À ce stade, vous pouvez reprendre la fonction <code>predict</code> que nous avons utilisée dans <a href="../../td/comp_modeles_app/comp_modeles_app.html">ce TD</a> pour réaliser des prédictions d'une variable cible à
 partir de données. Chaque ligne des données fournies est utilisée comme évidence (conditionnement)
 pour calculer la loi de la variable cible sachant les données observées.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">pred_prob</span> = bn.predict_proba(ot_odr_df[[<span style="color: #CC9393;">"SIG_OBS"</span>]].iloc[-1000:], 
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>var_target=<span style="color: #CC9393;">"SYSTEM_N1"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>show_progress=<span style="color: #BFEBBF;">True</span>)
-<span style="color: #F0DFAF; font-weight: bold;">print</span>(pred_prob)
+<pre class="src src-python"><span style="color: #DFAF8F;">pred_prob</span> = predict(bn,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   data=ot_odr_df[[<span style="color: #CC9393;">"SIG_OBS"</span>]].iloc[-1000:], 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   var_target=<span style="color: #CC9393;">"SYSTEM_N1"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   show_progress=<span style="color: #BFEBBF;">True</span>)
 
-<span style="color: #DFAF8F;">pred</span> = bn.predict(ot_odr_df[[<span style="color: #CC9393;">"SIG_OBS"</span>]].iloc[-1000:], 
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> var_target=<span style="color: #CC9393;">"SYSTEM_N1"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> show_progress=<span style="color: #BFEBBF;">True</span>)
-
-<span style="color: #F0DFAF; font-weight: bold;">print</span>(pred)
+pred_var = pred_prob.idxmax(axis=1).rename(<span style="color: #CC9393;">"pred"</span>)
 </pre>
 </div>
-</div>
+
+<p>
+On finit par évaluer le taux de prédictions du modèle par rapport aux données observées.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">(ot_odr_df[<span style="color: #CC9393;">"SYSTEM_N1"</span>].iloc[-1000:] == pred_var).mean()
+</pre>
 </div>
 
-<div id="outline-container-org9edbed0" class="outline-3">
-<h3 id="org9edbed0">Application</h3>
-<div class="outline-text-3" id="text-org9edbed0">
+<pre class="example">
+0.65
+</pre>
+
+
 <p>
-Un exemple rudimentaire d'application web de diagnostic est proposé dans le fichier <a href="diag.py">diag.py</a>.
+Et la matrice de confusion associée :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">pd.crosstab(ot_odr_df[<span style="color: #CC9393;">"SYSTEM_N1"</span>].iloc[-1000:], pred_var)
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">SYSTEM_N1</th>
+<th scope="col" class="org-right">EQUIPEMENT CHASSIS</th>
+<th scope="col" class="org-right">EQUIPEMENT DE CARROSSERIE</th>
+<th scope="col" class="org-right">EQUIPEMENT DE FREINAGE</th>
+<th scope="col" class="org-right">EQUIPEMENT DE MOTORISATION</th>
+<th scope="col" class="org-right">EQUIPEMENT ELECTRIQUE</th>
+<th scope="col" class="org-right">EQUIPEMENT EMBARQUE</th>
+<th scope="col" class="org-right">EQUIPEMENT PNEUMATIQUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">EQUIPEMENT CHASSIS</td>
+<td class="org-right">9</td>
+<td class="org-right">7</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">10</td>
+<td class="org-right">0</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-left">EQUIPEMENT CLIMATIQUE</td>
+<td class="org-right">0</td>
+<td class="org-right">3</td>
+<td class="org-right">0</td>
+<td class="org-right">3</td>
+<td class="org-right">8</td>
+<td class="org-right">0</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-left">EQUIPEMENT DE CARROSSERIE</td>
+<td class="org-right">2</td>
+<td class="org-right">56</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-right">138</td>
+<td class="org-right">0</td>
+<td class="org-right">10</td>
+</tr>
+
+<tr>
+<td class="org-left">EQUIPEMENT DE FREINAGE</td>
+<td class="org-right">4</td>
+<td class="org-right">3</td>
+<td class="org-right">4</td>
+<td class="org-right">0</td>
+<td class="org-right">16</td>
+<td class="org-right">0</td>
+<td class="org-right">8</td>
+</tr>
+
+<tr>
+<td class="org-left">EQUIPEMENT DE MOTORISATION</td>
+<td class="org-right">3</td>
+<td class="org-right">2</td>
+<td class="org-right">0</td>
+<td class="org-right">6</td>
+<td class="org-right">25</td>
+<td class="org-right">0</td>
+<td class="org-right">16</td>
+</tr>
+
+<tr>
+<td class="org-left">EQUIPEMENT DE TRANSMISSION</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">EQUIPEMENT ELECTRIQUE</td>
+<td class="org-right">2</td>
+<td class="org-right">20</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">555</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">EQUIPEMENT EMBARQUE</td>
+<td class="org-right">0</td>
+<td class="org-right">5</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">49</td>
+<td class="org-right">6</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">EQUIPEMENT PNEUMATIQUE</td>
+<td class="org-right">4</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">2</td>
+<td class="org-right">0</td>
+<td class="org-right">14</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Attention :</b> On notera que dans cet exemple, nous n'avons pas mis en place un schéma d'évaluation
+faisant intervenir des données d'apprentissage et des données de test.
 </p>
 
 <p>
-Pour tester l'application, il faut :
+<b>À vous de jouer à présent !</b>
 </p>
-<ol class="org-ol">
-<li>Placer le fichier <a href="diag.py">diag.py</a> dans le même répertoire que les fichiers
-<code>OT_ODR.csv.bz2</code> et <code>pyagrum_extra.py</code>.</li>
-<li>Installer la librairie <code>Dash</code>, i.e. <code>pip install dash</code>.</li>
-<li>Lancer la commande <code>python diag.py</code>.</li>
-<li>Ouvrir un navigateur web à l'adresse <a href="http://127.0.0.1:8050/">http://127.0.0.1:8050/</a>.</li>
-</ol>
 </div>
 </div>
 </div>
