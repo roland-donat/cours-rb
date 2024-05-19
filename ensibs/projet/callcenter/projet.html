@@ -44,31 +44,31 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org36f2909">Démarchage téléphonique en <i>call center</i></a></li>
-<li><a href="#org93795c1">Objectifs</a></li>
-<li><a href="#org01f3f60">Présentation des données</a></li>
-<li><a href="#org5350fe1">Pour se lancer en douceur</a>
+<li><a href="#org923eef6">Démarchage téléphonique en <i>call center</i></a></li>
+<li><a href="#org4cf0a7f">Travaux à réaliser</a></li>
+<li><a href="#orgb25d31b">Présentation des données</a></li>
+<li><a href="#org3ef344d">Pour se lancer en douceur</a>
 <ul>
-<li><a href="#org03e0604">Brève analyse descriptive</a></li>
-<li><a href="#orgd1824f1">Préparation des données</a></li>
-<li><a href="#orgbf4d4d9">Création d'un premier modèle</a></li>
-<li><a href="#orgd69d173">Apprentissage des LPC</a></li>
-<li><a href="#org26a695a">Prédictions</a></li>
+<li><a href="#orge96b6cc">Brève analyse descriptive</a></li>
+<li><a href="#org78e1c4b">Préparation des données</a></li>
+<li><a href="#org7e0b6f2">Création d'un premier modèle</a></li>
+<li><a href="#org8d57a5c">Apprentissage des LPC</a></li>
+<li><a href="#org2554329">Prédictions</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="org553d4c3" class="figure">
+<div id="orga7561b6" class="figure">
 <p><img src="./callcenter.png" alt="call center employees waiting for algorithms to deliver good phone numbers, illustration, white background, colorful" width="50%" />
 </p>
 </div>
 
 
-<div id="outline-container-org36f2909" class="outline-2">
-<h2 id="org36f2909">Démarchage téléphonique en <i>call center</i></h2>
-<div class="outline-text-2" id="text-org36f2909">
+<div id="outline-container-org923eef6" class="outline-2">
+<h2 id="org923eef6">Démarchage téléphonique en <i>call center</i></h2>
+<div class="outline-text-2" id="text-org923eef6">
 <p>
 Les centres d'appels, ou <i>call centers</i>, sont des services spécialisés dans la communication
 téléphonique à grande échelle. Les employés de ces centres - souvent appelés téléopérateurs ou
@@ -89,9 +89,9 @@ contacter les numéros inscrits sur les listes d'opposition au démarchage tél�
 </div>
 </div>
 
-<div id="outline-container-org93795c1" class="outline-2">
-<h2 id="org93795c1">Objectifs</h2>
-<div class="outline-text-2" id="text-org93795c1">
+<div id="outline-container-org4cf0a7f" class="outline-2">
+<h2 id="org4cf0a7f">Travaux à réaliser</h2>
+<div class="outline-text-2" id="text-org4cf0a7f">
 <p>
 Le présent projet a pour but de s'attaquer à un des principaux défis du démarchage
 téléphonique : l'optimisation de la joignabilité des prospects. Pour ce faire, vous réaliserez les
@@ -130,9 +130,9 @@ projet.*
 </div>
 
 
-<div id="outline-container-org01f3f60" class="outline-2">
-<h2 id="org01f3f60">Présentation des données</h2>
-<div class="outline-text-2" id="text-org01f3f60">
+<div id="outline-container-orgb25d31b" class="outline-2">
+<h2 id="orgb25d31b">Présentation des données</h2>
+<div class="outline-text-2" id="text-orgb25d31b">
 <p>
 Les quatre jeux de données suivants sont mis à disposition dans ce projet :
 </p>
@@ -165,10 +165,10 @@ même répertoire que votre script Python).
 </div>
 
 <p>
-Le Tableau <a href="#org89079fa">1</a> donne une description des variables des données de joignabilité.
+Le Tableau <a href="#org481209a">1</a> donne une description des variables des données de joignabilité.
 </p>
 
-<table id="org89079fa" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org481209a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données.</caption>
 
 <colgroup>
@@ -217,21 +217,20 @@ Le Tableau <a href="#org89079fa">1</a> donne une description des variables des d
 </div>
 </div>
 
-<div id="outline-container-org5350fe1" class="outline-2">
-<h2 id="org5350fe1">Pour se lancer en douceur</h2>
-<div class="outline-text-2" id="text-org5350fe1">
+<div id="outline-container-org3ef344d" class="outline-2">
+<h2 id="org3ef344d">Pour se lancer en douceur</h2>
+<div class="outline-text-2" id="text-org3ef344d">
 </div>
-<div id="outline-container-org03e0604" class="outline-3">
-<h3 id="org03e0604">Brève analyse descriptive</h3>
-<div class="outline-text-3" id="text-org03e0604">
+<div id="outline-container-orge96b6cc" class="outline-3">
+<h3 id="orge96b6cc">Brève analyse descriptive</h3>
+<div class="outline-text-3" id="text-orge96b6cc">
 <p>
 Affichage des premiers numéros ayant été contactés lors de la 2ème tentative :
 </p>
 <div class="org-src-container">
-<pre class="src src-python">tabulate.tabulate(calls_dfd[<span style="color: #CC9393;">"a2"</span>].head(5), tablefmt=<span style="color: #CC9393;">"orgtbl"</span>, headers=<span style="color: #CC9393;">"keys"</span>, showindex=<span style="color: #BFEBBF;">False</span>)
+<pre class="src src-python">calls_dfd[<span style="color: #CC9393;">"a2"</span>].head(5)
 </pre>
 </div>
-
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -375,10 +374,9 @@ Affichage des premiers numéros ayant été contactés lors de la 2ème tentativ
 Analyse des variables catégorielles pour les données de la 2ème tentative.
 </p>
 <div class="org-src-container">
-<pre class="src src-python">tabulate.tabulate(calls_dfd[<span style="color: #CC9393;">"a2"</span>].describe(include=<span style="color: #CC9393;">"O"</span>), tablefmt=<span style="color: #CC9393;">"orgtbl"</span>, headers=<span style="color: #CC9393;">"keys"</span>)
+<pre class="src src-python">calls_dfd[<span style="color: #CC9393;">"a2"</span>].describe(include=<span style="color: #CC9393;">"O"</span>)
 </pre>
 </div>
-
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -509,9 +507,9 @@ Récupération du nombre de numéros appelés lors de la deuxième tentative :
 </div>
 </div>
 
-<div id="outline-container-orgd1824f1" class="outline-3">
-<h3 id="orgd1824f1">Préparation des données</h3>
-<div class="outline-text-3" id="text-orgd1824f1">
+<div id="outline-container-org78e1c4b" class="outline-3">
+<h3 id="org78e1c4b">Préparation des données</h3>
+<div class="outline-text-3" id="text-org78e1c4b">
 <p>
 Dans cette partie, nous travaillerons sur les données de la 2ème tentative.
 </p>
@@ -530,9 +528,9 @@ calls_dfd[<span style="color: #CC9393;">"a2"</span>].info()
 </div>
 </div>
 
-<div id="outline-container-orgbf4d4d9" class="outline-3">
-<h3 id="orgbf4d4d9">Création d'un premier modèle</h3>
-<div class="outline-text-3" id="text-orgbf4d4d9">
+<div id="outline-container-org7e0b6f2" class="outline-3">
+<h3 id="org7e0b6f2">Création d'un premier modèle</h3>
+<div class="outline-text-3" id="text-org7e0b6f2">
 <p>
 Nous proposons de créer un modèle permettant d'expliquer la variable <code>lead_answered_a2</code> à partir de
 <code>hour_a1</code> et <code>hour_a2</code>.
@@ -589,30 +587,12 @@ Le RB obtenu possède donc la structure suivante :
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="218pt" height="116pt" viewBox="0.00 0.00 218.19 116.00">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
 <title>G</title>
-<!-- hour_a1 -->
-<g id="node1" class="node">
-<title>hour_a1</title>
-<g id="a_node1"><a xlink:title="(0) hour_a1">
-<ellipse fill="#404040" stroke="black" cx="48.1" cy="-90" rx="48.19" ry="18"/>
-<text text-anchor="middle" x="48.1" y="-86.3" font-family="Times,serif" font-size="14.00" fill="white">hour_a1</text>
-</a>
-</g>
-</g>
 <!-- lead_answered_a2 -->
-<g id="node3" class="node">
+<g id="node1" class="node">
 <title>lead_answered_a2</title>
-<g id="a_node3"><a xlink:title="(2) lead_answered_a2">
+<g id="a_node1"><a xlink:title="(2) lead_answered_a2">
 <ellipse fill="#404040" stroke="black" cx="105.1" cy="-18" rx="94.78" ry="18"/>
 <text text-anchor="middle" x="105.1" y="-14.3" font-family="Times,serif" font-size="14.00" fill="white">lead_answered_a2</text>
-</a>
-</g>
-</g>
-<!-- hour_a1&#45;&gt;lead_answered_a2 -->
-<g id="edge1" class="edge">
-<title>hour_a1-&gt;lead_answered_a2</title>
-<g id="a_edge1"><a xlink:title="0 → 2">
-<path fill="none" stroke="#4a4a4a" d="M61.6,-72.41C68.53,-63.91 77.11,-53.37 84.81,-43.91"/>
-<polygon fill="#4a4a4a" stroke="#4a4a4a" points="87.69,-45.92 91.29,-35.96 82.26,-41.5 87.69,-45.92"/>
 </a>
 </g>
 </g>
@@ -620,8 +600,8 @@ Le RB obtenu possède donc la structure suivante :
 <g id="node2" class="node">
 <title>hour_a2</title>
 <g id="a_node2"><a xlink:title="(1) hour_a2">
-<ellipse fill="#404040" stroke="black" cx="162.1" cy="-90" rx="48.19" ry="18"/>
-<text text-anchor="middle" x="162.1" y="-86.3" font-family="Times,serif" font-size="14.00" fill="white">hour_a2</text>
+<ellipse fill="#404040" stroke="black" cx="48.1" cy="-90" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="48.1" y="-86.3" font-family="Times,serif" font-size="14.00" fill="white">hour_a2</text>
 </a>
 </g>
 </g>
@@ -629,6 +609,24 @@ Le RB obtenu possède donc la structure suivante :
 <g id="edge2" class="edge">
 <title>hour_a2-&gt;lead_answered_a2</title>
 <g id="a_edge2"><a xlink:title="1 → 2">
+<path fill="none" stroke="#4a4a4a" d="M61.6,-72.41C68.53,-63.91 77.11,-53.37 84.81,-43.91"/>
+<polygon fill="#4a4a4a" stroke="#4a4a4a" points="87.69,-45.92 91.29,-35.96 82.26,-41.5 87.69,-45.92"/>
+</a>
+</g>
+</g>
+<!-- hour_a1 -->
+<g id="node3" class="node">
+<title>hour_a1</title>
+<g id="a_node3"><a xlink:title="(0) hour_a1">
+<ellipse fill="#404040" stroke="black" cx="162.1" cy="-90" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="162.1" y="-86.3" font-family="Times,serif" font-size="14.00" fill="white">hour_a1</text>
+</a>
+</g>
+</g>
+<!-- hour_a1&#45;&gt;lead_answered_a2 -->
+<g id="edge1" class="edge">
+<title>hour_a1-&gt;lead_answered_a2</title>
+<g id="a_edge1"><a xlink:title="0 → 2">
 <path fill="none" stroke="#4a4a4a" d="M148.59,-72.41C141.66,-63.91 133.08,-53.37 125.38,-43.91"/>
 <polygon fill="#4a4a4a" stroke="#4a4a4a" points="127.93,-41.5 118.9,-35.96 122.5,-45.92 127.93,-41.5"/>
 </a>
@@ -795,9 +793,9 @@ On remarque naturellement que les LPC ne contiennent pour l'instant que des zér
 </div>
 </div>
 
-<div id="outline-container-orgd69d173" class="outline-3">
-<h3 id="orgd69d173">Apprentissage des LPC</h3>
-<div class="outline-text-3" id="text-orgd69d173">
+<div id="outline-container-org8d57a5c" class="outline-3">
+<h3 id="org8d57a5c">Apprentissage des LPC</h3>
+<div class="outline-text-3" id="text-org8d57a5c">
 <p>
 Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la classe
 <code>gum.BNLearner</code> et en particulier la méthode <code>fitParameters</code>: 
@@ -810,7 +808,7 @@ learner.fitParameters(bn)
 </div>
 
 <pre class="example">
-Filename       : /tmp/tmprq5dlndr.csv
+Filename       : /tmp/tmpts0izg36.csv
 Size           : (2824096,3)
 Variables      : hour_a1[9], hour_a2[9], lead_answered_a2[2]
 Induced types  : True
@@ -977,9 +975,9 @@ LPC de probabilité de <code>lead_answered_a2</code> | <code>hour_a1</code>, <co
 </div>
 </div>
 
-<div id="outline-container-org26a695a" class="outline-3">
-<h3 id="org26a695a">Prédictions</h3>
-<div class="outline-text-3" id="text-org26a695a">
+<div id="outline-container-org2554329" class="outline-3">
+<h3 id="org2554329">Prédictions</h3>
+<div class="outline-text-3" id="text-org2554329">
 <p>
 À ce stade, vous pouvez reprendre la fonction <code>predict</code> que nous avons utilisée dans <a href="../../td/comp_modeles_app/comp_modeles_app.html">ce TD</a> pour réaliser des prédictions d'une variable cible à
 partir de données. Chaque ligne des données fournies est utilisée comme évidence (conditionnement)
