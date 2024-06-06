@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Détection de fraude à la carte de crédit</title>
+<meta name="author" content="Travaux dirigés" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Détection de fraude à la carte de crédit</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd7656a9">1. Problématique</a></li>
+<li><a href="#org95b32dd">2. Modélisation</a></li>
+<li><a href="#orgc2f61de">3. Implémentation du modèle avec <code>GeNIe</code></a></li>
+<li><a href="#org31a7aeb">4. Inférence</a></li>
+<li><a href="#org5905356">5. Indépendances conditionnelles</a></li>
+</ul>
+</div>
+</div>
+
+<div id="org1d121ab" class="figure">
+<p><img src="./fraude_cb.png" alt="fraude_cb.png" width="50%" />
+</p>
+<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
+</div>
+
+
+
+<div id="outline-container-orgd7656a9" class="outline-2">
+<h2 id="orgd7656a9"><span class="section-number-2">1.</span> Problématique</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Chaque année, les banques perdent d'importantes sommes d'argents suite
+aux pertes ou aux vols de cartes de crédit. Pour détecter l'occurrence de fraudes, l'industrie financière se tourne de plus en plus vers
+l'intelligence artificielle et l'analyse de données pour trouver des solutions à cette
+problématique. En effet, les propriétaires de carte de crédit ont tendance à faire leurs achats en suivant des
+schémas plus ou moins identifiables. Quand ce schéma n'est plus respecté, il y a de fortes chances
+qu'une fraude se soit produite. Les paragraphes suivants donnent des informations générales sur le
+comportement des propriétaires de carte :
+</p>
+<ol class="org-ol">
+<li>Quand un propriétaire de carte de crédit voyage à l'étranger, les transactions frauduleuses sont
+plus probables car les touristes sont des cibles privilégiées pour les voleurs. Plus précisément,
+on estime que \(1\%\) des transactions sont frauduleuses quand le propriétaire de la carte de crédit
+est en voyage, contre seulement \(0.2\%\) de transactions frauduleuses à domicile. En moyenne, \(5\%\)
+de toutes les transactions se produisent au cours de voyages à l'étranger. <br /></li>
+<li>Si une transaction est frauduleuse, alors la probabilité qu'il s'agisse d'un achat à l'étranger
+augmente, sauf si le propriétaire de la carte est précisément en voyage à l'étranger. Statistiquement, quand le propriétaire de la carte n'est pas en voyage, \(10\%\) des transactions
+frauduleuse concernent un achat à l'étranger alors que seulement \(1\%\) des transactions normales
+portent sur un achat à l'étranger. En revanche, quand le propriétaire est en voyage à l'étranger, \(90\%\) des
+transactions (frauduleuses ou non) sont des achats à
+l'étranger. <br /></li>
+<li>Les achats réalisés sur internet sont plus souvent frauduleux. Ceci est particulièrement vrai pour
+les propriétaires de carte n'ayant pas d'ordinateur. En effet :
+<ul class="org-ul">
+<li>Pour ceux qui ne possèdent pas d'ordinateur, seulement \(0.1\%\) de leurs transactions normales sont
+faites sur internet. Ce chiffre monte à \(1.1\%\) en cas de transactions frauduleuses.</li>
+<li>Pour les possesseurs d'ordinateur, \(1\%\) des transactions normales a
+lieu sur internet. En revanche, ce pourcentage s'élève à \(2\%\) lors de transactions
+frauduleuses.</li>
+<li>On estime aujourd'hui que \(75\%\) de la population possède un ordinateur <br /></li>
+</ul></li>
+<li>Malheureusement, les banques ne savent pas si le propriétaire d'une carte possède un
+ordinateur. Toutefois, ces dernières peuvent vérifier l'historique des transactions afin de
+rechercher si des achats liés à du matériel informatique ont été effectués dernièrement. En
+particulier, on estime que \(10\%\) des propriétaires d'ordinateur ont fait des achats en rapport avec
+l'informatique dernièrement contre \(0.1\%\) pour ceux ne possédant pas d'ordinateur.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org95b32dd" class="outline-2">
+<h2 id="org95b32dd"><span class="section-number-2">2.</span> Modélisation</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Construire un RB (graphe et LPC) visant à détecter des transactions frauduleuses. Le RB sera
+composé des six variables Booléennes suivantes :
+<ul class="org-ul">
+<li>FR : la transaction courante est frauduleuse.</li>
+<li>VE : le propriétaire de la carte est actuellement en voyage à l'étranger.</li>
+<li>AE : la transaction courante concerne un achat à l'étranger.</li>
+<li>AI : la transaction courante concerne un achat sur internet.</li>
+<li>PO : le propriétaire de la carte a un ordinateur.</li>
+<li>AOD : un achat lié à l'informatique a été effectué dernièrement.</li>
+</ul></li>
+<li>Évaluer la complexité de votre RB.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc2f61de" class="outline-2">
+<h2 id="orgc2f61de"><span class="section-number-2">3.</span> Implémentation du modèle avec <code>GeNIe</code></h2>
+<div class="outline-text-2" id="text-3">
+<ol class="org-ol">
+<li>Utiliser le logiciel <code>GeNIe</code> pour construire le modèle sur la détection de fraude.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org31a7aeb" class="outline-2">
+<h2 id="org31a7aeb"><span class="section-number-2">4.</span> Inférence</h2>
+<div class="outline-text-2" id="text-4">
+<ol class="org-ol">
+<li>Quelle est la probabilité <i>a priori</i> qu'une transaction donnée quelconque soit frauduleuse ?</li>
+<li>Quelle est la probabilité qu'une transaction donnée soit frauduleuse après avoir vérifié que le
+client ait effectué un achat sur internet.</li>
+<li>Supposons à présent que vous avez volé une carte de crédit - attention c'est mal ! -. Supposons de
+plus que vous connaissez les réseaux bayésiens et que vous savez que la banque du propriétaire de
+la carte utilise le système de détection de fraudes reposant sur le RB décrit
+précédemment. Malgré tout cela, vous souhaitez quand même faire un achat sur internet avec la
+carte volée, quelle(s) action(s) pouvez-vous effectuer afin de réduire le risque que votre
+transaction soit rejetée ? De combien pouvez-vous faire baisser la probabilité que la transaction
+soit considérée comme frauduleuse ?</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org5905356" class="outline-2">
+<h2 id="org5905356"><span class="section-number-2">5.</span> Indépendances conditionnelles</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Déterminer si les relations d'indépendances suivantes sont vraies ou fausses :
+</p>
+<ul class="org-ul">
+<li>VE \(\perp\!\!\!\perp\) AI</li>
+<li>VE \(\perp\!\!\!\perp\) PO</li>
+<li>VE \(\perp\!\!\!\perp\) AI \(|\) FR</li>
+<li>FR \(\perp\!\!\!\perp\) AOD</li>
+<li>FR \(\perp\!\!\!\perp\) AOD \(|\) PO</li>
+<li>VE \(\perp\!\!\!\perp\) AOD \(|\) AI</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

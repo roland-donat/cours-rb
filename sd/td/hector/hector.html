@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hector le robot jongleur</title>
+<meta name="author" content="Travaux dirigés" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Hector le robot jongleur</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga96f542">1. Introduction</a></li>
+<li><a href="#org939487c">2. Structure du réseau bayésien</a></li>
+<li><a href="#org8e6b134">3. Lois de probabilité conditionnelles</a></li>
+<li><a href="#org26e5e82">4. Implémentation et exploitation du modèle</a></li>
+</ul>
+</div>
+</div>
+
+<div id="orgd03a913" class="figure">
+<p><img src="./hector.png" alt="hector.png" width="50%" />
+</p>
+<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
+</div>
+
+
+
+<div id="outline-container-orga96f542" class="outline-2">
+<h2 id="orga96f542"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Hector, le robot jongleur, lâche souvent les balles avec lesquelles il jongle quand sa batterie est
+faible. 
+</p>
+
+<p>
+D'après les expériences précédentes, il a été déterminé que :
+</p>
+<ul class="org-ul">
+<li>la probabilité qu'il lâche une balle quand sa batterie est faible est de \(0.9\) ;</li>
+<li>quand sa batterie n'est pas faible, la probabilité qu'il lâche une balle est seulement de \(0.01\) ;</li>
+<li>quand la batterie a été rechargée il y a peu de temps, il y a seulement \(5\%\) de chances que la
+batterie soit faible contre \(50\%\) si la batterie n'a pas été rechargée récemment.</li>
+</ul>
+
+<p>
+Un premier système de vision \(O_{1}\)
+(peu fiable) observe le robot et nous prévient lorsqu'il croit qu'Hector a lâché une balle. Un
+autre système \(O_{2}\) (indépendant du premier) agit de la même façon. 
+</p>
+
+<p>
+Le but de cet exercice est de
+modéliser les résultats des observateurs en fonction de ce que fait Hector et de son état.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org939487c" class="outline-2">
+<h2 id="org939487c"><span class="section-number-2">2.</span> Structure du réseau bayésien</h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li>En supposant que toutes les variables soient booléennes, quelles variables allez-vous choisir pour
+modéliser ce problème ?</li>
+<li>Proposer une structure de réseau bayésien correspondant au problème. Étiqueter les noeuds du réseau et indiquer
+clairement la direction des arcs entre les nœuds.</li>
+<li>D'après votre modélisation, les résultats des deux observateurs sont-ils réellement indépendants ?
+À quelle(s) condition(s) y a-t-il indépendance ?</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org8e6b134" class="outline-2">
+<h2 id="org8e6b134"><span class="section-number-2">3.</span> Lois de probabilité conditionnelles</h2>
+<div class="outline-text-2" id="text-3">
+<ol class="org-ol">
+<li>À partir des informations disponibles, représenter les LPC correspondant à votre structure. Il
+vous manquera des données pour finir le travail, lesquelles ?</li>
+<li>Calculer la complexité du RB et comparer la avec la complexité de la loi jointe du modèle
+représentée naïvement (i.e. sans RB).</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org26e5e82" class="outline-2">
+<h2 id="org26e5e82"><span class="section-number-2">4.</span> Implémentation et exploitation du modèle</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+On suppose que la fiabilité des observateurs \(O_{1}\) et \(O_{2}\) est de respectivement
+\(70\%\) et \(90\%\).
+</p>
+
+<p>
+L'objectif est de répondre aux trois questions suivantes en utilisant le logiciel <code>GeNIe</code>.
+</p>
+
+<ol class="org-ol">
+<li>Calculer la probabilité a priori de chacun des noeuds du réseau.</li>
+<li>\(O_{1}\) observe que Hector a lâché une balle. Quelle est la probabilité que la batterie soit
+faible sachant cela? Comparer cette valeur à la probabilité <i>a priori</i> que la batterie soit faible.</li>
+<li>On ajoute alors une information supplémentaire : \(O_{2}\) n'a rien vu (à la différence de
+\(O_{1}\)). Quelle est la probabilité que la batterie soit faible sachant ces deux informations ?
+Comparer aux résultats précédents.</li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>
