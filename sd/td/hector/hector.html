@@ -55,15 +55,15 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga96f542">1. Introduction</a></li>
-<li><a href="#org939487c">2. Structure du réseau bayésien</a></li>
-<li><a href="#org8e6b134">3. Lois de probabilité conditionnelles</a></li>
-<li><a href="#org26e5e82">4. Implémentation et exploitation du modèle</a></li>
+<li><a href="#org94ab9a6">1. Introduction</a></li>
+<li><a href="#org98f54a0">2. Structure du réseau bayésien</a></li>
+<li><a href="#org3bc4973">3. Lois de probabilité conditionnelles</a></li>
+<li><a href="#orga798e45">4. Implémentation et exploitation du modèle</a></li>
 </ul>
 </div>
 </div>
 
-<div id="orgd03a913" class="figure">
+<div id="orga45fdfc" class="figure">
 <p><img src="./hector.png" alt="hector.png" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Image générée par Midjourney</p>
@@ -71,8 +71,8 @@
 
 
 
-<div id="outline-container-orga96f542" class="outline-2">
-<h2 id="orga96f542"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-org94ab9a6" class="outline-2">
+<h2 id="org94ab9a6"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Hector, le robot jongleur, lâche souvent les balles avec lesquelles il jongle quand sa batterie est
@@ -102,8 +102,8 @@ modéliser les résultats des observateurs en fonction de ce que fait Hector et 
 </div>
 </div>
 
-<div id="outline-container-org939487c" class="outline-2">
-<h2 id="org939487c"><span class="section-number-2">2.</span> Structure du réseau bayésien</h2>
+<div id="outline-container-org98f54a0" class="outline-2">
+<h2 id="org98f54a0"><span class="section-number-2">2.</span> Structure du réseau bayésien</h2>
 <div class="outline-text-2" id="text-2">
 <ol class="org-ol">
 <li>En supposant que toutes les variables soient booléennes, quelles variables allez-vous choisir pour
@@ -116,20 +116,19 @@ clairement la direction des arcs entre les nœuds.</li>
 </div>
 </div>
 
-<div id="outline-container-org8e6b134" class="outline-2">
-<h2 id="org8e6b134"><span class="section-number-2">3.</span> Lois de probabilité conditionnelles</h2>
+<div id="outline-container-org3bc4973" class="outline-2">
+<h2 id="org3bc4973"><span class="section-number-2">3.</span> Lois de probabilité conditionnelles</h2>
 <div class="outline-text-2" id="text-3">
 <ol class="org-ol">
 <li>À partir des informations disponibles, représenter les LPC correspondant à votre structure. Il
 vous manquera des données pour finir le travail, lesquelles ?</li>
-<li>Calculer la complexité du RB et comparer la avec la complexité de la loi jointe du modèle
-représentée naïvement (i.e. sans RB).</li>
+<li>Calculer la complexité du RB.</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org26e5e82" class="outline-2">
-<h2 id="org26e5e82"><span class="section-number-2">4.</span> Implémentation et exploitation du modèle</h2>
+<div id="outline-container-orga798e45" class="outline-2">
+<h2 id="orga798e45"><span class="section-number-2">4.</span> Implémentation et exploitation du modèle</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 On suppose que la fiabilité des observateurs \(O_{1}\) et \(O_{2}\) est de respectivement
