@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Comparaison de modèles, apprentissage des LPC et vraisemblance</title>
+<meta name="author" content="Travaux dirigés" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Comparaison de modèles, apprentissage des LPC et vraisemblance</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org8539597">1. Objectif</a></li>
+<li><a href="#orgd03af63">2. Apprentissage avec <code>GeNIe</code></a>
+<ul>
+<li><a href="#org98de10e">2.1. Modèle 1 : \(A \rightarrow V \leftarrow E\)</a></li>
+<li><a href="#org1dd7e5c">2.2. Autres modèles</a></li>
+</ul>
+</li>
+<li><a href="#org8c0c60a">3. Évaluation des modèles avec <code>GeNIe</code></a></li>
+</ul>
+</div>
+</div>
+
+<div id="orgd12fb68" class="figure">
+<p><img src="./bank_ml.png" alt="bank_ml.png" width="50%" />
+</p>
+<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Dall-E 3: machine learning digital marketing bank loan ; white background ; colorful</p>
+</div>
+
+
+
+<div id="outline-container-org8539597" class="outline-2">
+<h2 id="org8539597"><span class="section-number-2">1.</span> Objectif</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+L'objectif de cet exercice est de comparer l'influence du choix de la structure d'un RB sur la
+représentativité de données observées. Autrement dit, il s'agit d'un problème
+de sélection de modèles. 
+</p>
+
+<p>
+Pour ce faire, nous nous intéresserons à des données de retour marketing (fictives) sur la vente de livret
+A. Dans ces données, les individus sont décrits par les variables suivantes :
+</p>
+<dl class="org-dl">
+<dt>Age :</dt><dd>classe d'âges de l'individu - valeurs possibles : [18,25], [26,59], 60+;</dd>
+<dt>Epargne :</dt><dd>l'individu a t-il de l'épargne - valeurs possibles : non, oui;</dd>
+<dt>Vente_livret_A :</dt><dd>vente d'un livret A à l'individu - valeurs possibles : échec, succès. <br /></dd>
+</dl>
+
+<p>
+Une des applications classiques de ce type de modèles est le ciblage client. Pour un
+produit donné, l'idée est de trouver les caractéristiques de la population qui maximisent les
+chances de vente.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd03af63" class="outline-2">
+<h2 id="orgd03af63"><span class="section-number-2">2.</span> Apprentissage avec <code>GeNIe</code></h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org98de10e" class="outline-3">
+<h3 id="org98de10e"><span class="section-number-3">2.1.</span> Modèle 1 : \(A \rightarrow V \leftarrow E\)</h3>
+<div class="outline-text-3" id="text-2-1">
+<ol class="org-ol">
+<li>Utiliser <code>GeNIe</code> pour construire la structure du modèle 1.</li>
+<li>Télécharger le fichier de données <a href="vente_livret_A_donnees_10000.csv">vente_livret_A_donnees_10000.csv</a> (à ne faire qu'une fois
+!) puis ouvrir le fichier
+dans <code>GeNIe</code> (<code>File/Open data file</code>).</li>
+<li>Aller dans l'item <code>Learning/Learn parameters</code> du menu. Associer correctement chacune des
+variables de votre RB avec la colonne correspondante dans les données que vous avez chargées à
+l'étape précédente. Cliquer sur <code>Ok</code> pour valider. Si
+vous avez nommé vos variables avec les noms indiqués dans la partie
+"Objectif" (en respectant la casse), <code>GeNIe</code> devrait réussir à s'y retrouver tout seul.</li>
+<li>Lancer alors l'apprentissage (en cliquant sur <code>Ok</code>) en utilisant le paramétrage par défaut. Noter
+la log-vraisemblance des données dans ce modèle.</li>
+<li>Sauvegarder votre modèle.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org1dd7e5c" class="outline-3">
+<h3 id="org1dd7e5c"><span class="section-number-3">2.2.</span> Autres modèles</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Reprendre les étapes précédentes sur les modèles suivants :
+</p>
+<ul class="org-ul">
+<li>Modèle 2 : \(A \leftarrow V \rightarrow E\).</li>
+<li>Modèle 3 : \(A \leftarrow V \rightarrow E\) et \(A \rightarrow E\).</li>
+<li>Modèle 4 : \(A \leftarrow V \rightarrow E\) et \(A \leftarrow E\).</li>
+<li>Modèle 5 : \(A\), \(V\), \(E\) indépendantes. <br /></li>
+</ul>
+
+<p>
+Comparer les log-vraisemblance obtenues et expliquer les résultats.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8c0c60a" class="outline-2">
+<h2 id="org8c0c60a"><span class="section-number-2">3.</span> Évaluation des modèles avec <code>GeNIe</code></h2>
+<div class="outline-text-2" id="text-3">
+<p>
+L'objectif est à présent de tester les performances de nos modèles pour effectuer des ciblages de
+clientèle. Les clients à cibler se trouvent dans le fichier
+<a href="vente_livret_A_donnees_100_test.csv">vente_livret_A_donnees_100_test.csv</a> contenant ce que nous appellerons dans la suite les données
+de test. Ces données contiennent à la fois les caractéristiques des clients à cibler (âge, épargne)
+mais aussi le résultat réel de la vente. La performance d'un modèle correspondra donc au taux de bonnes
+prédictions du modèle sur l'issue des ventes. 
+</p>
+
+<p>
+Réaliser les étapes suivantes pour chacun des modèles construits à la phase précédente :
+</p>
+<ol class="org-ol">
+<li>Ouvrir le modèle avec <code>GeNIe</code>.</li>
+<li>Télécharger le fichier de données de test <a href="vente_livret_A_donnees_100_test.csv">vente_livret_A_donnees_100_test.csv</a> (à ne faire qu'une fois
+!) et l'ouvrir dans <code>GeNIe</code>.</li>
+<li>Aller dans l'item <code>Learning/Validate</code> du menu. Associer correctement chacune des
+variables de votre RB avec la colonne correspondante dans les données que vous avez chargées à
+l'étape précédente. Cliquer sur <code>Ok</code> pour valider. Si
+vous avez nommé vos variables avec les noms indiqués dans la partie
+"Objectif" (sans les parenthèses et en respectant la casse), <code>GeNIe</code> devrait réussir à s'y retrouver tout seul.</li>
+<li>Dans le cadre "Validation method", laisser la sélection sur "Test only". Dans le cadre "Class
+nodes", sélectionner la variable à prédire. Cliquer ensuite sur <code>Ok</code>.</li>
+<li>Noter les résultats obtenus. <br /></li>
+</ol>
+
+<p>
+Comparer les performances observées ce chaque modèle et expliquer les résultats.
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
