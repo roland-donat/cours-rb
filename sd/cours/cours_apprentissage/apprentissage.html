@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Introduction aux Réseaux Bayésiens  <br> <br> <br> <font size="10">Apprentissage automatique des lois de probabilité conditionnelles</font></title>
+<meta name="author" content="Roland Donat"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes_reveal.css"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: {
+Macros: {
+pa: ["\\text{pa}"],
+Pa: ["\\text{Pa}"],
+lrpar: ["\\left( #1 \\right)", 1],
+lrPar: ["\\left( #1 \\right)", 1],
+lrbrack: ["[ #1 ]", 1],
+lrBrack: ["\\left[ #1 \\right]", 1],
+set: ["\\left\\lbrace #1 \\right\\rbrace", 1],
+Prob: ["P"],
+inter: ["\\cap"],
+union: ["\\cup"],
+Dom: ["\\text{Dom}"],
+mbf: ["\\boldsymbol{#1}", 1],
+argmin: ["\\underset{#1}{\arg\min}~", 1],
+argmax: ["\\underset{#1}{\arg\max}~", 1],
+mathbfcal: ["\\boldsymbol{\\mathcal{#1}}", 1],
+sm: ["\\setminus"],
+}
+}
+});
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes_couv.jpg"><h1 class="title">Introduction aux Réseaux Bayésiens  <br> <br> <br> <font size="10">Apprentissage automatique des lois de probabilité conditionnelles</font></h1><p class="subtitle"></p>
+<h2 class="author">Roland Donat</h2><h2 class="date"> <br>Spécialité Cyber Data</h2>
+</section>
+<section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-orge635c1f">Objectifs de la séance</a></li>
+<li><a href="#/slide-orgac3ec82">Introduction</a></li>
+<li><a href="#/slide-orge065354">Apprentissage des LPC</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<section>
+<section id="slide-orge635c1f">
+<h2 id="orge635c1f">Objectifs de la séance</h2>
+<div class="column" style="float:left; width: 50%">
+
+<ul>
+<li>Comprendre les problématiques liées à la construction pratique d'un réseau bayésien</li>
+<li>Estimer automatiquement les lois de probabilité conditionnelles (LPC) à partir de données
+observées sur le phénomène étudié</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width: 50%">
+
+
+<div id="orgd8f956d" class="figure">
+<p><img src="./fig/objectives.png" alt="Objectives" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgac3ec82">
+<h2 id="orgac3ec82">Introduction</h2>
+
+<div id="org0ec6776" class="figure">
+<p><img src="./fig/machine_learning.png" alt="Inférence" width="70%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org78948d2">
+<h3 id="org78948d2">Problématique</h3>
+<div class="block-definition" id="orged9bf1e">
+<p>
+<h4>Objectif</h4>
+</p>
+
+<ul>
+<li>Modéliser un phénomène aléatoire impliquant différentes variables \(X_{1}, \ldots, X_{D}\)</li>
+<li>Utiliser un réseau bayésien afin de représenter au mieux les relations entre les variables</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="orgd6e00d2">
+<p>
+<h4>Problèmes</h4>
+</p>
+
+<ul>
+<li>Comment déterminer la structure du réseau bayésien (i.e. le graphe)?</li>
+<li>Comment estimer les lois de probabilité conditionnelles (LPC) \(P(X_{d}|\text{pa}(X_{d})),~ d = 1,
+  \ldots, D\) ?</li>
+
+</ul>
+
+</div>
+
+<div class="block-example" id="org92428a7">
+<p>
+<h4>Approches envisageables</h4>
+</p>
+
+<ul>
+<li>Approche par expertise : utilisation d'avis d'experts et connaissances métiers</li>
+<li>Approche statistique : utilisation de bases de données (contenant éventuellement des
+informations incomplètes)</li>
+<li>Approche mixte : expertise + bases de données</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org812c887">
+<h4 id="org812c887">Problématique</h4>
+<p>
+<div class="slidesubtitle">Exemple : Vente d'un livret</div>
+</p>
+
+
+<div id="orgfe42816" class="figure">
+<p><img src="./fig/rb_vente_var.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org05fed52">
+<h4 id="org05fed52">Problématique</h4>
+<p>
+<div class="slidesubtitle">Apprentissage de la structure</div>
+</p>
+
+
+<div id="org3085bad" class="figure">
+<p><img src="./fig/rb_vente_graphe_app.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgae6fee3">
+<h4 id="orgae6fee3">Problématique</h4>
+<p>
+<div class="slidesubtitle">Apprentissage des LPC (structure fixée)</div>
+</p>
+
+
+<div id="org64085a0" class="figure">
+<p><img src="./fig/rb_vente_lpc_app.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org8add235">
+<h4 id="org8add235">Problématique</h4>
+<p>
+<div class="slidesubtitle">Apprentissage complet du réseau bayésien</div>
+</p>
+
+
+<div id="orgc3a4236" class="figure">
+<p><img src="./fig/rb_vente_graphe_lpc_app.png" alt="RB vente" width="95%" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgc931b4b">
+<h3 id="orgc931b4b">Construction par expertise</h3>
+<p>
+<div class="slidesubtitle">Acquisition de l'information</div>
+</p>
+
+<div class="block-definition" id="org31e598b">
+<p>
+<h4>Acquisition de l'information</h4>
+</p>
+
+<ul>
+<li>Trouver des personnes expertes fiables et coopératives</li>
+<li>Familiariser ces personnes à la notion de probabilité</li>
+<li>Tenir compte de leurs biais éventuels (souvent inconscients)</li>
+<li>Utiliser un outil pour faciliter le recueil des informations</li>
+<li>Exemple : échelle de probabilité :</li>
+
+</ul>
+
+
+<div id="org160505f" class="figure">
+<p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/echelle_prob.png" alt="Echelle prob" width="90%" />
+</p>
+</div>
+
+<p>
+ <br>
+</p>
+
+</div>
+
+
+
+</section>
+<section id="slide-org807a811">
+<h4 id="org807a811">Construction par expertise</h4>
+<p>
+<div class="slidesubtitle">Attention au connexions convergentes (V-structures)</div>
+</p>
+
+<div class="block-alert" id="org8809598">
+<p>
+<h4>Problème</h4>
+</p>
+
+<ul>
+<li>L'expertise métier permet en général de construire des RB fidèles à la réalité opérationnelle</li>
+<li>En revanche, l'humain a intuitivement tendance à introduire des connexions convergentes
+<ul>
+<li>Exemple : Soit \(Y\) un phénomène à expliquer et \(X_{1}, \ldots, X_{D}\), \(D\) facteurs explicatifs possibles</li>
+<li>Structure naturelle : \(X_{1} \to Y, \ldots, X_{D} \to Y\)</li>
+<li>Risque d'explosion combinatoire : Définir \(P(Y|X_{1},\ldots,X_{D})\) nécessite \(2^{D}\) valeurs
+dans le cas où les variables sont binaires</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+
+<div class="fragment (appear) block-example" id="orgb2648b2">
+<p>
+<h4>Solutions possibles</h4>
+</p>
+
+<ul>
+<li>Inverser les flèches et utiliser une structure naïve : \(Y \to X_{1}, \ldots, Y \to X_{D}\) en
+assumant les simplifications induites</li>
+<li>Introduction d'un modèle de LPC particulier, e.g. modèle OU-bruité</li>
+
+</ul>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orge065354">
+<h2 id="orge065354">Apprentissage des LPC</h2>
+
+<div id="orgd47444c" class="figure">
+<p><img src="./fig/learning_data_complete.png" alt="Inférence" width="60%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgfce592e">
+<h3 id="orgfce592e">Apprentissage des LPC - Données complètes</h3>
+<p>
+<div class="slidesubtitle">Hypothèses</div>
+</p>
+
+<div class="block-definition" id="org370f322">
+<p>
+<h4>Hypothèses</h4>
+</p>
+<ul>
+<li>On modélise un phénomène aléatoire caractérisé par des variables aléatoires \(X_{1}, \ldots, X_{D}\)
+dont la loi est représentée par un RB</li>
+<li>Les variables aléatoires \(X_{1}, \ldots, X_{D}\) sont discrètes et finies</li>
+<li>Le graphe du RB est supposé connu</li>
+<li>On dispose d'un jeu de données \(\boldsymbol{D}\) contenant \(N\) observations indépendantes des
+variables aléatoires \(X_{1}, \ldots, X_{D}\)</li>
+
+</ul>
+
+</div>
+
+<div class="block-definition" id="org24aa174">
+<p>
+<h4>Objectif</h4>
+</p>
+
+<p>
+On cherche à estimer les LPC de ce RB :
+</p>
+<ul>
+<li>\(\Prob\lrPar{X_{1}|\pa\lrPar{X_{1}}}\)</li>
+<li>\(\Prob\lrPar{X_{2}|\pa\lrPar{X_{2}}}\)</li>
+<li>\(\ldots\)</li>
+<li>\(\Prob\lrPar{X_{d}|\pa\lrPar{X_{d}}}\)</li>
+<li>\(\ldots\)</li>
+<li>\(\Prob\lrPar{X_{D}|\pa\lrPar{X_{D}}}\)</li>
+
+</ul>
+<p>
+où \(\pa\lrPar{X_{d}}\) désigne les variables parentes de la variable \(X_{d}\) dans le graphe du RB
+</p>
+
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org9e0bc6c">
+<h3 id="org9e0bc6c">Apprentissage des LPC - Données complètes</h3>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org86cfe5d" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_mod.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org8575e63">
+<h4 id="org8575e63">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org821117f" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex1.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org05bff00">
+<h4 id="org05bff00">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orgec5358a" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex2.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgf3e90c0">
+<h4 id="orgf3e90c0">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="orge452e61" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex3.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgdb5bc2f">
+<h4 id="orgdb5bc2f">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org26f8b24" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex4.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgb84af25">
+<h4 id="orgb84af25">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org65801ad" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex5.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org1cdb079">
+<h4 id="org1cdb079">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org7a5b799" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex6.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgcc64b17">
+<h4 id="orgcc64b17">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org1191e7c" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex7.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org39a1e05">
+<h4 id="org39a1e05">Apprentissage des LPC - Données complètes</h4>
+<p>
+<div class="slidesubtitle">Exemple</div>
+</p>
+
+
+<div id="org013edb0" class="figure">
+<p><img src="./fig/rb_vente_lpc_app_ex8.png" alt="LPC app" width="100%" />
+</p>
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7604210">
+<h3 id="org7604210">Apprentissage des LPC - Données complètes</h3>
+<p>
+<div class="slidesubtitle">Estimation des LPC</div>
+</p>
+
+<div class="block-definition" id="org8d4c6db">
+<p>
+<h4>Estimation des LPC</h4>
+</p>
+
+<ul>
+<li>L'estimation de chaque LPC d'un RB a pour expression :
+\[
+  \hat{P}(X_{d} = x_{d,k}|\text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}) =
+  \frac{\# \{X_{d} = x_{d,k}~ \text{et}~
+      \text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}\}}{\# \{\text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}\}}
+  \]
+<ul>
+<li>\(x_{d,k}\) : \(k\) -ème valeur possible pour la v.a. \(X_{d}\)</li>
+<li>\(\boldsymbol{x}^{\prime}_{d,j}\) : \(j\) -ème configuration de valeurs possibles pour les parents de la
+v.a. \(X_{d}\)</li>
+
+</ul></li>
+
+<li><b>Interprétation</b> : Chaque probabilité \(\hat{P}(X_{d} = x_{d,k}|\text{pa}(X_{d}) =
+    \boldsymbol{x}^{\prime}_{d,j})\) est estimée par le rapport entre : 
+<ul>
+<li>le nombre d'événements \(\{X_{d} = x_{d,k}~ \text{et}~
+      \text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}\}\) observés dans les données</li>
+<li>et le nombre d'événements \(\{\text{pa}(X_{d}) = \boldsymbol{x}^{\prime}_{d,j}\}\) observés dans les données</li>
+
+</ul></li>
+
+</ul>
+
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+controlsLayout: 'edges', slideNumber:"c/t", center: false, transition: 'fade',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>
