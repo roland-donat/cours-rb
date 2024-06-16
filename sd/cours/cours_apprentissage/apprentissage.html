@@ -61,9 +61,9 @@ sm: ["\\setminus"],
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#/slide-org1316a0d">Objectifs de la séance</a></li>
-<li><a href="#/slide-orgd7fed5e">Introduction</a></li>
-<li><a href="#/slide-orge80ad79">Apprentissage des LPC</a></li>
+<li><a href="#/slide-orgf25bd00">Objectifs de la séance</a></li>
+<li><a href="#/slide-org51953cf">Introduction</a></li>
+<li><a href="#/slide-org4365343">Apprentissage des LPC</a></li>
 </ul>
 </div>
 </div>
@@ -71,8 +71,8 @@ sm: ["\\setminus"],
 
 
 <section>
-<section id="slide-org1316a0d">
-<h2 id="org1316a0d">Objectifs de la séance</h2>
+<section id="slide-orgf25bd00">
+<h2 id="orgf25bd00">Objectifs de la séance</h2>
 <div class="column" style="float:left; width: 50%">
 
 <ul>
@@ -87,7 +87,7 @@ observées sur le phénomène étudié</li>
 <div class="column" style="float:right; width: 50%">
 
 
-<div id="orgcaa9c76" class="figure">
+<div id="org0d751a9" class="figure">
 <p><img src="./fig/objectives.png" alt="Objectives" width="100%" />
 </p>
 </div>
@@ -97,10 +97,10 @@ observées sur le phénomène étudié</li>
 </section>
 </section>
 <section>
-<section id="slide-orgd7fed5e">
-<h2 id="orgd7fed5e">Introduction</h2>
+<section id="slide-org51953cf">
+<h2 id="org51953cf">Introduction</h2>
 
-<div id="org5533c55" class="figure">
+<div id="orgc43b4d7" class="figure">
 <p><img src="./fig/machine_learning.png" alt="Inférence" width="70%" />
 </p>
 </div>
@@ -109,9 +109,9 @@ observées sur le phénomène étudié</li>
 </section>
 </section>
 <section>
-<section id="slide-orgeb72b07">
-<h3 id="orgeb72b07">Problématique</h3>
-<div class="block-definition" id="org852c91a">
+<section id="slide-org5adaa92">
+<h3 id="org5adaa92">Problématique</h3>
+<div class="block-definition" id="orga3e685c">
 <p>
 <h4>Objectif</h4>
 </p>
@@ -124,21 +124,20 @@ observées sur le phénomène étudié</li>
 
 </div>
 
-<div class="block-definition" id="orgae2b370">
+<div class="block-definition" id="org1c7e3cc">
 <p>
 <h4>Problèmes</h4>
 </p>
 
 <ul>
-<li>Comment déterminer la structure du réseau bayésien (i.e. le graphe)?</li>
-<li>Comment estimer les lois de probabilité conditionnelles (LPC) \(P(X_{d}|\text{pa}(X_{d})),~ d = 1,
-  \ldots, D\) ?</li>
+<li>Comment déterminer la structure du réseau bayésien (i.e. le graphe) ?</li>
+<li>Comment estimer les lois de probabilité conditionnelles (LPC) ?</li>
 
 </ul>
 
 </div>
 
-<div class="block-example" id="org903e2cb">
+<div class="block-example" id="org0da6fdf">
 <p>
 <h4>Approches envisageables</h4>
 </p>
@@ -154,55 +153,55 @@ informations incomplètes)</li>
 </div>
 
 </section>
-<section id="slide-orgb325cfe">
-<h4 id="orgb325cfe">Problématique</h4>
+<section id="slide-org20ef5ed">
+<h4 id="org20ef5ed">Problématique</h4>
 <p>
 <div class="slidesubtitle">Exemple : Vente d'un livret</div>
 </p>
 
 
-<div id="orgc66695a" class="figure">
+<div id="org8953a6b" class="figure">
 <p><img src="./fig/rb_vente_var.png" alt="RB vente" width="95%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org707d527">
-<h4 id="org707d527">Problématique</h4>
+<section id="slide-org7e3d5c1">
+<h4 id="org7e3d5c1">Problématique</h4>
 <p>
 <div class="slidesubtitle">Apprentissage de la structure</div>
 </p>
 
 
-<div id="org41724dc" class="figure">
+<div id="org7a12b87" class="figure">
 <p><img src="./fig/rb_vente_graphe_app.png" alt="RB vente" width="95%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org132875e">
-<h4 id="org132875e">Problématique</h4>
+<section id="slide-org99b7158">
+<h4 id="org99b7158">Problématique</h4>
 <p>
 <div class="slidesubtitle">Apprentissage des LPC (structure fixée)</div>
 </p>
 
 
-<div id="org5929399" class="figure">
+<div id="org2b1c881" class="figure">
 <p><img src="./fig/rb_vente_lpc_app.png" alt="RB vente" width="95%" />
 </p>
 </div>
 
 
 </section>
-<section id="slide-org1147d52">
-<h4 id="org1147d52">Problématique</h4>
+<section id="slide-orgc6381cc">
+<h4 id="orgc6381cc">Problématique</h4>
 <p>
 <div class="slidesubtitle">Apprentissage complet du réseau bayésien</div>
 </p>
 
 
-<div id="org504e874" class="figure">
+<div id="org538777d" class="figure">
 <p><img src="./fig/rb_vente_graphe_lpc_app.png" alt="RB vente" width="95%" />
 </p>
 </div>
@@ -211,13 +210,13 @@ informations incomplètes)</li>
 </section>
 </section>
 <section>
-<section id="slide-org357f12a">
-<h3 id="org357f12a">Construction par expertise</h3>
+<section id="slide-org7426e92">
+<h3 id="org7426e92">Construction par expertise</h3>
 <p>
 <div class="slidesubtitle">Acquisition de l'information</div>
 </p>
 
-<div class="block-definition" id="org6aaec11">
+<div class="block-definition" id="org216d71e">
 <p>
 <h4>Acquisition de l'information</h4>
 </p>
@@ -232,7 +231,7 @@ informations incomplètes)</li>
 </ul>
 
 
-<div id="org056dec7" class="figure">
+<div id="org14e87cd" class="figure">
 <p><img src="https://roland-donat.github.io/cours-rb/stid_intro/fig/echelle_prob.png" alt="Echelle prob" width="90%" />
 </p>
 </div>
@@ -246,13 +245,13 @@ informations incomplètes)</li>
 
 
 </section>
-<section id="slide-org771cae9">
-<h4 id="org771cae9">Construction par expertise</h4>
+<section id="slide-orgaf81928">
+<h4 id="orgaf81928">Construction par expertise</h4>
 <p>
 <div class="slidesubtitle">Attention au connexions convergentes (V-structures)</div>
 </p>
 
-<div class="block-alert" id="org257d1d5">
+<div class="block-alert" id="orgc4a640e">
 <p>
 <h4>Problème</h4>
 </p>
@@ -272,7 +271,7 @@ dans le cas où les variables sont binaires</li>
 
 </div>
 
-<div class="fragment (appear) block-example" id="org94ca0e9">
+<div class="fragment (appear) block-example" id="orge76f8bc">
 <p>
 <h4>Solutions possibles</h4>
 </p>
@@ -290,10 +289,10 @@ assumant les simplifications induites</li>
 </section>
 </section>
 <section>
-<section id="slide-orge80ad79">
-<h2 id="orge80ad79">Apprentissage des LPC</h2>
+<section id="slide-org4365343">
+<h2 id="org4365343">Apprentissage des LPC</h2>
 
-<div id="org3fb1b49" class="figure">
+<div id="org1b079b3" class="figure">
 <p><img src="./fig/learning_data_complete.png" alt="Inférence" width="60%" />
 </p>
 </div>
@@ -301,13 +300,13 @@ assumant les simplifications induites</li>
 </section>
 </section>
 <section>
-<section id="slide-orgfc2e664">
-<h3 id="orgfc2e664">Apprentissage des LPC - Données complètes</h3>
+<section id="slide-orgd28e97f">
+<h3 id="orgd28e97f">Apprentissage des LPC - Données complètes</h3>
 <p>
 <div class="slidesubtitle">Hypothèses</div>
 </p>
 
-<div class="block-definition" id="org25d4ad9">
+<div class="block-definition" id="org85ac8fa">
 <p>
 <h4>Hypothèses</h4>
 </p>
@@ -323,7 +322,7 @@ variables aléatoires \(X_{1}, \ldots, X_{D}\)</li>
 
 </div>
 
-<div class="block-definition" id="orgbcad24f">
+<div class="block-definition" id="org83a6cc5">
 <p>
 <h4>Objectif</h4>
 </p>
@@ -350,118 +349,118 @@ où \(\pa\lrPar{X_{d}}\) désigne les variables parentes de la variable \(X_{d}\
 </section>
 </section>
 <section>
-<section id="slide-org371a9b4">
-<h3 id="org371a9b4">Apprentissage des LPC - Données complètes</h3>
+<section id="slide-org0fa4163">
+<h3 id="org0fa4163">Apprentissage des LPC - Données complètes</h3>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgdb271fd" class="figure">
+<div id="org57a662f" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_mod.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org0c226a8">
-<h4 id="org0c226a8">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-orgd7548ca">
+<h4 id="orgd7548ca">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org9da7e21" class="figure">
+<div id="orgb243bcc" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex1.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org18e56a1">
-<h4 id="org18e56a1">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org81c11e3">
+<h4 id="org81c11e3">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org5a5f240" class="figure">
+<div id="orga91d90c" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex2.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org45a5f5d">
-<h4 id="org45a5f5d">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org2faa2e3">
+<h4 id="org2faa2e3">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org8c9cdcf" class="figure">
+<div id="orgaa9469e" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex3.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgfeca6e8">
-<h4 id="orgfeca6e8">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org77f3657">
+<h4 id="org77f3657">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org982fad6" class="figure">
+<div id="org1d202c8" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex4.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org4e337ee">
-<h4 id="org4e337ee">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org339ca66">
+<h4 id="org339ca66">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org9dc4daf" class="figure">
+<div id="orga3b501d" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex5.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgf94c812">
-<h4 id="orgf94c812">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org7dd076b">
+<h4 id="org7dd076b">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgca8a7eb" class="figure">
+<div id="orge13a918" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex6.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgd11a256">
-<h4 id="orgd11a256">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org5469655">
+<h4 id="org5469655">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="org52a3baa" class="figure">
+<div id="org06f0579" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex7.png" alt="LPC app" width="100%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgb8970ad">
-<h4 id="orgb8970ad">Apprentissage des LPC - Données complètes</h4>
+<section id="slide-org54c0418">
+<h4 id="org54c0418">Apprentissage des LPC - Données complètes</h4>
 <p>
 <div class="slidesubtitle">Exemple</div>
 </p>
 
 
-<div id="orgcb48b11" class="figure">
+<div id="org54b9dee" class="figure">
 <p><img src="./fig/rb_vente_lpc_app_ex8.png" alt="LPC app" width="100%" />
 </p>
 </div>
@@ -471,13 +470,13 @@ où \(\pa\lrPar{X_{d}}\) désigne les variables parentes de la variable \(X_{d}\
 </section>
 </section>
 <section>
-<section id="slide-orgb9cd3a9">
-<h3 id="orgb9cd3a9">Apprentissage des LPC - Données complètes</h3>
+<section id="slide-org3c91e0e">
+<h3 id="org3c91e0e">Apprentissage des LPC - Données complètes</h3>
 <p>
 <div class="slidesubtitle">Estimation des LPC</div>
 </p>
 
-<div class="block-definition" id="org214e982">
+<div class="block-definition" id="org3352b84">
 <p>
 <h4>Estimation des LPC</h4>
 </p>
