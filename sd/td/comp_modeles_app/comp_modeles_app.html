@@ -55,19 +55,19 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8539597">1. Objectif</a></li>
-<li><a href="#orgd03af63">2. Apprentissage avec <code>GeNIe</code></a>
+<li><a href="#orgb93edbc">1. Objectif</a></li>
+<li><a href="#org4c3c5ea">2. Apprentissage avec <code>GeNIe</code></a>
 <ul>
-<li><a href="#org98de10e">2.1. Modèle 1 : \(A \rightarrow V \leftarrow E\)</a></li>
-<li><a href="#org1dd7e5c">2.2. Autres modèles</a></li>
+<li><a href="#orgc3a9f88">2.1. Modèle 1 : \(A \rightarrow V \leftarrow E\)</a></li>
+<li><a href="#org2a3e664">2.2. Autres modèles</a></li>
 </ul>
 </li>
-<li><a href="#org8c0c60a">3. Évaluation des modèles avec <code>GeNIe</code></a></li>
+<li><a href="#org3fa2175">3. Évaluation des modèles avec <code>GeNIe</code></a></li>
 </ul>
 </div>
 </div>
 
-<div id="orgd12fb68" class="figure">
+<div id="orgdb47d5c" class="figure">
 <p><img src="./bank_ml.png" alt="bank_ml.png" width="50%" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Dall-E 3: machine learning digital marketing bank loan ; white background ; colorful</p>
@@ -75,8 +75,8 @@
 
 
 
-<div id="outline-container-org8539597" class="outline-2">
-<h2 id="org8539597"><span class="section-number-2">1.</span> Objectif</h2>
+<div id="outline-container-orgb93edbc" class="outline-2">
+<h2 id="orgb93edbc"><span class="section-number-2">1.</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 L'objectif de cet exercice est de comparer l'influence du choix de la structure d'un RB sur la
@@ -89,9 +89,9 @@ Pour ce faire, nous nous intéresserons à des données de retour marketing (fic
 A. Dans ces données, les individus sont décrits par les variables suivantes :
 </p>
 <dl class="org-dl">
-<dt>Age :</dt><dd>classe d'âges de l'individu - valeurs possibles : [18,25], [26,59], 60+;</dd>
-<dt>Epargne :</dt><dd>l'individu a t-il de l'épargne - valeurs possibles : non, oui;</dd>
-<dt>Vente_livret_A :</dt><dd>vente d'un livret A à l'individu - valeurs possibles : échec, succès. <br /></dd>
+<dt>Age (notée \(A\)):</dt><dd>classe d'âges de l'individu - valeurs possibles : [18,25], [26,59], 60+;</dd>
+<dt>Epargne (notée \(E\)):</dt><dd>l'individu a t-il de l'épargne - valeurs possibles : non, oui;</dd>
+<dt>Vente_livret_A (notée \(V\)):</dt><dd>vente d'un livret A à l'individu - valeurs possibles : échec, succès. <br /></dd>
 </dl>
 
 <p>
@@ -102,17 +102,16 @@ chances de vente.
 </div>
 </div>
 
-<div id="outline-container-orgd03af63" class="outline-2">
-<h2 id="orgd03af63"><span class="section-number-2">2.</span> Apprentissage avec <code>GeNIe</code></h2>
+<div id="outline-container-org4c3c5ea" class="outline-2">
+<h2 id="org4c3c5ea"><span class="section-number-2">2.</span> Apprentissage avec <code>GeNIe</code></h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org98de10e" class="outline-3">
-<h3 id="org98de10e"><span class="section-number-3">2.1.</span> Modèle 1 : \(A \rightarrow V \leftarrow E\)</h3>
+<div id="outline-container-orgc3a9f88" class="outline-3">
+<h3 id="orgc3a9f88"><span class="section-number-3">2.1.</span> Modèle 1 : \(A \rightarrow V \leftarrow E\)</h3>
 <div class="outline-text-3" id="text-2-1">
 <ol class="org-ol">
 <li>Utiliser <code>GeNIe</code> pour construire la structure du modèle 1.</li>
-<li>Télécharger le fichier de données <a href="vente_livret_A_donnees_10000.csv">vente_livret_A_donnees_10000.csv</a> (à ne faire qu'une fois
-!) puis ouvrir le fichier
+<li>Télécharger le fichier de données <a href="vente_livret_A_donnees_10000.csv">vente_livret_A_donnees_10000.csv</a> puis ouvrir le fichier
 dans <code>GeNIe</code> (<code>File/Open data file</code>).</li>
 <li>Aller dans l'item <code>Learning/Learn parameters</code> du menu. Associer correctement chacune des
 variables de votre RB avec la colonne correspondante dans les données que vous avez chargées à
@@ -121,13 +120,14 @@ vous avez nommé vos variables avec les noms indiqués dans la partie
 "Objectif" (en respectant la casse), <code>GeNIe</code> devrait réussir à s'y retrouver tout seul.</li>
 <li>Lancer alors l'apprentissage (en cliquant sur <code>Ok</code>) en utilisant le paramétrage par défaut. Noter
 la log-vraisemblance des données dans ce modèle.</li>
+<li>Comment interpréter la log-vraisemblance ?</li>
 <li>Sauvegarder votre modèle.</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org1dd7e5c" class="outline-3">
-<h3 id="org1dd7e5c"><span class="section-number-3">2.2.</span> Autres modèles</h3>
+<div id="outline-container-org2a3e664" class="outline-3">
+<h3 id="org2a3e664"><span class="section-number-3">2.2.</span> Autres modèles</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Reprendre les étapes précédentes sur les modèles suivants :
@@ -146,8 +146,8 @@ Comparer les log-vraisemblance obtenues et expliquer les résultats.
 </div>
 </div>
 
-<div id="outline-container-org8c0c60a" class="outline-2">
-<h2 id="org8c0c60a"><span class="section-number-2">3.</span> Évaluation des modèles avec <code>GeNIe</code></h2>
+<div id="outline-container-org3fa2175" class="outline-2">
+<h2 id="org3fa2175"><span class="section-number-2">3.</span> Évaluation des modèles avec <code>GeNIe</code></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 L'objectif est à présent de tester les performances de nos modèles pour effectuer des ciblages de
