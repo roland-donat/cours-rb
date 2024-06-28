@@ -37,6 +37,7 @@
 # ====================
 
 #+ATTR_HTML: :width 50% :alt bus maintenance city 2d isometric cartoon white background
+#+CAPTION: Image générée par Midjourney
 [[./bus_maintenance.png]]
 
 
@@ -84,17 +85,6 @@ L'objectif de ce projet est d'aider les mainteneurs en leur recommandant la ou l
 du véhicule (kilométrage, type de moteur, marque, etc.).
 
 
-* Travaux à réaliser
-  :PROPERTIES:
-  :CUSTOM_ID: sec-sujets
-  :END:
-
-Ce travail correspond au développement d'un moteur d'aide au diagnostic et à la recommandation de
-maintenance. Il s'agit donc en 
-pratique d'élaborer un modèle permettant de déduire d'un signalement de panne et des
-caractéristiques d'un véhicule en maintenance, la localisation de la panne
-(SYSTEM_N1, SYSTEM_N2, SYSTEM_N3) et l'action de maintenance à réaliser (ODR) permettant de remettre 
-le véhicule en service. 
 
 * Présentation des données
 
@@ -215,12 +205,99 @@ tabulate.tabulate(equipements_df_var[["Description"]],
 
 
 
+* Travaux à réaliser
+  :PROPERTIES:
+  :CUSTOM_ID: sec-sujets
+  :END:
+
+** Développement d'une IA de diagnostic 
+
+Ce travail correspond au développement d'un moteur d'aide au diagnostic et à la recommandation de
+maintenance. Il s'agit donc en 
+pratique d'élaborer un modèle permettant de déduire d'un signalement de panne et des
+caractéristiques d'un véhicule en maintenance, la localisation de la panne
+(SYSTEM_N1, SYSTEM_N2, SYSTEM_N3) et l'action de maintenance à réaliser (ODR) permettant de remettre 
+le véhicule en service. 
+
+Les principaux travaux demandés sont les suivants :
+1. Proposer un réseau bayésien pertinent afin de répondre à la
+   problématique en argumentant vos choix. 
+2. Utiliser les données à disposition pour réaliser un apprentissage des lois du modèle retenu.
+3. Évaluer la performance prédictive de votre modèle à partir d'une approche apprentissage/test classique.
+4. (Option) Proposer un second modèle et comparer ses performances avec votre premier modèle.
+
+Le travail est à réaliser sous Python en utilisant la [[https://agrum.gitlab.io/pages/pyagrum.html][librairie =PyAgrum=]].
+   
+** Développement d'un applicatif métier
+
+L'objectif de ce travail est de développer une application permettant d'interagir avec le
+   moteur de recommandations de la section précédente de manière transparente pour 
+   l'utilisateur final.
+
+L'application devra donc proposer une interface web permettant de :
+- saisir les informations nécessaires à la production d'un diagnostic (e.g. signalements,
+  caractéristiques d'un véhicule, etc) ;
+- réaliser les calculs d'inférence afin de d'estimer les diagnostics ;
+- mettre en forme les diagnostics dans l'interface développée.
+
+L'application est à développer avec la librairie [[https://dash.plotly.com/][=Plotly Dash=]]. N'hésitez pas à consulter des
+ressources sur internet afin de monter en compétences (e.g. https://dash.plotly.com/tutorial).
+
+* Déroulement pratique et livrables
+
+Le projet est à réaliser par groupe de trois étudiant·es.
+
+Les deux livrables attendus sont :
+1. Le lien vers le dépôt github de votre projet.
+   - La page principale de votre dépôt doit présenter au minimum une procédure d'installation de
+     votre application.
+   - Votre application doit fonctionner sur un système Linux standard (e.g. Ubuntu, Débian, etc.).
+   - Tous les membres de votre groupe doivent "commiter" sur le projet.
+   - *Deadline : 9 juin 2023 14h00*
+
+2. Une restitution orale de votre travail lors de la séance du 9 juin 2023 structurée de la manière
+   suivante :
+   - 5 min de présentation (4-6 slides), expliquant brièvement l'objectif du projet, les modèles
+     réalisés, les performances obtenues et une conclusion.
+   - 5 min de démonstration de votre application.
+   - 5 min de questions.
+
+* Critères d'évaluation
+
+Vous serez principalement évalué·es sur les critères suivants :
+| Item                                                                    | Points |
+|-------------------------------------------------------------------------+--------|
+| Qualité de la documentation de votre dépôt github                       |  2     |
+| Fonctionnement de la procédure d'installation de votre application      |  2     |
+| Pertinence des modélisations réalisées pour répondre à la problématique |  3     |
+| Mise en oeuvre d'une démarche d'évaluation des performances             |  3     |
+| Design de l'application réalisée                                        |  2     |
+| Clarté de la présentation orale                                         |  3     |
+| Qualité de la démonstration de l'outil                                  |  1     |
+| Pertinence des réponses aux questions                                   |  2     |
+| Respect de la contrainte temporelle lors de la soutenance.              |  2     |
+
+
 * Pour se lancer en douceur
+
+** Préambule
+
+Pour réaliser l'apprentissage des LPC, nous allons utiliser la librairie utilitaire =pyagrum_extra=
+à télécharger ici :
+https://github.com/roland-donat/pyagrum-extra/blob/master/pyagrum-extra/pyagrum_extra.py.
+
+Une fois téléchargé, placez ce fichier à la racine de votre projet.
+
+Cette librairie ajoute des fonctions =fit= et =predict= à =pyAgrum= permettant de faciliter l'apprentissage et
+l'exploitation d'un RB. Vous pourrez ainsi importer =pyAgrum= de la façon suivante :
+#+BEGIN_SRC python :session :results value :exports both :tangle projet_start.py
+from pyagrum_extra import gum
+#+END_SRC
 
 ** Chargement et brève analyse descriptive
 
 Chargement des données :
-#+BEGIN_SRC python :session :results silent :exports code
+#+BEGIN_SRC python :session :results silent :exports code :tangle projet_start.py
 import pandas as pd
 import os
 
@@ -295,8 +372,6 @@ Nous proposons de créer un modèle permettant d'expliquer la variable =SYSTEM_N
 
 On commence par créer les variables du réseau.
 #+BEGIN_SRC python :session :results silent :exports both :tangle projet_start.py
-import pyAgrum as gum
-
 var_to_model = ["SYSTEM_N1", "SIG_OBS"]
 
 var_bn = {}
@@ -378,24 +453,11 @@ On remarque naturellement que les LPC ne contiennent pour l'instant que des zér
 
 ** Apprentissage des LPC
 
-Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la classe
-=gum.BNLearner= et en particulier la méthode =fitParameters=: 
-#+BEGIN_SRC python :session :results value :exports both
-learner = gum.BNLearner(ot_odr_df[var_to_model])
-
-learner.fitParameters(bn)
+Pour apprendre les paramètres des LPC à partir des données, vous pouvez utiliser la méthode =.fit=
+de la librairie =pyagrum_extra= :
+#+BEGIN_SRC python :session :results value :exports both :tangle projet_start.py
+bn.fit_bis(ot_odr_df, verbose_mode=True)
 #+END_SRC
-
-#+RESULTS:
-: Filename       : /tmp/tmptsosaf5q.csv
-: Size           : (506558,2)
-: Variables      : SYSTEM_N1[10], SIG_OBS[59]
-: Induced types  : True
-: Missing values : False
-: Algorithm      : MIIC
-: Score          : BDeu  (Not used for constraint-based algorithms)
-: Correction     : MDL  (Not used for score-based algorithms)
-: Prior          : -
 
 Après apprentissage, nous obtenons les LPC suivantes.
 Loi de probabilité de =SIG_OBS= :
@@ -405,11 +467,6 @@ bn.cpt("SIG_OBS")
 #+BEGIN_SRC python :session :results html :exports results
 gnb.getPotential(bn.cpt("SIG_OBS"))
 #+END_SRC
-
-#+RESULTS:
-#+begin_export html
-#+end_export
-
 # Loi de probabilité de =SIG_ORGANE= :
 # #+BEGIN_SRC python :session :results silent :exports code
 # bn.cpt("SIG_ORGANE")
@@ -427,96 +484,29 @@ gnb.getPotential(bn.cpt("SYSTEM_N1"))
 
 ** Prédictions
 
-#+BEGIN_SRC python :session :results silent :exports results
-import numpy as np
-import sys
-
-def predict(bn, data, var_target, show_progress=False):
-    """
-    This function is used to predict the posterior probability of a target variable from observations  
-    using a bayesian network model. 
-
-    Inputs:
-    - =bn=: the predictive model given as a =pyAgrum.BayesNet= object
-    - =data=: the data containing the observations used to predict the target variable 
-    as a =pandas.DataFrame= object
-    - =var_target=: the name of the target variable as a =str= object
-
-    Returns:
-    - a =DataFrame= containing the posterior probability distribution of the target 
-    variable given each observation in =data=.
-    """
-    # Initialize the inference engine
-    inf_bn = gum.LazyPropagation(bn)
-    inf_bn.setTargets({var_target})
-    nb_data = len(data)
-    target_size = bn.variable(var_target).domainSize()
-    target_dom = np.array([bn.variable(var_target).label(i)
-                           for i in range(target_size)])
-    data_records = data.to_dict("records")
-    post_prob = np.zeros((nb_data, target_size))
-    for i in range(nb_data):
-        # Set the evidence
-        inf_bn.setEvidence(data_records[i])
-        # Run inference
-        inf_bn.makeInference()
-        # Compute posterior probability of target variable
-        post_prob[i, :] = inf_bn.posterior(var_target).toarray()
-        # Erase evidence
-        inf_bn.eraseAllEvidence()
-        if show_progress:
-            sys.stdout.write("predict progress: {0:3.0%}\r".format(i/nb_data))
-
-    post_prob_df = pd.DataFrame(post_prob,
-                                index=data.index,
-                                columns=bn.variable(var_target).labels())
-    post_prob_df.columns.name = var_target
-    return post_prob_df
-#+END_SRC
-
-À ce stade, vous pouvez reprendre la fonction =predict= que nous avons utilisée dans [[file:../../td/comp_modeles_app/comp_modeles_app.org][ce TD]] pour réaliser des prédictions d'une variable cible à
+Les fonctions =predict_proba=/=predict= permettent de réaliser des prédictions d'une variable cible du modèle à
 partir de données. Chaque ligne des données fournies est utilisée comme évidence (conditionnement)
 pour calculer la loi de la variable cible sachant les données observées.
-#+BEGIN_SRC python :session :results silent :exports both
-pred_prob = predict(bn,
-                    data=ot_odr_df[["SIG_OBS"]].iloc[-1000:], 
-                    var_target="SYSTEM_N1",
-                    show_progress=True)
+#+BEGIN_SRC python :session :results silent :exports both :tangle projet_start.py
+pred_prob = bn.predict_proba(ot_odr_df[["SIG_OBS"]].iloc[-1000:], 
+                             var_target="SYSTEM_N1",
+                             show_progress=True)
+print(pred_prob)
 
-pred_var = pred_prob.idxmax(axis=1).rename("pred")
+pred = bn.predict(ot_odr_df[["SIG_OBS"]].iloc[-1000:], 
+                  var_target="SYSTEM_N1",
+                  show_progress=True)
+
+print(pred)
 #+END_SRC
 
-On finit par évaluer le taux de prédictions du modèle par rapport aux données observées.
-#+BEGIN_SRC python :session :results value :exports both
-(ot_odr_df["SYSTEM_N1"].iloc[-1000:] == pred_var).mean()
-#+END_SRC
+** Application
 
-#+RESULTS:
-: 0.65
+Un exemple rudimentaire d'application web de diagnostic est proposé dans le fichier [[file:diag.py]].
 
-Et la matrice de confusion associée :
-#+BEGIN_SRC python :session :results silent :exports code
-pd.crosstab(ot_odr_df["SYSTEM_N1"].iloc[-1000:], pred_var)
-#+END_SRC
-#+BEGIN_SRC python :session :results value raw :exports results
-tabulate.tabulate(pd.crosstab(ot_odr_df["SYSTEM_N1"].iloc[-1000:], pred_var),
-                  tablefmt="orgtbl", headers="keys")
-#+END_SRC
-
-#+RESULTS:
-| SYSTEM_N1                  | EQUIPEMENT CHASSIS | EQUIPEMENT DE CARROSSERIE | EQUIPEMENT DE FREINAGE | EQUIPEMENT DE MOTORISATION | EQUIPEMENT ELECTRIQUE | EQUIPEMENT EMBARQUE | EQUIPEMENT PNEUMATIQUE |
-|----------------------------+--------------------+---------------------------+------------------------+----------------------------+-----------------------+---------------------+------------------------|
-| EQUIPEMENT CHASSIS         |                  9 |                         7 |                      0 |                          0 |                    10 |                   0 |                      5 |
-| EQUIPEMENT CLIMATIQUE      |                  0 |                         3 |                      0 |                          3 |                     8 |                   0 |                      2 |
-| EQUIPEMENT DE CARROSSERIE  |                  2 |                        56 |                      0 |                          1 |                   138 |                   0 |                     10 |
-| EQUIPEMENT DE FREINAGE     |                  4 |                         3 |                      4 |                          0 |                    16 |                   0 |                      8 |
-| EQUIPEMENT DE MOTORISATION |                  3 |                         2 |                      0 |                          6 |                    25 |                   0 |                     16 |
-| EQUIPEMENT DE TRANSMISSION |                  1 |                         0 |                      0 |                          0 |                     0 |                   0 |                      0 |
-| EQUIPEMENT ELECTRIQUE      |                  2 |                        20 |                      0 |                          0 |                   555 |                   0 |                      1 |
-| EQUIPEMENT EMBARQUE        |                  0 |                         5 |                      0 |                          0 |                    49 |                   6 |                      0 |
-| EQUIPEMENT PNEUMATIQUE     |                  4 |                         0 |                      0 |                          0 |                     2 |                   0 |                     14 |
-
-*Attention :* On notera que dans cet exemple, nous n'avons pas mis en place un schéma d'évaluation
-faisant intervenir des données d'apprentissage et des données de test.
-
-*À vous de jouer à présent !*
+Pour tester l'application, il faut :
+1. Placer le fichier [[file:diag.py]] dans le même répertoire que les fichiers
+   =OT_ODR.csv.bz2= et =pyagrum_extra.py=.
+2. Installer la librairie =Dash=, i.e. =pip install dash=.
+3. Lancer la commande =python diag.py=.
+4. Ouvrir un navigateur web à l'adresse [[http://127.0.0.1:8050/]].
